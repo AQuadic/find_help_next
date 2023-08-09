@@ -5,9 +5,7 @@ import PhoneInput from "react-phone-number-input";
 function ContactForm() {
   const [value, setValue] = useState();
   const [value2, setValue2] = useState();
-
   const [selectedCheckbox, setSelectedCheckbox] = useState(null);
-
   const handleCheckboxChange = (checkboxValue) => {
     if (checkboxValue === selectedCheckbox) {
       setSelectedCheckbox(null);
