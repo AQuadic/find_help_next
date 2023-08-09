@@ -20,25 +20,25 @@ function Navbar2() {
             <ul className="dropdown-menu myAcc">
               <li>
                 <Link className="dropdown-item" href="/account">
-                  <img src="./images/account.webp" alt="account" />
+                  <img src="/images/account/account.webp" alt="account" />
                   <p>Personal Information</p>
                 </Link>
               </li>
               <li>
                 <Link className="dropdown-item" href="/account/password">
-                  <img src="./images/logoPass.webp" alt="logoPass" />
+                  <img src="/images/account/logoPass.webp" alt="logoPass" />
                   <p>Password</p>
                 </Link>
               </li>
               <li>
                 <Link className="dropdown-item" href="/account/activeSessions">
-                  <img src="./images/active.webp" alt="active" />
+                  <img src="/images/account/active.webp" alt="active" />
                   <p>Active Sessions</p>
                 </Link>
               </li>
               <li>
                 <a className="dropdown-item" href="signIn.html">
-                  <img src="./images/logOut.webp" alt="logOut" />
+                  <img src="/images/account/logOut.webp" alt="logOut" />
                   <p>Logout</p>
                 </a>
               </li>
@@ -83,25 +83,25 @@ function Navbar2() {
             <ul className="dropdown-menu myAcc">
               <li>
                 <a className="dropdown-item" href="account.html">
-                  <img src="./images/account.webp" alt="account" />
+                  <img src="/images/account/account.webp" alt="account" />
                   <p>Personal Information</p>
                 </a>
               </li>
               <li>
                 <a className="dropdown-item" href="password.html">
-                  <img src="./images/logoPass.webp" alt="logoPass" />
+                  <img src="/images/account/logoPass.webp" alt="logoPass" />
                   <p>Password</p>
                 </a>
               </li>
               <li>
                 <a className="dropdown-item" href="activeSessions.html">
-                  <img src="./images/active.webp" alt="active" />
+                  <img src="/images/account/active.webp" alt="active" />
                   <p>Active Sessions</p>
                 </a>
               </li>
               <li>
                 <a className="dropdown-item" href="signIn.html">
-                  <img src="./images/logOut.webp" alt="logOut" />
+                  <img src="/images/account/logOut.webp" alt="logOut" />
                   <p>Logout</p>
                 </a>
               </li>
