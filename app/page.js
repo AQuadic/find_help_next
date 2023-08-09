@@ -1,95 +1,203 @@
 import Image from 'next/image'
 import styles from './page.module.css'
+import React from 'react'
 
+import Link from 'next/link'
+import ItemCourse from '@/components/ItemCourse'
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+      <>
+     <section className="about m60">
+      <div className="container allAbout">
+        <div className="part1">
+          <h1>
+            <span className="mainColor">Empowering</span>
+            <span className="imgWord">Minds,</span> <br />
+            Enriching <span className="mainColor">Futures</span>
+          </h1>
+          <p>
+            Unlimited access to 7,000+ world-className courses, hands-on projects,
+            and job-ready certificate programs - all included in your
+            subscription
+          </p>
+          <Link href="courses" className="btn_page wow fadeInDown">Start Now</Link>
+          <div className="trusted">
+            <h2
+              className="headtitle head3 wow fadeInDown"
+              
+            >
+              Trusted By
+            </h2>
+            <div className="images_Trusted">
+              <img src="/images/about/image1.webp" alt="images_Trusted" />
+              <img src="/images/about/image2.webp" alt="images_Trusted" />
+              <img src="/images/about/image3.webp" alt="images_Trusted" />
+              <img src="/images/about/image4.webp" alt="images_Trusted" />
+              <img src="/images/about/image5.webp" alt="images_Trusted" />
+            </div>
+          </div>
+        </div>
+        <div className="part2 wow fadeInUp">
+          <img src="/images/about/herosectionphoto.webp" alt="herosectionphoto" />
         </div>
       </div>
+    </section>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+
+    <section className="services services_content container m60">
+      <h2 className="headtitle wow fadeInDown">Repairs Services</h2>
+      <p className="p_page wow fadeInUp">
+        Choose from 204.000 online video courses with new additions published
+        every month
+      </p>
+      <div className="allServices">
+        <ItemCourse title="Learn python: The Complete Python Programming Course" image="1" star="4.8" dec="Avinash jain, The Codex" oldsalary="E£679.99" newsalary="E£1,599.99" />
+        <ItemCourse title="Learn python: The Complete Python Programming Course" image="2" star="4.8" dec="Avinash jain, The Codex"  newsalary="E£1,599.99" best="Bestseller" />
+        <ItemCourse title="Learn python: The Complete Python Programming Course" image="3" star="4.8" dec="Avinash jain, The Codex" oldsalary="E£679.99" newsalary="E£1,599.99" />
+        <ItemCourse title="Learn python: The Complete Python Programming Course" image="1" star="4.8" dec="Avinash jain, The Codex" oldsalary="E£679.99" newsalary="E£1,599.99" />
+
+      
       </div>
+    </section>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
+    <section className="top m60">
+      <div className="container">
+        <h2 className="headtitle wow fadeInDown">Top Categories</h2>
+        <p className="p_page wow fadeInUp">
+          Choose from 204.000 online video courses with new additions published
+          every month
+        </p>
+        <div className="top_Categories">
+          <div className="part">
+            <img src="/images/top/creativity.webp" alt="creativity" />
+            <h3>Design</h3>
+          </div>
+          <div className="part">
+            <img src="/images/top/developmentphoto.webp" alt="developmentphoto" />
+            <h3>Development</h3>
+          </div>
+          <div className="part">
+            <img src="/images/top/marketing.webp" alt="marketing" />
+            <h3>Marketing</h3>
+          </div>
+          <div className="part">
+            <img src="/images/top/music.webp" alt="music" />
+            <h3>Music</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section className="services services_content container m60">
+      <h2 className="headtitle wow fadeInDown">Repairs Services</h2>
+      <p className="p_page wow fadeInUp">
+        Choose from 204.000 online video courses with new additions published
+        every month
+      </p>
+      <div className="allServices">
+        <ItemCourse title="Learn python: The Complete Python Programming Course" image="1" star="4.8" dec="Avinash jain, The Codex" oldsalary="E£679.99" newsalary="E£1,599.99" />
+        <ItemCourse title="Learn python: The Complete Python Programming Course" image="2" star="4.8" dec="Avinash jain, The Codex"  newsalary="E£1,599.99" best="Bestseller" />
+        <ItemCourse title="Learn python: The Complete Python Programming Course" image="3" star="4.8" dec="Avinash jain, The Codex" oldsalary="E£679.99" newsalary="E£1,599.99" />
+        <ItemCourse title="Learn python: The Complete Python Programming Course" image="1" star="4.8" dec="Avinash jain, The Codex" oldsalary="E£679.99" newsalary="E£1,599.99" />
+
+      
+      </div>
+    </section>
+    <section className="live m60">
+      <div className="container">
+        <h2 className="headtitle wow fadeInDown">
+          Create, manage, and market your learning environment with advanced
+          features like
+        </h2>
+        <div className="all_Live row">
+          <div className="part col-md-4 col-sm-6 col-12">
+            <img src="/images/live.svg" alt="live" />
+            <h3>Live lessons and events</h3>
+          </div>
+          <div className="part col-md-4 col-sm-6 col-12">
+            <img src="/images/live.svg" alt="live" />
+            <h3>Live lessons and events</h3>
+          </div>
+          <div className="part col-md-4 col-sm-6 col-12">
+            <img src="/images/live.svg" alt="live" />
+            <h3>Live lessons and events</h3>
+          </div>
+          <div className="part col-md-4 col-sm-6 col-12">
+            <img src="/images/live.svg" alt="live" />
+            <h3>Live lessons and events</h3>
+          </div>
+          <div className="part col-md-4 col-sm-6 col-12">
+            <img src="/images/live.svg" alt="live" />
+            <h3>Live lessons and events</h3>
+          </div>
+          <div className="part col-md-4 col-sm-6 col-12">
+            <img src="/images/live.svg" alt="live" />
+            <h3>Live lessons and events</h3>
+          </div>
+          <div className="part col-md-4 col-sm-6 col-12">
+            <img src="/images/live.svg" alt="live" />
+            <h3>Live lessons and events</h3>
+          </div>
+          <div className="part col-md-4 col-sm-6 col-12">
+            <img src="/images/live.svg" alt="live" />
+            <h3>Live lessons and events</h3>
+          </div>
+          <div className="part col-md-4 col-sm-6 col-12">
+            <img src="/images/live.svg" alt="live" />
+            <h3>Live lessons and events</h3>
+          </div>
+          <div className="part col-md-4 col-sm-6 col-12">
+            <img src="/images/live.svg" alt="live" />
+            <h3>Live lessons and events</h3>
+          </div>
+          <div className="part col-md-4 col-sm-6 col-12">
+            <img src="/images/live.svg" alt="live" />
+            <h3>Live lessons and events</h3>
+          </div>
+          <div className="part col-md-4 col-sm-6 col-12">
+            <img src="/images/live.svg" alt="live" />
+            <h3>Live lessons and events</h3>
+          </div>
+          <div className="part col-md-4 col-sm-6 col-12">
+            <img src="/images/live.svg" alt="live" />
+            <h3>Live lessons and events</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section className="services services_content container m60">
+      <h2 className="headtitle wow fadeInDown">Repairs Services</h2>
+      <p className="p_page wow fadeInUp">
+        Choose from 204.000 online video courses with new additions published
+        every month
+      </p>
+      <div className="allServices">
+        <ItemCourse title="Learn python: The Complete Python Programming Course" image="1" star="4.8" dec="Avinash jain, The Codex" oldsalary="E£679.99" newsalary="E£1,599.99" />
+        <ItemCourse title="Learn python: The Complete Python Programming Course" image="2" star="4.8" dec="Avinash jain, The Codex"  newsalary="E£1,599.99" best="Bestseller" />
+        <ItemCourse title="Learn python: The Complete Python Programming Course" image="3" star="4.8" dec="Avinash jain, The Codex" oldsalary="E£679.99" newsalary="E£1,599.99" />
+        <ItemCourse title="Learn python: The Complete Python Programming Course" image="1" star="4.8" dec="Avinash jain, The Codex" oldsalary="E£679.99" newsalary="E£1,599.99" />
+
+      
+      </div>
+    </section>
+    <section className="become container m60">
+      <div className="box">
+        <img src="/images/become.webp" className="img_become" alt="become" />
+        <div className="info_become">
+          <h2>Become an instructor</h2>
           <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+            Instructors from around the world teach millions of students on
+            Udemy. We provide the tools and skills to teach what you love.
           </p>
-        </a>
+          <Link href="instructor" className="btn_page2">Start Now</Link>
+        </div>
       </div>
+    </section>
+
+    </>
     </main>
   )
 }
