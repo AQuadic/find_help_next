@@ -1,17 +1,20 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 
 function page() {
-      const [openClose ,setOpenClose] = useState(false)
-    const [content ,setContent] = useState("one")
-  
-  const HandelContent =(e)=>{
-  setContent(e)
-  }
+  const [openClose, setOpenClose] = useState(false);
+  const [content, setContent] = useState("one");
+
+  const HandelContent = (e) => {
+    setContent(e);
+  };
   return (
     <>
       <section className="videoCourse container">
-        <div className={`headVideo  ${ openClose?"open":""} `} id="headVideo">
+        <div
+          className={`headVideo  ${openClose ? "open" : ""} `}
+          id="headVideo"
+        >
           <div className="part2">
             <h1>Learn python: The Complete Python Programming Course</h1>
             <h2>Quiz: Gestalt Principles</h2>
@@ -27,7 +30,8 @@ function page() {
                   15/ <span>20</span>
                 </h4>
                 <h5>
-                  Great job, <img src="/images/quiz/confetti.svg" alt="confetti" />
+                  Great job,{" "}
+                  <img src="/images/quiz/confetti.svg" alt="confetti" />
                 </h5>
                 <p>
                   Next time try to focus more and read the question carefully
@@ -97,7 +101,10 @@ function page() {
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
                       />
-                      <label className="form-check-label" htmlFor="flexRadioDefault1">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexRadioDefault1"
+                      >
                         Clickbait
                       </label>
                     </div>
@@ -110,7 +117,10 @@ function page() {
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
                       />
-                      <label className="form-check-label" htmlFor="flexRadioDefault1">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexRadioDefault1"
+                      >
                         Clickbait
                       </label>
                     </div>
@@ -123,7 +133,10 @@ function page() {
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
                       />
-                      <label className="form-check-label" htmlFor="flexRadioDefault1">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexRadioDefault1"
+                      >
                         Clickbait
                       </label>
                     </div>
@@ -136,7 +149,10 @@ function page() {
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
                       />
-                      <label className="form-check-label" htmlFor="flexRadioDefault1">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexRadioDefault1"
+                      >
                         Clickbait
                       </label>
                     </div>
@@ -161,7 +177,10 @@ function page() {
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
                       />
-                      <label className="form-check-label" htmlFor="flexRadioDefault1">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexRadioDefault1"
+                      >
                         Clickbait
                       </label>
                     </div>
@@ -174,7 +193,10 @@ function page() {
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
                       />
-                      <label className="form-check-label" htmlFor="flexRadioDefault1">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexRadioDefault1"
+                      >
                         Clickbait
                       </label>
                     </div>
@@ -187,7 +209,10 @@ function page() {
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
                       />
-                      <label className="form-check-label" htmlFor="flexRadioDefault1">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexRadioDefault1"
+                      >
                         Clickbait
                       </label>
                     </div>
@@ -200,7 +225,10 @@ function page() {
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
                       />
-                      <label className="form-check-label" htmlFor="flexRadioDefault1">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexRadioDefault1"
+                      >
                         Clickbait
                       </label>
                     </div>
@@ -225,7 +253,10 @@ function page() {
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
                       />
-                      <label className="form-check-label" htmlFor="flexRadioDefault1">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexRadioDefault1"
+                      >
                         Clickbait
                       </label>
                     </div>
@@ -238,7 +269,10 @@ function page() {
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
                       />
-                      <label className="form-check-label" htmlFor="flexRadioDefault1">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexRadioDefault1"
+                      >
                         Clickbait
                       </label>
                     </div>
@@ -251,7 +285,10 @@ function page() {
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
                       />
-                      <label className="form-check-label" htmlFor="flexRadioDefault1">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexRadioDefault1"
+                      >
                         Clickbait
                       </label>
                     </div>
@@ -264,7 +301,10 @@ function page() {
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
                       />
-                      <label className="form-check-label" htmlFor="flexRadioDefault1">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexRadioDefault1"
+                      >
                         Clickbait
                       </label>
                     </div>
@@ -281,167 +321,296 @@ function page() {
             </div>
           </div>
           <div className="part1 ">
-          <button className="arrowVideo" id="openClose" onClick={()=>setOpenClose(!openClose)}>  <img src="./images/icons/arrowVideo.svg"  alt="arrowVideo"/></button>
-            <div className="contantOne" style={{display:content==="one"?"block":"none"}} id="contantOne">
-                <h3>Course Content</h3>
-                <ul>
-                    <li className="lecture" onClick={()=>{HandelContent("two")}}>
-                        <h4>Introduction</h4>
-                        <p>0/2 | 5min</p>
-                    </li>
-                    <li className="lecture" onClick={()=>{HandelContent("two")}}>
-                        <h4>Chapter 1 - Basics of UX</h4>
-                        <p>0/10 | 2hr 35min</p>
-                    </li>
-                    <li className="lecture" onClick={()=>{HandelContent("two")}}>
-                        <h4>Chapter 1 - Basics of UX</h4>
-                        <p>0/10 | 2hr 35min</p>
-                    </li>
-                    <li className="lecture" onClick={()=>{HandelContent("two")}}>
-                        <h4>Chapter 1 - Basics of UX</h4>
-                        <p>0/10 | 2hr 35min</p>
-                    </li>
-                    <li className="lecture" onClick={()=>{HandelContent("two")}}>
-                        <h4>Chapter 1 - Basics of UX</h4>
-                        <p>0/10 | 2hr 35min</p>
-                    </li>
-                    <li className="lecture" onClick={()=>{HandelContent("two")}}>
-                        <h4>Chapter 1 - Basics of UX</h4>
-                        <p>0/10 | 2hr 35min</p>
-                    </li>
-                </ul>
+            <button
+              className="arrowVideo"
+              id="openClose"
+              onClick={() => setOpenClose(!openClose)}
+            >
+              {" "}
+              <img src="./images/icons/arrowVideo.svg" alt="arrowVideo" />
+            </button>
+            <div
+              className="contantOne"
+              style={{ display: content === "one" ? "block" : "none" }}
+              id="contantOne"
+            >
+              <h3>Course Content</h3>
+              <ul>
+                <li
+                  className="lecture"
+                  onClick={() => {
+                    HandelContent("two");
+                  }}
+                >
+                  <h4>Introduction</h4>
+                  <p>0/2 | 5min</p>
+                </li>
+                <li
+                  className="lecture"
+                  onClick={() => {
+                    HandelContent("two");
+                  }}
+                >
+                  <h4>Chapter 1 - Basics of UX</h4>
+                  <p>0/10 | 2hr 35min</p>
+                </li>
+                <li
+                  className="lecture"
+                  onClick={() => {
+                    HandelContent("two");
+                  }}
+                >
+                  <h4>Chapter 1 - Basics of UX</h4>
+                  <p>0/10 | 2hr 35min</p>
+                </li>
+                <li
+                  className="lecture"
+                  onClick={() => {
+                    HandelContent("two");
+                  }}
+                >
+                  <h4>Chapter 1 - Basics of UX</h4>
+                  <p>0/10 | 2hr 35min</p>
+                </li>
+                <li
+                  className="lecture"
+                  onClick={() => {
+                    HandelContent("two");
+                  }}
+                >
+                  <h4>Chapter 1 - Basics of UX</h4>
+                  <p>0/10 | 2hr 35min</p>
+                </li>
+                <li
+                  className="lecture"
+                  onClick={() => {
+                    HandelContent("two");
+                  }}
+                >
+                  <h4>Chapter 1 - Basics of UX</h4>
+                  <p>0/10 | 2hr 35min</p>
+                </li>
+              </ul>
             </div>
-            <div className="contantTwo" id="contantTwo" style={{display:content==="two"?"block":"none"}}>
-                <h3>Chapter 1 - Basics of UX</h3>
-                <button className="back" id="back" onClick={()=>HandelContent("one")}>
-                    <img src="./images/icons/ArrowBack.svg" alt="ArrowBack"/>
-                    <p>Back</p>
-                </button>
-                <ul>
-                    <li >
-                        <form className="infoChapter">
-                            <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled"  disabled />
-                                <label className="form-check-label" htmlFor="flexCheckCheckedDisabled">
-                                    Lecture 1
-                                </label>
-                                <div className="clock">
-                                    <img src="/images/icons/copywriting.svg" alt="copywriting" />
-                                    <p>1min</p>
-                                </div>
-                              </div>
-                        </form>
-                    
-                    </li>
-                    <li >
-                        <form className="infoChapter">
-                            <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" disabled />
-                                <label className="form-check-label" htmlFor="flexCheckCheckedDisabled">
-                                    Lecture Paper
-                                </label>
-                                <div className="clock">
-                                    <img src="/images/icons/copywriting.svg" alt="copywriting" />
-                                    <p>1min</p>
-                                </div>
-                              </div>
-                        </form>
-                        <button className="btn_page2" style={{width:"116px",height:"30px"}}>Download</button>
-                    </li>
-                    <li>
-                        <form className="infoChapter">
-                            <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" disabled />
-                                <label className="form-check-label" htmlFor="flexCheckCheckedDisabled">
-                                    Difference between a Product and a Service
-                                </label>
-                                <div className="clock">
-                                    <img src="/images/icons/video.svg" alt="video" />
-                                    <p>15min</p>
-                                </div>
-                              </div>
-                        </form>
-                     
-                    </li>
-                    <li>
-                        <form className="infoChapter">
-                            <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" disabled />
-                                <label className="form-check-label" htmlFor="flexCheckCheckedDisabled">
-                                    Difference between a Product and a Service
-                                </label>
-                                <div className="clock">
-                                    <img src="/images/icons/video.svg" alt="video" />
-                                    <p>1min</p>
-                                </div>
-                              </div>
-                        </form>
-                     
-                    </li>
-                    <li>
-                        <form className="infoChapter">
-                            <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" disabled />
-                                <label className="form-check-label" htmlFor="flexCheckCheckedDisabled">
-                                    Difference between a Product and a Service
-                                </label>
-                                <div className="clock">
-                                    <img src="/images/icons/video.svg" alt="video" />
-                                    <p>1min</p>
-                                </div>
-                              </div>
-                        </form>
-                     
-                    </li>
-                    <li>
-                        <form className="infoChapter">
-                            <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" disabled/>
-                                <label className="form-check-label" htmlFor="flexCheckCheckedDisabled">
-                                    Test Of Chapter 1
-                                </label>
-                                <div className="clock">
-                                    <img src="/images/icons/test.svg" alt="video"/>
-                                    <p>30min</p>
-                                </div>
-                              </div>
-                        </form>
-                     
-                    </li>
-                </ul>
+            <div
+              className="contantTwo"
+              id="contantTwo"
+              style={{ display: content === "two" ? "block" : "none" }}
+            >
+              <h3>Chapter 1 - Basics of UX</h3>
+              <button
+                className="back"
+                id="back"
+                onClick={() => HandelContent("one")}
+              >
+                <img src="./images/icons/ArrowBack.svg" alt="ArrowBack" />
+                <p>Back</p>
+              </button>
+              <ul>
+                <li>
+                  <form className="infoChapter">
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="flexCheckCheckedDisabled"
+                        disabled
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexCheckCheckedDisabled"
+                      >
+                        Lecture 1
+                      </label>
+                      <div className="clock">
+                        <img
+                          src="/images/icons/copywriting.svg"
+                          alt="copywriting"
+                        />
+                        <p>1min</p>
+                      </div>
+                    </div>
+                  </form>
+                </li>
+                <li>
+                  <form className="infoChapter">
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="flexCheckCheckedDisabled"
+                        disabled
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexCheckCheckedDisabled"
+                      >
+                        Lecture Paper
+                      </label>
+                      <div className="clock">
+                        <img
+                          src="/images/icons/copywriting.svg"
+                          alt="copywriting"
+                        />
+                        <p>1min</p>
+                      </div>
+                    </div>
+                  </form>
+                  <button
+                    className="btn_page2"
+                    style={{ width: "116px", height: "30px" }}
+                  >
+                    Download
+                  </button>
+                </li>
+                <li>
+                  <form className="infoChapter">
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="flexCheckCheckedDisabled"
+                        disabled
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexCheckCheckedDisabled"
+                      >
+                        Difference between a Product and a Service
+                      </label>
+                      <div className="clock">
+                        <img src="/images/icons/video.svg" alt="video" />
+                        <p>15min</p>
+                      </div>
+                    </div>
+                  </form>
+                </li>
+                <li>
+                  <form className="infoChapter">
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="flexCheckCheckedDisabled"
+                        disabled
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexCheckCheckedDisabled"
+                      >
+                        Difference between a Product and a Service
+                      </label>
+                      <div className="clock">
+                        <img src="/images/icons/video.svg" alt="video" />
+                        <p>1min</p>
+                      </div>
+                    </div>
+                  </form>
+                </li>
+                <li>
+                  <form className="infoChapter">
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="flexCheckCheckedDisabled"
+                        disabled
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexCheckCheckedDisabled"
+                      >
+                        Difference between a Product and a Service
+                      </label>
+                      <div className="clock">
+                        <img src="/images/icons/video.svg" alt="video" />
+                        <p>1min</p>
+                      </div>
+                    </div>
+                  </form>
+                </li>
+                <li>
+                  <form className="infoChapter">
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="flexCheckCheckedDisabled"
+                        disabled
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexCheckCheckedDisabled"
+                      >
+                        Test Of Chapter 1
+                      </label>
+                      <div className="clock">
+                        <img src="/images/icons/test.svg" alt="video" />
+                        <p>30min</p>
+                      </div>
+                    </div>
+                  </form>
+                </li>
+              </ul>
             </div>
-        </div>
+          </div>
         </div>
         <div className="endVideo">
-        <a className="btn_page2" href="">
-          <img src="/images/icons/Arrow1.svg" alt="Arrow" />
-          <p>Previous</p>
-        </a>
-        <a className="btn_page" href="lectureText.html">
-          <p>Next</p>
-          <img src="/images/icons/Arrow2.svg" alt="Arrow" />
-        </a>
-      </div>
+          <a className="btn_page2" href="">
+            <img src="/images/icons/Arrow1.svg" alt="Arrow" />
+            <p>Previous</p>
+          </a>
+          <a className="btn_page" href="lectureText.html">
+            <p>Next</p>
+            <img src="/images/icons/Arrow2.svg" alt="Arrow" />
+          </a>
+        </div>
       </section>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <img src="/images/quiz/thank-you.webp" alt="thank-you" />
+              <h2>Thanks for completing that!</h2>
+              <a href="#" class="btn_page">
+                Continue
+              </a>
+            </div>
+            <div class="modal-footer" style={{ display: "none" }}>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        <img src="/images/quiz/thank-you.webp" alt="thank-you"/>
-        <h2>Thanks for completing that!</h2>
-        <a href="#" class="btn_page">Continue</a>
-      </div>
-      <div class="modal-footer" style={{display:"none"}}>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
     </>
   );
 }

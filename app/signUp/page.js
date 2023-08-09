@@ -1,12 +1,12 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import PhoneInput from "react-phone-number-input";
-import Link from 'next/link'
+import Link from "next/link";
 
 function SignUp() {
   const [value, setValue] = useState();
   const [value2, setValue2] = useState();
-  const [selectedOption, setSelectedOption] = useState('option1');
+  const [selectedOption, setSelectedOption] = useState("option1");
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -34,7 +34,7 @@ function SignUp() {
           </div>
           <form className="row g-4 form_page">
             <div className="col-md-12">
-              <label htmlFor="inputFirstName"  className="form-label">
+              <label htmlFor="inputFirstName" className="form-label">
                 First Name{" "}
               </label>
               <input
@@ -102,16 +102,14 @@ function SignUp() {
                 onChange={setValue2}
               />
             </div>
-             {/*value={selectedOption} onChange={handleOptionChange}*/}
+            {/*value={selectedOption} onChange={handleOptionChange}*/}
             <div className="col-md-12">
               <label htmlFor="inputCountry" className="form-label">
                 Country
               </label>
-             
-              <select id="inputCountry"    className="form-select">
-                <option value="option"  >
-                  Select Your Country
-                </option>
+
+              <select id="inputCountry" className="form-select">
+                <option value="option">Select Your Country</option>
                 <option value="option1">EG</option>
                 <option value="option2">EUR</option>
               </select>
@@ -131,10 +129,8 @@ function SignUp() {
               <label htmlFor="inputGender" className="form-label">
                 Gender
               </label>
-              <select id="inputGender"   className="form-select">
-                <option   value="option"  >
-                  Select Your Gender
-                </option>
+              <select id="inputGender" className="form-select">
+                <option value="option">Select Your Gender</option>
                 <option value="option1">male</option>
                 <option value="option2">female</option>
               </select>
@@ -143,10 +139,8 @@ function SignUp() {
               <label htmlFor="inputProfession" className="form-label">
                 What profession are you learning for?
               </label>
-              <select id="inputProfession"   className="form-select">
-                <option   value="option"  >
-                  Select Your Profession
-                </option>
+              <select id="inputProfession" className="form-select">
+                <option value="option">Select Your Profession</option>
                 <option value="option1">Profession1</option>
                 <option value="option2">Profession2</option>
               </select>

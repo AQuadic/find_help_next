@@ -1,7 +1,6 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import PhoneInput from "react-phone-number-input";
-
 
 function ContactForm() {
   const [value, setValue] = useState();
@@ -55,7 +54,7 @@ function ContactForm() {
                   Mobile Number
                 </label>
                 <PhoneInput
-                 defaultCountry='EG'
+                  defaultCountry="EG"
                   placeholder="Phone Number"
                   className="form-control"
                   value={value}
@@ -67,7 +66,7 @@ function ContactForm() {
                   WhatsApp Number
                 </label>
                 <PhoneInput
-                 defaultCountry='EG'
+                  defaultCountry="EG"
                   placeholder="Phone Number"
                   className="form-control"
                   value={value2}
@@ -79,9 +78,7 @@ function ContactForm() {
                   Language of The Course
                 </label>
                 <select id="inputLanguage" className="form-select">
-                  <option  >
-                    Select The Language
-                  </option>
+                  <option>Select The Language</option>
                   <option>EN</option>
                   <option>AR</option>
                 </select>
@@ -91,9 +88,7 @@ function ContactForm() {
                   Category of The Course
                 </label>
                 <select id="inputCategory" className="form-select">
-                  <option >
-                    Select The Category
-                  </option>
+                  <option>Select The Category</option>
                   <option>Category1</option>
                   <option>Category2</option>
                 </select>
