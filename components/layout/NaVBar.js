@@ -1,7 +1,37 @@
-import React from 'react';
+'use client'
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { getUser } from '../useAPI/GetUser';
+import { useRouter } from 'next/navigation';
+import { LogOut } from '../useAPI/Auth';
+import Cookies from 'js-cookie';
 
 function NavBar() {
+ const router = useRouter()
+  const [userData, setUserData] = useState()
+  const [userLogOut, setUserLogOut] = useState()
+  const [isLogin, setisLogin] = useState(Cookies.get('token')?true:false)
+  
+  useEffect(() => {
+    FetchDataOFUserData();
+    setisLogin(Cookies.get('token')?true:false)
+  }, [,Cookies.get('token')])
+
+  const FetchDataOFUserData = async () => {
+    const UserData = await getUser();
+    if (!UserData) console.log(UserData?.message)
+    setUserData(UserData)
+
+  }
+
+  const FetchLogOut = async () => {
+    const UserLogOut = await LogOut();
+    if (!UserLogOut) console.log(UserLogOut?.message)
+    router.push("/signIn")
+    setUserLogOut(UserLogOut)
+  }
+  console.log(userData);
+  console.log(userLogOut);
   return (
     <nav className="navbar navbar-expand-lg">
     <div className="container">
@@ -471,10 +501,10 @@ function NavBar() {
         </div>
         <Link href="/instructor" className="nav-link">Teach On Analytica</Link>
         <Link href="/myCourses" className="nav-link">My Courses</Link>
-        <Link href="/signIn" className="btn_page2">Log In</Link>
-        <Link href="/signUp" className="btn_page">Sign Up</Link>
-      
-        <div className="dropdown" style={{position: "relative", display: "none",}}>
+        {
+         isLogin?
+          <>
+           <div className="dropdown" style={{position: "relative",}}>
           <h4
             className="dropdown-toggle nav_btn btn_page2"
             data-bs-toggle="dropdown"
@@ -503,13 +533,23 @@ function NavBar() {
                 </Link>
               </li>
               <li>
-                <a className="dropdown-item" href="signIn.html">
+                <a className="dropdown-item" href="" onClick={()=>{FetchLogOut()}}>
                   <img src="/images/account/logOut.webp" alt="logOut" />
                   <p>Logout</p>
                 </a>
               </li>
             </ul>
         </div>
+          </>
+          :
+          <>
+            <Link href="/signIn" className="btn_page2">Log In</Link>
+            <Link href="/signUp" className="btn_page">Sign Up</Link>
+          </>
+        }
+      
+      
+       
 
         <button className="lang">
           <img src="/images/lang.webp" className="lang" alt="lang" />

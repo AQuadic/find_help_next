@@ -8,6 +8,7 @@ function ItemCourse({
   oldsalary,
   newsalary,
   image,
+  imageCourse,
   best,
   Myprogress,
   numProgress,
@@ -17,11 +18,25 @@ function ItemCourse({
     <div className="service ">
       {best && <h5>{best}</h5>}
       <Link href={link2?link2:"/coursesDetails"}>
-        <img
+        {
+          imageCourse? 
+          <>
+            <img
+          src={imageCourse}
+          className="imgService"
+          alt="service"
+        />
+          </>
+          :
+          <>
+           <img
           src={`./images/service/service${image}.webp`}
           className="imgService"
           alt="service"
         />
+          </>
+        }
+       
       </Link>
       <div className="aboutservice">
         <Link href={link2?link2:"/coursesDetails"} >

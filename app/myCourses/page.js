@@ -1,10 +1,26 @@
 "use client";
 import ItemCourse from "@/components/ItemCourse";
+import { getMyCourses } from "@/components/useAPI/CorsesApi/GetCourses";
 import React, { useState } from "react";
+import { useEffect } from "react";
 
 function MyCourses() {
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("progress");
   const ActiveBtn = (e) => [setActive(e)];
+
+  useEffect(() => {
+    FetchDataOFMyCourses()
+  }, [])
+
+  const FetchDataOFMyCourses = async () => {
+
+    const MyCourses = await getMyCourses();
+    if (!MyCourses) console.log(MyCourses?.message)
+console.log(MyCourses);
+  }
+
+
+
   return (
     <>
       <section className="myCourses  m60">
@@ -13,13 +29,13 @@ function MyCourses() {
           <div className=" container">
             <div className="parts">
               <button
-                className={active === "progress" && "active"}
+                className={active === "progress" ?"active":""}
                 onClick={() => ActiveBtn("progress")}
               >
                 In Progress
               </button>
               <button
-                className={active === "completed" && "active"}
+                className={active === "completed" ? "active":""}
                 onClick={() => ActiveBtn("completed")}
               >
                 completed

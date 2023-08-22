@@ -1,7 +1,56 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { PasswordInput, TextInput } from "@mantine/core";
+import { useRouter } from 'next/navigation'
+
 
 function SignIn() {
+  const router = useRouter()
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [Erroremail, setErroremail] = useState("");
+  const [Errorpassword, setErrorpassword] = useState("");
+ console.log(email);
+  const handellogin = () => {
+    
+    const po = axios
+      .post(
+        "https://education.aquadic.com/api/v1/users/auth/login",
+        {
+          email: email,
+          password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        Cookies.set("token",res.data.token);
+        if(res.status === 200){
+router.push("/")
+        }
+       console.log(res);
+      })
+      .catch((res) => {
+      /*  setLoading(false);
+        res.response.data.email
+          ? setErroremail(res.response.data.email[0])
+          : setErroremail("");
+        res.response.data.password
+          ? setErrorpassword(res.response.data.password[0])
+          : setErrorpassword("");
+        res.response.data.error
+          ? setError(res.response.data.error)
+          : setError("");*/
+          console.log(res);
+      });
+  };
   return (
     <>
       <section className="sign container">
@@ -24,34 +73,29 @@ function SignIn() {
             </ul>
           </div>
           <form className="row g-4 form_page">
-            <div className="col-md-12">
-              <label htmlFor="inputEmail" className="form-label">
-                Email Adress{" "}
-              </label>
-              <input
-                type="email"
-                className="form-control"
-                id="inputEmail"
-                placeholder="Enter Your Email"
-              />
-            </div>
+           
+            <TextInput
+      placeholder="Enter Your Email"
+      label="Email Adress"
+      type="email"
+      onChange={(e)=>setemail(e.target.value)}
+    />
 
             <div className="col-md-12">
-              <label htmlFor="inputpassword" className="form-label">
-                Password{" "}
-              </label>
-              <input
-                type="password"
-                className="form-control"
-                id="inputpassword"
-                placeholder="Enter The Password "
-              />
+            <PasswordInput
+            variant="unstyled"
+      placeholder="Enter The Password "
+      label="Password"
+      onChange={(e)=>setpassword(e.target.value)}
+    />
+              
+            
               <Link href="/forgetPassword" className="forget">
                 Forget password?
               </Link>
             </div>
 
-            <input type="submit" value="Sign Up" className="btn_page" />
+            <input type="submit" onClick={(e)=>{e.preventDefault(); handellogin()}} value="Sign In" className="btn_page" />
           </form>
           <div className="haveAccount">
             <p>

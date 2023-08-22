@@ -453,6 +453,8 @@ html[dir="rtl"] .services .allServices .service h5 {
   height: 222px;
   object-fit: fill;
   border-radius: 10px 10px 0px 0px;
+  border: 1px solid #dfdfdf;
+    border-bottom: none;
 }
 .services .allServices .service .aboutservice {
   padding: 12px 12px 0px 12px;
@@ -2125,7 +2127,14 @@ bottom: -120px;
   margin-bottom: 8px;
 }
 
-.form_page .form-control {
+.mantine-PasswordInput-input {
+  min-height: 46px;
+}
+.mantine-TextInput-root input:focus{
+  box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+  border: 1px solid #dbdbdb;
+}
+.form_page .form-control ,.mantine-TextInput-root input{
   background-color: transparent;
   outline: none;
   border: 1px solid #dbdbdb;
@@ -2133,6 +2142,22 @@ bottom: -120px;
   padding: 6px 16px;
 
   height: 46px;
+}
+.mantine-PasswordInput-root .mantine-PasswordInput-wrapper{
+  background-color: transparent;
+  outline: none;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+  padding: 6px 16px;
+
+  height: 46px;
+}
+.mantine-PasswordInput-root .mantine-PasswordInput-wrapper:focus{
+  box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+  border: 1px solid #dbdbdb;
+}
+.mantine-PasswordInput-input input {
+ padding: 0;
 }
 .form-check-input:checked {
   background-color: #1f2265;
@@ -2159,7 +2184,7 @@ html[dir="rtl"] .form_page .form-select {
   color: black;
 }
 
-.form_page .form-control::placeholder {
+.form_page .form-control::placeholder ,.mantine-InputWrapper-root input::placeholder{
   font-size: 14px;
   line-height: 25px;
   color: #999999;
@@ -2445,7 +2470,7 @@ html[dir="rtl"] .Profile .btn_page {
   margin-right: auto;
 }
 
-.Profile .form_page .form-control {
+.Profile .form_page .form-control ,.Profile .mantine-InputWrapper-root input{
   font-size: 14px;
   font-family: "DM Sans3";
   max-width: 460px;

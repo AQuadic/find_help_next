@@ -1,7 +1,27 @@
+'use client'
 import ItemCourse2 from "@/components/ItemCourse2";
-import React from "react";
+import { getAllCourses } from "@/components/useAPI/CorsesApi/GetCourses";
+import React, { useEffect, useState } from "react";
 
 function Courses() {
+
+
+  const [allCourses, setAllCourses] = useState([])
+  
+  
+  useEffect(() => {
+    FetchDataOFAllCourses()
+    console.log(allCourses);
+  }, [])
+
+  
+  const FetchDataOFAllCourses= async () => {
+    const AllCourses = await getAllCourses();
+    if (!AllCourses) console.log(AllCourses?.message)
+    await setAllCourses(AllCourses.data)
+
+  }
+  console.log(allCourses);
   return (
     <>
       <div className="courses container">
