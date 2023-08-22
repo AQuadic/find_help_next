@@ -9,34 +9,27 @@ import Cookies from "js-cookie";
 
 
 
-
-
 export default  function Home() {
   const [allCourses, setAllCourses] = useState([])
   const [userData, setUserData] = useState();
-  const [isLogin, setisLogin] = useState(Cookies.get('token')?true:false)
-
-  
-  useEffect(() => {
-    if(isLogin){
-      FetchDataOFAllCourses()
-      FetchDataOFUserData();
-    }
-   
-  }, [])
 
   const FetchDataOFUserData = async () => {
     const UserData = await getUser();
     if (!UserData) console.log(UserData?.message)
     setUserData(UserData)
-
   }
   const FetchDataOFAllCourses= async () => {
-    const AllCourses = await getAllCourses();
+      const AllCourses = await getAllCourses();
     if (!AllCourses) console.log(AllCourses?.message)
-    await setAllCourses(AllCourses.data)
-
+     setAllCourses(AllCourses.data)
   }
+  
+  useEffect(() => {
+      FetchDataOFAllCourses()
+      FetchDataOFUserData();
+  
+  }, [])
+
 
   return (
     <main className={styles.main}>

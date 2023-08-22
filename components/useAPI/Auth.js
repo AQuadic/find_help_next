@@ -24,7 +24,6 @@ let headersToken = {
             body,
         },);
         const data = await res.json();
-        Cookies.remove("token");
         return data;
     } catch (error) {
         console.log('Error in Add New Category (service) =>', error);

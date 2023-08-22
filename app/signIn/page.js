@@ -13,7 +13,6 @@ function SignIn() {
   const [password, setpassword] = useState("");
   const [Erroremail, setErroremail] = useState("");
   const [Errorpassword, setErrorpassword] = useState("");
- console.log(email);
   const handellogin = () => {
     
     const po = axios
@@ -32,9 +31,6 @@ function SignIn() {
       )
       .then((res) => {
         Cookies.set("token",res.data.token);
-        if(res.status === 200){
-router.push("/")
-        }
        console.log(res);
       })
       .catch((res) => {
