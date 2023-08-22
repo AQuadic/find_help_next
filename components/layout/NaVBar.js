@@ -11,9 +11,12 @@ function NavBar() {
   const [userData, setUserData] = useState()
   const [userLogOut, setUserLogOut] = useState()
   const [isLogin, setisLogin] = useState(Cookies.get('token')?true:false)
-  
+ 
   useEffect(() => {
-    FetchDataOFUserData();
+    if(isLogin){
+      FetchDataOFUserData();
+    }
+   
     setisLogin(Cookies.get('token')?true:false)
   }, [,Cookies.get('token')])
 
@@ -28,7 +31,8 @@ function NavBar() {
     const UserLogOut = await LogOut();
     if (!UserLogOut) console.log(UserLogOut?.message)
     router.push("/signIn")
-    setUserLogOut(UserLogOut)
+    setUserLogOut(UserLogOut);
+    setisLogin(false)
   }
   console.log(userData);
   console.log(userLogOut);
@@ -503,7 +507,7 @@ function NavBar() {
         <Link href="/myCourses" className="nav-link">My Courses</Link>
         {
          isLogin?
-          <>
+         
            <div className="dropdown" style={{position: "relative",}}>
           <h4
             className="dropdown-toggle nav_btn btn_page2"
@@ -540,7 +544,7 @@ function NavBar() {
               </li>
             </ul>
         </div>
-          </>
+        
           :
           <>
             <Link href="/signIn" className="btn_page2">Log In</Link>

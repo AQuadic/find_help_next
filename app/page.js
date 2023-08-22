@@ -5,6 +5,7 @@ import Link from "next/link";
 import ItemCourse from "@/components/ItemCourse";
 import { getUser } from "@/components/useAPI/GetUser";
 import { getAllCourses } from "@/components/useAPI/CorsesApi/GetCourses";
+import Cookies from "js-cookie";
 
 
 
@@ -12,11 +13,16 @@ import { getAllCourses } from "@/components/useAPI/CorsesApi/GetCourses";
 
 export default  function Home() {
   const [allCourses, setAllCourses] = useState([])
-  const [userData, setUserData] = useState()
+  const [userData, setUserData] = useState();
+  const [isLogin, setisLogin] = useState(Cookies.get('token')?true:false)
+
   
   useEffect(() => {
-    FetchDataOFUserData();
-    FetchDataOFAllCourses()
+    if(isLogin){
+      FetchDataOFAllCourses()
+      FetchDataOFUserData();
+    }
+   
   }, [])
 
   const FetchDataOFUserData = async () => {
