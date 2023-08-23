@@ -2,6 +2,10 @@
 import React, { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 
+export const metadata = {
+  title: 'analytica | Verify',
+}
+
 function Verify() {
   const [otp, setOtp] = useState("");
   const clearOtp = () => {

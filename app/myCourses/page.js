@@ -4,6 +4,9 @@ import { getMyCourses } from "@/components/useAPI/CorsesApi/GetCourses";
 import React, { useState } from "react";
 import { useEffect } from "react";
 
+export const metadata = {
+  title: 'analytica | My Courses',
+}
 function MyCourses() {
   const [active, setActive] = useState("progress");
   const ActiveBtn = (e) => [setActive(e)];

@@ -11,9 +11,8 @@ import { navState } from "@/atoms";
 
 
 export const metadata = {
-  title: 'analytica - Home',
-  description: 'analytica',
-  icons: [{ rel: 'icon', url: '/public/images/Logo.svg' }],
+  title: 'analytica | Home',
+ 
 }
 
 export default  function Home() {
@@ -59,6 +58,7 @@ const FetchDataOFHomePage= async () => {
   const AllData = await getHomePage();
 if (!AllData) console.log(AllData?.message)
 setHomeData(AllData.home_sections)
+console.log(AllData);
 }
 console.log(homeData);
 
@@ -113,6 +113,7 @@ console.log(homeData);
                 return(
                   <ItemCourse
                   key={course.id}
+                  id={course.id}
                   title={course.name.en}
                   imageCourse={course.image.url}
                   star="4.8"
@@ -201,6 +202,7 @@ console.log(homeData);
                 return(
                   <ItemCourse
                   key={course.id}
+                  id={course.id}
                   title={course.name.en}
                   imageCourse={course.image.url}
                   star="4.8"

@@ -3,6 +3,10 @@ import ItemCourse2 from "@/components/ItemCourse2";
 import { getAllCourses } from "@/components/useAPI/CorsesApi/GetCourses";
 import React, { useEffect, useState } from "react";
 
+export const metadata = {
+  title: 'analytica | Courses',
+}
+
 function Courses() {
 
 

@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import Link from "next/link";
 
+export const metadata = {
+  title: 'analytica | Sign UP',
+}
+
 function SignUp() {
   const [value, setValue] = useState();
   const [value2, setValue2] = useState();

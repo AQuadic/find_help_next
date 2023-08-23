@@ -3,6 +3,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 
+
+export const metadata = {
+  title: 'analytica | Account',
+}
+
 function page() {
   const router = useRouter()
   return (

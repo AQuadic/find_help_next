@@ -12,12 +12,13 @@ function ItemCourse({
   best,
   Myprogress,
   numProgress,
-  link2
+  link2,
+  id
 }) {
   return (
     <div className="service ">
       {best && <h5>{best}</h5>}
-      <Link href={link2?link2:"/coursesDetails"}>
+      <Link href={link2?link2:`/courses/${id}`}>
         {
           imageCourse? 
           <>
@@ -39,7 +40,7 @@ function ItemCourse({
        
       </Link>
       <div className="aboutservice">
-        <Link href={link2?link2:"/coursesDetails"} >
+        <Link href={link2?link2:`/courses/${id}`} >
           <div className="head">
             <h3>{title}</h3>
             {star && (

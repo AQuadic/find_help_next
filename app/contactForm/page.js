@@ -1,7 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import PhoneInput from "react-phone-number-input";
-
+export const metadata = {
+  title: 'analytica | Contact_Form',
+}
 function ContactForm() {
   const [value, setValue] = useState();
   const [value2, setValue2] = useState();

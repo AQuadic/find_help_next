@@ -10,10 +10,7 @@ import Layout from '@/components/layout/Layout';
 
 
 export const metadata = {
-  title: 'analytica - Home',
   description: 'analytica',
-  icons: [{ rel: 'icon', url: '/public/images/Logo.svg' }],
-  
   
 }
 

@@ -4,7 +4,14 @@ import React from "react";
 import { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 
+
+export const metadata = {
+  title: 'analytica | Account',
+}
+
 function page() {
+
+
   const [value, setValue] = useState();
   return (
     <>

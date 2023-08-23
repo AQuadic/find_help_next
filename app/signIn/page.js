@@ -8,6 +8,9 @@ import { useRouter } from 'next/navigation'
 import { useRecoilState } from "recoil";
 import { navState } from "@/atoms";
 
+export const metadata = {
+  title: 'analytica | Sign IN',
+}
 
 function SignIn() {
   const router = useRouter()
