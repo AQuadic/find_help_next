@@ -7,12 +7,16 @@ import Navbar2 from '../layout2/Navbar2'
 import Footer2 from '../layout2/Footer2'
 
 import Script from 'next/script'
+import { RecoilRoot } from 'recoil'
 
 function Layout({children}) {
   const pathname = usePathname()
   const isClintUrl = pathname.includes('instructorScreen');
   return (
     <>
+    <RecoilRoot>
+
+   
     {
       isClintUrl?
        <>
@@ -31,6 +35,7 @@ function Layout({children}) {
       <Footer/> 
       </> 
     }
+     </RecoilRoot>
     </>
   )
 }

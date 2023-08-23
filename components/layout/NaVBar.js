@@ -1,59 +1,99 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { getUser } from "../useAPI/GetUser";
+import { UserState, getUser } from "../useAPI/GetUser";
 import { useRouter } from "next/navigation";
 import { LogOut } from "../useAPI/Auth";
 import Cookies from "js-cookie";
+import { useRecoilState } from "recoil";
+import { navState } from "@/atoms";
 
 function NavBar() {
+  const [userData, setUserData] = useState();
+  const [IsUser, setIsUser] = useRecoilState(navState);
+  console.log(IsUser);
+
+  useEffect(() => {
+    if (IsUser) {
+      FetchDataOFUserData();
+    }
+  }, [IsUser]);
+
+  const FetchDataOFUserData = async () => {
+    const UserData = await getUser(Cookies.get("token"));
+    if (!UserData) console.log(UserData?.message);
+    setUserData(UserData);
+  };
+  console.log("nave user");
+
+  console.log(userData);
+  const HandelLogOut = async () => {
+    const UserLogOut = await LogOut(Cookies.get("token"));
+    if (UserLogOut.message === "auth.logged_out") {
+      console.log("done");
+      setIsUser(false);
+      Cookies.remove('token')
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container">
         <div className="phone_nav ac_nav">
-          <div
-            className="dropdown"
-            style={{ position: "relative", display: "none" }}
-          >
-            <h4
-              className="dropdown-toggle nav_btn btn_page2"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
+          {IsUser ? (
+            <div
+              className="dropdown"
+              style={{ position: "relative" }}
             >
-              Hi, Donia
-            </h4>
+              <h4
+                className="dropdown-toggle nav_btn btn_page2"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Hi, {userData?.name}
+              </h4>
 
-            <ul className="dropdown-menu myAcc">
-              <li>
-                <Link className="dropdown-item" href="/account">
-                  <img src="/images/account/account.webp" alt="account" />
-                  <p>Personal Information</p>
-                </Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="/account/password">
-                  <img src="/images/account/logoPass.webp" alt="logoPass" />
-                  <p>Password</p>
-                </Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="/account/activeSessions">
-                  <img src="/images/account/active.webp" alt="active" />
-                  <p>Active Sessions</p>
-                </Link>
-              </li>
-              <li>
-                <a className="dropdown-item" href="signIn.html">
-                  <img src="/images/account/logOut.webp" alt="logOut" />
-                  <p>Logout</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <Link href="/signIn" className="btn_page2">
-            {" "}
-            Login
-          </Link>
+              <ul className="dropdown-menu myAcc">
+                <li>
+                  <Link className="dropdown-item" href="/account">
+                    <img src="/images/account/account.webp" alt="account" />
+                    <p>Personal Information</p>
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" href="/account/password">
+                    <img src="/images/account/logoPass.webp" alt="logoPass" />
+                    <p>Password</p>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="dropdown-item"
+                    href="/account/activeSessions"
+                  >
+                    <img src="/images/account/active.webp" alt="active" />
+                    <p>Active Sessions</p>
+                  </Link>
+                </li>
+                <li>
+                <button
+                    className="dropdown-item"
+                    onClick={() => {
+                      HandelLogOut();
+                    }}
+                  >
+                    <img src="/images/account/logOut.webp" alt="logOut" />
+                    <p>Logout</p>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <Link href="/signIn" className="btn_page2">
+              Login
+            </Link>
+          )}
+
           <button className="search btnsearch">
             <img src="/images/search.svg" alt="search" />
           </button>
@@ -79,7 +119,6 @@ function NavBar() {
           <form action="">
             <input type="text" className="search" />
           </form>
-
           <div className="col-dec">
             <div className="navbar-nav">
               <div className="nav-item dropdown">
@@ -769,55 +808,68 @@ function NavBar() {
               </div>
             </div>
           </div>
+        
           <Link href="/instructor" className="nav-link">
             Teach On Analytica
           </Link>
           <Link href="/myCourses" className="nav-link">
             My Courses
           </Link>
+          {IsUser ? (
+            <div className="dropdown" style={{ position: "relative" }}>
+              <h4
+                className="dropdown-toggle nav_btn btn_page2"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Hi, {userData?.name}
+              </h4>
 
-          <Link href="/signIn" className="btn_page2">
-            Log In
-          </Link>
-          <Link href="/signUp" className="btn_page">
-            Sign Up
-          </Link>
-          <div className="dropdown" style={{ position: "relative",display:"none" }}>
-            <h4
-              className="dropdown-toggle nav_btn btn_page2"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Hi, Donia
-            </h4>
-
-            <ul className="dropdown-menu myAcc">
-              <li>
-                <Link className="dropdown-item" href="/account">
-                  <img src="/images/account/account.webp" alt="account" />
-                  <p>Personal Information</p>
-                </Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="/account/password">
-                  <img src="/images/account/logoPass.webp" alt="logoPass" />
-                  <p>Password</p>
-                </Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="/account/activeSessions">
-                  <img src="/images/account/active.webp" alt="active" />
-                  <p>Active Sessions</p>
-                </Link>
-              </li>
-              <li>
-                <a className="dropdown-item" href="">
-                  <img src="/images/account/logOut.webp" alt="logOut" />
-                  <p>Logout</p>
-                </a>
-              </li>
-            </ul>
-          </div>
+              <ul className="dropdown-menu myAcc">
+                <li>
+                  <Link className="dropdown-item" href="/account">
+                    <img src="/images/account/account.webp" alt="account" />
+                    <p>Personal Information</p>
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" href="/account/password">
+                    <img src="/images/account/logoPass.webp" alt="logoPass" />
+                    <p>Password</p>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="dropdown-item"
+                    href="/account/activeSessions"
+                  >
+                    <img src="/images/account/active.webp" alt="active" />
+                    <p>Active Sessions</p>
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => {
+                      HandelLogOut();
+                    }}
+                  >
+                    <img src="/images/account/logOut.webp" alt="logOut" />
+                    <p>Logout</p>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <>
+              <Link href="/signIn" className="btn_page2">
+                Log In
+              </Link>
+              <Link href="/signUp" className="btn_page">
+                Sign Up
+              </Link>
+            </>
+          )}
 
           <button className="lang">
             <img src="/images/lang.webp" className="lang" alt="lang" />

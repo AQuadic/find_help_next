@@ -465,6 +465,7 @@ html[dir="rtl"] .services .allServices .service h5 {
   display: flex;
   flex-direction: column;
   border-radius: 0px 0px 10px 10px;
+  justify-content: space-between;
 }
 .services .allServices .service .aboutservice .head,
 .current_Service .about_current_Service .head {
@@ -2889,7 +2890,7 @@ background-image: url("/images/search.svg");
 .ac_nav .dropdown-toggle::after {
 }
 
-.ac_nav .dropdown li a {
+.ac_nav .dropdown li .dropdown-item {
   color: black !important;
   padding: 4px 8px;
 }
@@ -2998,19 +2999,20 @@ nav .dropdown-menu a {
   padding-bottom: 12px;
   border-bottom: 1px solid #e2e2e2;
 }
-.myAcc.dropdown-menu a {
+.myAcc.dropdown-menu .dropdown-item {
   display: flex;
   align-items: center;
   gap: 4px;
   padding: 0 !important;
+  cursor: pointer;
 }
-.myAcc.dropdown-menu a p {
+.myAcc.dropdown-menu .dropdown-item p {
   font-size: 12px;
   font-family: "DM Sans3";
   line-height: 16px;
   color: black;
 }
-.myAcc.dropdown-menu a img {
+.myAcc.dropdown-menu .dropdown-item img {
 }
 .input_srearch {
   position: absolute;

@@ -5,6 +5,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { PasswordInput, TextInput } from "@mantine/core";
 import { useRouter } from 'next/navigation'
+import { useRecoilState } from "recoil";
+import { navState } from "@/atoms";
 
 
 function SignIn() {
@@ -13,6 +15,7 @@ function SignIn() {
   const [password, setpassword] = useState("");
   const [Erroremail, setErroremail] = useState("");
   const [Errorpassword, setErrorpassword] = useState("");
+  const [IsUser, setIsUser] = useRecoilState(navState);
   const handellogin = () => {
     
     const po = axios
@@ -30,8 +33,10 @@ function SignIn() {
         }
       )
       .then((res) => {
+        setIsUser(true)
         Cookies.set("token",res.data.token);
        console.log(res);
+       router.push('/')
       })
       .catch((res) => {
       /*  setLoading(false);

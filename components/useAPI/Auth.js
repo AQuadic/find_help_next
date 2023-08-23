@@ -16,11 +16,16 @@ let headersToken = {
     "from_all": true
 };
 
-  export const LogOut = async () => {
+  export const LogOut = async (e) => {
     try {
         const res = await fetch(`https://education.aquadic.com/api/v1/users/auth/logout`, {
             method: 'POST',
-            headers:headersToken,
+            headers:{
+              Authorization: `Bearer ${e} `,
+               "Content-Type": "application/json",
+               Accept: "application/json",
+               
+             },
             body,
         },);
         const data = await res.json();
