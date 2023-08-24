@@ -10,8 +10,12 @@ import Layout from '@/components/layout/Layout';
 
 
 export const metadata = {
-  description: 'analytica',
-  
+  title: 'analytica',
+  description: 'analytica is a...',
+  openGraph: {
+    title: 'analytica',
+    description: 'analytica is a...',
+  },
 }
 
 export default function RootLayout({ children }) {

@@ -10,9 +10,10 @@ import { useRecoilState } from "recoil";
 import { navState } from "@/atoms";
 
 
-export const metadata = {
-  title: 'analytica | Home',
- 
+export  function generateMetadata({params}) {
+  return {
+    title: "product title",
+  }
 }
 
 export default  function Home() {
@@ -194,8 +195,8 @@ console.log(homeData);
               <section className="services services_content container m60" key={part.id}>
               <h2 className="headtitle wow fadeInDown">{part.name.en}</h2>
               <p className="p_page wow fadeInUp">
-               {part.description&&part.description[en]}
-              </p>
+               {part.description&&part.description?.en}
+            </p>
               <div className="allServices">
               {
               part.courses.map((course)=>{
