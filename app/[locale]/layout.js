@@ -6,7 +6,8 @@ import './globals.css'
 import 'react-phone-number-input/style.css'
 import Script from 'next/script';
 import Layout from '@/components/layout/Layout';
-
+import {useLocale} from 'next-intl';
+import {notFound} from 'next/navigation';
 
 
 export const metadata = {
@@ -18,10 +19,16 @@ export const metadata = {
   },
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children , params}) {
+  const locale = useLocale();
+ 
+  // Show a 404 error if the user requests an unknown locale
+  if (params.locale !== locale) {
+    notFound();
+  }
   
   return (
-    <html lang="en">
+    <html lang={locale}>
   
       <body >
         

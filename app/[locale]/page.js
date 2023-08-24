@@ -16,16 +16,13 @@ export  function generateMetadata({params}) {
   }
 }
 
-export default  function Home() {
+export default  function Home({params: {locale}}) {
   const [allCourses, setAllCourses] = useState([])
   const [userData, setUserData] = useState();
   const [homeData, setHomeData] = useState([]);
   const [IsUser, setIsUser] = useRecoilState(navState);
 
-
-
   useEffect(() => {
-
     FetchDataOFHomePage()
       if(IsUser){
         FetchDataOFAllCoursesWithUser()
@@ -35,9 +32,6 @@ export default  function Home() {
         FetchDataOFUserData()
       }
 }, [])
-
- 
-
 
   const FetchDataOFUserData = async () => {
     const UserData = await getUser(Cookies.get('token'));
@@ -62,6 +56,7 @@ setHomeData(AllData.home_sections)
 console.log(AllData);
 }
 console.log(homeData);
+
 
   return (
     <main className={styles.main}>

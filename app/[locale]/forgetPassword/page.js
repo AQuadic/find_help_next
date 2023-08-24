@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React from "react";
 
 export const metadata = {
@@ -5,11 +6,12 @@ export const metadata = {
 }
 
 function ForgetPassword() {
+  const t = useTranslations('Index');
   return (
     <>
       <section className="sign container">
         <div className="box_sign">
-          <h2 className="title_sign">Forget Password</h2>
+          <h2 className="title_sign">{t('title')}</h2>
           <p className="p_sign">
             Please enter your registered e-mail address for sending new password
           </p>

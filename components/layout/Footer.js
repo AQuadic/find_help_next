@@ -60,10 +60,10 @@ function Footer() {
           </div>
         </div>
         <div className="part">
-          <button className="langFooter">
+          <Link className="langFooter" href="" locale="ar">
             <img src="/images/media/lang.svg" alt="lang" />
             <p>English</p>
-          </button>
+          </Link>
         </div>
       </div>
       <div className="copy">

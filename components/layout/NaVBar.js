@@ -1,12 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
+
 import { UserState, getUser } from "../useAPI/GetUser";
 import { useRouter } from "next/navigation";
 import { LogOut } from "../useAPI/Auth";
 import Cookies from "js-cookie";
 import { useRecoilState } from "recoil";
 import { navState } from "@/atoms";
+import Link from 'next-intl/link';
 
 function NavBar() {
   const [userData, setUserData] = useState();
@@ -871,10 +872,10 @@ function NavBar() {
             </>
           )}
 
-          <button className="lang">
+          <Link className="lang" href="" locale="ar">
             <img src="/images/lang.webp" className="lang" alt="lang" />
             <p>En</p>
-          </button>
+          </Link>
         </div>
 
         <div className="collapse col-phone" id="navbarSupportedContent">
