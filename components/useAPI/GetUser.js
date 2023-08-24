@@ -49,3 +49,21 @@ let headersToken = {
     }
   }
   
+
+
+  export const getInstractor = async (e) => {
+    try {
+        const res = await fetch(`https://education.aquadic.com/api/v1/users/instructors/${e}`, {
+            method: 'GET',
+            headers:{
+                 "Content-Type": "application/json",
+                 Accept: "application/json",
+                 
+               },
+        },);
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.log('Error in Add New Category (service) =>', error);
+    }
+  }

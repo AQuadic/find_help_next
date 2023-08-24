@@ -30,7 +30,7 @@ function CourseDetails({ params }) {
                 {allCourses.description && <h3>{allCourses.description.en}</h3>}
                 <p>
                   Instructor:{" "}
-                  <Link href="/instractorInfo">
+                  <Link href={`/instractorInfo/${allCourses.instructor.id}`}>
                     {allCourses.instructor.name}
                   </Link>
                 </p>

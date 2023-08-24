@@ -1833,7 +1833,7 @@ background-image: url('/images/graduate.svg');
 }
 @media (max-width: 1200px) {
   .InstractorInfo {
-    gap: 30px 80px;
+    gap: 30px 50px;
   }
 }
 @media (max-width: 768px) {
