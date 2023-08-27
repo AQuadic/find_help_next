@@ -3,20 +3,73 @@ import React, { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import axios from "axios";
 
 
 
 function CSignup() {
+  const t = useTranslations('Sign');
+  const [name, setName] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
   const [value, setValue] = useState();
+  const [phone_country, setPhone_country] = useState();
   const [value2, setValue2] = useState();
   const [selectedOption, setSelectedOption] = useState("option1");
-
+  const [Erroremail, setErroremail] = useState("");
+  const [Errorpassword, setErrorpassword] = useState("");
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
+ 
+console.log(value);
+
+  const handelSignUP = () => {
+    
+    const po = axios
+      .post(
+        "https://education.aquadic.com/api/v1/users/auth/signup",
+        {
+          "name": name,
+           email: email,
+          "password": password,
+          "phone": value,
+          "phone_country": 'EG',
+          "parent_phone":value,
+    "nid": "a",
+    "area_id": 20,
+    "city_id": 1,
+    "country_id": 8,
+    "level_id": 12,
+    "parent_phone_country":"EG",
+    "password_confirmation":password
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      )
+      .then((res) => {
+       console.log(res);
+      })
+      .catch((res) => {
+      /*  setLoading(false);
+        res.response.data.email
+          ? setErroremail(res.response.data.email[0])
+          : setErroremail("");
+        res.response.data.password
+          ? setErrorpassword(res.response.data.password[0])
+          : setErrorpassword("");
+        res.response.data.error
+          ? setError(res.response.data.error)
+          : setError("");*/
+          console.log(res);
+      });
+  };
 
 
-  const t = useTranslations('Sign');
 
   return (
     <>
@@ -49,6 +102,7 @@ function CSignup() {
                 className="form-control"
                 id="inputFirstName"
                 placeholder={t('enterFirst')}
+                onChange={(e)=>setName(e.target.value)}
               />
             </div>
             <div className="col-md-12">
@@ -60,6 +114,7 @@ function CSignup() {
                 className="form-control"
                 id="inputLast Name"
                 placeholder={t('enterLast')}
+               
               />
             </div>
             <div className="col-md-12">
@@ -71,6 +126,7 @@ function CSignup() {
                 className="form-control"
                 id="inputEmail"
                 placeholder={t('enterEmail')}
+                onChange={(e)=>setemail(e.target.value)}
               />
             </div>
             <div className="col-md-12">
@@ -82,6 +138,7 @@ function CSignup() {
                 className="form-control"
                 id="inputpassword"
                 placeholder={t('enterPassword')}
+                onChange={(e)=>setpassword(e.target.value)}
               />
             </div>
 
@@ -94,6 +151,7 @@ function CSignup() {
                 placeholder={t('enterNumber')}
                 className="form-control"
                 value={value}
+                onCountryChange={(e)=>setPhone_country(e)}
                 onChange={setValue}
               />
             </div>
@@ -152,14 +210,14 @@ function CSignup() {
                 <option value="option2">Profession2</option>
               </select>
             </div>
-            <a href="courseVideo.html" className="btn_page">
+            {/* <a href="courseVideo.html" className="btn_page">
             {t('signUp')}
-            </a>
+            </a> */}
 
-            {/*
-           ToDo
-           <input type="submit" value="Sign Up" className="btn_page" />
-  */}
+           
+          
+           <input type="submit" value="Sign Up" onClick={(e)=>{e.preventDefault();handelSignUP()}} className="btn_page" />
+
           </form>
           <div className="haveAccount">
             <p>

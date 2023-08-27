@@ -2,7 +2,6 @@ import React from "react";
 
 export const metadata = {
   title: 'analytica | Certificate',
-
 }
 
 function CCertificate() {

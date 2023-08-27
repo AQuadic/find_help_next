@@ -34,4 +34,19 @@ let headersToken = {
         console.log('Error in Add New Category (service) =>', error);
     }
   }
-  
+  export const SignUP = async (formate) => {
+    try {
+        const res = await fetch("https://education.aquadic.com/api/v1/users/auth/signup", {
+            method: 'POST',
+            headers:{
+               "Content-Type": "application/json",
+               Accept: "application/json",
+             },
+            body,
+        },);
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.log('Error in Add New Category (service) =>', error);
+    }
+  }
