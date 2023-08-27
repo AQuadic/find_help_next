@@ -2,17 +2,20 @@
 import React, { useEffect, useState } from "react";
 
 import { UserState, getUser } from "../useAPI/GetUser";
-import { useRouter } from "next/navigation";
+import {usePathname, useRouter} from 'next-intl/client';
 import { LogOut } from "../useAPI/Auth";
 import Cookies from "js-cookie";
 import { useRecoilState } from "recoil";
 import { navState } from "@/atoms";
 import Link from 'next-intl/link';
 
-function NavBar() {
+
+function NavBar({lang}) {
   const [userData, setUserData] = useState();
   const [IsUser, setIsUser] = useRecoilState(navState);
   console.log(IsUser);
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (IsUser) {
@@ -872,10 +875,10 @@ function NavBar() {
             </>
           )}
 
-          <Link className="lang" href="" locale="ar">
+          <div className="lang"  onClick={()=>{router.replace(`${pathname}`, {locale: lang==='en'?'ar':'en'});}}>
             <img src="/images/lang.webp" className="lang" alt="lang" />
-            <p>En</p>
-          </Link>
+            <p>{lang==='en'?'Ar':'En'}</p>
+          </div>
         </div>
 
         <div className="collapse col-phone" id="navbarSupportedContent">

@@ -1,7 +1,11 @@
+"use client";
 import React from 'react'
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next-intl/client';
 
-function Footer() {
+function Footer({lang}) {
+  const router = useRouter();
+  const pathname = usePathname();
   return (
     <footer>
     <div className="container">
@@ -60,10 +64,10 @@ function Footer() {
           </div>
         </div>
         <div className="part">
-          <Link className="langFooter" href="" locale="ar">
+          <div className="langFooter"  onClick={()=>{router.replace(`${pathname}`, {locale: lang==='en'?'ar':'en'});}}>
             <img src="/images/media/lang.svg" alt="lang" />
-            <p>English</p>
-          </Link>
+            <p>{lang==='en'?'Arabic':'English'}</p>
+          </div>
         </div>
       </div>
       <div className="copy">

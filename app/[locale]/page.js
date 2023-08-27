@@ -5,9 +5,9 @@ import Link from "next/link";
 import ItemCourse from "@/components/ItemCourse";
 import { getHomePage, getUser } from "@/components/useAPI/GetUser";
 import { getAllCourses, getAllCoursesWithUser } from "@/components/useAPI/CorsesApi/GetCourses";
-import Cookies from "js-cookie";
 import { useRecoilState } from "recoil";
 import { navState } from "@/atoms";
+import { useTranslations } from "next-intl";
 
 
 export  function generateMetadata({params}) {
@@ -18,10 +18,9 @@ export  function generateMetadata({params}) {
 
 export default  function Home({params: {locale}}) {
   const [allCourses, setAllCourses] = useState([])
-  const [userData, setUserData] = useState();
   const [homeData, setHomeData] = useState([]);
   const [IsUser, setIsUser] = useRecoilState(navState);
-
+  const t = useTranslations('Index');
   useEffect(() => {
     FetchDataOFHomePage()
       if(IsUser){
@@ -29,20 +28,16 @@ export default  function Home({params: {locale}}) {
       }
       if(!IsUser){
         FetchDataOFAllCourses()
-        FetchDataOFUserData()
       }
 }, [])
 
-  const FetchDataOFUserData = async () => {
-    const UserData = await getUser(Cookies.get('token'));
-    if (!UserData) console.log(UserData?.message)
-    setUserData(UserData)
-  }
+
   const FetchDataOFAllCourses= async () => {
       const AllCourses = await getAllCourses();
     if (!AllCourses) console.log(AllCourses?.message)
      setAllCourses(AllCourses.data)
   }
+ 
   const FetchDataOFAllCoursesWithUser= async () => {
     const AllCourses = await getAllCoursesWithUser();
   if (!AllCourses) console.log(AllCourses?.message)
@@ -65,20 +60,18 @@ console.log(homeData);
           <div className="container allAbout">
             <div className="part1">
               <h1>
-                <span className="mainColor">Empowering</span>
-                <span className="imgWord">Minds,</span> <br />
-                Enriching <span className="mainColor">Futures</span>
+                <span className="mainColor">{t('title')}</span>
+                <span className="imgWord">{t('title2')},</span> <br />
+                {t('title3')} <span className="mainColor">{t('title4')}</span>
               </h1>
               <p>
-                Unlimited access to 7,000+ world-className courses, hands-on
-                projects, and job-ready certificate programs - all included in
-                your subscription
+              {t('dec')}
               </p>
               <Link href="courses" className="btn_page wow fadeInDown">
-                Start Now
+              {t('start')}
               </Link>
               <div className="trusted">
-                <h2 className="headtitle head3 wow fadeInDown">Trusted By</h2>
+                <h2 className="headtitle head3 wow fadeInDown"> {t('trusted')}</h2>
                 <div className="images_Trusted">
                   <img src="/images/about/image1.webp" alt="images_Trusted" />
                   <img src="/images/about/image2.webp" alt="images_Trusted" />
@@ -287,13 +280,12 @@ console.log(homeData);
               alt="become"
             />
             <div className="info_become">
-              <h2>Become an instructor</h2>
+              <h2> {t('become')}</h2>
               <p>
-                Instructors from around the world teach millions of students on
-                Udemy. We provide the tools and skills to teach what you love.
+              {t('becomeDec')}
               </p>
               <Link href="instructor" className="btn_page2">
-                Start Now
+              {t('start')}
               </Link>
             </div>
           </div>

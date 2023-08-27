@@ -6,9 +6,12 @@ import './globals.css'
 import 'react-phone-number-input/style.css'
 import Script from 'next/script';
 import Layout from '@/components/layout/Layout';
-import {useLocale} from 'next-intl';
+import {NextIntlClientProvider, useLocale} from 'next-intl';
 import {notFound} from 'next/navigation';
 
+export function generateStaticParams() {
+  return [{locale: 'en'}, {locale: 'ar'}];
+}
 
 export const metadata = {
   title: 'analytica',
@@ -19,23 +22,29 @@ export const metadata = {
   },
 }
 
-export default function RootLayout({ children , params}) {
+export default async function RootLayout({ children , params}) {
   const locale = useLocale();
- 
-  // Show a 404 error if the user requests an unknown locale
-  if (params.locale !== locale) {
+  
+  let messages;
+  try {
+    messages = (await import(`../../messages/${locale}.json`)).default;
+  } catch (error) {
     notFound();
   }
-  
+
   return (
-    <html lang={locale}>
+    <html lang={locale} dir={locale==="en"?'ltr':'rtl'}>
   
-      <body >
+      <body className={locale==="en"?'ltr':'rtl'}>
         
 
      
-        <Layout>
+        <Layout lang={locale}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+
+        
         {children}
+        </NextIntlClientProvider>
         </Layout>
       
 

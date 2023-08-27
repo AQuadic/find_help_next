@@ -1,5 +1,56 @@
 {
-    "Index": {
-      "title": "Hello world!"
-    }
+  "Index": {
+    "title": "Empowering",
+    "title2": "Minds",
+    "title3": "Enriching",
+    "title4": "Futures",
+    "dec":" Unlimited access to 7,000+ world-className courses, hands-on projects, and job-ready certificate programs - all included in your subscription",
+    "start":"Start Now",
+    "trusted":"Trusted By",
+    "become":"Become an instructor",
+    "becomeDec":" Instructors from around the world teach millions of students on Udemy. We provide the tools and skills to teach what you love."
+  },
+  "Sign": {
+    "in": "Log in and start learning",
+    "up": "Sign up and start learning",
+    "first": "First Name ",
+    "last": "Last Name ",
+    "email": "Email Address ",
+    "password ": "Password ",
+    "mobile": "Mobile Number",
+    "whatsApp": "WhatsApp Number",
+    "country": "Country",
+    "age": "Age",
+    "gender": "Gender",
+    "profession": "What profession are you learning for?",
+    "signUp": "Sign Up",
+    "already": "Already have an account?",
+    "logIn": "Log In",
+    "don’t": "Don’t have an account?",
+    "Forget": "Forget Password",
+    "forget2": "Forget Password?",
+    "forgetTitle": "Please enter your registered e-mail address for sending new password",
+    "sendMail": "Send Mail",
+    "set": "Set A New Password",
+    "newPassword": "New Password",
+    "confirmNew": "Confirm New Password",
+    "confirm": "Confirm",
+    "verifyEmail": "Verify Your Email",
+    "verifyTitle": "Please enter the verification code we sent to your Email Address",
+    "verify": "Verify",
+    "gmail": "Sign Up By Gmail",
+    "facebook": "Sign Up By Facebook",
+
+    "enterFirst": "Enter Your First Name",
+    "enterLast": "Enter Your Last Names",
+    "enterEmail": "Enter Your Email",
+    "enterPassword ": "Enter The Password ",
+    "enterNumber": "Enter Your Number",
+    "selectCountry": "Select Your Country",
+    "enterAge": "Enter Your Age",
+    "selectGender": "Select  Your Gender",
+    "selectProfession": "Select Your Profession",
+    "enterNew": "Enter New Password",
+    "enterAgain": "Enter New Password Again"
   }
+}

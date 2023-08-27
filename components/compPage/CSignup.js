@@ -1,0 +1,175 @@
+"use client";
+import React, { useState } from "react";
+import PhoneInput from "react-phone-number-input";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+
+
+
+function CSignup() {
+  const [value, setValue] = useState();
+  const [value2, setValue2] = useState();
+  const [selectedOption, setSelectedOption] = useState("option1");
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+
+  const t = useTranslations('Sign');
+
+  return (
+    <>
+      <section className="sign container">
+        <div className="box_sign">
+          <h2 className="title_sign">{t('up')}</h2>
+          <div className="signWith">
+            <ul>
+              <li>
+                <a href="" className="google">
+                  <img src="/images/media/google2.svg" alt="google" />
+                  <p>{t('gmail')}</p>
+                </a>
+              </li>
+              <li>
+                <a href="" className="facebook">
+                  <img src="/images/media/face2.svg" alt="facebook" />
+                  <p>{t('facebook')}</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <form className="row g-4 form_page">
+            <div className="col-md-12">
+              <label htmlFor="inputFirstName" className="form-label">
+              {t('first')}
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputFirstName"
+                placeholder={t('enterFirst')}
+              />
+            </div>
+            <div className="col-md-12">
+              <label htmlFor="inputLast Name" className="form-label">
+              {t('last')}
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputLast Name"
+                placeholder={t('enterLast')}
+              />
+            </div>
+            <div className="col-md-12">
+              <label htmlFor="inputEmail" className="form-label">
+              {t('email')}
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="inputEmail"
+                placeholder={t('enterEmail')}
+              />
+            </div>
+            <div className="col-md-12">
+              <label htmlFor="inputpassword" className="form-label">
+              {t('password')}
+              </label>
+              <input
+                type="password"
+                className="form-control"
+                id="inputpassword"
+                placeholder={t('enterPassword')}
+              />
+            </div>
+
+            <div className="col-md-12">
+              <label htmlFor="inputPhone " className="form-label">
+              {t('mobile')}
+              </label>
+              <PhoneInput
+                defaultCountry="EG"
+                placeholder={t('enterNumber')}
+                className="form-control"
+                value={value}
+                onChange={setValue}
+              />
+            </div>
+            <div className="col-md-12">
+              <label htmlFor="inputPhone " className="form-label">
+              {t('whatsApp')}
+              </label>
+              <PhoneInput
+                defaultCountry="EG"
+                placeholder={t('enterNumber')}
+                className="form-control"
+                value={value2}
+                onChange={setValue2}
+              />
+            </div>
+            {/*value={selectedOption} onChange={handleOptionChange}*/}
+            <div className="col-md-12">
+              <label htmlFor="inputCountry" className="form-label">
+              {t('country')}
+              </label>
+
+              <select id="inputCountry" className="form-select">
+                <option value="option">{t('selectCountry')}</option>
+                <option value="option1">EG</option>
+                <option value="option2">EUR</option>
+              </select>
+            </div>
+            <div className="col-md-12">
+              <label htmlFor="inputAge" className="form-label">
+              {t('age')}
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="inputAge"
+                placeholder={t('enterAge')}
+              />
+            </div>
+            <div className="col-md-12">
+              <label htmlFor="inputGender" className="form-label">
+              {t('gender')}
+              </label>
+              <select id="inputGender" className="form-select">
+                <option value="option">{t('selectGender')}</option>
+                <option value="option1">male</option>
+                <option value="option2">female</option>
+              </select>
+            </div>
+            <div className="col-md-12">
+              <label htmlFor="inputProfession" className="form-label">
+              {t('profession')}
+              </label>
+              <select id="inputProfession" className="form-select">
+                <option value="option">{t('selectProfession')}</option>
+                <option value="option1">Profession1</option>
+                <option value="option2">Profession2</option>
+              </select>
+            </div>
+            <a href="courseVideo.html" className="btn_page">
+            {t('signUp')}
+            </a>
+
+            {/*
+           ToDo
+           <input type="submit" value="Sign Up" className="btn_page" />
+  */}
+          </form>
+          <div className="haveAccount">
+            <p>
+            {t('already')}<Link href="/signIn"> {t('logIn')}</Link>
+            </p>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export default CSignup;

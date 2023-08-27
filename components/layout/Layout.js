@@ -9,9 +9,10 @@ import Footer2 from '../layout2/Footer2'
 import Script from 'next/script'
 import { RecoilRoot } from 'recoil'
 
-function Layout({children}) {
+function Layout({children,lang}) {
   const pathname = usePathname()
   const isClintUrl = pathname.includes('instructorScreen');
+ 
   return (
     <>
     <RecoilRoot>
@@ -30,9 +31,9 @@ function Layout({children}) {
         </> 
       :
       <>
-      <NavBar/>
+      <NavBar lang={lang}/>
      {children}
-      <Footer/> 
+      <Footer lang={lang}/> 
       </> 
     }
      </RecoilRoot>
