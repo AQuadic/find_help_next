@@ -41,15 +41,15 @@ export default async function RootLayout({ children , params}) {
       <body className={locale==="en"?'ltr':'rtl'}>
         
 
-     
+      <NextIntlClientProvider locale={locale} messages={messages}>
         <Layout lang={locale}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
+      
 
         
         {children}
-        </NextIntlClientProvider>
+        
         </Layout>
-      
+        </NextIntlClientProvider>
 
         <Script  src='/bootstrap.js'/>
         

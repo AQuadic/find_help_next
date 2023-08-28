@@ -2,10 +2,12 @@
 import React from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next-intl/client';
+import { useTranslations } from 'next-intl';
 
 function Footer({lang}) {
   const router = useRouter();
   const pathname = usePathname();
+  const t = useTranslations('Footer');
   return (
     <footer>
     <div className="container">
@@ -15,32 +17,31 @@ function Footer({lang}) {
             <Link href="/"><img src="/images/logo.svg" alt="logo" /></Link>
           </h1>
           <p>
-            We change lives, businesses, and nations through digital
-            upskilling, developing the edge you need to conquer what’s next.
+           {t('footerTitle')}
           </p>
         </div>
         <div className="part">
-          <h2>Main Pages</h2>
+          <h2> {t('main')}</h2>
           <div className="links">
-            <Link href="/">Home</Link>
-            <Link href="/myCourses">My Courses</Link>
-            <a href="">Privacy Policy</a>
-            <a href="">Terms of Use</a>
+            <Link href="/">  {t('home')}</Link>
+            <Link href="/myCourses">{t('myCourses')}</Link>
+            <a href="">{t('privacy')}</a>
+            <a href="">{t('terms')}</a>
             <Link href="/instructorScreen">instructorScreen 1</Link>
             <Link href="/instructorScreen/oneCourse">instructorScreen 2</Link>
           </div>
         </div>
         <div className="part">
-          <h2>Categories</h2>
+          <h2> {t('categories')}</h2>
           <div className="links">
-            <a href="">Design</a>
-            <a href="">Music</a>
-            <a href="">Development</a>
-            <a href="">Marketing</a>
+            <a href=""> {t('design')}</a>
+            <a href=""> {t('music')}</a>
+            <a href=""> {t('development')}</a>
+            <a href=""> {t('marketing')}</a>
           </div>
         </div>
         <div className="part" style={{alignItems:"center"}}>
-          <h2 style={{padding:"0px 20px"}} >Follow Us</h2>
+          <h2 style={{padding:"0px 20px"}} >{t('followUs')}</h2>
           <div className="links_social">
             <a href="">
               <img src="/images/media/facebook.webp" alt="facebook" />

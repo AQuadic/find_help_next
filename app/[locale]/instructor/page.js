@@ -1,19 +1,21 @@
 import React from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 export const metadata = {
   title: 'analytica | INSTRUCTOR',
 }
 function Instructor() {
+  const t = useTranslations('Teach');
   return (
     <>
       <section className="become container m60 become2">
         <div className="box">
           <div className="info_become">
-            <h2>Come teach with us</h2>
-            <p>Become an instructor and change lives — including your own</p>
+            <h2>{t('teachTitle')}</h2>
+            <p>{t('teachDec')}</p>
 
             <Link href="/contactForm" className="btn_page">
-              Start Now
+            {t('start')}
             </Link>
           </div>
           <img
@@ -25,7 +27,7 @@ function Instructor() {
       </section>
 
       <section className="begin container m60">
-        <h2>How To Begin</h2>
+        <h2>{t('begin')}</h2>
         <div className="stepsBegin">
           <div className="part1">
             <span id="mySpan"></span>
@@ -33,50 +35,38 @@ function Instructor() {
           <div className="part2" id="myDiv">
             <ul>
               <li>
-                <h3>Apply The Form</h3>
+                <h3>{t('begin1')}</h3>
                 <div className="aboutBegin">
                   <img src="/images/icons/log-in.webp" alt="log-in" />
                   <p>
-                    You start with your passion and knowledge. Then choose a
-                    promising topic with the help of our Marketplace Insights
-                    tool. The way that you teach — what you bring to it — is up
-                    to you.
+                   {t('begin11')}
                   </p>
                 </div>
               </li>
               <li>
-                <h3>Apply The Form</h3>
+                <h3> {t('begin2')}</h3>
                 <div className="aboutBegin rev">
                   <img src="/images/icons/game-plan.webp" alt="game-plan" />
                   <p>
-                    Use basic tools like a smartphone or a DSLR camera. Add a
-                    good microphone and you’re ready to start. If you don’t like
-                    being on camera, just capture your screen. Either way, we
-                    recommend two hours or more of video for a paid course.
+                     {t('begin22')}
                   </p>
                 </div>
               </li>
               <li>
-                <h3>Apply The Form</h3>
+                <h3> {t('begin3')}</h3>
                 <div className="aboutBegin">
                   <img src="/images/icons/female.webp" alt="female" />
                   <p>
-                    Use basic tools like a smartphone or a DSLR camera. Add a
-                    good microphone and you’re ready to start. If you don’t like
-                    being on camera, just capture your screen. Either way, we
-                    recommend two hours or more of video for a paid course.
+                  {t('begin33')}
                   </p>
                 </div>
               </li>
               <li>
-                <h3>Apply The Form</h3>
+                <h3> {t('begin4')}</h3>
                 <div className="aboutBegin rev">
                   <img src="/images/icons/rocket.webp" alt="rocket" />
                   <p>
-                    Gather your first ratings and reviews by promoting your
-                    course through social media and your professional networks.
-                    Your course will be discoverable in our marketplace where
-                    you earn revenue from each paid enrollment.
+                  {t('begin44')}
                   </p>
                 </div>
               </li>
@@ -89,13 +79,12 @@ function Instructor() {
         <div className="box">
           <img src="/images/become.webp" className="img_become" alt="become" />
           <div className="info_become">
-            <h2>Become an instructor</h2>
+            <h2> {t('teachTitle2')}</h2>
             <p>
-              Instructors from around the world teach millions of students on
-              Udemy. We provide the tools and skills to teach what you love.
+               {t('teachDec2')}
             </p>
             <Link href="/contactForm" className="btn_page2">
-              Start Now
+            {t('start')}
             </Link>
           </div>
         </div>

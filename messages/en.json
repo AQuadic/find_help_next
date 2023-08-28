@@ -14,6 +14,7 @@
     "in": "Log in and start learning",
     "up": "Sign up and start learning",
     "first": "First Name ",
+    "full":"Full Name",
     "last": "Last Name ",
     "email": "Email Address ",
     "password": "Password ",
@@ -40,7 +41,6 @@
     "verify": "Verify",
     "gmail": "Sign Up By Gmail",
     "facebook": "Sign Up By Facebook",
-
     "enterFirst": "Enter Your First Name",
     "enterLast": "Enter Your Last Names",
     "enterEmail": "Enter Your Email",
@@ -52,5 +52,73 @@
     "selectProfession": "Select Your Profession",
     "enterNew": "Enter New Password",
     "enterAgain": "Enter New Password Again"
+  },
+  "Footer":{
+    "footerTitle":" We change lives, businesses, and nations through digital upskilling, developing the edge you need to conquer what’s next.",
+    "main":"Main Pages",
+    "home":"Home",
+    "myCourses":"My Courses",
+    "privacy":"Privacy Policy",
+    "terms":"Terms of Use",
+    "categories":"Categories",
+    "design":"Design",
+    "music":"Music",
+    "development":"Development",
+    "marketing":"Marketing",
+    "followUs":"Follow Us"
+  },
+  "Nav":{
+    "teach":" Teach On Analytica",
+    "myCourses":" My Courses",
+    "logIn":"Log In",
+    "signUp":"Sign Up",
+    "categories":"Categories"
+  },
+  "Account":{
+    "account":"Account",
+    "personal":"Personal Information",
+    "password":"Password",
+    "active":"Active Sessions",
+    "logout":"Logout",
+    "save":"Save",
+    "current":"Current Password ",
+    "change":"Change",
+    "revoke":"Revoke"
+
+  },
+  "MyCourses":{
+    "myCourses":"My Courses",
+    "inProgress":"In Progress",
+    "completed":"Completed",
+    "congratulations":"Congratulations",
+    "download":"Download"
+  },
+  "Teach":{
+    "teachTitle":"Come teach with us",
+    "teachTitle2":"Become an instructor",
+    "teachDec":"Become an instructor and change lives — including your own",
+    "teachDec2":"Instructors from around the world teach millions of students on Analytica. We provide the tools and skills to teach what you love.",
+    "start":"Start Now",
+    "begin":"How To Begin",
+    "begin1":"Apply The Form",
+    "begin2":"Plan Your Curriculum",
+    "begin3":"Record Your Video",
+    "begin4":"Launch Your Course",
+    "begin11":"You start with your passion and knowledge. Then choose a promising topic with the help of our Marketplace Insights tool. The way that you teach — what you bring to it — is up to you.",
+    "begin22":"Use basic tools like a smartphone or a DSLR camera. Add a good microphone and you’re ready to start. If you don’t like being on camera, just capture your screen. Either way, we recommend two hours or more of video for a paid course.",
+    "begin33":"Use basic tools like a smartphone or a DSLR camera. Add a good microphone and you’re ready to start. If you don’t like being on camera, just capture your screen. Either way, we recommend two hours or more of video for a paid course.",
+    "begin44":"Gather your first ratings and reviews by promoting your course through social media and your professional networks. Your course will be discoverable in our marketplace where you earn revenue from each paid enrollment.",
+    "hurry":"Hurry Up and fill in this form and be an instructor, we will contact with you soon.",
+    "language":"Language of The Course",
+    "category":"Category of The Course",
+    "titleCourse":"Title of The Course",
+    "subscription":"Subscription Method",
+    "basic":"Basic",
+    "professional":"Professional",
+    "sessions":"Sessions",
+    "ads":"Ads",
+    "agreement":"This is your agreement that you bear the responsibility for the video that will be downloaded on your platform",
+    "Successfully":"You Apply Successfully",
+    "contact":"We Will Contact With You As Soon As Possible"
   }
 }

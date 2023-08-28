@@ -1,6 +1,7 @@
 "use client";
 import ItemCourse from "@/components/ItemCourse";
 import { getMyCourses } from "@/components/useAPI/CorsesApi/GetCourses";
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 import { useEffect } from "react";
 
@@ -8,7 +9,7 @@ import { useEffect } from "react";
 function CMyCourses() {
   const [active, setActive] = useState("progress");
   const ActiveBtn = (e) => [setActive(e)];
-
+const t = useTranslations("MyCourses");
   useEffect(() => {
     FetchDataOFMyCourses()
   }, [])
@@ -25,7 +26,7 @@ console.log(MyCourses);
   return (
     <>
       <section className="myCourses  m60">
-        <h1 className=" container">My Courses</h1>
+        <h1 className=" container">{t('myCourses')}</h1>
         <div className="typeCourses">
           <div className=" container">
             <div className="parts">
@@ -33,13 +34,13 @@ console.log(MyCourses);
                 className={active === "progress" ?"active":""}
                 onClick={() => ActiveBtn("progress")}
               >
-                In Progress
+               {t('inProgress')}
               </button>
               <button
                 className={active === "completed" ? "active":""}
                 onClick={() => ActiveBtn("completed")}
               >
-                completed
+              {t('completed')}
               </button>
             </div>
           </div>

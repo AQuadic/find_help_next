@@ -8,11 +8,14 @@ import Cookies from "js-cookie";
 import { useRecoilState } from "recoil";
 import { navState } from "@/atoms";
 import Link from 'next-intl/link';
+import { useTranslations } from "next-intl";
 
 
 function NavBar({lang}) {
   const [userData, setUserData] = useState();
   const [IsUser, setIsUser] = useRecoilState(navState);
+  const t = useTranslations('Nav');
+  const t2 = useTranslations('Account');
   console.log(IsUser);
   const router = useRouter();
   const pathname = usePathname();
@@ -61,13 +64,13 @@ function NavBar({lang}) {
                 <li>
                   <Link className="dropdown-item" href="/account">
                     <img src="/images/account/account.webp" alt="account" />
-                    <p>Personal Information</p>
+                    <p>{t2('personal')}</p>
                   </Link>
                 </li>
                 <li>
                   <Link className="dropdown-item" href="/account/password">
                     <img src="/images/account/logoPass.webp" alt="logoPass" />
-                    <p>Password</p>
+                    <p>{t2('password')}</p>
                   </Link>
                 </li>
                 <li>
@@ -76,7 +79,7 @@ function NavBar({lang}) {
                     href="/account/activeSessions"
                   >
                     <img src="/images/account/active.webp" alt="active" />
-                    <p>Active Sessions</p>
+                    <p>{t2('active')}</p>
                   </Link>
                 </li>
                 <li>
@@ -87,14 +90,14 @@ function NavBar({lang}) {
                     }}
                   >
                     <img src="/images/account/logOut.webp" alt="logOut" />
-                    <p>Logout</p>
+                    <p>{t2('logout')}</p>
                   </button>
                 </li>
               </ul>
             </div>
           ) : (
             <Link href="/signIn" className="btn_page2">
-              Login
+             {t('logIn')}
             </Link>
           )}
 
@@ -133,7 +136,7 @@ function NavBar({lang}) {
                   aria-expanded="false"
                   style={{ marginBottom: "0px" }}
                 >
-                  Categories
+                  {t('categories')}
                 </h3>
                 <ul className="dropdown-menu row">
                   <li className="col-md-4 col-sm-6 col-12">
@@ -814,10 +817,10 @@ function NavBar({lang}) {
           </div>
         
           <Link href="/instructor" className="nav-link">
-            Teach On Analytica
+            {t('teach')}
           </Link>
           <Link href="/myCourses" className="nav-link">
-            My Courses
+          {t('myCourses')}
           </Link>
           {IsUser ? (
             <div className="dropdown" style={{ position: "relative" }}>
@@ -833,13 +836,13 @@ function NavBar({lang}) {
                 <li>
                   <Link className="dropdown-item" href="/account">
                     <img src="/images/account/account.webp" alt="account" />
-                    <p>Personal Information</p>
+                    <p>{t2('personal')}</p>
                   </Link>
                 </li>
                 <li>
                   <Link className="dropdown-item" href="/account/password">
                     <img src="/images/account/logoPass.webp" alt="logoPass" />
-                    <p>Password</p>
+                    <p>{t2('password')}</p>
                   </Link>
                 </li>
                 <li>
@@ -848,7 +851,7 @@ function NavBar({lang}) {
                     href="/account/activeSessions"
                   >
                     <img src="/images/account/active.webp" alt="active" />
-                    <p>Active Sessions</p>
+                    <p>{t2('active')}</p>
                   </Link>
                 </li>
                 <li>
@@ -859,7 +862,7 @@ function NavBar({lang}) {
                     }}
                   >
                     <img src="/images/account/logOut.webp" alt="logOut" />
-                    <p>Logout</p>
+                    <p>{t2('logout')}</p>
                   </button>
                 </li>
               </ul>
@@ -867,10 +870,10 @@ function NavBar({lang}) {
           ) : (
             <>
               <Link href="/signIn" className="btn_page2">
-                Log In
+              {t('logIn')}
               </Link>
               <Link href="/signUp" className="btn_page">
-                Sign Up
+              {t('signUp')}
               </Link>
             </>
           )}
@@ -884,10 +887,10 @@ function NavBar({lang}) {
         <div className="collapse col-phone" id="navbarSupportedContent">
           <div className="right_nav ac_nav" id="">
             <Link href="instructor" className="nav-link">
-              Teach On Analytica
+            {t('teach')}
             </Link>
             <Link href="myCourses" className="nav-link">
-              My Courses
+            {t('myCourses')}
             </Link>
           </div>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">

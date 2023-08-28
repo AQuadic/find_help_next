@@ -1,8 +1,11 @@
 "use client";
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 
 function CContactForm() {
+  const t = useTranslations('Teach');
+  const t2 = useTranslations('Sign');
   const [value, setValue] = useState();
   const [value2, setValue2] = useState();
   const [selectedCheckbox, setSelectedCheckbox] = useState(null);
@@ -20,14 +23,12 @@ function CContactForm() {
         <div className="container">
           <div className="content">
             <h3 className="f-s">
-              Hurry Up and fill in this form to get all <span>knowledge</span>{" "}
-              and
-              <span>fun</span> we will contact you soon.
+              {t('hurry')}
             </h3>
             <form className="row g-4 form_page">
               <div className="col-md-12">
                 <label htmlFor="inputFirstName" className="form-label">
-                  Full Name{" "}
+                {t2('full')}
                 </label>
                 <input
                   type="text"
@@ -38,22 +39,22 @@ function CContactForm() {
               </div>
               <div className="col-md-12">
                 <label htmlFor="inputEmail" className="form-label">
-                  Email Adress{" "}
+                {t2('email')}
                 </label>
                 <input
                   type="email"
                   className="form-control"
                   id="inputEmail"
-                  placeholder="Enter Your Email"
+                  placeholder={t2('enterEmail')}
                 />
               </div>
               <div className="col-md-12">
                 <label htmlFor="inputPhone " className="form-label">
-                  Mobile Number
+                {t2('mobile')}
                 </label>
                 <PhoneInput
                   defaultCountry="EG"
-                  placeholder="Phone Number"
+                  placeholder= {t2('enterNumber')}
                   className="form-control"
                   value={value}
                   onChange={setValue}
@@ -61,11 +62,11 @@ function CContactForm() {
               </div>
               <div className="col-md-12">
                 <label htmlFor="inputPhone " className="form-label">
-                  WhatsApp Number
+                {t2('whatsApp')}
                 </label>
                 <PhoneInput
                   defaultCountry="EG"
-                  placeholder="Phone Number"
+                  placeholder= {t2('enterNumber')}
                   className="form-control"
                   value={value2}
                   onChange={setValue2}
@@ -73,7 +74,7 @@ function CContactForm() {
               </div>
               <div className="col-md-12">
                 <label htmlFor="inputLanguage" className="form-label">
-                  Language of The Course
+                {t('language')}
                 </label>
                 <select id="inputLanguage" className="form-select">
                   <option>Select The Language</option>
@@ -83,7 +84,7 @@ function CContactForm() {
               </div>
               <div className="col-md-12">
                 <label htmlFor="inputCategory" className="form-label">
-                  Category of The Course
+                {t('category')}
                 </label>
                 <select id="inputCategory" className="form-select">
                   <option>Select The Category</option>
@@ -93,7 +94,7 @@ function CContactForm() {
               </div>
               <div className="col-md-12">
                 <label htmlFor="inputTitle" className="form-label">
-                  Title of The Course
+                {t('titleCourse')}
                 </label>
                 <input
                   type="text"
@@ -108,7 +109,7 @@ function CContactForm() {
                   className="form-label"
                   style={{ margin: "0" }}
                 >
-                  Subscription Method
+                  {t('subscription')}
                 </label>
                 <div className="checkgroub">
                   <div className="form-check">
@@ -122,22 +123,22 @@ function CContactForm() {
                     />
                     <label className="form-check-label" htmlFor="gridCheck1">
                       <div className="method active">
-                        <h4>Basic</h4>
+                        <h4> {t('basic')}</h4>
                         <h5>
                           25 <span>EGP</span>
                         </h5>
                         <ul className="active">
                           <li>
                             <img src="/images/details/true.svg" alt="true" />
-                            <h6>12 Sessions</h6>
+                            <h6>12 {t('sessions')}</h6>
                           </li>
                           <li>
                             <img src="/images/details/true.svg" alt="true" />
-                            <h6>12 Sessions</h6>
+                            <h6>12 {t('sessions')}</h6>
                           </li>
                           <li>
                             <img src="/images/details/true.svg" alt="true" />
-                            <h6>3 Ads</h6>
+                            <h6>3 {t('ads')}</h6>
                           </li>
                         </ul>
                       </div>
@@ -154,7 +155,7 @@ function CContactForm() {
                     />
                     <label className="form-check-label" htmlFor="gridCheck1">
                       <div className="method">
-                        <h4>Professional</h4>
+                        <h4>{t('professional')}</h4>
                         <h5>
                           250 <span>EGP</span>
                         </h5>
@@ -165,15 +166,15 @@ function CContactForm() {
                         <ul className="active">
                           <li>
                             <img src="/images/details/true.svg" alt="true" />
-                            <h6>12 Sessions</h6>
+                            <h6>12 {t('sessions')}</h6>
                           </li>
                           <li>
                             <img src="/images/details/true.svg" alt="true" />
-                            <h6>12 Sessions</h6>
+                            <h6>12 {t('sessions')}</h6>
                           </li>
                           <li>
                             <img src="/images/details/true.svg" alt="true" />
-                            <h6>5 Ads</h6>
+                            <h6>5 {t('ads')}</h6>
                           </li>
                         </ul>
                       </div>
@@ -190,22 +191,22 @@ function CContactForm() {
                     />
                     <label className="form-check-label" htmlFor="gridCheck1">
                       <div className="method active">
-                        <h4>Basic</h4>
+                        <h4> {t('basic')}</h4>
                         <h5>
                           25 <span>EGP</span>
                         </h5>
                         <ul className="active">
                           <li>
                             <img src="/images/details/true.svg" alt="true" />
-                            <h6>12 Sessions</h6>
+                            <h6>12 {t('sessions')}</h6>
                           </li>
                           <li>
                             <img src="/images/details/true.svg" alt="true" />
-                            <h6>12 Sessions</h6>
+                            <h6>12 {t('sessions')}</h6>
                           </li>
                           <li>
                             <img src="/images/details/true.svg" alt="true" />
-                            <h6>15 Ads</h6>
+                            <h6>15 {t('ads')}</h6>
                           </li>
                         </ul>
                       </div>
@@ -225,8 +226,7 @@ function CContactForm() {
                     htmlFor="gridCheck"
                     style={{ color: "#313131", fontFamily: "DM Sans3" }}
                   >
-                    This is your agreement that you bear the responsibility for
-                    the video that will be downloaded on your platform
+                   {t('agreement')}
                   </label>
                 </div>
               </div>

@@ -31,7 +31,7 @@ function ItemCourse({
           :
           <>
            <img
-          src={`./images/service/service${image}.webp`}
+          src={`/images/service/service${image}.webp`}
           className="imgService"
           alt="service"
         />

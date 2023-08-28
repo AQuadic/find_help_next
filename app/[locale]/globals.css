@@ -1,4 +1,3 @@
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -12,10 +11,9 @@ body {
 }
 
 a {
-  color: inherit ;
-  text-decoration: none ;
+  color: inherit;
+  text-decoration: none;
 }
-
 
 * {
   padding: 0;
@@ -65,7 +63,7 @@ ul {
 }
 a {
   text-decoration: none;
-  color: black ;
+  color: black;
 }
 a:hover {
   text-decoration: none;
@@ -179,11 +177,11 @@ html::-webkit-scrollbar-track {
   padding-left: 62px;
   position: relative;
 }
-.head3{
+.head3 {
   font-size: 16px;
-                line-height: 21px;
-                color: #5a5a5a;
-                font-family: DM Sans2;
+  line-height: 21px;
+  color: #5a5a5a;
+  font-family: DM Sans2;
 }
 .headtitle::before {
   content: "";
@@ -275,6 +273,11 @@ html[dir="rtl"] .headtitle::before {
   background-repeat: no-repeat;
   background-size: 58px;
 }
+.rtl .about .allAbout .part1 h1 span.imgWord::before {
+  right: 80%;
+  left: auto;
+  transform: rotate(-90deg);
+}
 .about .allAbout .part1 p {
   font-size: 20px;
   line-height: 30px;
@@ -358,6 +361,10 @@ html[dir="rtl"] .about .allAbout .part1 .trusted .headtitle {
     height: 34px;
     background-size: 34px;
   }
+  .rtl .about .allAbout .part1 h1 span.imgWord::before {
+    right: 73%;
+    left: auto;
+  }
   .about .allAbout .part1 .btn_page {
     width: 220px;
     height: 50px;
@@ -380,7 +387,7 @@ html[dir="rtl"] .about .allAbout .part1 .trusted .headtitle {
   content: "";
   width: 272px;
   height: 271.273px;
-background-image: url("/images/graduate.svg");
+  background-image: url("/images/graduate.svg");
   background-repeat: no-repeat;
   background-size: 272px;
   top: -22%;
@@ -454,7 +461,7 @@ html[dir="rtl"] .services .allServices .service h5 {
   object-fit: fill;
   border-radius: 10px 10px 0px 0px;
   border: 1px solid #dfdfdf;
-    border-bottom: none;
+  border-bottom: none;
 }
 .services .allServices .service .aboutservice {
   padding: 12px 12px 0px 12px;
@@ -622,7 +629,7 @@ html[dir="rtl"] .services .allServices .service h5 {
 .top {
   background: #1f99c8;
   padding: 68px 0px 88px;
- background-image: url("/images/top/back-top.webp");
+  background-image: url("/images/top/back-top.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -938,6 +945,7 @@ footer .part .langFooter {
   border: 1px solid #313131;
   border-radius: 5px;
   background-color: transparent;
+  cursor: pointer;
 }
 footer .part .langFooter img {
   width: 18px;
@@ -1021,6 +1029,8 @@ html[dir="rtl"] .accordion-button::after {
 }
 html[dir="rtl"] .form-check .form-check-input {
   float: right;
+  
+  margin-right: -1.5em;
 }
 .accordion-button:not(.collapsed)::after {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
@@ -1049,13 +1059,11 @@ html[dir="rtl"] .form-check .form-check-input {
   display: flex;
   gap: 10px;
 }
-.courses .part2 .fillter_Courses .item .imageLink{
+.courses .part2 .fillter_Courses .item .imageLink {
   width: 270px;
-
 }
-.courses .part2 .fillter_Courses .item .imageLink img{
+.courses .part2 .fillter_Courses .item .imageLink img {
   width: 100%;
-
 }
 .courses .part2 .fillter_Courses .item .imgService {
   width: 270px;
@@ -1167,9 +1175,8 @@ html[dir="rtl"] .form-check .form-check-input {
   .courses .part2 .fillter_Courses .item .imgService {
     width: 80%;
   }
-  .courses .part2 .fillter_Courses .item .imageLink{
+  .courses .part2 .fillter_Courses .item .imageLink {
     width: 80%;
-  
   }
 }
 /*============================ end courses==========================*/
@@ -1189,7 +1196,7 @@ html[dir="rtl"] .form-check .form-check-input {
 .coursesDetails1 .course_Content .all_Course_Content,
 .coursesDetails1 .course_Content .all_Course_Content h2 button,
 .coursesDetails1 .course_Content .all_Course_Content .accordion-body,
-.coursesDetails1 .course_Content .all_Course_Content .accordion-item  {
+.coursesDetails1 .course_Content .all_Course_Content .accordion-item {
   background-color: white !important;
 }
 
@@ -1286,14 +1293,14 @@ html[dir="rtl"] .coursesDetails .part1 .content .contantCart {
 .coursesDetails .part2::after {
   position: absolute;
   content: "";
- background-image: url('/images/graduate.svg');
+  background-image: url("/images/graduate.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 240px;
   width: 240px;
-    height: 190px;
-    top: -67px;
-    left: -100px;
+  height: 190px;
+  top: -67px;
+  left: -100px;
 }
 .coursesDetails .part2 .part {
 }
@@ -1455,7 +1462,7 @@ html[dir="rtl"] .coursesDetails .part3 .img_box {
     height: 100px;
     top: -34px;
     left: -46px;
-}
+  }
   .coursesDetails .part3 p {
     font-size: 18px;
   }
@@ -1506,14 +1513,14 @@ html[dir="rtl"] .coursesDetails .part3 .img_box {
 .checkOut::after {
   position: absolute;
   content: "";
-background-image: url('/images/graduate.svg');
+  background-image: url("/images/graduate.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 240px;
   width: 240px;
-    height: 190px;
-    top: -67px;
-    left: -100px;
+  height: 190px;
+  top: -67px;
+  left: -100px;
 }
 .checkOut .part1 {
   flex: 1;
@@ -1659,7 +1666,7 @@ background-image: url('/images/graduate.svg');
     height: 100px;
     top: -34px;
     left: -46px;
-}
+  }
 }
 /*============================ end checkOut==========================*/
 /*============================ start successfull==========================*/
@@ -1767,7 +1774,7 @@ background-image: url('/images/graduate.svg');
   background-repeat: no-repeat;
   background-size: 222px;
   top: -114px;
-  
+
   left: -72px;
 }
 .InstractorInfo .part1 .info .info_about {
@@ -2027,7 +2034,6 @@ html[dir="rtl"] .become2 .img_become {
 /*============================ end begin==========================*/
 /*==================================start bookingForm==============================*/
 .bookingForm {
-
   position: relative;
   overflow: hidden;
 }
@@ -2044,7 +2050,7 @@ html[dir="rtl"] .become2 .img_become {
 .bookingForm .content::after {
   position: absolute;
   content: "";
- background-image: url('/images/graduate.svg');
+  background-image: url("/images/graduate.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 240px;
@@ -2056,14 +2062,14 @@ html[dir="rtl"] .become2 .img_become {
 .bookingForm .content::before {
   position: absolute;
   content: "";
-background-image: url('/images/graduate2.svg');
+  background-image: url("/images/graduate2.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 244px;
   width: 244px;
-height: 268px;
-bottom: -120px;
-    right: -100px;
+  height: 268px;
+  bottom: -120px;
+  right: -100px;
 }
 .bookingForm .content .box {
   position: absolute;
@@ -2111,54 +2117,55 @@ bottom: -120px;
   text-align: center;
   max-width: 550px;
 }
-
 .bookingForm .content form {
   margin: auto;
   max-width: 520px;
 }
-
 .form_page {
   width: 100%;
 }
-
 .form_page label {
   font-size: 16px;
   line-height: 21px;
   color: black;
   margin-bottom: 8px;
 }
-
+.rtl .PhoneInput {
+  flex-direction: row-reverse;
+}
+.PhoneInputCountry {
+  gap: 5px;
+}
 .mantine-PasswordInput-input {
   min-height: 46px;
 }
-.mantine-TextInput-root input:focus{
-  box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+.mantine-TextInput-root input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
   border: 1px solid #dbdbdb;
 }
-.form_page .form-control ,.mantine-TextInput-root input{
+.form_page .form-control,
+.mantine-TextInput-root input {
   background-color: transparent;
   outline: none;
   border: 1px solid #dbdbdb;
   border-radius: 5px;
   padding: 6px 16px;
-
   height: 46px;
 }
-.mantine-PasswordInput-root .mantine-PasswordInput-wrapper{
+.mantine-PasswordInput-root .mantine-PasswordInput-wrapper {
   background-color: transparent;
   outline: none;
   border: 1px solid #dbdbdb;
   border-radius: 5px;
   padding: 6px 16px;
-
   height: 46px;
 }
-.mantine-PasswordInput-root .mantine-PasswordInput-wrapper:focus{
-  box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+.mantine-PasswordInput-root .mantine-PasswordInput-wrapper:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
   border: 1px solid #dbdbdb;
 }
 .mantine-PasswordInput-input input {
- padding: 0;
+  padding: 0;
 }
 .form-check-input:checked {
   background-color: #1f2265;
@@ -2173,7 +2180,6 @@ bottom: -120px;
   border-radius: 10px;
   background-color: transparent;
 }
-
 .form-select {
   padding: 8px 16px;
   background-position: right 0.75rem center;
@@ -2184,32 +2190,27 @@ html[dir="rtl"] .form_page .form-select {
 .form_page .form-select option {
   color: black;
 }
-
-.form_page .form-control::placeholder ,.mantine-InputWrapper-root input::placeholder{
+.form_page .form-control::placeholder,
+.mantine-InputWrapper-root input::placeholder {
   font-size: 14px;
   line-height: 25px;
   color: #999999;
   font-family: "DM Sans3";
 }
-
 .bookingForm .content form .btn_page {
   margin: 44px auto 10px;
   width: 366px;
 }
-
 .bookingForm .form-check .form-check-input {
   width: 18px;
   height: 18px;
 }
-
 html[dir="ltr"] .form-check .form-check-input {
   float: left;
 }
-
 html[dir="rtl"] .form-check .form-check-input {
   float: right;
 }
-
 .bookingForm .checkgroub {
   display: flex;
   justify-content: space-between;
@@ -2217,21 +2218,17 @@ html[dir="rtl"] .form-check .form-check-input {
   flex-wrap: wrap;
   gap: 2px;
 }
-
 .bookingForm .checkgroub label {
 }
-
 .bookingForm .checkgroub .method {
   padding: 16px 12px;
   border: 1px solid #e2e2e2;
   min-width: 203px;
   flex-grow: 1;
 }
-
 .bookingForm .checkgroub .method.active {
   border: 1px solid #1f2265;
 }
-
 .bookingForm .checkgroub .method h4 {
   font-size: 16px;
   font-weight: bold;
@@ -2240,7 +2237,6 @@ html[dir="rtl"] .form-check .form-check-input {
   color: #1f2265;
   margin-bottom: 8px;
 }
-
 .bookingForm .checkgroub .method h5 {
   font-size: 40px;
   line-height: 44px;
@@ -2248,13 +2244,11 @@ html[dir="rtl"] .form-check .form-check-input {
   font-family: "DM Sans";
   margin: 0;
 }
-
 .bookingForm .checkgroub .method h5 span {
   font-size: 16px;
   font-family: "DM Sans3";
   color: #555555;
 }
-
 .bookingForm .checkgroub .method p {
   font-size: 14px;
   line-height: 18px;
@@ -2263,7 +2257,6 @@ html[dir="rtl"] .form-check .form-check-input {
   display: block;
   margin: 0px auto 10px;
 }
-
 .bookingForm .checkgroub .method p span {
   font-size: 16px;
   line-height: 21px;
@@ -2273,7 +2266,6 @@ html[dir="rtl"] .form-check .form-check-input {
   color: #969696;
   font-family: "DM Sans3";
 }
-
 .bookingForm .checkgroub .method ul {
   padding: 12px 0px 8px;
   display: flex;
@@ -2281,17 +2273,14 @@ html[dir="rtl"] .form-check .form-check-input {
   gap: 12px;
   border-top: 1px solid #f3f3f3;
 }
-
 .bookingForm .checkgroub .method ul li {
   display: flex;
   align-items: center;
   gap: 4px;
 }
-
 .bookingForm .checkgroub .method ul li img {
   width: 12px;
 }
-
 .bookingForm .checkgroub .method ul li h6 {
   font-size: 12px;
   line-height: 16px;
@@ -2304,6 +2293,10 @@ html[dir="rtl"] .form-check {
   padding-right: 1.5em;
   padding-left: 0.5em;
 }
+.rtl .mantine-PasswordInput-rightSection {
+  left: 0;
+  right: auto;
+}
 @media (max-width: 768px) {
   .bookingForm .content {
     padding: 32px 6px;
@@ -2312,20 +2305,19 @@ html[dir="rtl"] .form-check {
     margin: 70px auto 80px;
   }
   .bookingForm .content::after {
-   
     background-size: 180px;
     width: 180px;
     height: 114px;
     top: -56px;
     left: -66px;
-}
-.bookingForm .content::before {
-  background-size: 180px;
-  width: 180px;
-  height: 194px;
-  bottom: -78px;
-  right: -32px;
-}
+  }
+  .bookingForm .content::before {
+    background-size: 180px;
+    width: 180px;
+    height: 194px;
+    bottom: -78px;
+    right: -32px;
+  }
   .bookingForm .content h3 {
     font-size: 18px;
     margin-bottom: 12px;
@@ -2350,7 +2342,6 @@ html[dir="rtl"] .form-check {
     width: 280px;
   }
 }
-
 /*==================================end bookingForm==============================*/
 
 /*=========================== start account ======================*/
@@ -2392,17 +2383,19 @@ html[dir="rtl"] .form-check {
   padding: 0;
 }
 
-.account_info .part1 ul li:last-of-type a {
-  color: #787878;
-}
-
-.account_info .part1 ul li a {
+.account_info .part1 ul li a ,.account_info .part1 ul li button {
   font-size: 16px;
   line-height: 21px;
   font-family: "DM Sans3";
   padding: 0px 12px;
   display: block;
   width: 100%;
+}
+.account_info .part1 ul li button {
+  background: transparent;
+  border: none;
+  width: fit-content;
+  color: #787878;
 }
 .account_info .part1 ul li a.active {
   padding: 8px 12px;
@@ -2471,7 +2464,8 @@ html[dir="rtl"] .Profile .btn_page {
   margin-right: auto;
 }
 
-.Profile .form_page .form-control ,.Profile .mantine-InputWrapper-root input{
+.Profile .form_page .form-control,
+.Profile .mantine-InputWrapper-root input {
   font-size: 14px;
   font-family: "DM Sans3";
   max-width: 460px;
@@ -2870,7 +2864,7 @@ html[dir="rtl"] .Profile .btn_page {
   left: 16px;
   background-size: 17px;
   background-repeat: no-repeat;
-background-image: url("/images/search.svg");
+  background-image: url("/images/search.svg");
   z-index: 50;
 }
 .ac_nav {
@@ -2909,7 +2903,8 @@ background-image: url("/images/search.svg");
 .ac_nav .lang {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 2px;
+  cursor: pointer;
 }
 .ac_nav .lang p {
   font-size: 16px;
@@ -3866,7 +3861,7 @@ html[dir="rtl"]
 }
 .videoCourse .headVideo .part2 .questions .question ul li.false {
   border: 1px solid #d70808;
- /* background-image: url("/images/false.svg");*/
+  /* background-image: url("/images/false.svg");*/
   background-size: 24px;
   background-repeat: no-repeat;
   background-position: center right 30px;
@@ -3997,7 +3992,7 @@ html[dir="rtl"]
   flex-direction: column;
   justify-content: center;
   align-items: center;
-background-image: url("/images/instructorScreen/backnew.webp");
+  background-image: url("/images/instructorScreen/backnew.webp");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -4150,12 +4145,12 @@ html[dir="rtl"] .instructor_about3 .content .instructor_info h5::before {
 .instructor_about .content .part1 {
   max-width: 522px;
 }
-.instructor_about .content .part1 .video-wrapper{
+.instructor_about .content .part1 .video-wrapper {
   width: 522px;
-height: 565px;
-border-radius: 20px;
+  height: 565px;
+  border-radius: 20px;
 }
-.instructor_about .content .part1 .video-wrapper video{
+.instructor_about .content .part1 .video-wrapper video {
   height: 100% !important;
   border-radius: 20px;
 }
@@ -4172,14 +4167,12 @@ border-radius: 20px;
   flex-direction: row-reverse;
 }
 @media (max-width: 992px) {
-  .part-video{
-   flex-wrap: wrap;
+  .part-video {
+    flex-wrap: wrap;
   }
   .instructor_about .content .part1 {
-   
     margin: auto;
-}
-
+  }
 }
 @media (max-width: 768px) {
   .instructor_about .content {
@@ -4191,7 +4184,7 @@ border-radius: 20px;
   .instructor_about .content .part1 {
     display: none;
   }
-  .instructor_about  .part-video .part1{
+  .instructor_about .part-video .part1 {
     display: block;
   }
   .instructor_about .content .instructor_info {
@@ -4200,8 +4193,7 @@ border-radius: 20px;
   .instructor_about .content .part1 .video-wrapper {
     width: 100%;
     height: 300px;
-    
-}
+  }
 }
 /*end instructor_about*/
 /*start services2*/
@@ -4337,7 +4329,7 @@ html[dir="rtl"] .faq .accordion .accordion-button::before {
 .slick-prev:before,
 .slick-next:before {
   color: #8d0c0c;
-  font-family: 'DM Sans';
+  font-family: "DM Sans";
 }
 .slick-prev,
 .slick-next {
@@ -4571,7 +4563,7 @@ html[dir="rtl"] .faq .accordion .accordion-button::before {
   gap: 200px;
   flex-wrap: wrap;
 }
-.coursesDetails2 .part2 .part .attach .all_attach .part-attach .btn_page3{
+.coursesDetails2 .part2 .part .attach .all_attach .part-attach .btn_page3 {
   width: 134px;
   height: 34px;
   border-radius: 5px;
@@ -4686,7 +4678,7 @@ html[dir="rtl"] .faq .accordion .accordion-button::before {
   min-width: 0;
   border: none;
 }
-.PhoneInputInput::placeholder{
+.PhoneInputInput::placeholder {
   font-size: 14px;
   line-height: 21px;
   color: #868686;
@@ -4701,7 +4693,5 @@ html[dir="rtl"] .faq .accordion .accordion-button::before {
   color: white;
 }
 .slick-dots li button:before {
-  
-  content: '';
-  
+  content: "";
 }

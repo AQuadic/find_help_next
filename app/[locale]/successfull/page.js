@@ -1,12 +1,14 @@
 import Thanks from "@/components/Thanks";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 function Successfull() {
+  const t = useTranslations('Teach');
   return (
     <>
       <Thanks
-        title="You Apply Successfully"
-        dec="You can see the course in My Courses Page"
+        title={t('Successfully')}
+        dec={t('contact ')}
         link="/courses"
       />
     </>
