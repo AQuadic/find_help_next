@@ -3,7 +3,7 @@ import styles from "./page.module.css";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import ItemCourse from "@/components/ItemCourse";
-import { getHomePage, getUser } from "@/components/useAPI/GetUser";
+import { getDevices, getHomePage, getUser } from "@/components/useAPI/GetUser";
 import { getAllCourses, getAllCoursesWithUser } from "@/components/useAPI/CorsesApi/GetCourses";
 import { useRecoilState } from "recoil";
 import { navState } from "@/atoms";
@@ -25,6 +25,7 @@ export default  function Home({params: {locale}}) {
     FetchDataOFHomePage()
       if(IsUser){
         FetchDataOFAllCoursesWithUser()
+       // FetchDataOFDevices()
       }
       if(!IsUser){
         FetchDataOFAllCourses()
@@ -50,6 +51,13 @@ if (!AllData) console.log(AllData?.message)
 setHomeData(AllData.home_sections)
 console.log(AllData);
 }
+//GET Devices
+/*const FetchDataOFDevices= async () => {
+  const Devices = await getDevices();
+if (!Devices) console.log(Devices?.message)
+ console.log(Devices);
+}*/
+
 console.log(homeData);
 
 

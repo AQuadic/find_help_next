@@ -67,3 +67,23 @@ let headersToken = {
         console.log('Error in Add New Category (service) =>', error);
     }
   }
+
+
+  export const getDevices = async () => {
+    try {
+        const res = await fetch("https://education.aquadic.com/api/v1/users/devices", {
+            method: 'GET',
+            headers:{
+              Authorization: `Bearer ${Cookies.get('token')} `,
+                 "Content-Type": "application/json",
+                 Accept: "application/json",
+                 
+               },
+        },);
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.log('Error in Add New Category (service) =>', error);
+    }
+  }
+  
