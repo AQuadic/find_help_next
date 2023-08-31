@@ -390,7 +390,7 @@ html[dir="rtl"] .about .allAbout .part1 .trusted .headtitle {
   background-image: url("/images/graduate.svg");
   background-repeat: no-repeat;
   background-size: 272px;
-  top: -22%;
+  top: -120px;
   left: -130px;
 }
 .services_content::before {
@@ -401,7 +401,7 @@ html[dir="rtl"] .about .allAbout .part1 .trusted .headtitle {
   background-image: url("/images/graduate2.svg");
   background-repeat: no-repeat;
   background-size: 230px;
-  top: -15%;
+  top: -115px;
   right: -80px;
 }
 .services .allServices {
@@ -567,14 +567,14 @@ html[dir="rtl"] .services .allServices .service h5 {
     width: 190px;
     height: 190px;
     background-size: 190px;
-    top: -5%;
+    top: -95px;
     right: -10px;
   }
   .services_content::after {
     width: 200px;
     height: 200px;
     background-size: 200px;
-    top: -8%;
+    top: -100px;
     left: -90px;
   }
 }
@@ -588,14 +588,14 @@ html[dir="rtl"] .services .allServices .service h5 {
     width: 136px;
     height: 136px;
     background-size: 136px;
-    top: -2%;
+    top: -65px;
     right: 0px;
   }
   .services_content::after {
     width: 168px;
     height: 168px;
     background-size: 168px;
-    top: -7%;
+    top: -80px;
     left: -30px;
   }
   .services .allServices .service .aboutservice .head h3 {
