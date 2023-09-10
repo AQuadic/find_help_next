@@ -16,7 +16,7 @@ export function generateStaticParams() {
 
 export const metadata = {
   title: 'Find Help',
-  description: 'Find Help is a...',
+  description: 'Find Help is ...',
   openGraph: {
     title: 'Find Help',
     description: 'Find Help is a...',
