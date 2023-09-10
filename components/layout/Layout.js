@@ -25,9 +25,7 @@ function Layout({children,lang}) {
         <Navbar2/>
        {children}
         <Footer2/> 
-        <Script async src='/js/jquery-3.6.1.min.js'/>
-        <Script async src='/js/slick.min.js'/>
-        <Script async src='/js/funSlick.js' />
+       
         </> 
       :
       <>
@@ -36,6 +34,9 @@ function Layout({children,lang}) {
       <Footer lang={lang}/> 
       </> 
     }
+     <Script async src='/js/jquery-3.6.1.min.js'/>
+        <Script async src='/js/owl.carousel.min.js'/>
+        <Script async src='/js/funSlick.js' />
      </RecoilRoot>
     </>
   )

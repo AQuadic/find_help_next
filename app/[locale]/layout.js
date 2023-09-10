@@ -1,25 +1,25 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 import './globals.css'
 import 'react-phone-number-input/style.css'
 import Script from 'next/script';
 import Layout from '@/components/layout/Layout';
 import {NextIntlClientProvider, useLocale} from 'next-intl';
 import {notFound} from 'next/navigation';
-import Head from 'next/head';
+
 
 export function generateStaticParams() {
   return [{locale: 'en'}, {locale: 'ar'}];
 }
 
 export const metadata = {
-  title: 'analytica',
-  description: 'analytica is a...',
+  title: 'Find Help',
+  description: 'Find Help is a...',
   openGraph: {
-    title: 'analytica',
-    description: 'analytica is a...',
+    title: 'Find Help',
+    description: 'Find Help is a...',
   },
 }
 

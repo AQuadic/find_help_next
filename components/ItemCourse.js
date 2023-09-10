@@ -1,90 +1,62 @@
+import Link from "next/link";
 import React from "react";
-import Link from 'next/link'
+
 
 function ItemCourse({
   title,
   star,
-  dec,
+  loc,
+  timeFrom,
+  timeTo,
   oldsalary,
   newsalary,
   image,
-  imageCourse,
-  best,
-  Myprogress,
-  numProgress,
-  link2,
-  id
+  love
 }) {
   return (
-    <div className="service ">
-      {best && <h5>{best}</h5>}
-      <Link href={link2?link2:`/courses/${id}`}>
-        {
-          imageCourse? 
-          <>
-            <img
-          src={imageCourse}
-          className="imgService"
-          alt="service"
-        />
-          </>
-          :
-          <>
-           <img
-          src={`/images/service/service${image}.webp`}
-          className="imgService"
-          alt="service"
-        />
-          </>
-        }
-       
-      </Link>
-      <div className="aboutservice">
-        <Link href={link2?link2:`/courses/${id}`} >
-          <div className="head">
-            <h3>{title}</h3>
-            {star && (
-              <div className="Star">
-                <img src="/images/star.svg" alt="star" />
-
-                <p>{star}</p>
-              </div>
+    <div class="service">
+      <div
+        class="stateLove"
+        style={love&&{ backgroundImage: "url(/images/loved.svg)" }}
+      >
+        <img src="/images/love.svg" alt="love" />
+      </div>
+      <img src={`/images/service${image}.webp`} class="imgService" alt="service" />
+      <div class="aboutservice">
+        <div class="head">
+          <h3>{title}</h3>
+          <div class="Star">
+            <img src="/images/star.svg" alt="star" />
+            <p>{star}</p>
+          </div>
+        </div>
+        <ul>
+          <li>
+            <img src="/images/Time-Circle.svg" alt="Time-Circle" />
+            <p>
+              {timeFrom} to {timeTo}
+            </p>
+          </li>
+          <li>
+            <img src="/images/Location.svg" alt="Location" />
+            <p>{loc}</p>
+          </li>
+        </ul>
+        <div class="salary_pay">
+          <div class="salary">
+            {oldsalary ? (
+              <>
+                <span class="sall">{oldsalary} EGP</span>
+                <p>{newsalary} EGP</p>
+              </>
+            ) : (
+              <> <p>{newsalary} EGP</p></>
             )}
           </div>
-          <p className="dec_service">{dec}</p>
-          {newsalary && (
-            <div className="salary">
-              {!oldsalary && <p>{newsalary}</p>}
-              {oldsalary && (
-                <>
-                  <span className="sall">{oldsalary}</span>
-                  <p>{newsalary}</p>
-                </>
-              )}
-            </div>
-          )}
-        </Link>
-        {Myprogress && (
-          <>
-            <div className="lineprogress">
-              <div className="numProgress">
-                <span style={{ width: numProgress }}></span>
-              </div>
-              <p className="dec_service">{numProgress} Completed</p>
-            </div>
-           {
-            numProgress==="100%"&& <Link href="/certificate" className="btn_page">
-            View Certificate
+          <Link href="/categoriesDetails/2" class="btn_page">
+            Book Now
           </Link>
-           }
-          </>
-        )}
-{
-  !Myprogress && <Link href="/checkOut" className="btn_page2">
-  Enroll Now
-</Link>
-}
-       
+        </div>
       </div>
     </div>
   );

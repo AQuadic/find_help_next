@@ -1,88 +1,73 @@
 "use client";
 import React from 'react'
-import Link from 'next/link'
-import { usePathname, useRouter } from 'next-intl/client';
-import { useTranslations } from 'next-intl';
 
-function Footer({lang}) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const t = useTranslations('Footer');
+
+function Footer() {
+ 
   return (
     <footer>
-    <div className="container">
-      <div className="fotter_content">
-        <div className="head">
-          <h1>
-            <Link href="/"><img src="/images/logo.svg" alt="logo" /></Link>
-          </h1>
-          <p>
-           {t('footerTitle')}
-          </p>
-        </div>
-        <div className="part">
-          <h2> {t('main')}</h2>
-          <div className="links">
-            <Link href="/">  {t('home')}</Link>
-            <Link href="/myCourses">{t('myCourses')}</Link>
-            <a href="">{t('privacy')}</a>
-            <a href="">{t('terms')}</a>
-            <Link href="/instructorScreen">instructorScreen 1</Link>
-            <Link href="/instructorScreen/oneCourse">instructorScreen 2</Link>
+      <div className="container">
+        <div className="fotter_content">
+          <div className="head">
+            <h1>
+              <a href="index.html"><img src="/images/logo.svg" alt="" /></a>
+            </h1>
+            <p>Find All The Services You Need In Find Help</p>
           </div>
-        </div>
-        <div className="part">
-          <h2> {t('categories')}</h2>
-          <div className="links">
-            <a href=""> {t('design')}</a>
-            <a href=""> {t('music')}</a>
-            <a href=""> {t('development')}</a>
-            <a href=""> {t('marketing')}</a>
+          <div className="part">
+            <h2>About</h2>
+            <div className="links">
+              <a href="">Contact Us</a>
+              <a href="">Privacy Policy</a>
+              <a href="">Terms of Use</a>
+            </div>
           </div>
-        </div>
-        <div className="part" style={{alignItems:"center"}}>
-          <h2 style={{padding:"0px 20px"}} >{t('followUs')}</h2>
-          <div className="links_social">
-            <a href="">
-              <img src="/images/media/facebook.webp" alt="facebook" />
-            </a>
+          <div className="part">
+            <h2>Countries</h2>
+            <div className="links links2">
+              <p>Kuwait</p>
+              <p>Egypt</p>
+              <p>Bahrain</p>
+              <p>Bahrain</p>
+              <p>Bahrain</p>
+              <p>Bahrain</p>
+              <p>Bahrain</p>
+            </div>
+          </div>
+          <div className="part">
+            <h2 style={{padding: "0px 20px"}}>Follow Us</h2>
+            <div className="links_social">
+              <a href="">
+                <img src="/images/facebook.webp" alt="facebook" />
+              </a>
 
-            <a href="">
-              <img src="/images/media/linkedin.webp" alt="instagram" />
-            </a>
-            <a href="">
-              <img src="/images/media/insta.webp" alt="linkedin" />
-            </a>
-            <a href="">
-              <img src="/images/media/twiiter.webp" alt="twitter" />
-            </a>
-          </div>
-          <div className="store">
-            <a href=""><img src="/images/media/app.webp" alt="app store" /></a>
-            <a href=""
-              ><img src="/images/media/google.webp" alt="google play"
-            /></a>
-          </div>
-        </div>
-        <div className="part">
-          <div className="langFooter"  onClick={()=>{router.replace(`${pathname}`, {locale: lang==='en'?'ar':'en'});}}>
-            <img src="/images/media/lang.svg" alt="lang" />
-            <p>{lang==='en'?'Arabic':'English'}</p>
+              <a href="">
+                <img src="/images/linkedin.webp" alt="instagram" />
+              </a>
+              <a href="">
+                <img src="/images/insta.webp" alt="linkedin" />
+              </a>
+              <a href="">
+                <img src="/images/twiiter.webp" alt="twitter" />
+              </a>
+            </div>
+            <div className="store">
+              <a href=""><img src="/images/app.webp" alt="app store" /></a>
+              <a href=""
+                ><img src="/images/google.webp" alt="google play"
+              /></a>
+            </div>
           </div>
         </div>
+        <div className="copy">
+          <p>
+            © Find Help, 2019-2022 Made by
+            <a href="#">AQuadic Solution Company</a>
+          </p>
+          <p>All rights reserved.</p>
+        </div>
       </div>
-      <div className="copy">
-        <p>
-          ©
-          <a href="https://analytica-tech.com/"
-            >https://analytica-tech.com/
-            </a>
-          , 2019-2022
-        </p>
-        <p>All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+    </footer>
   )
 }
 

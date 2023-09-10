@@ -1,61 +1,22 @@
-$(".responsive").slick({
-  dots: false,
-  infinite: false,
-  speed: 300,
-  centerPadding: 20,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
+$(document).ready(function () {
+  $(".owl-carousel").owlCarousel({
+    loop: true,
+    margin: 20,
+    rtl: true,
+    nav: true,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      460: {
+        items: 2,
+      },
+      992: {
+        items: 3,
+      },
+      1400: {
+        items: 4,
       },
     },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        arrows: false,
-        dots: true,
-      },
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1.2,
-        slidesToScroll: 1,
-        arrows: false,
-        dots: true,
-      },
-    },
-  ],
-});
-
-$(".testimonialsSlide").slick({
-  dots: true,
-  infinite: false,
-  speed: 300,
-  centerPadding: 20,
-  slidesToShow: 2,
-  slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 3,
-      },
-    },
-    {
-      breakpoint: 992,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-      },
-    },
-  ],
+  });
 });

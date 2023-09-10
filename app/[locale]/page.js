@@ -1,300 +1,254 @@
-'use client'
-import styles from "./page.module.css";
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
+"use client";
 import ItemCourse from "@/components/ItemCourse";
-import { getDevices, getHomePage, getUser } from "@/components/useAPI/GetUser";
-import { getAllCourses, getAllCoursesWithUser } from "@/components/useAPI/CorsesApi/GetCourses";
-import { useRecoilState } from "recoil";
-import { navState } from "@/atoms";
-import { useTranslations } from "next-intl";
+import styles from "./page.module.css";
+import React from "react";
+import ItemCategories from "@/components/ItemCategories";
 
-
-export  function generateMetadata({params}) {
-  return {
-    title: "product title",
-  }
-}
-
-export default  function Home({params: {locale}}) {
-  const [allCourses, setAllCourses] = useState([])
-  const [homeData, setHomeData] = useState([]);
-  const [IsUser, setIsUser] = useRecoilState(navState);
-  const t = useTranslations('Index');
-  useEffect(() => {
-    FetchDataOFHomePage()
-      if(IsUser){
-        FetchDataOFAllCoursesWithUser()
-       // FetchDataOFDevices()
-      }
-      if(!IsUser){
-        FetchDataOFAllCourses()
-      }
-}, [])
-
-
-  const FetchDataOFAllCourses= async () => {
-      const AllCourses = await getAllCourses();
-    if (!AllCourses) console.log(AllCourses?.message)
-     setAllCourses(AllCourses.data)
-  }
- 
-  const FetchDataOFAllCoursesWithUser= async () => {
-    const AllCourses = await getAllCoursesWithUser();
-  if (!AllCourses) console.log(AllCourses?.message)
-   setAllCourses(AllCourses.data)
-}
-
-const FetchDataOFHomePage= async () => {
-  const AllData = await getHomePage();
-if (!AllData) console.log(AllData?.message)
-setHomeData(AllData.home_sections)
-console.log(AllData);
-}
-//GET Devices
-/*const FetchDataOFDevices= async () => {
-  const Devices = await getDevices();
-if (!Devices) console.log(Devices?.message)
- console.log(Devices);
-}*/
-
-console.log(homeData);
-
-
+export default function Home() {
   return (
     <main className={styles.main}>
       <>
-        <section className="about m60">
-          <div className="container allAbout">
-            <div className="part1">
-              <h1>
-                <span className="mainColor">{t('title')}</span>
-                <span className="imgWord">{t('title2')},</span> <br />
-                {t('title3')} <span className="mainColor">{t('title4')}</span>
-              </h1>
-              <p>
-              {t('dec')}
-              </p>
-              <Link href="courses" className="btn_page wow fadeInDown">
-              {t('start')}
-              </Link>
-              <div className="trusted">
-                <h2 className="headtitle head3 wow fadeInDown"> {t('trusted')}</h2>
-                <div className="images_Trusted">
-                  <img src="/images/about/image1.webp" alt="images_Trusted" />
-                  <img src="/images/about/image2.webp" alt="images_Trusted" />
-                  <img src="/images/about/image3.webp" alt="images_Trusted" />
-                  <img src="/images/about/image4.webp" alt="images_Trusted" />
-                  <img src="/images/about/image5.webp" alt="images_Trusted" />
+        <section class="find">
+          <img src="/images/find.webp" class="imgFind" alt="find" />
+          <div class="aboutFind container">
+            <h1>The largest website to find and request services</h1>
+            <h2>Find your services with ease</h2>
+            <form action="">
+              <input type="text" placeholder="What you want to search about?" />
+              <input type="submit" value="Search" />
+            </form>
+          </div>
+        </section>
+
+        <section class="categories container m90">
+          <h2 class="headtitle">Categories</h2>
+          <div class="parts">
+            <ItemCategories title="Repairs" image="1" />
+            <ItemCategories title="Cleaning Services" image="2" />
+            <ItemCategories title="Salon" image="3" />
+            <ItemCategories title="Home Exterior" image="4" />
+            <ItemCategories title="Repairs" image="1" />
+            <ItemCategories title="Cleaning Services" image="2" />
+            <ItemCategories title="Salon" image="3" />
+            <ItemCategories title="Home Exterior" image="4" />
+            <ItemCategories title="Repairs" image="1" />
+            <ItemCategories title="Cleaning Services" image="2" />
+            <ItemCategories title="Salon" image="3" />
+            <ItemCategories title="Home Exterior" image="4" />
+            <ItemCategories title="Repairs" image="1" />
+            <ItemCategories title="Cleaning Services" image="2" />
+            <ItemCategories title="Salon" image="3" />
+            <ItemCategories title="Home Exterior" image="4" />
+          </div>
+        </section>
+
+        <section class="use m90">
+          <div class="container">
+            <h2>How To Use Find Help</h2>
+            <div class="parts">
+              <div class="part">
+                <div class="numStep">1</div>
+                <img src="/images/people-search.webp" alt="people-search" />
+                <div class="aboutUse">
+                  <h3>Find The Services</h3>
+                  <p>
+                    Find the service you need using the search box at the top or
+                    through the categories.
+                  </p>
+                </div>
+              </div>
+              <div class="part">
+                <div class="numStep">2</div>
+                <img src="/images/click.webp" alt="click" />
+                <div class="aboutUse">
+                  <h3>Make a Book</h3>
+                  <p>
+                    Review service descriptions and buyer reviews, then request
+                    to open contact with the seller.
+                  </p>
+                </div>
+              </div>
+              <div class="part">
+                <div class="numStep">3</div>
+                <img src="/images/shopping-list1.webp" alt="shopping-list" />
+                <div class="aboutUse">
+                  <h3>Receive your service</h3>
+                  <p>
+                    Contact the seller directly within the find help website
+                    until receiving your complete order.
+                  </p>
                 </div>
               </div>
             </div>
-            <div className="part2 wow fadeInUp">
-              <img
-                src="/images/about/herosectionphoto.webp"
-                alt="herosectionphoto"
+          </div>
+        </section>
+
+        <section class="services container m90">
+          <h2 class="headtitle">Repairs Services</h2>
+
+          <div class="allServices">
+            <ItemCourse
+              title="Alloy Wheel Repairs Derby"
+              star="4.8"
+              loc="sidi bisher, alex"
+              timeFrom="9:00 AM"
+              timeTo="10:00 PM"
+              oldsalary="2000"
+              newsalary="1000"
+              image="1"
+            />
+            <ItemCourse
+              title="Alloy Wheel Repairs Derby"
+              star="4.8"
+              loc="sidi bisher, alex"
+              timeFrom="9:00 AM"
+              timeTo="10:00 PM"
+              newsalary="2000"
+              image="2"
+              love
+            />
+            <ItemCourse
+              title="Alloy Wheel Repairs Derby"
+              star="4.8"
+              loc="sidi bisher, alex"
+              timeFrom="9:00 AM"
+              timeTo="10:00 PM"
+              newsalary="2000"
+              image="3"
+            />
+          </div>
+        </section>
+        <section class="services container m90">
+          <h2 class="headtitle">Cleaning Services</h2>
+          <div class="allServices">
+            <div class="allServices">
+              <ItemCourse
+                title="Alloy Wheel Repairs Derby"
+                star="4.8"
+                loc="sidi bisher, alex"
+                timeFrom="9:00 AM"
+                timeTo="10:00 PM"
+                oldsalary="2000"
+                newsalary="1000"
+                image="1"
+                love
+              />
+              <ItemCourse
+                title="Alloy Wheel Repairs Derby"
+                star="4.8"
+                loc="sidi bisher, alex"
+                timeFrom="9:00 AM"
+                timeTo="10:00 PM"
+                newsalary="2000"
+                image="2"
+              />
+              <ItemCourse
+                title="Alloy Wheel Repairs Derby"
+                star="4.8"
+                loc="sidi bisher, alex"
+                timeFrom="9:00 AM"
+                timeTo="10:00 PM"
+                newsalary="2000"
+                image="3"
               />
             </div>
           </div>
         </section>
 
-        <section className="services services_content container m60">
-          <h2 className="headtitle wow fadeInDown">Repairs Services</h2>
-          <p className="p_page wow fadeInUp">
-            Choose from 204.000 online video courses with new additions
-            published every month
-          </p>
-          <div className="allServices">
-            {
-              allCourses&&allCourses.map((course)=>{
-                return(
-                  <ItemCourse
-                  key={course.id}
-                  id={course.id}
-                  title={course.name.en}
-                  imageCourse={course.image.url}
-                  star="4.8"
-                  dec={course.instructor.name}
-                  newsalary={course.price?"EG "+course.price:"free"}
-                />
-                )
-              })
-           }
-            <ItemCourse
-              title="Learn python: The Complete Python Programming Course"
-              image="1"
-              star="4.8"
-              dec="Avinash jain, The Codex"
-              oldsalary="E£679.99"
-              newsalary="E£1,599.99"
-            />
-            <ItemCourse
-              title="Learn python: The Complete Python Programming Course"
-              image="2"
-              star="4.8"
-              dec="Avinash jain, The Codex"
-              newsalary="E£1,599.99"
-              best="Bestseller"
-            />
-            <ItemCourse
-              title="Learn python: The Complete Python Programming Course"
-              image="3"
-              star="4.8"
-              dec="Avinash jain, The Codex"
-              oldsalary="E£679.99"
-              newsalary="E£1,599.99"
-            />
-            <ItemCourse
-              title="Learn python: The Complete Python Programming Course"
-              image="1"
-              star="4.8"
-              dec="Avinash jain, The Codex"
-              oldsalary="E£679.99"
-              newsalary="E£1,599.99"
-            />
-          </div>
-        </section>
-
-        <section className="top m60">
-          <div className="container">
-            <h2 className="headtitle wow fadeInDown">Top Categories</h2>
-            <p className="p_page wow fadeInUp">
-              Choose from 204.000 online video courses with new additions
-              published every month
-            </p>
-            <div className="top_Categories">
-              <div className="part">
-                <img src="/images/top/creativity.webp" alt="creativity" />
-                <h3>Design</h3>
-              </div>
-              <div className="part">
+        <section class="need m90">
+          <div class="container">
+            <div class="parts">
+              <div class="part1">
+                <h3 style={{ color: "#1866ff" }}>Search - Book - Receive</h3>
                 <img
-                  src="/images/top/developmentphoto.webp"
-                  alt="developmentphoto"
+                  src="/images/hotelbooking-pana(1)1.webp"
+                  alt="hotelbooking-panar"
                 />
-                <h3>Development</h3>
+                <a
+                  href="#"
+                  class="btn_page btn_page2"
+                  style={{ backgroundColor: "#1866ff" }}
+                >
+                  Find The Services
+                </a>
               </div>
-              <div className="part">
-                <img src="/images/top/marketing.webp" alt="marketing" />
-                <h3>Marketing</h3>
+              <div class="part2">
+                <h2>Everything you need and more in one site</h2>
               </div>
-              <div className="part">
-                <img src="/images/top/music.webp" alt="music" />
-                <h3>Music</h3>
-              </div>
-            </div>
-          </div>
-        </section> 
-        {
-          homeData&&homeData.filter((item)=>item.courses.length !== 0).map((part)=>{
-            return(
-              <section className="services services_content container m60" key={part.id}>
-              <h2 className="headtitle wow fadeInDown">{part.name.en}</h2>
-              <p className="p_page wow fadeInUp">
-               {part.description&&part.description?.en}
-            </p>
-              <div className="allServices">
-              {
-              part.courses.map((course)=>{
-                return(
-                  <ItemCourse
-                  key={course.id}
-                  id={course.id}
-                  title={course.name.en}
-                  imageCourse={course.image.url}
-                  star="4.8"
-                  //dec={course.instructor.name}
-                  newsalary={course.price?"EG "+course.price:"free"}
-                />
-                )
-              })
-           }
-                
-               
-               
-              </div>
-            </section>
-            )
-          })
-        }
-        <section className="live m60">
-          <div className="container">
-            <h2 className="headtitle wow fadeInDown">
-              Create, manage, and market your learning environment with advanced
-              features like
-            </h2>
-            <div className="all_Live row">
-              <div className="part col-md-4 col-sm-6 col-12">
-                <img src="/images/live.svg" alt="live" />
-                <h3>Live lessons and events</h3>
-              </div>
-              <div className="part col-md-4 col-sm-6 col-12">
-                <img src="/images/live.svg" alt="live" />
-                <h3>Live lessons and events</h3>
-              </div>
-              <div className="part col-md-4 col-sm-6 col-12">
-                <img src="/images/live.svg" alt="live" />
-                <h3>Live lessons and events</h3>
-              </div>
-              <div className="part col-md-4 col-sm-6 col-12">
-                <img src="/images/live.svg" alt="live" />
-                <h3>Live lessons and events</h3>
-              </div>
-              <div className="part col-md-4 col-sm-6 col-12">
-                <img src="/images/live.svg" alt="live" />
-                <h3>Live lessons and events</h3>
-              </div>
-              <div className="part col-md-4 col-sm-6 col-12">
-                <img src="/images/live.svg" alt="live" />
-                <h3>Live lessons and events</h3>
-              </div>
-              <div className="part col-md-4 col-sm-6 col-12">
-                <img src="/images/live.svg" alt="live" />
-                <h3>Live lessons and events</h3>
-              </div>
-              <div className="part col-md-4 col-sm-6 col-12">
-                <img src="/images/live.svg" alt="live" />
-                <h3>Live lessons and events</h3>
-              </div>
-              <div className="part col-md-4 col-sm-6 col-12">
-                <img src="/images/live.svg" alt="live" />
-                <h3>Live lessons and events</h3>
-              </div>
-              <div className="part col-md-4 col-sm-6 col-12">
-                <img src="/images/live.svg" alt="live" />
-                <h3>Live lessons and events</h3>
-              </div>
-              <div className="part col-md-4 col-sm-6 col-12">
-                <img src="/images/live.svg" alt="live" />
-                <h3>Live lessons and events</h3>
-              </div>
-              <div className="part col-md-4 col-sm-6 col-12">
-                <img src="/images/live.svg" alt="live" />
-                <h3>Live lessons and events</h3>
-              </div>
-              <div className="part col-md-4 col-sm-6 col-12">
-                <img src="/images/live.svg" alt="live" />
-                <h3>Live lessons and events</h3>
+              <div class="part3">
+                <h3 style={{ color: "#f3b100" }}>Add - Announce - Sale</h3>
+                <img src="/images/refund-pana1.webp" alt="refund-pana" />
+                <a
+                  href="#"
+                  class="btn_page"
+                  style={{ backgroundColor: "#f3b100" }}
+                >
+                  Add Your Services
+                </a>
               </div>
             </div>
           </div>
         </section>
-        
-        <section className="become container m60">
-          <div className="box">
-            <img
-              src="/images/become.webp"
-              className="img_become"
-              alt="become"
-            />
-            <div className="info_become">
-              <h2> {t('become')}</h2>
+        <section class="services container m90">
+          <h2 class="headtitle">Cleaning Services</h2>
+          <div class="allServices">
+            <div class="allServices">
+              <ItemCourse
+                title="Alloy Wheel Repairs Derby"
+                star="4.8"
+                loc="sidi bisher, alex"
+                timeFrom="9:00 AM"
+                timeTo="10:00 PM"
+                oldsalary="2000"
+                newsalary="1000"
+                image="1"
+                love
+              />
+              <ItemCourse
+                title="Alloy Wheel Repairs Derby"
+                star="4.8"
+                loc="sidi bisher, alex"
+                timeFrom="9:00 AM"
+                timeTo="10:00 PM"
+                newsalary="2000"
+                image="2"
+              />
+              <ItemCourse
+                title="Alloy Wheel Repairs Derby"
+                star="4.8"
+                loc="sidi bisher, alex"
+                timeFrom="9:00 AM"
+                timeTo="10:00 PM"
+                newsalary="2000"
+                image="3"
+              />
+            </div>
+          </div>
+        </section>
+        <section class="try container m90">
+          <img src="/images/phone.webp" class="phone" alt="phone" />
+          <div class="aboutTry">
+            <div class="part1">
+              <h2>TRY THE FIND HELP APP</h2>
               <p>
-              {t('becomeDec')}
+                Buy, sell and find just about anything using the app on your
+                mobile.
               </p>
-              <Link href="instructor" className="btn_page2">
-              {t('start')}
-              </Link>
+            </div>
+            <div class="part2">
+              <h3>GET YOUR APP TODAY</h3>
+              <ul>
+                <li>
+                  <a href="">
+                    <img src="/images/app.webp" alt="app store" />
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <img src="/images/google.webp" alt="google play" />
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </section>
@@ -302,5 +256,3 @@ console.log(homeData);
     </main>
   );
 }
-
-

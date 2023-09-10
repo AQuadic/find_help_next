@@ -1,12 +1,12 @@
 "use client";
-import { useTranslations } from "next-intl";
+
 import React, { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 
 
 
 function CVerify() {
-  const t = useTranslations('Sign');
+
   const [otp, setOtp] = useState("");
   const clearOtp = () => {
     setOtp("");
@@ -44,16 +44,17 @@ function CVerify() {
   }, []);
   return (
     <>
-      <script src="../js/otp.js" />
-      <section className="sign container">
-        <div className="box_sign">
-          <h2 className="title_sign">{t('verifyEmail')}</h2>
-          <p className="p_sign">
-          {t('verifyTitle')}
+      
+      <section className="page_log">
+      <div className="container">
+        <div className="box_log">
+          <h3>Type The OTP</h3>
+          <p className="dec">
+            Please enter the verification code we sent to your mobile number
           </p>
-          <form action="">
+          <form action="" className="verify">
             <div className="passcode-wrapper">
-              <OTPInput
+            <OTPInput
                 value={otp}
                 onChange={setOtp}
                 numInputs={4}
@@ -61,28 +62,22 @@ function CVerify() {
               />
             </div>
 
-            <p id="counter" className="counter red">
-              02:00 s
-            </p>
+            <p id="counter" className="counter red">02:00 s</p>
             <h4>
               If you don’t receive a code!
-              <button id="resend" disabled onClick={clearOtp}>
-                Resend
-              </button>
+              <button id="resend" disabled onClick={clearOtp}>Resend</button>
             </h4>
-            <input
-              type="submit"
-              id="ss"
-              disabled={otp.length < 4}
-              className="btn_page"
-              value= {t('verify')}
-            />
+            <input type="submit" id="ss" className="btn_page" value="Verify" />
           </form>
-          {/* <button  type="button" disabled={otp.trim() === ''} onClick={clearOtp}>
-                Clear
-  </button>*/}
+          <a href="LogIn.html" className="change_num">change Mobile Number</a>
         </div>
-      </section>
+      </div>
+    </section>
+
+    <section className="endPage_login">
+      <p>© Find Help, 2019-2022 Made by</p>
+      <a href="#"> AQuadic Solution Company</a>
+    </section>
     </>
   );
 }
