@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 function page() {
@@ -17,11 +18,11 @@ function page() {
       <div className="account_info personal_info">
         <div className="part1">
           <ul>
-            <li><a href="profile.html">My Profile</a></li>
-            <li><a href="myServices.html ">My services</a></li>
-            <li><a href="Prmoted.html" className="active">Promotion</a></li>
-            <li><a href="myOrders.html">My Orders</a></li>
-            <li><a href="profile_Addressess.html">Addresses</a></li>
+            <li><Link href="/account" >My Profile</Link></li>
+            <li><Link href="/account/myServices" >My services</Link></li>
+            <li><Link href="/account/prmoted"  className="active">Promotion</Link></li>
+            <li><Link href="/account/myOrders" >My Orders</Link></li>
+            <li><Link href="/account/addressess"  >Addresses</Link></li>
             <li><a href="">Log out</a></li>
           </ul>
         </div>

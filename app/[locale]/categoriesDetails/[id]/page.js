@@ -413,7 +413,7 @@ function page() {
         </div>
         <button className="more">Show More</button>
       </div>
-    </section>
+    </section> 
     </>
   )
 }

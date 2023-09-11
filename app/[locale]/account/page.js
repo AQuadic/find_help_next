@@ -1,4 +1,5 @@
  "use client";
+import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 import PhoneInput from "react-phone-number-input";
@@ -30,12 +31,12 @@ function page() {
       <div className="account_info personal_info">
         <div className="part1">
           <ul>
-            <li><a href="profile.html" className="active">My Profile</a></li>
-            <li><a href="myServices.html">My services</a></li>
-            <li><a href="Prmoted.html">Promotion</a></li>
-            <li><a href="myOrders.html">My Orders</a></li>
-            <li><a href="profile_Addressess.html">Addresses</a></li>
-            <li><a href="">Log out</a></li>
+            <li><Link href="/account" className="active">My Profile</Link></li>
+            <li><Link href="/account/myServices">My services</Link></li>
+            <li><Link href="/account/prmoted">Promotion</Link></li>
+            <li><Link href="/account/myOrders">My Orders</Link></li>
+            <li><Link href="/account/addressess">Addresses</Link></li>
+            <li><Link href="">Log out</Link></li>
           </ul>
         </div>
         <div className="Profile">

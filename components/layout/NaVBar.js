@@ -34,27 +34,27 @@ console.log(user);
 
             <ul className="dropdown-menu myAcc">
               <li>
-                <a className="dropdown-item" href="profile.html">
+                <Link className="dropdown-item" href="/account">
                   My Profile
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="dropdown-item" href="myServices.html">
+                <a className="dropdown-item" href="/account/myServices">
                   My Services
                 </a>
               </li>
               <li>
-                <a className="dropdown-item" href="Prmoted.html">
+                <a className="dropdown-item" href="/account/prmoted">
                   Promotion
                 </a>
               </li>
               <li>
-                <a className="dropdown-item" href="myOrders.html">
+                <a className="dropdown-item" href="/account/myOrders">
                   My Orders
                 </a>
               </li>
               <li>
-                <a className="dropdown-item" href="profile_Addressess.html">
+                <a className="dropdown-item" href="/account/addressess">
                   Addresses
                 </a>
               </li>

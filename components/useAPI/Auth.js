@@ -16,12 +16,12 @@ let headersToken = {
     "from_all": true
 };
 
-  export const LogOut = async (e) => {
+  export const LogOut = async () => {
     try {
-        const res = await fetch(`https://education.aquadic.com/api/v1/users/auth/logout`, {
+        const res = await fetch("https://findhelpapp.com/api/v1/users/auth/logout", {
             method: 'POST',
             headers:{
-              Authorization: `Bearer ${e} `,
+              Authorization: `Bearer ${Cookies.get("token")} `,
                "Content-Type": "application/json",
                Accept: "application/json",
                
@@ -36,7 +36,7 @@ let headersToken = {
   }
 
 
-  export const SignUP = async (formate) => {
+  export const SignUP = async () => {
     try {
         const res = await fetch("https://findhelpapp.com/api/v1/users/auth/verify", {
             method: 'POST',

@@ -26,6 +26,9 @@ useEffect(() => {
     if (!Services) console.log(Services?.message);
     setServices(Services);
   };
+  console.log('====================================');
+  console.log(services);
+  console.log('====================================');
   const FetchDataOFData = async () => {
     const HomePage = await getHomePage();
     if (!HomePage) console.log(HomePage?.message);
@@ -52,7 +55,7 @@ console.log(data);
           <h2 class="headtitle">Categories</h2>
           <div class="parts">
             {
-              data?.categories?.map((item)=>{
+              data?.service_categories?.map((item)=>{
 return(
   <ItemCategories  id={item.id} title={item.name.en} image={item.image.url} />
 )

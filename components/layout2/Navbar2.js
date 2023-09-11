@@ -1,7 +1,18 @@
 import Link from 'next/link'
 import React from 'react'
+import { LogOut } from '../useAPI/Auth';
 
 function Navbar2() {
+  const HandelLogOut = async () => {
+    const UserLogOut = await LogOut();
+    console.log('====================================');
+    console.log(UserLogOut);
+    console.log('====================================');
+    if (UserLogOut.message === "auth.logged_out") {
+      console.log("done");
+      Cookies.remove('token')
+    }
+  };
   return (
     <>
     <nav className="navbar navbar-expand-lg">
@@ -37,10 +48,10 @@ function Navbar2() {
                 </Link>
               </li>
               <li>
-                <a className="dropdown-item" href="signIn.html">
+                <button className="dropdown-item" onClick={()=>{HandelLogOut()}}>
                   <img src="/images/account/logOut.webp" alt="logOut" />
                   <p>Logout</p>
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -71,7 +82,7 @@ function Navbar2() {
              
             <Link href="signIn" className="btn_page2">Log In</Link>
              <Link href="signUp" className="btn_page">Sign Up</Link>
-          <div className="dropdown" style={{position:"relative",display:"none"}}>
+          <div className="dropdown" >
             <h4
               className="dropdown-toggle nav_btn btn_page2"
               data-bs-toggle="dropdown"
