@@ -2954,7 +2954,7 @@ margin:32px auto 32px;
 .page_log .send_sms li{
   margin-bottom: 16px;
 }
-.page_log .send_sms li a{
+.page_log .send_sms li button{
   padding: 16px 6px;
   display: flex;
   align-items: center;
@@ -2963,18 +2963,19 @@ margin:32px auto 32px;
 width: 100%;
 height: 58px;
   border-radius: 5px;
+  border: none;
 }
-.page_log .send_sms li.sms a{
+.page_log .send_sms li.sms button{
   background: #F4C444;
 }
-.page_log .send_sms li.whatsApp a{
+.page_log .send_sms li.whatsApp button{
   background: #29B540;
 }
-.page_log .send_sms li a img{
+.page_log .send_sms li button img{
   height: 24px;
   width: auto;
 }
-.page_log .send_sms li a p{
+.page_log .send_sms li button p{
   font-size: 16px;
 line-height: 16px;
 color: #FFFFFF;

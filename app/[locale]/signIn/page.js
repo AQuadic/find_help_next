@@ -1,6 +1,10 @@
 
 "use client";
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 import React from 'react'
+import { useEffect } from 'react';
 import { useState } from 'react';
 import PhoneInput from 'react-phone-number-input';
 
@@ -9,8 +13,44 @@ export const metadata = {
 }
 
 function page() {
-  const [value, setValue] = useState();
-  const [phone_country, setPhone_country] = useState();
+  const router = useRouter()
+  const [phone, setPhone] = useState("")
+  const [phone_country, setPhone_country] = useState("EG")
+console.log('====================================');
+console.log(phone);
+console.log('====================================');
+console.log('====================================');
+console.log(phone_country);
+console.log('====================================');
+
+  const [Errorphone, setErrorPhone] = useState("");
+
+  const handellogin = () => {
+    
+    const po = axios
+      .post(
+        "https://findhelpapp.com/api/v1/users/auth/login",
+        {
+          "phone": phone,
+          "phone_country":phone_country,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-Language": "ar",
+          },
+        }
+      )
+      .then((res) => {
+       console.log(res);
+       Cookies.set("token",res.data.token);
+       router.push('/verify')
+      })
+      .catch((res) => {
+          console.log(res);
+      });
+  };
   return (
    <>
 <section className="page_log">
@@ -27,24 +67,24 @@ function page() {
                 defaultCountry="EG"
                 placeholder={"Your Mobile Number"}
                 className="form-control"
-                value={value}
+                value={phone}
                 onCountryChange={(e)=>setPhone_country(e)}
-                onChange={setValue}
+                onChange={setPhone}
               />
             </div>
           </form>
           <ul className="send_sms">
             <li className="sms">
-              <a href="">
+              <button>
                 <img src="/images/sms.svg" alt="sms" />
                 <p>Continue Using The SMS</p>
-              </a>
+              </button>
             </li>
             <li className="whatsApp">
-              <a href="">
+              <button onClick={()=>handellogin()}>
                 <img src="/images/whatsapp.svg" alt="WhatsApp" />
                 <p>Continue Using WhatsApp</p>
-              </a>
+              </button>
             </li>
           </ul>
           <div className="line">

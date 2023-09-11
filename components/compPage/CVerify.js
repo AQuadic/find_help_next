@@ -1,13 +1,28 @@
 "use client";
 
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 
 
 
 function CVerify() {
-
+  const router = useRouter()
+  const [phone, setPhone] = useState("")
+  const [phone_country, setPhone_country] = useState("EG")
+  const [code, setCode] = useState()
   const [otp, setOtp] = useState("");
+console.log('====================================');
+console.log(phone);
+console.log('====================================');
+console.log('====================================');
+console.log(phone_country);
+console.log('====================================');
+console.log('====================================');
+console.log(otp);
+console.log('====================================');
+  
   const clearOtp = () => {
     setOtp("");
   };
@@ -42,6 +57,41 @@ function CVerify() {
   useEffect(() => {
     handelOTP();
   }, []);
+
+
+  const handelVerify = () => {
+    
+    const po = axios
+      .post(
+        "https://findhelpapp.com/api/v1/users/auth/verify",
+        {
+          "phone": "+201276790349",
+          "phone_country":phone_country,
+          "code": otp,
+          "type": "verify"
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-Language": "ar",
+          },
+        }
+      )
+      .then((res) => {
+       console.log(res);
+       router.push('/')
+      })
+      .catch((res) => {
+          console.log(res);
+      });
+  };
+
+
+
+
+
+
   return (
     <>
       
@@ -57,7 +107,7 @@ function CVerify() {
             <OTPInput
                 value={otp}
                 onChange={setOtp}
-                numInputs={4}
+                numInputs={6}
                 renderInput={(props) => <input {...props} width="90px" />}
               />
             </div>
@@ -67,7 +117,7 @@ function CVerify() {
               If you don’t receive a code!
               <button id="resend" disabled onClick={clearOtp}>Resend</button>
             </h4>
-            <input type="submit" id="ss" className="btn_page" value="Verify" />
+            <input type="submit" id="ss" className="btn_page" value="Verify" onClick={(e)=>{e.preventDefault();handelVerify()}}/>
           </form>
           <a href="LogIn.html" className="change_num">change Mobile Number</a>
         </div>

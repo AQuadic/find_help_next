@@ -1,14 +1,10 @@
 import ItemCourse from '@/components/ItemCourse'
-import Link from 'next/link'
 import React from 'react'
 
 function page() {
-
-  
-
   return (
-   <>
-    <div className="container breadcrumbDetails">
+    <>
+       <div className="container breadcrumbDetails">
       <nav  aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item" aria-current="page">Home</li>
@@ -16,133 +12,318 @@ function page() {
           <li className="breadcrumb-item" aria-current="page">Categories</li>
           <li className="breadcrumb-item" aria-current="page">Repairs</li>
           <li className="breadcrumb-item" aria-current="page">Sub category</li>
-          <li className="breadcrumb-item" aria-current="page">Services</li>
         </ol>
       </nav>
     </div>
 
-    <section className="current_Service container m90">
-      <img
-        src="/images/ServiceDetails1.webp"
-        className="img_current"
-        alt="Service"
-      />
-      <div className="about_current_Service">
-        <div className="head">
-          <h3>Alloy Wheel Repairs Derby</h3>
-          <div className="Star">
-            <img src="/images/star.svg" alt="star" />
-            <p>4.8</p>
-          </div>
-        </div>
-        <ul>
-          <li>
-            <img src="/images/Time-Circle.svg" alt="Time-Circle" />
-            <p>9:00 AM to 10:00 PM</p>
-          </li>
-          <li>
-            <img src="/images/Location.svg" alt="Location" />
-            <p>sidi bisher, alex</p>
-          </li>
+    <div className="details_head container">
+      <h3>Get the support you need to run your business more smoothly</h3>
+      <div className="dropdown">
+        <button
+          className="btn btn-secondary dropdown-toggle"
+          id="dropdownMenuButton"
+          type="button"
+          data-bs-toggle="dropdown"
+          data-bs-target="#dropdownOne"
+          aria-expanded="false"
+        >
+          Recommended services
+        </button>
+        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li><a className="dropdown-item" href="#">Action</a></li>
+          <li><a className="dropdown-item" href="#">Another action</a></li>
+          <li><a className="dropdown-item" href="#">Something else here</a></li>
         </ul>
-        <div className="salary_Service">
-          <p>2000 EGP</p>
-        </div>
-        <div className="bookNow_Fav">
-          <Link href="/checkOut" className="btn_page">Book Now</Link>
-          <div
-            className="fav"
-            style={{backgroundImage: "url(/images/love.svg)"}}
-          ></div>
-        </div>
       </div>
-    </section>
-
-    <section className="provider container m90">
-      <h2 className="headtitle">Provider Details</h2>
-      <div className="part1">
-        <img src="/images/person.webp" className="person" alt="person" />
-        <div className="about_Provider">
-          <h3>Muhammed Ahmed</h3>
-          <p>Alexandria , Egypt</p>
-          <p
-            style={{direction:"ltr", textDecoration: "underline"}}
-            id="myPhoneNumber"
-          >
-            +123 456-7890
-          </p>
+    </div>
+    <section className="categories container m90">
+      <div className="filter">
+        <div className="search">
+          <h3>Search</h3>
+          <form action="">
+            <input type="text" placeholder="What You Search about" />
+          </form>
         </div>
-      </div>
-      <div className="part2">
-        <div className="rat_cus">
-          <div className="rating rat_cus_same">
-            <h3>Provider Rating</h3>
-            <div className="Star">
-              <p>4.8</p>
-              <img src="/images/star.svg" alt="star" />
+        <h3 className="headDrop">Categories</h3>
+        <div className="accordion" id="accordionExample">
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                Gender
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              className="accordion-collapse collapse show"
+              data-bs-parent="#accordionExample"
+            >
+              <div className="accordion-body">
+                <ul>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="" className="active">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <p><span>79% </span> Positive Ratings</p>
           </div>
-          <div className="customers rat_cus_same">
-            <h3>Customers</h3>
-            <h4>249K+</h4>
-            <p>During the last 90 days</p>
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                Cleaning Services
+              </button>
+            </h2>
+            <div
+              id="collapseTwo"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div className="accordion-body">
+                <ul>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="all_Rating">
-          <ul>
-            <li>
-              <div className="headRating">
-                <div className="allStars">
-                  <img src="/images/star.svg" alt="star" />
-                  <img src="/images/star.svg" alt="star" />
-                  <img src="/images/star.svg" alt="star" />
-                  <img src="/images/star.svg" alt="star" />
-                  <img src="/images/star.svg" alt="star" />
-                </div>
-                <p>12/11/2022</p>
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                Home Exterior
+              </button>
+            </h2>
+            <div
+              id="collapseThree"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div className="accordion-body">
+                <ul>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                </ul>
               </div>
-              <h3>He’s so Professional</h3>
-              <h4>By: Ahmed</h4>
-            </li>
-            <li>
-              <div className="headRating">
-                <div className="allStars">
-                  <img src="/images/star.svg" alt="star" />
-                  <img src="/images/star.svg" alt="star" />
-                  <img src="/images/star.svg" alt="star" />
-                  <img src="/images/star.svg" alt="star" />
-                  <img src="/images/star.svg" alt="star" />
-                </div>
-                <p>12/11/2022</p>
+            </div>
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                Cleaning Services
+              </button>
+            </h2>
+            <div
+              id="collapseTwo"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div className="accordion-body">
+                <ul>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                </ul>
               </div>
-              <h3>He’s so Professional</h3>
-              <h4>By: Ahmed</h4>
-            </li>
-            <li>
-              <div className="headRating">
-                <div className="allStars">
-                  <img src="/images/star.svg" alt="star" />
-                  <img src="/images/star.svg" alt="star" />
-                  <img src="/images/star.svg" alt="star" />
-                  <img src="/images/star.svg" alt="star" />
-                  <img src="/images/star.svg" alt="star" />
-                </div>
-                <p>12/11/2022</p>
+            </div>
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                Home Exterior
+              </button>
+            </h2>
+            <div
+              id="collapseThree"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div className="accordion-body">
+                <ul>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                </ul>
               </div>
-              <h3>He’s so Professional</h3>
-              <h4>By: Ahmed</h4>
-            </li>
-          </ul>
+            </div>
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                Cleaning Services
+              </button>
+            </h2>
+            <div
+              id="collapseTwo"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div className="accordion-body">
+                <ul>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                Home Exterior
+              </button>
+            </h2>
+            <div
+              id="collapseThree"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionExample"
+            >
+              <div className="accordion-body">
+                <ul>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                  <li>
+                    <a href="">sub categories</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
-
-    <section className="ServicesProvider services container m90">
-      <h2 className="headtitle">All Services by this provider</h2>
-      <div className="owl-carousel allServices">
-        <div className="item">
-           <ItemCourse
+      <div className="services">
+        <div className="allServices">
+        <ItemCourse
               title="Alloy Wheel Repairs Derby"
               star="4.8"
               loc="sidi bisher, alex"
@@ -152,9 +333,7 @@ function page() {
               newsalary="1000"
               image="1"
             />
-        </div>
-        <div className="item">
-          <ItemCourse
+            <ItemCourse
               title="Alloy Wheel Repairs Derby"
               star="4.8"
               loc="sidi bisher, alex"
@@ -164,9 +343,7 @@ function page() {
               image="2"
               
             />
-        </div>
-        <div className="item">
-        <ItemCourse
+            <ItemCourse
               title="Alloy Wheel Repairs Derby"
               star="4.8"
               loc="sidi bisher, alex"
@@ -175,9 +352,7 @@ function page() {
               newsalary="2000"
               image="3"
             />
-        </div>
-        <div className="item">
-          <ItemCourse
+             <ItemCourse
               title="Alloy Wheel Repairs Derby"
               star="4.8"
               loc="sidi bisher, alex"
@@ -187,9 +362,46 @@ function page() {
               newsalary="1000"
               image="1"
             />
-        </div>
-        <div className="item">
-        <ItemCourse
+            <ItemCourse
+              title="Alloy Wheel Repairs Derby"
+              star="4.8"
+              loc="sidi bisher, alex"
+              timeFrom="9:00 AM"
+              timeTo="10:00 PM"
+              newsalary="2000"
+              image="2"
+              
+            />
+            <ItemCourse
+              title="Alloy Wheel Repairs Derby"
+              star="4.8"
+              loc="sidi bisher, alex"
+              timeFrom="9:00 AM"
+              timeTo="10:00 PM"
+              newsalary="2000"
+              image="3"
+            />
+             <ItemCourse
+              title="Alloy Wheel Repairs Derby"
+              star="4.8"
+              loc="sidi bisher, alex"
+              timeFrom="9:00 AM"
+              timeTo="10:00 PM"
+              oldsalary="2000"
+              newsalary="1000"
+              image="1"
+            />
+            <ItemCourse
+              title="Alloy Wheel Repairs Derby"
+              star="4.8"
+              loc="sidi bisher, alex"
+              timeFrom="9:00 AM"
+              timeTo="10:00 PM"
+              newsalary="2000"
+              image="2"
+              
+            />
+            <ItemCourse
               title="Alloy Wheel Repairs Derby"
               star="4.8"
               loc="sidi bisher, alex"
@@ -199,11 +411,10 @@ function page() {
               image="3"
             />
         </div>
+        <button className="more">Show More</button>
       </div>
-    
     </section>
-
-   </>
+    </>
   )
 }
 

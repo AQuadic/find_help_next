@@ -32,7 +32,7 @@ function page() {
           <form className="">
             <div className="box1 address_page">
               <div className="myAddress">
-                <img src="./images/address.svg" alt="address" />
+                <img src="/images/address.svg" alt="address" />
                 <div className="about_address">
                   <p>
                     66 Youssef Ghaly Street, Miami , Alexandria. Appointment No.

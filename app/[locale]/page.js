@@ -1,10 +1,38 @@
 "use client";
 import ItemCourse from "@/components/ItemCourse";
 import styles from "./page.module.css";
-import React from "react";
+import React, { useState } from "react";
 import ItemCategories from "@/components/ItemCategories";
+import { getCategories, getServices } from "@/components/useAPI/shop/shop";
+import { useEffect } from "react";
+import { getHomePage } from "@/components/useAPI/GetUser";
 
 export default function Home() {
+  const [categories, setCategories] = useState();
+  const [services, setServices] = useState();
+  const [data, setData] = useState();
+
+useEffect(() => {
+  FetchDataOFData()
+    FetchDataOFIServices();
+  }, []);
+  const FetchDataOFICategories = async () => {
+    const Categories = await getCategories();
+    if (!Categories) console.log(Categories?.message);
+    setCategories(Categories);
+  };
+  const FetchDataOFIServices = async () => {
+    const Services = await getServices();
+    if (!Services) console.log(Services?.message);
+    setServices(Services);
+  };
+  const FetchDataOFData = async () => {
+    const HomePage = await getHomePage();
+    if (!HomePage) console.log(HomePage?.message);
+    setData(HomePage);
+  };
+console.log(data);
+
   return (
     <main className={styles.main}>
       <>
@@ -23,22 +51,13 @@ export default function Home() {
         <section class="categories container m90">
           <h2 class="headtitle">Categories</h2>
           <div class="parts">
-            <ItemCategories title="Repairs" image="1" />
-            <ItemCategories title="Cleaning Services" image="2" />
-            <ItemCategories title="Salon" image="3" />
-            <ItemCategories title="Home Exterior" image="4" />
-            <ItemCategories title="Repairs" image="1" />
-            <ItemCategories title="Cleaning Services" image="2" />
-            <ItemCategories title="Salon" image="3" />
-            <ItemCategories title="Home Exterior" image="4" />
-            <ItemCategories title="Repairs" image="1" />
-            <ItemCategories title="Cleaning Services" image="2" />
-            <ItemCategories title="Salon" image="3" />
-            <ItemCategories title="Home Exterior" image="4" />
-            <ItemCategories title="Repairs" image="1" />
-            <ItemCategories title="Cleaning Services" image="2" />
-            <ItemCategories title="Salon" image="3" />
-            <ItemCategories title="Home Exterior" image="4" />
+            {
+              data?.categories?.map((item)=>{
+return(
+  <ItemCategories  id={item.id} title={item.name.en} image={item.image.url} />
+)
+              })
+            }
           </div>
         </section>
 

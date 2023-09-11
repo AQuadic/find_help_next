@@ -1,8 +1,24 @@
 "use client";
 import Link from "next/link";
 import React from "react";
+import { useEffect } from "react";
+import { getUser } from "../useAPI/GetUser";
+import { useState } from "react";
 
 function NavBar() {
+const [user ,setUser] = useState("")
+
+useEffect(() => {
+  FetchDataOFUser();
+  }, []);
+  const FetchDataOFUser = async () => {
+    const User = await getUser();
+    if (!User) console.log(User?.message);
+    setUser(User);
+  };
+console.log(user);
+
+
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container">
@@ -13,7 +29,7 @@ function NavBar() {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Donia,
+             {user.name},
             </h4>
 
             <ul className="dropdown-menu myAcc">
@@ -780,7 +796,7 @@ function NavBar() {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Donia,
+             {user.name},
             </h4>
 
             <ul className="dropdown-menu myAcc">
