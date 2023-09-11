@@ -11,10 +11,11 @@ function ItemCourse({
   oldsalary,
   newsalary,
   image,
-  love
+  love,
+  id
 }) {
   return (
-    <div class="service">
+    <div class="service" key={id}>
       <div
         class="stateLove"
         style={love&&{ backgroundImage: "url(/images/loved.svg)" }}

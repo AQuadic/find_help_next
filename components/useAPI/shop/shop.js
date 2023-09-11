@@ -32,21 +32,32 @@ export const getCategories = async () => {
   }
 };
 
-export const getServices = async () => {
- 
+export const getServices = async (id) => {
+
   try {
-    const res = await fetch(
-      "https://findhelpapp.com/api/v1/users/services",
-      {
-        method: "GET",
-        headers: {
-         
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Accept-Language": "ar"
-        },
-      }
-    );
+    const url = new URL(
+      "https://findhelpapp.com/api/v1/users/services"
+  );
+  
+  const params = {
+      "category_id": id,
+      "pinned": "1",
+      "per_page":"3"
+  };
+  Object.keys(params)
+      .forEach(key => url.searchParams.append(key, params[key]));
+  
+  const headers = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Accept-Language": "ar",
+  };
+  
+    const res = await fetch(url, {
+      method: "GET",
+      headers,
+  })
+ 
     const data = await res.json();
     return data;
   } catch (error) {
