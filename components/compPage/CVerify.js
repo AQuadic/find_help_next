@@ -1,28 +1,28 @@
 "use client";
 
 import axios from "axios";
+import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 
+function CVerify({ params }) {
+  const router = useRouter();
 
-
-function CVerify() {
-  const router = useRouter()
-  const [phone, setPhone] = useState("")
-  const [phone_country, setPhone_country] = useState("EG")
-  const [code, setCode] = useState()
+  const [phone, setPhone] = useState("");
+  const [phone_country, setPhone_country] = useState("EG");
+  const [code, setCode] = useState();
   const [otp, setOtp] = useState("");
-console.log('====================================');
-console.log(phone);
-console.log('====================================');
-console.log('====================================');
-console.log(phone_country);
-console.log('====================================');
-console.log('====================================');
-console.log(otp);
-console.log('====================================');
-  
+  console.log("====================================");
+  console.log(phone);
+  console.log("====================================");
+  console.log("====================================");
+  console.log(phone_country);
+  console.log("====================================");
+  console.log("====================================");
+  console.log(otp);
+  console.log("====================================");
+
   const clearOtp = () => {
     setOtp("");
   };
@@ -58,17 +58,15 @@ console.log('====================================');
     handelOTP();
   }, []);
 
-
   const handelVerify = () => {
-    
     const po = axios
       .post(
         "https://findhelpapp.com/api/v1/users/auth/verify",
         {
-          "phone": "+201276790349",
-          "phone_country":phone_country,
-          "code": otp,
-          "type": "verify"
+          phone: Cookies.get("phone"),
+          phone_country: Cookies.get("phone_country"),
+          code: otp,
+          type: "verify",
         },
         {
           headers: {
@@ -79,55 +77,70 @@ console.log('====================================');
         }
       )
       .then((res) => {
-       console.log(res);
-       router.push('/')
+        console.log(res);
+        if (res.status === 200) {
+          if (res.data.user.name === "FindHelp User") {
+           router.push('/created')
+          } else {
+            router.push('/created')
+          }
+        }
       })
       .catch((res) => {
-          console.log(res);
+        console.log(res);
       });
   };
 
-
-
-
-
-
   return (
     <>
-      
       <section className="page_log">
-      <div className="container">
-        <div className="box_log">
-          <h3>Type The OTP</h3>
-          <p className="dec">
-            Please enter the verification code we sent to your mobile number
-          </p>
-          <form action="" className="verify">
-            <div className="passcode-wrapper">
-            <OTPInput
-                value={otp}
-                onChange={setOtp}
-                numInputs={6}
-                renderInput={(props) => <input {...props} width="90px" />}
+        <div className="container">
+          <div className="box_log">
+            <h3>Type The OTP</h3>
+            <p className="dec">
+              Please enter the verification code we sent to your mobile number
+            </p>
+            <form action="" className="verify">
+              <div className="passcode-wrapper">
+                <OTPInput
+                  value={otp}
+                  onChange={setOtp}
+                  numInputs={6}
+                  renderInput={(props) => <input {...props} width="90px" />}
+                />
+              </div>
+
+              <p id="counter" className="counter red">
+                02:00 s
+              </p>
+              <h4>
+                If you don’t receive a code!
+                <button id="resend" disabled onClick={clearOtp}>
+                  Resend
+                </button>
+              </h4>
+              <input
+                type="submit"
+                id="ss"
+                className="btn_page"
+                value="Verify"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handelVerify();
+                }}
               />
-            </div>
-
-            <p id="counter" className="counter red">02:00 s</p>
-            <h4>
-              If you don’t receive a code!
-              <button id="resend" disabled onClick={clearOtp}>Resend</button>
-            </h4>
-            <input type="submit" id="ss" className="btn_page" value="Verify" onClick={(e)=>{e.preventDefault();handelVerify()}}/>
-          </form>
-          <a href="LogIn.html" className="change_num">change Mobile Number</a>
+            </form>
+            <a href="LogIn.html" className="change_num">
+              change Mobile Number
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section className="endPage_login">
-      <p>© Find Help, 2019-2022 Made by</p>
-      <a href="#"> AQuadic Solution Company</a>
-    </section>
+      <section className="endPage_login">
+        <p>© Find Help, 2019-2022 Made by</p>
+        <a href="#"> AQuadic Solution Company</a>
+      </section>
     </>
   );
 }

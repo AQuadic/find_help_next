@@ -15,18 +15,18 @@ function ItemCourse({
   id
 }) {
   return (
-    <div class="service" key={id}>
+    <div className= "service" key={id}>
       <div
-        class="stateLove"
+        className= "stateLove"
         style={love&&{ backgroundImage: "url(/images/loved.svg)" }}
       >
         <img src="/images/love.svg" alt="love" />
       </div>
-      <img src={`/images/service${image}.webp`} class="imgService" alt="service" />
-      <div class="aboutservice">
-        <div class="head">
+      <img src={`/images/service${image}.webp`} className= "imgService" alt="service" />
+      <div className= "aboutservice">
+        <div className= "head">
           <h3>{title}</h3>
-          <div class="Star">
+          <div className= "Star">
             <img src="/images/star.svg" alt="star" />
             <p>{star}</p>
           </div>
@@ -43,18 +43,18 @@ function ItemCourse({
             <p>{loc}</p>
           </li>
         </ul>
-        <div class="salary_pay">
-          <div class="salary">
+        <div className= "salary_pay">
+          <div className= "salary">
             {oldsalary ? (
               <>
-                <span class="sall">{oldsalary} EGP</span>
+                <span className= "sall">{oldsalary} EGP</span>
                 <p>{newsalary} EGP</p>
               </>
             ) : (
               <> <p>{newsalary} EGP</p></>
             )}
           </div>
-          <Link href="/categoriesDetails/2" class="btn_page">
+          <Link href="/categoriesDetails/2" className= "btn_page">
             Book Now
           </Link>
         </div>

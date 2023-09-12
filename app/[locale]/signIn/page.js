@@ -45,6 +45,8 @@ console.log('====================================');
       .then((res) => {
        console.log(res);
        Cookies.set("token",res.data.token);
+       Cookies.set("phone",phone);
+       Cookies.set("phone_country",phone_country);
        router.push('/verify')
       })
       .catch((res) => {

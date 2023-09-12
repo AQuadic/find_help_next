@@ -1,6 +1,54 @@
+"use client";
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import React from 'react'
+import { useState } from 'react';
 
 function page() {
+
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [selectedFile, setSelectedFile] = useState(null);
+console.log('====================================');
+console.log(name);
+console.log('====================================');
+console.log('====================================');
+console.log(email);
+console.log('====================================');
+console.log('====================================');
+console.log(selectedFile);
+console.log('====================================');
+const handleHeaderInputChange = (e) => {
+  setSelectedFile(e.target.files[0]);
+};
+const handelProfile = () => {
+  const body = new FormData();
+  body.append('name', name);
+  body.append('email', email);
+  body.append('image', selectedFile);
+
+  const po = axios
+    .post(
+      "https://findhelpapp.com/api/v1/users/auth/update",
+      body,
+      {
+        headers: {
+          "Authorization": `Bearer ${Cookies.get('token')}`,
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+    "Accept-Language": "ar",
+        },
+      }
+    )
+    .then((res) => {
+     console.log(res);
+     router.push('/')
+    })
+    .catch((res) => {
+        console.log(res);
+    });
+};
+
   return (
     <>
        <section className="page_log">
@@ -11,10 +59,13 @@ function page() {
             Complete Your Personal Information To Create The Account
           </p>
           <div className="img_persone">
-            <img src="/images/person.webp" className="person" alt="person" />
-            <button>
+            <img src={selectedFile?URL.createObjectURL(selectedFile):"/images/person.webp"} className="person" alt="person" />
+            <div className='inputfile'>
+            <input type="file" onChange={handleHeaderInputChange} />
               <img src="/images/Camera.svg" alt="Camera" />
-            </button>
+            </div>
+           
+
           </div>
           <form className="row g-3 form_page">
             <div className="col-md-12">
@@ -24,7 +75,8 @@ function page() {
                 className="form-control"
                 id="inputname4"
                 placeholder="Full Name"
-                value="Donia El Wazery"
+                value={name}
+                onChange={(e)=>{setName(e.target.value)}}
               />
             </div>
 
@@ -35,10 +87,11 @@ function page() {
                 className="form-control"
                 id="inputemail"
                 placeholder="Email"
-                value="doniaahmedelwazery@gmail.com"
+                value={email}
+                onChange={(e)=>{setEmail(e.target.value)}}
               />
             </div>
-            <input type="submit" value="Done" className="btn_page" />
+            <input type="submit" value="Done" onClick={(e)=>{e.preventDefault();handelProfile()}} className="btn_page" />
           </form>
         </div>
       </div>

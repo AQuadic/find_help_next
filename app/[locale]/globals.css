@@ -2512,8 +2512,12 @@ html[dir="rtl"] .Profile .btn_page {
   background: #f4c444;
   border: 2px solid #ffffff;
 }
+
 .Profile .img_persone button img {
 }
+
+
+
 .Profile .warning {
   display: flex;
   align-items: center;
@@ -2523,6 +2527,7 @@ html[dir="rtl"] .Profile .btn_page {
   background: rgba(203, 10, 10, 0.15);
   margin-bottom: 40px;
 }
+
 .Profile .warning img {
   width: 24px;
   height: 24px;
@@ -3113,6 +3118,7 @@ margin:42px auto 0px;
   width: 92px;
   height: 92px;
   border-radius: 50%;
+  object-fit: cover;
 }
 .page_log .img_persone button {
   position: absolute;
@@ -3126,6 +3132,34 @@ margin:42px auto 0px;
   justify-content: center;
   background: #f4c444;
   border: 2px solid #ffffff;
+}
+.page_log .img_persone .inputfile{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4c444;
+  border: 2px solid #ffffff;
+  overflow: hidden;
+  cursor: pointer;
+}
+.page_log .img_persone .inputfile input{
+  position: absolute;
+  z-index: 55;
+  opacity: 0;
+  cursor: pointer;
+}
+.page_log .img_persone .inputfile img{
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
 }
 @media(max-width:600px){
   .page_log .box_log {
@@ -3154,3 +3188,21 @@ margin:42px auto 0px;
 }
 }
 /*=========================== end page_log ======================*/
+/*=========================== start pageAbout ======================*/
+.pageAbout {
+  margin-top: 16px;
+}
+.pageAbout h2{
+  font-size: 28px;
+  font-family: "DM Sans";
+  margin-bottom: 20px;
+}
+.pageAbout p{}
+@media(max-width:768px){
+  .pageAbout h2{
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+}
+/*=========================== end pageAbout ======================*/

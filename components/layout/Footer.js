@@ -1,9 +1,23 @@
 "use client";
 import React from 'react'
+import { getHomePage } from '../useAPI/GetUser';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import Link from 'next/link';
 
 
 function Footer() {
- 
+  const [data, setData] = useState();
+  useEffect(() => {
+    FetchDataOFData()
+   
+    }, []);
+    const FetchDataOFData = async () => {
+      const HomePage = await getHomePage();
+      if (!HomePage) console.log(HomePage?.message);
+      setData(HomePage);
+    };
+  console.log(data);
   return (
     <footer>
       <div className="container">
@@ -17,9 +31,14 @@ function Footer() {
           <div className="part">
             <h2>About</h2>
             <div className="links">
-              <a href="">Contact Us</a>
-              <a href="">Privacy Policy</a>
-              <a href="">Terms of Use</a>
+              {
+                data?.pages.map((item)=>{
+                  return(
+                    <Link href={`/about/${item.id}`} key={item.id}>{item.title.en}</Link>
+                  )
+                })
+              }
+              
             </div>
           </div>
           <div className="part">
@@ -37,17 +56,19 @@ function Footer() {
           <div className="part">
             <h2 style={{padding: "0px 20px"}}>Follow Us</h2>
             <div className="links_social">
-              <a href="">
+            
+              <a href={data?.socials.facebook} >
                 <img src="/images/facebook.webp" alt="facebook" />
               </a>
 
-              <a href="">
+             {/* { <a href={data?.socials.}>
                 <img src="/images/linkedin.webp" alt="instagram" />
-              </a>
-              <a href="">
+              </a>} */}
+              <a href={data?.socials.instagram} >
                 <img src="/images/insta.webp" alt="linkedin" />
               </a>
-              <a href="">
+              
+              <a href={data?.socials.twitter} >
                 <img src="/images/twiiter.webp" alt="twitter" />
               </a>
             </div>

@@ -39,9 +39,9 @@ console.log(data);
   return (
     <main className={styles.main}>
       <>
-        <section class="find">
-          <img src="/images/find.webp" class="imgFind" alt="find" />
-          <div class="aboutFind container">
+        <section className= "find">
+          <img src="/images/find.webp" className= "imgFind" alt="find" />
+          <div className= "aboutFind container">
             <h1>The largest website to find and request services</h1>
             <h2>Find your services with ease</h2>
             <form action="">
@@ -51,27 +51,27 @@ console.log(data);
           </div>
         </section>
 
-        <section class="categories container m90">
-          <h2 class="headtitle">Categories</h2>
-          <div class="parts">
+        <section className= "categories container m90">
+          <h2 className= "headtitle">Categories</h2>
+          <div className= "parts">
             {
               data?.service_categories?.map((item)=>{
 return(
-  <ItemCategories  id={item.id} title={item.name.en} image={item.image.url} />
+  <ItemCategories  key={item.id}  id={item.id} title={item.name.en} image={item.image.url} />
 )
               })
             }
           </div>
         </section>
 
-        <section class="use m90">
-          <div class="container">
+        <section className= "use m90">
+          <div className= "container">
             <h2>How To Use Find Help</h2>
-            <div class="parts">
-              <div class="part">
-                <div class="numStep">1</div>
+            <div className= "parts">
+              <div className= "part">
+                <div className= "numStep">1</div>
                 <img src="/images/people-search.webp" alt="people-search" />
-                <div class="aboutUse">
+                <div className= "aboutUse">
                   <h3>Find The Services</h3>
                   <p>
                     Find the service you need using the search box at the top or
@@ -79,10 +79,10 @@ return(
                   </p>
                 </div>
               </div>
-              <div class="part">
-                <div class="numStep">2</div>
+              <div className= "part">
+                <div className= "numStep">2</div>
                 <img src="/images/click.webp" alt="click" />
-                <div class="aboutUse">
+                <div className= "aboutUse">
                   <h3>Make a Book</h3>
                   <p>
                     Review service descriptions and buyer reviews, then request
@@ -90,10 +90,10 @@ return(
                   </p>
                 </div>
               </div>
-              <div class="part">
-                <div class="numStep">3</div>
+              <div className= "part">
+                <div className= "numStep">3</div>
                 <img src="/images/shopping-list1.webp" alt="shopping-list" />
-                <div class="aboutUse">
+                <div className= "aboutUse">
                   <h3>Receive your service</h3>
                   <p>
                     Contact the seller directly within the find help website
@@ -105,10 +105,10 @@ return(
           </div>
         </section>
 
-        <section class="services container m90">
-          <h2 class="headtitle">Repairs Services</h2>
+        <section className= "services container m90">
+          <h2 className= "headtitle">Repairs Services</h2>
 
-          <div class="allServices">
+          <div className= "allServices">
             <ItemCourse
               title="Alloy Wheel Repairs Derby"
               star="4.8"
@@ -140,10 +140,10 @@ return(
             />
           </div>
         </section>
-        <section class="services container m90">
-          <h2 class="headtitle">Cleaning Services</h2>
-          <div class="allServices">
-            <div class="allServices">
+        <section className= "services container m90">
+          <h2 className= "headtitle">Cleaning Services</h2>
+          <div className= "allServices">
+            <div className= "allServices">
               <ItemCourse
                 title="Alloy Wheel Repairs Derby"
                 star="4.8"
@@ -177,10 +177,10 @@ return(
           </div>
         </section>
 
-        <section class="need m90">
-          <div class="container">
-            <div class="parts">
-              <div class="part1">
+        <section className= "need m90">
+          <div className= "container">
+            <div className= "parts">
+              <div className= "part1">
                 <h3 style={{ color: "#1866ff" }}>Search - Book - Receive</h3>
                 <img
                   src="/images/hotelbooking-pana(1)1.webp"
@@ -188,21 +188,21 @@ return(
                 />
                 <a
                   href="#"
-                  class="btn_page btn_page2"
+                  className= "btn_page btn_page2"
                   style={{ backgroundColor: "#1866ff" }}
                 >
                   Find The Services
                 </a>
               </div>
-              <div class="part2">
+              <div className= "part2">
                 <h2>Everything you need and more in one site</h2>
               </div>
-              <div class="part3">
+              <div className= "part3">
                 <h3 style={{ color: "#f3b100" }}>Add - Announce - Sale</h3>
                 <img src="/images/refund-pana1.webp" alt="refund-pana" />
                 <a
                   href="#"
-                  class="btn_page"
+                  className= "btn_page"
                   style={{ backgroundColor: "#f3b100" }}
                 >
                   Add Your Services
@@ -211,10 +211,10 @@ return(
             </div>
           </div>
         </section>
-        <section class="services container m90">
-          <h2 class="headtitle">Cleaning Services</h2>
-          <div class="allServices">
-            <div class="allServices">
+        <section className= "services container m90">
+          <h2 className= "headtitle">Cleaning Services</h2>
+          <div className= "allServices">
+            <div className= "allServices">
               <ItemCourse
                 title="Alloy Wheel Repairs Derby"
                 star="4.8"
@@ -247,17 +247,17 @@ return(
             </div>
           </div>
         </section>
-        <section class="try container m90">
-          <img src="/images/phone.webp" class="phone" alt="phone" />
-          <div class="aboutTry">
-            <div class="part1">
+        <section className= "try container m90">
+          <img src="/images/phone.webp" className= "phone" alt="phone" />
+          <div className= "aboutTry">
+            <div className= "part1">
               <h2>TRY THE FIND HELP APP</h2>
               <p>
                 Buy, sell and find just about anything using the app on your
                 mobile.
               </p>
             </div>
-            <div class="part2">
+            <div className= "part2">
               <h3>GET YOUR APP TODAY</h3>
               <ul>
                 <li>
