@@ -683,7 +683,7 @@ footer .copy p a {
 .current_Service .about_current_Service .head {
   margin-bottom: 8px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
 }
@@ -733,7 +733,7 @@ footer .copy p a {
 }
 .services .allServices .service .aboutservice .salary_pay {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 10px;
   flex-wrap: wrap;
