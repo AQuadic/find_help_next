@@ -14,12 +14,7 @@ function page() {
   const router = useRouter()
   const [phone, setPhone] = useState("")
   const [phone_country, setPhone_country] = useState("EG")
-console.log('====================================');
-console.log(phone);
-console.log('====================================');
-console.log('====================================');
-console.log(phone_country);
-console.log('====================================');
+
 
   const [Errorphone, setErrorPhone] = useState("");
 

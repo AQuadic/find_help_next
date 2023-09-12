@@ -8,10 +8,10 @@ import { navState } from "@/atoms";
 import { useRecoilState } from "recoil";
 
 function NavBar() {
-const [user ,setUser] = useState("")
-const [IsUser, setIsUser] = useRecoilState(navState);
-useEffect(() => {
-  FetchDataOFUser();
+  const [user, setUser] = useState("");
+  const [IsUser, setIsUser] = useRecoilState(navState);
+  useEffect(() => {
+    FetchDataOFUser();
   }, [IsUser]);
   const FetchDataOFUser = async () => {
     const User = await getUser();
@@ -19,53 +19,55 @@ useEffect(() => {
     setUser(User);
   };
 
-
-
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container">
         <div className="phone_nav ac_nav">
-          <div className="dropdown" style={{position:"relative",display:"none" }}>
-            <h4
-              className="dropdown-toggle nav_btn"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-             {user.name},
-            </h4>
+          {IsUser && (
+            <div className="dropdown" style={{ position: "relative" }}>
+              <h4
+                className="dropdown-toggle nav_btn"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {user.name},
+              </h4>
 
-            <ul className="dropdown-menu myAcc">
-              <li>
-                <Link className="dropdown-item" href="/account">
-                  My Profile
-                </Link>
-              </li>
-              <li>
-                <a className="dropdown-item" href="/account/myServices">
-                  My Services
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="/account/prmoted">
-                  Promotion
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="/account/myOrders">
-                  My Orders
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="/account/addressess">
-                  Addresses
-                </a>
-              </li>
-            </ul>
-          </div>
-          <Link href="/signIn" className="nav_btn">
-            <img src="/images/login.svg" className="img_login" alt="login" />
-            <p>Login</p>
-          </Link>
+              <ul className="dropdown-menu myAcc">
+                <li>
+                  <Link className="dropdown-item" href="/account">
+                    My Profile
+                  </Link>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="/account/myServices">
+                    My Services
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="/account/prmoted">
+                    Promotion
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="/account/myOrders">
+                    My Orders
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="/account/addressess">
+                    Addresses
+                  </a>
+                </li>
+              </ul>
+            </div>
+          )}
+          {!IsUser && (
+            <Link href="/signIn" className="nav_btn">
+              <img src="/images/login.svg" className="img_login" alt="login" />
+              <p>Login</p>
+            </Link>
+          )}
           <button className="search btnsearch">
             <img src="/images/search.svg" alt="search" />
           </button>
@@ -792,51 +794,51 @@ useEffect(() => {
             <img src="/images/add.svg" className="add" alt="Add_Services" />
             <p>Add Services</p>
           </Link>
-          <div className="dropdown" style={{position:"relative"}}>
-            <h4
-              className="dropdown-toggle nav_btn"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-             {user.name},
-            </h4>
+          {IsUser && (
+            <div className="dropdown" style={{ position: "relative" }}>
+              <h4
+                className="dropdown-toggle nav_btn"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {user.name},
+              </h4>
 
-            <ul className="dropdown-menu myAcc">
-              <li>
-                <Link className="dropdown-item" href="/account">
-                  My Profile
-                </Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="/account/myServices">
-                  My Services
-                </Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="/account/prmoted">
-                  Promotion
-                </Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="/account/myOrders">
-                  My Orders
-                </Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="/account/addressess">
-                  Addresses
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <Link
-            href="/signIn"
-            className="nav_btn login_btn"
-            style={{display: "none"}}
-          >
-            <img src="/images/login.svg" className="img_login" alt="login" />
-            <p>Login</p>
-          </Link>
+              <ul className="dropdown-menu myAcc">
+                <li>
+                  <Link className="dropdown-item" href="/account">
+                    My Profile
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" href="/account/myServices">
+                    My Services
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" href="/account/prmoted">
+                    Promotion
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" href="/account/myOrders">
+                    My Orders
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" href="/account/addressess">
+                    Addresses
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
+          {!IsUser && (
+            <Link href="/signIn" className="nav_btn login_btn">
+              <img src="/images/login.svg" className="img_login" alt="login" />
+              <p>Login</p>
+            </Link>
+          )}
           <button className="lang">
             <img src="/images/lang.webp" className="lang" alt="lang" />
             <p>En</p>
@@ -1457,4 +1459,3 @@ useEffect(() => {
 }
 
 export default NavBar;
-  
