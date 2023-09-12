@@ -13,7 +13,8 @@ function ItemCourse({
   image,
   img,
   love,
-  id
+  id,
+  category_id
 }) {
  
   return (
@@ -62,7 +63,7 @@ function ItemCourse({
            )}
          </div>
          }
-          <Link href="/categoriesDetails/2" className= "btn_page">
+          <Link href={`/categoriesDetails/${category_id}/${id}`} className= "btn_page">
             Book Now
           </Link>
         </div>

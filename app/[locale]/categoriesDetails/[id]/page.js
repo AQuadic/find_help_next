@@ -122,7 +122,7 @@ function page({ params }) {
                       <ul>
                         {categorie.children.map((child) => {
                           return (
-                            <li>
+                            <li key={child.id}>
                               <Link href={`/categoriesDetails/${child.id}`} className={`${child.id=== +params.id?"active":""}`}>{child.name.en}</Link>
                             </li>
                           );
@@ -151,6 +151,7 @@ function page({ params }) {
                   newsalary={service.price}
                   img={service.images}
                   id={service.id}
+                  category_id={service.category_id}
                 />
               );
             })}
