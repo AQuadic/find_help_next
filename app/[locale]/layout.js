@@ -10,17 +10,12 @@ import {NextIntlClientProvider, useLocale} from 'next-intl';
 import {notFound} from 'next/navigation';
 
 
-export function generateStaticParams() {
-  return [{locale: 'en'}, {locale: 'ar'}];
-}
+
 
 export const metadata = {
   title: 'Find Help',
   description: 'Find Help is ...',
-  openGraph: {
-    title: 'Find Help',
-    description: 'Find Help is a...',
-  },
+  
 }
 
 export default async function RootLayout({ children , params}) {
@@ -36,7 +31,7 @@ export default async function RootLayout({ children , params}) {
   return (
     <html lang={locale} dir={locale==="en"?'ltr':'rtl'}>
 <head>
-<link rel="icon" href="/images/favicon.ico" sizes="any" />
+
 </head>
       <body className={locale==="en"?'ltr':'rtl'}>
         

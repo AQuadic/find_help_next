@@ -11,9 +11,13 @@ function ItemCourse({
   oldsalary,
   newsalary,
   image,
+  img,
   love,
   id
 }) {
+  console.log('====================================');
+  console.log(img);
+  console.log('====================================');
   return (
     <div className= "service" key={id}>
       <div
@@ -22,7 +26,7 @@ function ItemCourse({
       >
         <img src="/images/love.svg" alt="love" />
       </div>
-      <img src={`/images/service${image}.webp`} className= "imgService" alt="service" />
+      <img src={img?img[0]?.url:`/images/logo.svg`}  className= "imgService" alt="service" />
       <div className= "aboutservice">
         <div className= "head">
           <h3>{title}</h3>
@@ -32,28 +36,34 @@ function ItemCourse({
           </div>
         </div>
         <ul>
-          <li>
-            <img src="/images/Time-Circle.svg" alt="Time-Circle" />
-            <p>
-              {timeFrom} to {timeTo}
-            </p>
-          </li>
+         {
+          timeFrom&&<li>
+          <img src="/images/Time-Circle.svg" alt="Time-Circle" />
+          <p>
+            {timeFrom} to {timeTo}
+          </p>
+        </li>
+           
+         }
           <li>
             <img src="/images/Location.svg" alt="Location" />
             <p>{loc}</p>
           </li>
         </ul>
         <div className= "salary_pay">
-          <div className= "salary">
-            {oldsalary ? (
-              <>
-                <span className= "sall">{oldsalary} EGP</span>
-                <p>{newsalary} EGP</p>
-              </>
-            ) : (
-              <> <p>{newsalary} EGP</p></>
-            )}
-          </div>
+         {
+          newsalary===0?<></>:
+           <div className= "salary">
+           {oldsalary ? (
+             <>
+               <span className= "sall">{oldsalary} EGP</span>
+               <p>{newsalary} EGP</p>
+             </>
+           ) : (
+             <> <p>{newsalary} EGP</p></>
+           )}
+         </div>
+         }
           <Link href="/categoriesDetails/2" className= "btn_page">
             Book Now
           </Link>

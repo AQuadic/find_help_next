@@ -6,9 +6,7 @@ import PhoneInput from "react-phone-number-input";
 
 
 
-export const metadata = {
-  title: 'analytica | Account',
-}
+
 
 function page() {
   const [value, setValue] = useState();

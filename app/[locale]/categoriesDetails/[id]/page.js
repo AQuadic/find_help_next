@@ -10,6 +10,7 @@ import { useState } from "react";
 function page({ params }) {
   const [services, setServices] = useState();
   const [categories, setcategories] = useState();
+  const [selectCurrentCategories, setSelectCurrentCategories] = useState();
 
   useEffect(() => {
     FetchDataOFIServices();
@@ -20,9 +21,11 @@ function page({ params }) {
     const Services = await getServices(params.id);
     if (!Services) console.log(Services?.message);
     setServices(Services);
+    setSelectCurrentCategories(Services.data[0].category_id)
   };
   console.log("====================================");
   console.log(services);
+  console.log(selectCurrentCategories);
   console.log("====================================");
 
   const FetchDataOFData = async () => {
@@ -100,7 +103,7 @@ function page({ params }) {
                 <div className="accordion-item" key={categorie.id}>
                   <h2 className="accordion-header">
                     <button
-                      className="accordion-button collapsed"
+                      className={`accordion-button   ${categorie.id ===selectCurrentCategories?"":"collapsed"}`}
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target={`#collapse${categorie.id}`}
@@ -112,7 +115,7 @@ function page({ params }) {
                   </h2>
                   <div
                     id={`collapse${categorie.id}`}
-                    className="accordion-collapse collapse "
+                    className={`accordion-collapse collapse  ${categorie.id ===selectCurrentCategories?"show":""} `}
                     data-bs-parent="#accordionExample"
                   >
                     <div className="accordion-body">
@@ -120,7 +123,7 @@ function page({ params }) {
                         {categorie.children.map((child) => {
                           return (
                             <li>
-                              <Link href={`/categoriesDetails/${child.id}`}>{child.name.en}</Link>
+                              <Link href={`/categoriesDetails/${child.id}`} className={`${child.id=== +params.id?"active":""}`}>{child.name.en}</Link>
                             </li>
                           );
                         })}
@@ -131,281 +134,8 @@ function page({ params }) {
                 </div>
               );
             })}
-            <div className="accordion-item">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne"
-                  aria-expanded="true"
-                  aria-controls="collapseOne"
-                >
-                  Gender
-                </button>
-              </h2>
-              <div
-                id="collapseOne"
-                className="accordion-collapse collapse show"
-                data-bs-parent="#accordionExample"
-              >
-                <div className="accordion-body">
-                  <ul>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="" className="active">
-                        sub categories
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="accordion-item">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
-                >
-                  Cleaning Services
-                </button>
-              </h2>
-              <div
-                id="collapseTwo"
-                className="accordion-collapse collapse"
-                data-bs-parent="#accordionExample"
-              >
-                <div className="accordion-body">
-                  <ul>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="accordion-item">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree"
-                  aria-expanded="false"
-                  aria-controls="collapseThree"
-                >
-                  Home Exterior
-                </button>
-              </h2>
-              <div
-                id="collapseThree"
-                className="accordion-collapse collapse"
-                data-bs-parent="#accordionExample"
-              >
-                <div className="accordion-body">
-                  <ul>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="accordion-item">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
-                >
-                  Cleaning Services
-                </button>
-              </h2>
-              <div
-                id="collapseTwo"
-                className="accordion-collapse collapse"
-                data-bs-parent="#accordionExample"
-              >
-                <div className="accordion-body">
-                  <ul>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="accordion-item">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree"
-                  aria-expanded="false"
-                  aria-controls="collapseThree"
-                >
-                  Home Exterior
-                </button>
-              </h2>
-              <div
-                id="collapseThree"
-                className="accordion-collapse collapse"
-                data-bs-parent="#accordionExample"
-              >
-                <div className="accordion-body">
-                  <ul>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="accordion-item">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
-                >
-                  Cleaning Services
-                </button>
-              </h2>
-              <div
-                id="collapseTwo"
-                className="accordion-collapse collapse"
-                data-bs-parent="#accordionExample"
-              >
-                <div className="accordion-body">
-                  <ul>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="accordion-item">
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree"
-                  aria-expanded="false"
-                  aria-controls="collapseThree"
-                >
-                  Home Exterior
-                </button>
-              </h2>
-              <div
-                id="collapseThree"
-                className="accordion-collapse collapse"
-                data-bs-parent="#accordionExample"
-              >
-                <div className="accordion-body">
-                  <ul>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                    <li>
-                      <a href="">sub categories</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+           
+           
           </div>
         </div>
         <div className="services">
@@ -413,13 +143,13 @@ function page({ params }) {
             {services?.data?.map((service) => {
               return (
                 <ItemCourse
-                  title={service.address_text.en}
+                  title={service.description.en}
                   star="4.8"
-                  loc="sidi bisher, alex"
+                  loc={service.address_text.en}
                   timeFrom={service.work_times?.time_from}
                   timeTo={service.work_times?.time_to}
                   newsalary={service.price}
-                  image="1"
+                  img={service.images}
                   id={service.id}
                 />
               );
@@ -434,80 +164,8 @@ function page({ params }) {
               newsalary="1000"
               image="1"
             />
-            <ItemCourse
-              title="Alloy Wheel Repairs Derby"
-              star="4.8"
-              loc="sidi bisher, alex"
-              timeFrom="9:00 AM"
-              timeTo="10:00 PM"
-              newsalary="2000"
-              image="2"
-            />
-            <ItemCourse
-              title="Alloy Wheel Repairs Derby"
-              star="4.8"
-              loc="sidi bisher, alex"
-              timeFrom="9:00 AM"
-              timeTo="10:00 PM"
-              newsalary="2000"
-              image="3"
-            />
-            <ItemCourse
-              title="Alloy Wheel Repairs Derby"
-              star="4.8"
-              loc="sidi bisher, alex"
-              timeFrom="9:00 AM"
-              timeTo="10:00 PM"
-              oldsalary="2000"
-              newsalary="1000"
-              image="1"
-            />
-            <ItemCourse
-              title="Alloy Wheel Repairs Derby"
-              star="4.8"
-              loc="sidi bisher, alex"
-              timeFrom="9:00 AM"
-              timeTo="10:00 PM"
-              newsalary="2000"
-              image="2"
-            />
-            <ItemCourse
-              title="Alloy Wheel Repairs Derby"
-              star="4.8"
-              loc="sidi bisher, alex"
-              timeFrom="9:00 AM"
-              timeTo="10:00 PM"
-              newsalary="2000"
-              image="3"
-            />
-            <ItemCourse
-              title="Alloy Wheel Repairs Derby"
-              star="4.8"
-              loc="sidi bisher, alex"
-              timeFrom="9:00 AM"
-              timeTo="10:00 PM"
-              oldsalary="2000"
-              newsalary="1000"
-              image="1"
-            />
-            <ItemCourse
-              title="Alloy Wheel Repairs Derby"
-              star="4.8"
-              loc="sidi bisher, alex"
-              timeFrom="9:00 AM"
-              timeTo="10:00 PM"
-              newsalary="2000"
-              image="2"
-            />
-            <ItemCourse
-              title="Alloy Wheel Repairs Derby"
-              star="4.8"
-              loc="sidi bisher, alex"
-              timeFrom="9:00 AM"
-              timeTo="10:00 PM"
-              newsalary="2000"
-              image="3"
-            />
+           
+           
           </div>
           <button className="more">Show More</button>
         </div>

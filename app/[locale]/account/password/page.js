@@ -2,9 +2,7 @@
 import Link from "next/link";
 import React from "react";
 
-export const metadata = {
-  title: "analytica | Account",
-};
+
 
 function page() {
   return (

@@ -8,9 +8,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import PhoneInput from 'react-phone-number-input';
 
-export const metadata = {
-  title: 'analytica | Sign IN',
-}
+
 
 function page() {
   const router = useRouter()
