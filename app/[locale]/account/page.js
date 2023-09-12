@@ -1,4 +1,6 @@
  "use client";
+
+import BtnLogOut from "@/components/btnLogOut";
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
@@ -34,7 +36,7 @@ function page() {
             <li><Link href="/account/prmoted">Promotion</Link></li>
             <li><Link href="/account/myOrders">My Orders</Link></li>
             <li><Link href="/account/addressess">Addresses</Link></li>
-            <li><Link href="">Log out</Link></li>
+            <li><BtnLogOut/></li>
           </ul>
         </div>
         <div className="Profile">
@@ -47,17 +49,17 @@ function page() {
           </div>
           <form className="row g-3 form_page">
             <div className="col-md-12">
-              <label for="inputname4 " className="form-label">Full Name </label>
+              <label htmlFor="inputname4 " className="form-label">Full Name </label>
               <input
                 type="text"
                 className="form-control"
                 id="inputname4"
                 placeholder="Full Name"
-                value="Donia El Wazery"
+                defaultValue="Donia El Wazery"
               />
             </div>
             <div className="col-md-12 tel_num">
-              <label for="inputtel " className="form-label">Phone Number </label>
+              <label htmlFor="inputtel " className="form-label">Phone Number </label>
              
               <PhoneInput
                 defaultCountry="EG"
@@ -69,13 +71,14 @@ function page() {
               />
             </div>
             <div className="col-md-12">
-              <label for="inputemail " className="form-label">Email Adress </label>
+              <label htmlFor="inputemail " className="form-label">Email Adress </label>
               <input
                 type="email"
                 className="form-control"
                 id="inputemail"
                 placeholder="Email"
-                value="doniaahmedelwazery@gmail.com"
+                defaultValue="doniaahmedelwazery@gmail.com"
+                
               />
             </div>
             <a href="changePassword.html" className="change">Change Password</a>

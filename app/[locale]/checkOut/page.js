@@ -34,7 +34,7 @@ function page() {
                   id="firstRadio"
                   checked
                 />
-                <label className="form-check-label" for="firstRadio">Pick Up</label>
+                <label className="form-check-label" htmlFor="firstRadio">Pick Up</label>
               </li>
               <li className="list-group-item">
                 <input
@@ -44,7 +44,7 @@ function page() {
                   value=""
                   id="secondRadio"
                 />
-                <label className="form-check-label" for="secondRadio"
+                <label className="form-check-label" htmlFor="secondRadio"
                   >Delivery
                   </label>
               </li>
@@ -78,7 +78,7 @@ function page() {
                   id="firstRadio"
                   checked
                 />
-                <label className="form-check-label" for="firstRadio">Cash</label>
+                <label className="form-check-label" htmlFor="firstRadio">Cash</label>
               </li>
               <li className="list-group-item">
                 <input
@@ -88,7 +88,7 @@ function page() {
                   value=""
                   id="secondRadio"
                 />
-                <label className="form-check-label" for="secondRadio"
+                <label className="form-check-label" htmlFor="secondRadio"
                   >Credit Card
                   </label>
               </li>

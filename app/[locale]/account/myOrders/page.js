@@ -24,7 +24,7 @@ function page() {
             <li><Link href="/account/prmoted" >Promotion</Link></li>
             <li><Link href="/account/myOrders"  className="active">My Orders</Link></li>
             <li><Link href="/account/addressess"  >Addresses</Link></li>
-            <li><a href="">Log out</a></li>
+            <li><button >Log out</button></li>
           </ul>
         </div>
         <div className="Profile Profile3">

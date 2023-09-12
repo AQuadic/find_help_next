@@ -20,7 +20,9 @@ export const metadata = {
 
 export default async function RootLayout({ children , params}) {
   const locale = useLocale();
-  
+  console.log('====================================');
+  console.log(locale);
+  console.log('====================================');
   let messages;
   try {
     messages = (await import(`../../messages/${locale}.json`)).default;

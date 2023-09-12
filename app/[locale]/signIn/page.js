@@ -62,7 +62,7 @@ console.log('====================================');
           </p>
           <form className="row g-3 form_page">
             <div className="col-md-12">
-              <label for="inputPhone " className="form-label">Mobile Number </label>
+              <label htmlFor="inputPhone " className="form-label">Mobile Number </label>
               <PhoneInput
                 defaultCountry="EG"
                 placeholder={"Your Mobile Number"}

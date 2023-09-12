@@ -28,7 +28,9 @@ let headersToken = {
              },
             body,
         },);
+      
         const data = await res.json();
+
         return data;
     } catch (error) {
         console.log('Error in Add New Category (service) =>', error);

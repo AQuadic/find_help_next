@@ -96,9 +96,9 @@ function page() {
                   <button className="upload">Upload photos</button>
                 </div>
                 <div className="col-md-12 g-3 new_row row">
-                  <label for="">What are you offering?</label>
+                  <label htmlFor="">What are you offering?</label>
                   <div className="col-6">
-                    <label for="inputCity" className="form-label">
+                    <label htmlFor="inputCity" className="form-label">
                       Category{" "}
                     </label>
                     <select id="inputCity" className="form-select">
@@ -108,7 +108,7 @@ function page() {
                     </select>
                   </div>
                   <div className="col-6">
-                    <label for="inputCity" className="form-label">
+                    <label htmlFor="inputCity" className="form-label">
                       Sub Category
                     </label>
                     <select id="inputCity" className="form-select">
@@ -139,7 +139,7 @@ function page() {
                 </div>
 
                 <div className="col-md-12">
-                  <label for="inputCity" className="form-label">
+                  <label htmlFor="inputCity" className="form-label">
                     Location{" "}
                   </label>
                   <select id="inputCity" className="form-select">
@@ -150,7 +150,7 @@ function page() {
                 </div>
 
                 <div className="col-md-12">
-                  <label for="inputMethod" className="form-label">
+                  <label htmlFor="inputMethod" className="form-label">
                     Service Method
                   </label>
                   <ul
@@ -165,7 +165,7 @@ function page() {
                         value=""
                         id="firstCheckbox1"
                       />
-                      <label className="form-check-label" for="firstCheckbox1">
+                      <label className="form-check-label" htmlFor="firstCheckbox1">
                         Pick Up
                       </label>
                     </li>
@@ -176,14 +176,14 @@ function page() {
                         value=""
                         id="secondCheckbox2"
                       />
-                      <label className="form-check-label" for="secondCheckbox2">
+                      <label className="form-check-label" htmlFor="secondCheckbox2">
                         Delivery
                       </label>
                     </li>
                   </ul>
                 </div>
                 <div className="col-md-12">
-                  <label for="inputAddress" className="form-label">
+                  <label htmlFor="inputAddress" className="form-label">
                     Address{" "}
                   </label>
                   <input
@@ -194,7 +194,7 @@ function page() {
                   />
                 </div>
                 <div className="col-md-12">
-                  <label for="inputPhone " className="form-label">
+                  <label htmlFor="inputPhone " className="form-label">
                     Mobile Number
                   </label>
 
@@ -209,9 +209,9 @@ function page() {
                 </div>
 
                 <div className="col-md-12 g-2 new_row row">
-                  <label for="">Service details</label>
+                  <label htmlFor="">Service details</label>
                   <div className="col-8">
-                    <label for="">Package Name</label>
+                    <label htmlFor="">Package Name</label>
                     <input
                       type="text"
                       className="form-control"
@@ -220,7 +220,7 @@ function page() {
                     />
                   </div>
                   <div className="col-4">
-                    <label for="">Prices</label>
+                    <label htmlFor="">Prices</label>
                     <input
                       type="number"
                       className="form-control"
@@ -230,7 +230,7 @@ function page() {
                   </div>
 
                   <div className="col-8">
-                    <label for="">Package Name</label>
+                    <label htmlFor="">Package Name</label>
                     <input
                       type="text"
                       className="form-control"
@@ -239,7 +239,7 @@ function page() {
                     />
                   </div>
                   <div className="col-4">
-                    <label for="">Prices</label>
+                    <label htmlFor="">Prices</label>
                     <input
                       type="number"
                       className="form-control"
@@ -271,7 +271,7 @@ function page() {
                   value=""
                   id="firstCheckbox"
                 />
-                <label className="form-check-label" for="firstCheckbox">
+                <label className="form-check-label" htmlFor="firstCheckbox">
                   Work Time
                 </label>
               </li>
@@ -282,7 +282,7 @@ function page() {
                   value=""
                   id="secondCheckbox"
                 />
-                <label className="form-check-label" for="secondCheckbox">
+                <label className="form-check-label" htmlFor="secondCheckbox">
                   Prices
                 </label>
               </li>
@@ -293,7 +293,7 @@ function page() {
                   value=""
                   id="thirdCheckbox"
                 />
-                <label className="form-check-label" for="thirdCheckbox">
+                <label className="form-check-label" htmlFor="thirdCheckbox">
                   Packages
                 </label>
               </li>
@@ -304,7 +304,7 @@ function page() {
                   value=""
                   id="fourCheckbox"
                 />
-                <label className="form-check-label" for="fourCheckbox">
+                <label className="form-check-label" htmlFor="fourCheckbox">
                   Description
                 </label>
               </li>

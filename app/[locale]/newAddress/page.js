@@ -55,7 +55,7 @@ function page() {
                 ></iframe>
               </div>
               <div className="col-md-6">
-                <label for="inputName " className="form-label">
+                <label htmlFor="inputName " className="form-label">
                   First Name{" "}
                 </label>
 
@@ -67,7 +67,7 @@ function page() {
                 />
               </div>
               <div className="col-md-6">
-                <label for="inputLast " className="form-label">
+                <label htmlFor="inputLast " className="form-label">
                   Last Name{" "}
                 </label>
 
@@ -79,7 +79,7 @@ function page() {
                 />
               </div>
               <div className="col-md-12">
-                <label for="inputCity" className="form-label">
+                <label htmlFor="inputCity" className="form-label">
                   Country{" "}
                 </label>
                 <select id="inputCity" className="form-select">
@@ -89,7 +89,7 @@ function page() {
                 </select>
               </div>
               <div className="col-md-12">
-                <label for="inputCity" className="form-label">
+                <label htmlFor="inputCity" className="form-label">
                   City{" "}
                 </label>
                 <select id="inputCity" className="form-select">
@@ -99,7 +99,7 @@ function page() {
                 </select>
               </div>
               <div className="col-md-12">
-                <label for="inputAddress" className="form-label">
+                <label htmlFor="inputAddress" className="form-label">
                   Address{" "}
                 </label>
                 <input
@@ -111,7 +111,7 @@ function page() {
               </div>
 
               <div className="col-md-6">
-                <label for="inputBuilding " className="form-label">
+                <label htmlFor="inputBuilding " className="form-label">
                   Building No.
                 </label>
 
@@ -123,7 +123,7 @@ function page() {
                 />
               </div>
               <div className="col-md-6">
-                <label for="inputBuilding Name " className="form-label">
+                <label htmlFor="inputBuilding Name " className="form-label">
                   Building Name
                 </label>
 
@@ -135,7 +135,7 @@ function page() {
                 />
               </div>
               <div className="col-md-6">
-                <label for="inputFloor " className="form-label">
+                <label htmlFor="inputFloor " className="form-label">
                   Floor No.{" "}
                 </label>
 
@@ -147,7 +147,7 @@ function page() {
                 />
               </div>
               <div className="col-md-6">
-                <label for="inputAppointment " className="form-label">
+                <label htmlFor="inputAppointment " className="form-label">
                   Appointment No.
                 </label>
 
@@ -160,7 +160,7 @@ function page() {
               </div>
 
               <div className="col-md-12">
-                <label for="inputPhone " className="form-label">
+                <label htmlFor="inputPhone " className="form-label">
                   Mobile Number{" "}
                 </label>
 

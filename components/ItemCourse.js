@@ -15,9 +15,7 @@ function ItemCourse({
   love,
   id
 }) {
-  console.log('====================================');
-  console.log(img);
-  console.log('====================================');
+ 
   return (
     <div className= "service" key={id}>
       <div
@@ -26,7 +24,7 @@ function ItemCourse({
       >
         <img src="/images/love.svg" alt="love" />
       </div>
-      <img src={img?img[0]?.url:`/images/logo.svg`}  className= "imgService" alt="service" />
+      <img src={img?.length?img[0]?.url:`/images/logo.svg`}  className= "imgService" alt="service" />
       <div className= "aboutservice">
         <div className= "head">
           <h3>{title}</h3>

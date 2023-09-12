@@ -49,7 +49,7 @@ function page() {
                 <Link href="/account/addressess">Addresses</Link>
               </li>
               <li>
-                <a href="">Log out</a>
+                <button >Log out</button>
               </li>
             </ul>
           </div>
@@ -70,7 +70,7 @@ function page() {
 
             <form className="row g-3 form_page">
               <div className="col-md-12">
-                <label for="inputpass1 " className="form-label">
+                <label htmlFor="inputpass1 " className="form-label">
                   Current Password
                 </label>
                 <input
@@ -81,7 +81,7 @@ function page() {
                 />
               </div>
               <div className="col-md-12">
-                <label for="inputpass2 " className="form-label">
+                <label htmlFor="inputpass2 " className="form-label">
                   New Password
                 </label>
 
@@ -93,7 +93,7 @@ function page() {
                 />
               </div>
               <div className="col-md-12">
-                <label for="inputpass3 " className="form-label">
+                <label htmlFor="inputpass3 " className="form-label">
                   Confirm New Password
                 </label>
                 <input

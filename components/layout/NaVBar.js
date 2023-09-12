@@ -4,19 +4,21 @@ import React from "react";
 import { useEffect } from "react";
 import { getUser } from "../useAPI/GetUser";
 import { useState } from "react";
+import { navState } from "@/atoms";
+import { useRecoilState } from "recoil";
 
 function NavBar() {
 const [user ,setUser] = useState("")
-
+const [IsUser, setIsUser] = useRecoilState(navState);
 useEffect(() => {
   FetchDataOFUser();
-  }, []);
+  }, [IsUser]);
   const FetchDataOFUser = async () => {
     const User = await getUser();
     if (!User) console.log(User?.message);
     setUser(User);
   };
-console.log(user);
+
 
 
   return (

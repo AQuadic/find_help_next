@@ -69,7 +69,7 @@ const handelProfile = () => {
           </div>
           <form className="row g-3 form_page">
             <div className="col-md-12">
-              <label for="inputname4 " className="form-label">Full Name </label>
+              <label htmlFor="inputname4 " className="form-label">Full Name </label>
               <input
                 type="text"
                 className="form-control"
@@ -81,7 +81,7 @@ const handelProfile = () => {
             </div>
 
             <div className="col-md-12">
-              <label for="inputemail " className="form-label">Email Adress </label>
+              <label htmlFor="inputemail " className="form-label">Email Adress </label>
               <input
                 type="email"
                 className="form-control"

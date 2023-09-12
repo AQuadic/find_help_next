@@ -1,10 +1,12 @@
 "use client";
 
+import { navState } from "@/atoms";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
+import { useRecoilState } from "recoil";
 
 function CVerify({ params }) {
   const router = useRouter();
@@ -13,15 +15,8 @@ function CVerify({ params }) {
   const [phone_country, setPhone_country] = useState("EG");
   const [code, setCode] = useState();
   const [otp, setOtp] = useState("");
-  console.log("====================================");
-  console.log(phone);
-  console.log("====================================");
-  console.log("====================================");
-  console.log(phone_country);
-  console.log("====================================");
-  console.log("====================================");
-  console.log(otp);
-  console.log("====================================");
+  const [IsUser, setIsUser] = useRecoilState(navState);
+  
 
   const clearOtp = () => {
     setOtp("");
@@ -79,10 +74,11 @@ function CVerify({ params }) {
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
+          setIsUser(true)
           if (res.data.user.name === "FindHelp User") {
            router.push('/created')
           } else {
-            router.push('/created')
+            router.push('/')
           }
         }
       })
