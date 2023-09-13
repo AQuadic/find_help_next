@@ -2503,6 +2503,7 @@ html[dir="rtl"] .Profile .btn_page {
   width: 92px;
   height: 92px;
   border-radius: 50%;
+  object-fit: cover;
 }
 .Profile .img_persone button {
   position: absolute;
@@ -2522,7 +2523,34 @@ html[dir="rtl"] .Profile .btn_page {
 }
 
 
-
+.Profile .img_persone .inputfile{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4c444;
+  border: 2px solid #ffffff;
+  overflow: hidden;
+  cursor: pointer;
+}
+.Profile .img_persone .inputfile input{
+  position: absolute;
+  z-index: 55;
+  opacity: 0;
+  cursor: pointer;
+}
+.Profile .img_persone .inputfile img{
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
 .Profile .warning {
   display: flex;
   align-items: center;

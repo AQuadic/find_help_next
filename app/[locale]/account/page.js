@@ -1,8 +1,13 @@
  "use client";
 
 import BtnLogOut from "@/components/btnLogOut";
+import { getUser } from "@/components/useAPI/GetUser";
+import axios from "axios";
+import Cookies from "js-cookie";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 
@@ -11,8 +16,72 @@ import PhoneInput from "react-phone-number-input";
 
 
 function page() {
-  const [value, setValue] = useState();
+  const router = useRouter()
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [IsImage, setIsImage] = useState('');
+  const [changeImage, setChangeImage] = useState(false);
+  const [phone, setPhone] = useState();
   const [phone_country, setPhone_country] = useState();
+  const [user, setUser] = useState("");
+  console.log(name);
+  console.log(email);
+  console.log(IsImage);
+  console.log(phone);
+  console.log(phone_country);
+  console.log(selectedFile);
+  
+  const handleHeaderInputChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+    setChangeImage(true)
+  };
+  
+
+  useEffect(() => {
+    FetchDataOFUser();
+  }, []);
+  const FetchDataOFUser = async () => {
+    const User = await getUser();
+    if (!User) console.log(User?.message);
+    setUser(User);
+    setName(User.name)
+    setEmail(User.email?User.email:"")
+    setIsImage(User.image?User.image.url:null)
+    setPhone(User.phone)
+    setPhone_country(User.phone_country)
+  };
+console.log(user);
+
+  const handelProfile = () => {
+    const body = new FormData();
+    body.append('name', name);
+    body.append('email', email);
+    body.append('image', selectedFile);
+    body.append('phone', phone);
+    body.append('phone_country', phone_country);
+    const po = axios
+      .post(
+        "https://findhelpapp.com/api/v1/users/auth/update",
+        body,
+        {
+          headers: {
+            "Authorization": `Bearer ${Cookies.get('token')}`,
+      "Content-Type": "multipart/form-data",
+      "Accept": "application/json",
+      "Accept-Language": "ar",
+          },
+        }
+      )
+      .then((res) => {
+       console.log(res);
+       
+      })
+      .catch((res) => {
+          console.log(res);
+      });
+  };
+
 
   return (
     <>
@@ -41,12 +110,24 @@ function page() {
         </div>
         <div className="Profile">
           <h2 className="cart_title2">Personal Details</h2>
+
+          
           <div className="img_persone">
-            <img src="/images/person.webp" className="person" alt="person" />
-            <button>
+            <img src={!changeImage?IsImage:selectedFile?URL.createObjectURL(selectedFile):"/images/person.webp"} className="person" alt="person" /> 
+              <div className='inputfile'>
+            <input type="file" onChange={handleHeaderInputChange} />
               <img src="/images/Camera.svg" alt="Camera" />
-            </button>
+            </div>
           </div>
+
+          
+
+
+
+
+
+
+
           <form className="row g-3 form_page">
             <div className="col-md-12">
               <label htmlFor="inputname4 " className="form-label">Full Name </label>
@@ -55,7 +136,8 @@ function page() {
                 className="form-control"
                 id="inputname4"
                 placeholder="Full Name"
-                defaultValue="Donia El Wazery"
+                value={name}
+                onChange={(e)=>setName(e.target.value)}
               />
             </div>
             <div className="col-md-12 tel_num">
@@ -65,9 +147,9 @@ function page() {
                 defaultCountry="EG"
                 placeholder={"Your Mobile Number"}
                 className="form-control"
-                value={value}
+                value={phone}
                 onCountryChange={(e)=>setPhone_country(e)}
-                onChange={setValue}
+                onChange={setPhone}
               />
             </div>
             <div className="col-md-12">
@@ -77,12 +159,11 @@ function page() {
                 className="form-control"
                 id="inputemail"
                 placeholder="Email"
-                defaultValue="doniaahmedelwazery@gmail.com"
-                
+               value={email}
+               onChange={(e)=>setEmail(e.target.value)}
               />
             </div>
-            <a href="changePassword.html" className="change">Change Password</a>
-            <button type="submit" href="" className="next btn_page">Save</button>
+            <button type="submit" href="" className="next btn_page" onClick={(e)=>{e.preventDefault();handelProfile()}}>Save</button>
           </form>
         </div>
       </div>

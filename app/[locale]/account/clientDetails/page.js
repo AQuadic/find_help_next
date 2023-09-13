@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-
+import BtnLogOut from "@/components/btnLogOut";
 function page() {
   return (
     <>
@@ -24,7 +24,7 @@ function page() {
             <li><Link href="/account/prmoted" >Promotion</Link></li>
             <li><Link href="/account/myOrders" >My Orders</Link></li>
             <li><Link href="/account/addressess"  >Addresses</Link></li>
-            <li><button >Log out</button></li>
+           <li><BtnLogOut/></li>
           </ul>
         </div>
         <div className="Profile Profile2">

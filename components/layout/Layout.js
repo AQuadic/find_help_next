@@ -35,8 +35,7 @@ function Layout({children,lang}) {
       </> 
     }
      <Script async src='/js/jquery-3.6.1.min.js'/>
-        <Script async src='/js/owl.carousel.min.js'/>
-        <Script async src='/js/funSlick.js' />
+        
      </RecoilRoot>
     </>
   )

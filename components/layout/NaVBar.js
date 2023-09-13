@@ -18,7 +18,7 @@ function NavBar() {
     if (!User) console.log(User?.message);
     setUser(User);
   };
-
+console.log(user);
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container">

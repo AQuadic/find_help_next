@@ -90,3 +90,30 @@ export const getSingleServices = async (id) => {
     console.log("Error in Add New Category (service) =>", error);
   }
 };
+
+
+export const getServicesClient = async (id) => {
+
+  try {
+    const url = new URL(
+      `https://findhelpapp.com/api/v1/users/services?user_id=${id}`
+  );
+  
+  
+  const headers = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Accept-Language": "ar",
+  };
+  
+    const res = await fetch(url, {
+      method: "GET",
+      headers,
+  })
+ 
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log("Error in Add New Category (service) =>", error);
+  }
+};

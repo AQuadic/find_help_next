@@ -1,26 +1,24 @@
 "use client";
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 import { useState } from 'react';
 
 function page() {
-
+const router = useRouter()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [selectedFile, setSelectedFile] = useState(null);
-console.log('====================================');
 console.log(name);
-console.log('====================================');
-console.log('====================================');
 console.log(email);
-console.log('====================================');
-console.log('====================================');
 console.log(selectedFile);
-console.log('====================================');
+
 const handleHeaderInputChange = (e) => {
   setSelectedFile(e.target.files[0]);
 };
+
+
 const handelProfile = () => {
   const body = new FormData();
   body.append('name', name);

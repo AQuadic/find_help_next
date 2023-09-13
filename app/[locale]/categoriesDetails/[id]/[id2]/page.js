@@ -1,31 +1,48 @@
 "use client";
 import ItemCourse from "@/components/ItemCourse";
-import { getSingleServices } from "@/components/useAPI/shop/shop";
+import { getServicesClient, getSingleServices } from "@/components/useAPI/shop/shop";
 import Link from "next/link";
+import Script from "next/script";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 
 function page({ params }) {
   const [services, setServices] = useState();
+  const [servicesClient, setServicesClient] = useState();
+  const [ClientID, setClientID] = useState();
 
   useEffect(() => {
     FetchDataOFSingleServices();
-  }, []);
+    FetchDataOFServicesClient()
+  }, [ClientID]);
 
   const FetchDataOFSingleServices = async () => {
     const Services = await getSingleServices(params.id2);
     if (!Services) console.log(Services?.message);
     setServices(Services);
+    setClientID(Services.user.id)
   };
   console.log("====================================");
   console.log(services);
   console.log("====================================");
 
+const FetchDataOFServicesClient = async () => {
+  if(ClientID){
+    const ServicesClient = await getServicesClient(ClientID);
+    if (!ServicesClient) console.log(ServicesClient?.message);
+    setServicesClient(ServicesClient);
+  }
+ 
+};
+console.log("====================================");
+  console.log(servicesClient);
+  console.log("====================================");
   return (
     <>
       {services && (
         <>
+        
           <div className="container breadcrumbDetails">
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
@@ -51,7 +68,7 @@ function page({ params }) {
 
           <section className="current_Service container m90">
             <img
-              src={services?.images ? services.images[0].url : "/images/logo.svg"}
+              src={services.images[0]?services.images[0].url : "/images/logo.svg"}
               className="img_current"
               alt="Service"
             />
@@ -234,6 +251,7 @@ function page({ params }) {
               </div>
             </div>
           </section>
+         
         </>
       )}
     </>

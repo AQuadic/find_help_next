@@ -1,7 +1,5 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.css';
 import './globals.css'
 import 'react-phone-number-input/style.css'
 import Script from 'next/script';
