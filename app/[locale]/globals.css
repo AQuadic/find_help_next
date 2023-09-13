@@ -1658,16 +1658,16 @@ html[dir="rtl"] .provider .part1 .about_Provider #myPhoneNumber {
   }
 }
 /*===========================================end service Details ==================*/
-.owl-prev {
-  left: -20px;
+.slick-prev {
+  left: -10px;
 }
 
-.owl-next {
-  right: -20px;
+.slick-next {
+  right: -10px;
 }
 
-.owl-prev,
-.owl-next {
+.slick-prev,
+.slick-next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -1705,8 +1705,8 @@ html[dir="rtl"] .provider .part1 .about_Provider #myPhoneNumber {
   background-color: #f3b100 !important;
 }
 @media (max-width: 550px) {
-  .owl-prev,
-  .owl-next {
+  .slick-prev,
+  .slick-next {
     display: none;
   }
   .owl-dots {
@@ -3239,3 +3239,6 @@ margin:42px auto 0px;
 
 }
 /*=========================== end pageAbout ======================*/
+.slick-slider .item{
+  padding: 0px 8px;
+}

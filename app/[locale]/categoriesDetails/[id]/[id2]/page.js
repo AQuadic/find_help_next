@@ -6,11 +6,35 @@ import Script from "next/script";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import Slider from "react-slick";
 
 function page({ params }) {
   const [services, setServices] = useState();
   const [servicesClient, setServicesClient] = useState();
   const [ClientID, setClientID] = useState();
+
+  var settings = {
+    dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        }
+      },
+      
+    ]
+  };
 
   useEffect(() => {
     FetchDataOFSingleServices();
@@ -191,8 +215,9 @@ console.log("====================================");
 
           <section className="ServicesProvider services container m90">
             <h2 className="headtitle">All Services by this provider</h2>
-            <div className="owl-carousel allServices">
-              <div className="item">
+           <div style={{maxWidth:"100%",display:"block"}} className=" allServices">
+           <Slider  {...settings}  >
+            <div className="item" style={{paddingLeft:"8px",paddingRight:"8px"}}>
                 <ItemCourse
                   title="Alloy Wheel Repairs Derby"
                   star="4.8"
@@ -249,9 +274,16 @@ console.log("====================================");
                   image="3"
                 />
               </div>
-            </div>
-          </section>
+             
+            </Slider>
+           </div>
          
+           
+         
+           
+          
+          </section>
+       
         </>
       )}
     </>
