@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 
 function page({params}) {
     const [about, setAbout] = useState();
+    
     useEffect(() => {
       FetchDataOFData()
      
@@ -11,7 +12,7 @@ function page({params}) {
       const FetchDataOFData = async () => {
         const HomePage = await getHomePage();
         if (!HomePage) console.log(HomePage?.message);
-        setAbout(HomePage.pages.filter((item)=> item.id === +params.id)[0]);
+        setAbout(HomePage.pages.filter((item)=> ((item.title.en).replace(/\s/g, "")) === params.id)[0]);
       };
     console.log(about);
     console.log('====================================');

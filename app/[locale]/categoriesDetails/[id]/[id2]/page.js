@@ -102,13 +102,7 @@ function page({ params }) {
               <img src={services.user.image?services.user.image.url:'/images/person.webp'} className="person" alt="person" />
               <div className="about_Provider">
                 <h3>{services.user.name}</h3>
-                <p>Alexandria , Egypt</p>
-                <p
-                  style={{ direction: "ltr", textDecoration: "underline" }}
-                  id="myPhoneNumber"
-                >
-                 {services.user.phone}
-                </p>
+                <p>{services.address_text.en}</p>
               </div>
             </div>
             <div className="part2">

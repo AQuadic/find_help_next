@@ -34,7 +34,7 @@ function Footer() {
               {
                 data?.pages.map((item)=>{
                   return(
-                    <Link href={`/about/${item.id}`} key={item.id}>{item.title.en}</Link>
+                    <Link href={`/about/${(item.title.en).replace(/\s/g, "")}`} key={item.id}>{item.title.en}</Link>
                   )
                 })
               }
