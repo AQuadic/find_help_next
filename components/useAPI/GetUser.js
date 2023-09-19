@@ -50,7 +50,23 @@ let headersToken = {
     }
   }
   
-
+  export const getCities = async (id) => {
+    try {
+        const res = await fetch(`https://findhelpapp.com/api/v1/meta/cities/${id}`, {
+            method: 'GET',
+            headers:{
+              
+                 "Content-Type": "application/json",
+                 Accept: "application/json",
+                 "Accept-Language": "ar",
+               },
+        },);
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.log('Error in Add New Category (service) =>', error);
+    }
+  }
 
   
   

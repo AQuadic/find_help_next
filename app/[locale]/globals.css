@@ -2040,7 +2040,7 @@ html[dir="rtl"] .btn_Address {
   display: inline;
 }
 
-.form_page .form-control {
+.form_page .form-control ,.mantine-InputWrapper-root input{
   background-color: transparent;
   outline: none;
   border: 1px solid #c1c1c1;

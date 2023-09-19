@@ -6,6 +6,7 @@ import ItemCategories from "@/components/ItemCategories";
 import { getCategories, getServices } from "@/components/useAPI/shop/shop";
 import { useEffect } from "react";
 import { getHomePage } from "@/components/useAPI/GetUser";
+import Cookies from "js-cookie";
 
 export default function Home() {
   const [categories, setCategories] = useState();
