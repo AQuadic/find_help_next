@@ -7,7 +7,7 @@ import {
   TextInput,
   Textarea,
 } from "@mantine/core";
-import { MobileTimePicker } from "@mui/x-date-pickers";
+import { MobileTimePicker, itIT } from "@mui/x-date-pickers";
 import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
 import React from "react";
@@ -197,7 +197,10 @@ function page() {
     body.append("work_times.holidays", holidays);
 
     if (selectedFile.length > 0) {
-      body.append(`images[]`, selectedFile);
+      selectedFile.map((item,i)=>{
+        body.append(`images[${i}]`, item);
+      })
+      
     }
 
     const po = axios
