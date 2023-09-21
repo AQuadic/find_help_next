@@ -48,7 +48,7 @@ function page() {
     setName(User.name)
     setEmail(User.email?User.email:"")
     setIsImage(User.image?User.image.url:null)
-    setPhone(User.phone)
+    setPhone(User.phone_normalized)
     setPhone_country(User.phone_country)
   };
 console.log(user);
