@@ -23,12 +23,15 @@ function page() {
   const [IsImage, setIsImage] = useState('');
   const [changeImage, setChangeImage] = useState(false);
   const [phone, setPhone] = useState();
+  const [phone_national, setPhone_national] = useState();
+  const [phone_normalized, setphone_normalized] = useState();
   const [phone_country, setPhone_country] = useState();
   const [user, setUser] = useState("");
   console.log(name);
   console.log(email);
   console.log(IsImage);
   console.log(phone);
+  console.log(phone_national);
   console.log(phone_country);
   console.log(selectedFile);
   
@@ -48,7 +51,9 @@ function page() {
     setName(User.name)
     setEmail(User.email?User.email:"")
     setIsImage(User.image?User.image.url:null)
-    setPhone(User.phone_normalized)
+    setPhone(User.phone)
+    setPhone_national(User.phone_national)
+    setphone_normalized(User.phone_normalized)
     setPhone_country(User.phone_country)
   };
 console.log(user);
@@ -145,9 +150,11 @@ console.log(user);
              
               <PhoneInput
                 defaultCountry={phone_country}
+                country={phone_country}
+                initialValueFormat="national"
                 placeholder={"Your Mobile Number"}
                 className="form-control"
-                value={phone}
+                value={phone_normalized}
                 onCountryChange={(e)=>setPhone_country(e)}
                 onChange={setPhone}
               />
