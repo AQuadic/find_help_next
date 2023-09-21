@@ -12,7 +12,6 @@ export default function Home() {
   const [categories, setCategories] = useState();
   const [services, setServices] = useState();
   const [data, setData] = useState();
-
 useEffect(() => {
   FetchDataOFData()
     FetchDataOFIServices();

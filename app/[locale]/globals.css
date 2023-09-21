@@ -3177,13 +3177,14 @@ min-width: fit-content;
   font-family: "DM Sans3";
 }
 
-.page_log .verify  h4 button {
+.page_log .verify  #resend  {
   background-color: transparent;
   color: rgb(190, 188, 212);
   font-family: "DM Sans";
   border: none;
+  margin: 0px 8px;
 }
-.page_log .verify  h4 button.resend {
+.page_log .verify  h4 input.resend {
   color: #F4C444;
   text-decoration: underline;
 }

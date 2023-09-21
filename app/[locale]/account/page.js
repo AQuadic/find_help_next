@@ -57,7 +57,7 @@ console.log(user);
     const body = new FormData();
     body.append('name', name);
     body.append('email', email);
-    body.append('image', selectedFile);
+    changeImage&&body.append('image', selectedFile);
     body.append('phone', phone);
     body.append('phone_country', phone_country);
     const po = axios
@@ -144,7 +144,7 @@ console.log(user);
               <label htmlFor="inputtel " className="form-label">Phone Number </label>
              
               <PhoneInput
-                defaultCountry="EG"
+                defaultCountry={phone_country}
                 placeholder={"Your Mobile Number"}
                 className="form-control"
                 value={phone}

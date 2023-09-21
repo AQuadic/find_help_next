@@ -3,6 +3,7 @@
 import { navState } from "@/atoms";
 import axios from "axios";
 import Cookies from "js-cookie";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
@@ -11,12 +12,11 @@ import { useRecoilState } from "recoil";
 function CVerify({ params }) {
   const router = useRouter();
 
-  const [phone, setPhone] = useState("");
-  const [phone_country, setPhone_country] = useState("EG");
-  const [code, setCode] = useState();
+  const [phone, setPhone] = useState(Cookies.get('phone'));
+  const [phone_country, setPhone_country] = useState(Cookies.get('phone_country'));
   const [otp, setOtp] = useState("");
   const [IsUser, setIsUser] = useRecoilState(navState);
-  
+  const [errorcode, setErrorCode] = useState("");
 
   const clearOtp = () => {
     setOtp("");
@@ -54,12 +54,13 @@ function CVerify({ params }) {
   }, []);
 
   const handelVerify = () => {
+    setErrorCode("");
     const po = axios
       .post(
         "https://findhelpapp.com/api/v1/users/auth/verify",
         {
-          phone: Cookies.get("phone"),
-          phone_country: Cookies.get("phone_country"),
+          phone: phone,
+          phone_country: phone_country,
           code: otp,
           type: "verify",
         },
@@ -74,19 +75,48 @@ function CVerify({ params }) {
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
-          setIsUser(true)
+          setIsUser(true);
           if (res.data.user.name === "FindHelp User") {
-           router.push('/created')
+            router.push("/created");
           } else {
-            router.push('/')
+            router.push("/");
           }
         }
       })
       .catch((res) => {
+        res.response.data.message
+          ? setErrorCode(res.response.data.message)
+          : setErrorCode("");
         console.log(res);
       });
   };
-
+  const handelResend = () => {
+    
+    const po = axios
+      .post(
+        "https://findhelpapp.com/api/v1/users/auth/resend",
+        {
+          "phone": phone,
+          "phone_country":phone_country,
+        },
+        {
+          headers: {
+            "Authorization": `Bearer ${Cookies.get('token')}`,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-Language": "ar",
+          },
+        }
+      )
+      .then((res) => {
+       console.log(res);
+       Cookies.set("phone",Cookies.get('phone'));
+       Cookies.set("phone_country",Cookies.get("phone_country"));
+      })
+      .catch((res) => {
+          console.log(res);
+      });
+  };
   return (
     <>
       <section className="page_log">
@@ -105,15 +135,30 @@ function CVerify({ params }) {
                   renderInput={(props) => <input {...props} width="90px" />}
                 />
               </div>
-
+              {errorcode && (
+                <p
+                  style={{
+                    color: "red",
+                    textAlign: "center",
+                    fontSize: "14px",
+                    marginTop: "4px",
+                  }}
+                >
+                  {errorcode}
+                </p>
+              )}
               <p id="counter" className="counter red">
                 02:00 s
               </p>
               <h4>
                 If you don’t receive a code!
-                <button id="resend" disabled onClick={clearOtp}>
-                  Resend
-                </button>
+                <input type="submit" value={"Resend"} id="resend" className="resend" disabled   onClick={(e) => {
+                  e.preventDefault();
+                  clearOtp()
+                  handelResend();
+                }}/>
+                  
+              
               </h4>
               <input
                 type="submit"
@@ -125,10 +170,11 @@ function CVerify({ params }) {
                   handelVerify();
                 }}
               />
+              
             </form>
-            <a href="LogIn.html" className="change_num">
+            <Link href={'/signIn'} className="change_num">
               change Mobile Number
-            </a>
+            </Link>
           </div>
         </div>
       </section>

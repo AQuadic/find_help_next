@@ -21,7 +21,7 @@ import Cookies from "js-cookie";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { RequestType, geocode, setDefaults } from "react-geocode";
 const containerStyle = {
-  width: "400px",
+  width: "100%",
   height: "400px",
 };
 
@@ -31,7 +31,6 @@ function page() {
     language: "en", // Default language for responses.
     region: "es", // Default region for responses.
   });
-
   const [lat, setLat] = useState(-3.745);
   const [lng, setLng] = useState(-38.523);
   console.log(lat);
@@ -58,7 +57,7 @@ function page() {
         {}
       );
       console.log(city, state, country);
-      console.log(address);
+      setaddress_Info(address);
     })
     .catch(console.error);
   useEffect(() => {}, [lat, lng]);
@@ -104,7 +103,6 @@ function page() {
   const [categories, setCategories] = useState([]);
   const [Subcategory, setSubCategory] = useState();
   const [Subcategories, setSubCategories] = useState([]);
-  const [time, setTime] = useState("10:00");
   const [address, setAddress] = useState("");
   const [TimeFrom, setTimeFrom] = useState("");
   const [Timeto, setTimeto] = useState("");
@@ -114,6 +112,22 @@ function page() {
   const [description, setDescription] = useState("");
   const [selectedFile, setSelectedFile] = useState([]);
   const [holidays, setholidays] = useState([]);
+  const [address_Info, setaddress_Info] = useState("");
+  //Error
+  const [errorPhone, setErrorPhone] = useState();
+  const [errorCountry, setErrorCountry] = useState();
+  const [errorCity, setErrorCity] = useState();
+  const [errorCategory, setErrorCategory] = useState();
+  const [errorSubcategory, setErrorSubCategory] = useState();
+  const [errorAddress, setErrorAddress] = useState("");
+  const [errorTimeFrom, setErrorTimeFrom] = useState("");
+  const [errorTimeto, setErrorTimeto] = useState("");
+  const [errorPrice, setErrorPrice] = useState("");
+  const [errorCurrency, setErrorCurrency] = useState("");
+  const [errorDescription, setErrorDescription] = useState("");
+  const [errorHolidays, setErrorholidays] = useState();
+  const [errorLocationLat, setErrorLocationLat] = useState("");
+  const [erroLocationLng, setErroLocationLng] = useState("");
 
   useEffect(() => {
     FetchDataOFData();
@@ -143,13 +157,18 @@ function page() {
       };
       setCategories((current) => [...current, item]);
     });
+    const items = [];
     HomePage.countries.map((county) => {
       const item = {
         value: county.currency.en,
         label: county.currency.en,
       };
-      setAllCurrency((current) => [...current, item]);
+      items.push(item);
     });
+    const AllItem = Array.from(new Set(items.map(JSON.stringify))).map(
+      JSON.parse
+    );
+    setAllCurrency(AllItem);
   };
   const FetchDataOFCategory = async () => {
     const HomePage = await getHomePage();
@@ -194,13 +213,34 @@ function page() {
     body.append("phone_country", phone_country);
     body.append("location[lat]", lat);
     body.append("location[lng]", lng);
-    body.append("work_times.holidays", holidays);
+    body.append("work_times[holidays]", {
+      'sat':false,
+      'sun':false,
+      'mon':false,
+      'tue':false,
+      'wed':false,
+      'thu':false,
+      'fri':false,
+    });
+    setErrorAddress("");
+    setErrorCategory("");
+    setErrorCity("");
+    setErrorCountry("");
+    setErrorDescription("");
+    setErrorLocationLat("");
+    setErroLocationLng("");
+    setErrorPhone("");
+    setErrorPrice("");
+    setErrorSubCategory("");
+    setErrorholidays("");
+    setErrorTimeFrom("");
+    setErrorTimeto("");
+    setErrorCurrency("");
 
     if (selectedFile.length > 0) {
-      selectedFile.map((item,i)=>{
+      selectedFile.map((item, i) => {
         body.append(`images[${i}]`, item);
-      })
-      
+      });
     }
 
     const po = axios
@@ -215,16 +255,53 @@ function page() {
         console.log(res);
       })
       .catch((res) => {
-        /*  setLoading(false);
-        res.response.data.email
-          ? setErroremail(res.response.data.email[0])
-          : setErroremail("");
-        res.response.data.password
-          ? setErrorpassword(res.response.data.password[0])
-          : setErrorpassword("");
-        res.response.data.error
-          ? setError(res.response.data.error)
-          : setError("");*/
+        /*  setLoading(false);*/
+        console.log(res.response.data.errors["address_text.en"]);
+        res.response.data.errors["address_text.en"]
+          ? setErrorAddress(res.response.data.errors["address_text.en"][0])
+          : setErrorAddress("");
+        res.response.data.errors.category_id
+          ? setErrorCategory(res.response.data.errors.category_id[0])
+          : setErrorCategory("");
+        res.response.data.errors.city_id
+          ? setErrorCity(res.response.data.errors.city_id[0])
+          : setErrorCity("");
+        res.response.data.errors.country_id
+          ? setErrorCountry(res.response.data.errors.country_id[0])
+          : setErrorCountry("");
+        res.response.data.errors["description.en"]
+          ? setErrorDescription(res.response.data.errors["description.en"][0])
+          : setErrorDescription("");
+        res.response.data.errors["location.lat"]
+          ? setErrorLocationLat(res.response.data.errors["location.lat"][0])
+          : setErrorLocationLat("");
+        res.response.data.errors["location.lng"]
+          ? setErroLocationLng(res.response.data.errors["location.lng"][0])
+          : setErroLocationLng("");
+        res.response.data.errors.phone
+          ? setErrorPhone(res.response.data.errors.phone[0])
+          : setErrorPhone("");
+        res.response.data.errors.price
+          ? setErrorPrice(res.response.data.errors.price[0])
+          : setErrorPrice("");
+        res.response.data.errors.sub_category_id
+          ? setErrorSubCategory(res.response.data.errors.sub_category_id[0])
+          : setErrorSubCategory("");
+        res.response.data.errors["work_times.holidays"]
+          ? setErrorholidays(res.response.data.errors["work_times.holidays"][0])
+          : setErrorholidays("");
+        res.response.data.errors["work_times.time_from"]
+          ? setErrorTimeFrom(
+              res.response.data.errors["work_times.time_from"][0]
+            )
+          : setErrorTimeFrom("");
+        res.response.data.errors["work_times.time_to"]
+          ? setErrorTimeto(res.response.data.errors["work_times.time_to"][0])
+          : setErrorTimeto("");
+        res.response.data.errors.currency
+          ? setErrorCurrency(res.response.data.errors.currency[0])
+          : setErrorCurrency("");
+
         console.log(res);
       });
   };
@@ -326,9 +403,9 @@ function page() {
                           duration: 80,
                           timingFunction: "ease",
                         }}
+                        error={errorCategory}
                         onChange={setCategory}
                         value={category}
-                        //error={ErrorCategory}
                         data={categories}
                       />
                     </div>
@@ -344,9 +421,9 @@ function page() {
                           duration: 80,
                           timingFunction: "ease",
                         }}
+                        error={errorSubcategory}
                         onChange={setSubCategory}
                         value={Subcategory}
-                        //error={ErrorCategory}
                         data={Subcategories}
                       />
                     </div>
@@ -385,7 +462,7 @@ function page() {
                       }}
                       onChange={setCountry}
                       value={country}
-                      //error={ErrorCategory}
+                      error={errorCountry}
                       data={countries}
                     />
                   </div>
@@ -403,22 +480,59 @@ function page() {
                       }}
                       onChange={setCity}
                       value={city}
-                      //error={ErrorCategory}
+                      error={errorCity}
                       data={cities}
                     />
                   </div>
                   <div className="col-md-12">
                     {isLoaded ? (
-                      <GoogleMap
-                        mapContainerStyle={containerStyle}
-                        center={center}
-                        zoom={2}
-                        onLoad={onLoad}
-                        onUnmount={onUnmount}
-                      >
-                        {/* Child components, such as markers, info windows, etc. */}
-                        <></>
-                      </GoogleMap>
+                      <>
+                      {address_Info && (
+                          <p
+                            style={{
+                              fontSize: "12px",
+                              margin: "4px",
+                            }}
+                          >
+                            {address_Info}
+                          </p>
+                        )}
+                      
+                        <GoogleMap
+                          mapContainerStyle={containerStyle}
+                          center={center}
+                          zoom={14}
+                          onLoad={onLoad}
+                          onUnmount={onUnmount}
+                        >
+                          {/* Child components, such as markers, info windows, etc. */}
+                          <></>
+                        </GoogleMap>
+                        {errorLocationLat && (
+                          <p
+                            style={{
+                              color: "red",
+  
+                              fontSize: "12px",
+                              marginTop: "4px",
+                            }}
+                          >
+                            {errorLocationLat}
+                          </p>
+                        )}
+                        {erroLocationLng && (
+                          <p
+                            style={{
+                              color: "red",
+  
+                              fontSize: "12px",
+                              marginTop: "4px",
+                            }}
+                          >
+                            {erroLocationLng}
+                          </p>
+                        )}
+                      </>
                     ) : (
                       <></>
                     )}
@@ -472,6 +586,7 @@ function page() {
                       onChange={(e) => {
                         setAddress(e.target.value);
                       }}
+                      error={errorAddress}
                     />
                   </div>
                   <div className="col-md-12">
@@ -487,6 +602,17 @@ function page() {
                       onCountryChange={(e) => setPhone_country(e)}
                       onChange={setPhone}
                     />
+                    {errorPhone && (
+                      <p
+                        style={{
+                          color: "red",
+                          fontSize: "12px",
+                          marginTop: "4px",
+                        }}
+                      >
+                        {errorPhone}
+                      </p>
+                    )}
                   </div>
                   <div className="col-md-12 g-2 new_row row">
                     <label htmlFor="">Service details</label>
@@ -501,6 +627,18 @@ function page() {
                           }
                         />
                       </DemoItem>
+                      {errorTimeFrom && (
+                        <p
+                          style={{
+                            color: "red",
+
+                            fontSize: "12px",
+                            marginTop: "4px",
+                          }}
+                        >
+                          {errorTimeFrom}
+                        </p>
+                      )}
                     </div>
                     <div className="col-6">
                       <DemoItem label="Mobile variant">
@@ -511,6 +649,18 @@ function page() {
                           }
                         />
                       </DemoItem>
+                      {errorTimeto && (
+                        <p
+                          style={{
+                            color: "red",
+
+                            fontSize: "12px",
+                            marginTop: "4px",
+                          }}
+                        >
+                          {errorTimeto}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="col-12">
@@ -528,6 +678,7 @@ function page() {
                       ]}
                       onChange={setholidays}
                       value={holidays}
+                      error={errorHolidays}
                     />
                   </div>
                   <div className="col-md-12 g-2 new_row row">
@@ -537,6 +688,7 @@ function page() {
                         label="Description"
                         placeholder=""
                         onChange={(e) => setDescription(e.target.value)}
+                        error={errorDescription}
                       />
                     </div>
                     <div className="col-8">
@@ -544,6 +696,7 @@ function page() {
                         label="Price"
                         hideControls
                         onChange={setPrice}
+                        error={errorPrice}
                       />
                     </div>
                     <div className="col-4">
@@ -560,7 +713,7 @@ function page() {
                         }}
                         onChange={setCurrency}
                         value={currency}
-                        //error={ErrorCategory}
+                        error={errorCurrency}
                         data={AllCurrency}
                       />
                     </div>
