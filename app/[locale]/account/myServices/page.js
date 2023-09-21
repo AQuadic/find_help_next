@@ -1,17 +1,23 @@
 "use client"
-import { navState } from "@/atoms";
-import { LogOut } from "@/components/useAPI/Auth";
+
 import Cookies from "js-cookie";
-import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React from "react";
-import { useRecoilState } from "recoil";
+import React, { useEffect, useState } from "react";
 import BtnLogOut from "@/components/btnLogOut";
+import { getMyServices } from "@/components/useAPI/shop/shop";
 
 
 function page() {
- 
+  const [services, setServices] = useState([]);
+  useEffect(() => {
+    FetchDataOFMyServices()
+    }, []);
+  const FetchDataOFMyServices = async () => {
+    const Services = await getMyServices();
+    if (!Services) console.log(Services?.message);
+    setServices(Services);
+  };
+  console.log(services);
   return (
     <>
       <div className="container breadcrumbDetails">
@@ -39,7 +45,7 @@ function page() {
         </div>
         <div className="Profile Profile2">
           <div className="warning">
-            <img src="images/warning.webp" alt="warning" />
+            <img src="/images/warning.webp" alt="warning" />
             <div className="about_warning">
               <h3>Be careful!</h3>
               <p>

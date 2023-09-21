@@ -42,7 +42,7 @@ function page() {
                   <h4>Top on Search</h4>
                 </li>
               </ul>
-              <a href="selectServices.html  " className="btn_page">Get Promoted</a>
+              <Link href="/account/prmoted/selectServices" className="btn_page">Get Promoted</Link>
             </div>
           </div>
         </div>

@@ -1,7 +1,20 @@
+"use client";
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BtnLogOut from "@/components/btnLogOut";
-function page() {
+import { getProviders } from '@/components/useAPI/GetUser';
+function page({ params }) {
+  console.log(params);
+  const [Provider, setProvider] = useState();
+  useEffect(() => {
+    FetchDataOFProvider();
+  }, []);
+  const FetchDataOFProvider = async () => {
+    const Providers = await getProviders(params.id);
+    if (!Providers) console.log(Providers?.message);
+    setProvider(Providers);
+  };
+  console.log(Provider);
   return (
     <>
       <div className="container breadcrumbDetails">
@@ -38,11 +51,12 @@ function page() {
               </p>
             </div>
           </div>
-          <div className="infoclient">
+          {
+            Provider&& <div className="infoclient">
             <div className="information">
-              <img src="/images/person.webp" className="person" alt="person" />
+              <img src={Provider.provider.image?Provider.provider.image.url:"/images/person.webp"} className="person" alt="person" />
               <div className="name_phone">
-                <h3>Adam Khaled</h3>
+                <h3>{Provider.provider.name}</h3>
                 <div className="infoPhone">
                   <img src="/images/telephone.svg" alt="telephone" />
                   <p style={{direction: "ltr"}}>+20 125 154 1598</p>
@@ -52,7 +66,7 @@ function page() {
             <div className="part2">
               <div className="clientData">
                 <h4>Booking details</h4>
-                <h5>English Session</h5>
+                <h5>{Provider.user_service.description.en}</h5>
                 <ul>
                   <li>
                     <img src="/images/Time-Circle2.svg" alt="Time-Circle" />
@@ -64,7 +78,7 @@ function page() {
                   </li>
                   <li>
                     <img src="/images/Location2.svg" alt="Location" />
-                    <p>sidi bisher, alex</p>
+                    <p>{Provider.user_service.address_text.en}</p>
                   </li>
                   <li>
                     <img src="/images/Location2.svg" alt="Location" />
@@ -78,18 +92,21 @@ function page() {
               </div>
               <div className="map_client">
                 <h5>Track The Provider</h5>
+       
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13644.980469861162!2d29.985604349999996!3d31.2416371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f5c52fadf4220f%3A0x7d08dceaad4557bd!2sSan%20Stefano%20Grand%20Plaza!5e0!3m2!1sen!2seg!4v1678613910844!5m2!1sen!2seg"
+                  src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13644.980469861162!2d${Provider.address.location_google_maps.lat}!3d${Provider.address.location_google_maps.lng}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f5c52fadf4220f%3A0x7d08dceaad4557bd!2sSan%20Stefano%20Grand%20Plaza!5e0!3m2!1sen!2seg!4v1678613910844!5m2!1sen!2seg`}
                   width="410"
                   height="324"
                   style={{border: "0", borderRadius: "10px"}}
-                  allowfullscreen=""
+                  allowFullScreen
                   loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade"
                 ></iframe>
               </div>
             </div>
           </div>
+          }
+         
         </div>
       </div>
     </section>
