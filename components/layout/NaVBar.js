@@ -75,7 +75,7 @@ console.log(user);
 
         <div className="logo">
           <Link className="navbar-brand" href="/">
-            <img src="/images/logo.svg" alt="" />
+            <img src="/images/Logo.svg" alt="" />
           </Link>
           <div className="collapse  col-dec" id="navbarSupportedContent">
             <div className="navbar-nav me-auto mb-2 mb-lg-0">

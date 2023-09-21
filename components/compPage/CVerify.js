@@ -117,6 +117,12 @@ function CVerify({ params }) {
           console.log(res);
       });
   };
+  useEffect(() => {
+    if(otp.split("").length===6){
+      handelVerify()
+    }
+  }, [otp]);
+
   return (
     <>
       <section className="page_log">
@@ -131,6 +137,7 @@ function CVerify({ params }) {
                 <OTPInput
                   value={otp}
                   onChange={setOtp}
+                  shouldAutoFocus
                   numInputs={6}
                   renderInput={(props) => <input {...props} width="90px" />}
                 />

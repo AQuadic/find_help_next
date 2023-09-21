@@ -1851,6 +1851,9 @@ div#ui-datepicker-div {
   width: 368px;
 }
 /*========================== satrt checkOut======================*/
+.ServicesProvider.services {
+  overflow: hidden;
+}
 .checkOut,
 .services {
   display: flex;

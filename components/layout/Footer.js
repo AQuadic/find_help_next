@@ -24,7 +24,7 @@ function Footer() {
         <div className="fotter_content">
           <div className="head">
             <h1>
-              <a href="index.html"><img src="/images/logo.svg" alt="" /></a>
+              <a href="index.html"><img src="/images/Logo.svg" alt="" /></a>
             </h1>
             <p>Find All The Services You Need In Find Help</p>
           </div>
