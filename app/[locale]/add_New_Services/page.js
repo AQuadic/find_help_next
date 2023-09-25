@@ -10,7 +10,7 @@ import {
 import { MobileTimePicker, itIT } from "@mui/x-date-pickers";
 import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
-import React from "react";
+import React, { useCallback } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import PhoneInput from "react-phone-number-input";
@@ -18,49 +18,30 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import { RequestType, geocode, setDefaults } from "react-geocode";
+import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 const containerStyle = {
   width: "100%",
   height: "400px",
 };
 
 function page() {
-  setDefaults({
-    key: "AIzaSyDDbeB2JCI9I77iwI6SdzeHpcq2bx0qeQE", // Your API key here.
-    language: "en", // Default language for responses.
-    region: "es", // Default region for responses.
-  });
+ 
   const [lat, setLat] = useState(-3.745);
   const [lng, setLng] = useState(-38.523);
+  const onMapClick = useCallback((e) => {
+    setLat(e.latLng.lat())
+    setLng(e.latLng.lng())
+  }, []);
+
   console.log(lat);
-  navigator.geolocation.getCurrentPosition(function (position) {
-    setLat(position.coords.latitude);
-    setLng(position.coords.longitude);
-  });
-  geocode(RequestType.LATLNG, `${lat},${lng}`, {
-    location_type: "ROOFTOP", // Override location type filter for this request.
-    enable_address_descriptor: true, // Include address descriptor in response.
-  })
-    .then(({ results }) => {
-      const address = results[0].formatted_address;
-      const { city, state, country } = results[0].address_components.reduce(
-        (acc, component) => {
-          if (component.types.includes("locality"))
-            acc.city = component.long_name;
-          else if (component.types.includes("administrative_area_level_1"))
-            acc.state = component.long_name;
-          else if (component.types.includes("country"))
-            acc.country = component.long_name;
-          return acc;
-        },
-        {}
-      );
-      console.log(city, state, country);
-      setaddress_Info(address);
-    })
-    .catch(console.error);
-  useEffect(() => {}, [lat, lng]);
+  
+ 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setLat(position.coords.latitude);
+      setLng(position.coords.longitude);
+    });
+  }, []);
   const center = {
     lat: lat,
     lng: lng,
@@ -505,10 +486,22 @@ function page() {
                           zoom={14}
                           onLoad={onLoad}
                           onUnmount={onUnmount}
-                          onClick={(e)=>{console.log(e);}}
+                          onClick={onMapClick}
                         >
                           {/* Child components, such as markers, info windows, etc. */}
-                          <></>
+                          <>
+                          <Marker
+           
+           position={{ lat: lat, lng: lng }}
+         
+           icon={{
+             url: `/images/mapicon.png`,
+             origin: new window.google.maps.Point(0, 0),
+             anchor: new window.google.maps.Point(15, 15),
+             scaledSize: new window.google.maps.Size(30, 30),
+           }}
+         />
+                          </>
                         </GoogleMap>
                         {errorLocationLat && (
                           <p
