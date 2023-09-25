@@ -87,3 +87,40 @@ let headersToken = {
         console.log('Error in Add New Category (service) =>', error);
     }
   }
+
+  export const getUserLocation = async (e) => {
+    try {
+        const res = await fetch("https://findhelpapp.com/api/v1/users/addresses", {
+            method: 'GET',
+            headers:{
+                Authorization: `Bearer ${Cookies.get('token')} `,
+                 "Content-Type": "application/json",
+                 Accept: "application/json",
+                 "Accept-Language": "ar",
+                 
+               },
+        },);
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.log('Error in Add New Category (service) =>', error);
+    }
+  }
+  
+  export const getAreas = async (id) => {
+    try {
+        const res = await fetch(`https://findhelpapp.com/api/v1/meta/areas/${id}`, {
+            method: 'GET',
+            headers:{
+              
+                 "Content-Type": "application/json",
+                 Accept: "application/json",
+                 "Accept-Language": "ar",
+               },
+        },);
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.log('Error in Add New Category (service) =>', error);
+    }
+  }

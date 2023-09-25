@@ -1,173 +1,346 @@
 "use client";
-import Link from 'next/link';
-import React from 'react'
-import { useState } from 'react';
-import PhoneInput from 'react-phone-number-input'
+import Link from "next/link";
+import React, { useCallback, useEffect } from "react";
+import { useState } from "react";
+import PhoneInput from "react-phone-number-input";
 import BtnLogOut from "@/components/btnLogOut";
+import { Select, TextInput } from "@mantine/core";
+import { getAreas, getCities, getHomePage } from "@/components/useAPI/GetUser";
+import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import Cookies from "js-cookie";
+import axios from "axios";
+const containerStyle = {
+  width: "100%",
+  height: "400px",
+};
 function page() {
-  const [value, setValue] = useState();
+  const [lat, setLat] = useState(-3.745);
+  const [lng, setLng] = useState(-38.523);
+  
+  const [nameAddresse, setNameAddresse] = useState("");
+  const [countries, setCountries] = useState([]);
+  const [country, setCountry] = useState();
+  const [cities, setCities] = useState([]);
+  const [city, setCity] = useState();
+  const [areas, setAreas] = useState([]);
+  const [areaID, setAreaID] = useState();
+  const [addresse, setAddresse] = useState("");
+  const [buildingNo, setBuildingNo] = useState("");
+  const [buildingName, setBuildingName] = useState("");
+  const [phone, setPhone] = useState();
   const [phone_country, setPhone_country] = useState();
+
+  const onMapClick = useCallback((e) => {
+    setLat(e.latLng.lat())
+    setLng(e.latLng.lng())
+  }, []);
+  const center = {
+    lat: lat,
+    lng: lng, 
+  };
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: "AIzaSyDDbeB2JCI9I77iwI6SdzeHpcq2bx0qeQE",
+  });
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setLat(position.coords.latitude);
+      setLng(position.coords.longitude);
+    });
+  }, []);
+  const [map, setMap] = React.useState(null);
+
+  const onLoad = React.useCallback(
+    function callback(map) {
+      // This is just an example of getting and using the map instance!!! don't just blindly copy!
+      const bounds = new window.google.maps.LatLngBounds(center);
+      map.fitBounds(bounds);
+
+      setMap(map);
+    },
+    [lat, lng]
+  );
+
+  const onUnmount = React.useCallback(function callback(map) {
+    setMap(null);
+  }, []);
+  useEffect(() => {
+    FetchDataOFData();
+  }, []);
+  useEffect(() => {
+    if (country) {
+      FetchDataOFCities();
+    }
+  }, [country]);
+  useEffect(() => {
+    if (city) {
+      FetchDataOFAreas();
+    }
+  }, [city]);
+  const FetchDataOFData = async () => {
+    const HomePage = await getHomePage();
+    if (!HomePage) console.log(HomePage?.message);
+    HomePage.countries.map((itemCountries) => {
+      const item = { value: itemCountries.id, label: itemCountries.name.en };
+      setCountries((current) => [...current, item]);
+    });
+  };
+  const FetchDataOFCities = async () => {
+    const HomePage = await getCities(country);
+    if (!HomePage) console.log(HomePage?.message);
+    setCities([]);
+    HomePage.map((itemCountries) => {
+      const item = { value: itemCountries.id, label: itemCountries.name.en };
+      setCities((current) => [...current, item]);
+    });
+  };
+
+  const FetchDataOFAreas = async () => {
+    const HomePage = await getAreas(city);
+    if (!HomePage) console.log(HomePage?.message);
+    setAreas([]);
+    HomePage.map((itemCountries) => {
+      const item = { value: itemCountries.id, label: itemCountries.name.en };
+      setAreas((current) => [...current, item]);
+    });
+  };
+  const handelNewAddresse = () => {
+    const po = axios
+      .post(
+        "https://findhelpapp.com/api/v1/users/addresses",
+        {
+          "name": nameAddresse,
+          "phone": phone,
+          "phone_country": phone_country,
+          "country_id": country,
+          "city_id": city,
+          "area_id": areaID,
+          "details": addresse,
+          "lat": lat,
+          "lng": lng,
+        },
+        {
+          headers: {
+            "Authorization": `Bearer ${Cookies.get('token')}`,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-Language": "ar",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+       
+      })
+      .catch((res) => {
+       
+        console.log(res);
+      });
+  };
+  console.log(nameAddresse);
   return (
-   <>
-     <div className="container breadcrumbDetails">
-      <nav  aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item" aria-current="page">Home</li>
-          <li className="breadcrumb-item" aria-current="page">Account</li>
-          <li className="breadcrumb-item" aria-current="page">Addressess</li>
-          <li className="breadcrumb-item" aria-current="page">Add New Address</li>
-        </ol>
-      </nav>
-    </div>
-
-    <section className="account container">
-      <div className="account_info personal_info">
-        <div className="part1">
-          <ul>
-            <li><Link href="/account" >My Profile</Link></li>
-            <li><Link href="/account/myServices" >My services</Link></li>
-            <li><Link href="/account/prmoted" >Promotion</Link></li>
-            <li><Link href="/account/myOrders" >My Orders</Link></li>
-            <li>
-              <Link href="/account/addressess"   className="active">Addresses</Link>
+    <>
+      <div className="container breadcrumbDetails">
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item" aria-current="page">
+              Home
             </li>
-           <li><BtnLogOut/></li>
-          </ul>
-        </div>
-        <div className="Profile">
-          <h2 className="cart_title2">Add New Address</h2>
-
-          <form className="row g-3 form_page" style={{maxWidth: "490px"}}>
-            {/* <!-- map  --> */}
-
-            <div className="map col-md-12">
-              <label className="form-label">Select Delivery Location</label>
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13644.980469861162!2d29.985604349999996!3d31.2416371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f5c52fadf4220f%3A0x7d08dceaad4557bd!2sSan%20Stefano%20Grand%20Plaza!5e0!3m2!1sen!2seg!4v1678613910844!5m2!1sen!2seg"
-                width="600"
-                height="450"
-                style={{border: "0"}}
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
-            <div className="col-md-6">
-              <label htmlFor="inputName " className="form-label">First Name </label>
-
-              <input
-                type="text"
-                className="form-control"
-                id="inputNametext"
-                placeholder="your first name"
-              />
-            </div>
-            <div className="col-md-6">
-              <label htmlFor="inputLast " className="form-label">Last Name </label>
-
-              <input
-                type="text"
-                className="form-control"
-                id="inputLasttext"
-                placeholder="your Last name"
-              />
-            </div>
-            <div className="col-md-12">
-              <label htmlFor="inputCity" className="form-label">Country </label>
-              <select id="inputCity" className="form-select">
-                <option selected>Select Your Country</option>
-                <option>Egypt</option>
-                <option>England</option>
-              </select>
-            </div>
-            <div className="col-md-12">
-              <label htmlFor="inputCity" className="form-label">City </label>
-              <select id="inputCity" className="form-select">
-                <option selected>Select Your City</option>
-                <option>alex</option>
-                <option>cairo</option>
-              </select>
-            </div>
-            <div className="col-md-12">
-              <label htmlFor="inputAddress" className="form-label">Address </label>
-              <input
-                type="text"
-                className="form-control"
-                id="inputAddress"
-                placeholder="Type Your Address"
-              />
-            </div>
-
-            <div className="col-md-6">
-              <label htmlFor="inputBuilding " className="form-label"
-                >Building No.
-              </label>
-
-              <input
-                type="number"
-                className="form-control"
-                id="inputBuildingNumber"
-                placeholder="Number"
-              />
-            </div>
-            <div className="col-md-6">
-              <label htmlFor="inputBuilding Name " className="form-label"
-                >Building Name
-              </label>
-
-              <input
-                type="number"
-                className="form-control"
-                id="inputBuilding NameNumber"
-                placeholder="Number"
-              />
-            </div>
-            <div className="col-md-6">
-              <label htmlFor="inputFloor " className="form-label">Floor No. </label>
-
-              <input
-                type="number"
-                className="form-control"
-                id="inputFloorNumber"
-                placeholder="Number"
-              />
-            </div>
-            <div className="col-md-6">
-              <label htmlFor="inputAppointment " className="form-label"
-                >Appointment No.
-              </label>
-
-              <input
-                type="number"
-                className="form-control"
-                id="inputAppointmentNumber"
-                placeholder="Number"
-              />
-            </div>
-
-            <div className="col-md-12">
-              <label htmlFor="inputPhone " className="form-label">Mobile Number </label>
-
-              <PhoneInput
-                defaultCountry="EG"
-                placeholder={"Your Mobile Number"}
-                className="form-control"
-                value={value}
-                onCountryChange={(e)=>setPhone_country(e)}
-                onChange={setValue}
-              />
-            </div>
-          </form>
-          <input
-            type="submit"
-            value="Add Address"
-            className="btn_page btn_Address"
-          />
-        </div>
+            <li className="breadcrumb-item" aria-current="page">
+              Account
+            </li>
+            <li className="breadcrumb-item" aria-current="page">
+              Addressess
+            </li>
+            <li className="breadcrumb-item" aria-current="page">
+              Add New Address
+            </li>
+          </ol>
+        </nav>
       </div>
-    </section>
-   </>
-  )
+
+      <section className="account container">
+        <div className="account_info personal_info">
+          <div className="part1">
+            <ul>
+              <li>
+                <Link href="/account">My Profile</Link>
+              </li>
+              <li>
+                <Link href="/account/myServices">My services</Link>
+              </li>
+              <li>
+                <Link href="/account/prmoted">Promotion</Link>
+              </li>
+              <li>
+                <Link href="/account/myOrders">My Orders</Link>
+              </li>
+              <li>
+                <Link href="/account/addressess" className="active">
+                  Addresses
+                </Link>
+              </li>
+              <li>
+                <BtnLogOut />
+              </li>
+            </ul>
+          </div>
+          <div className="Profile">
+            <h2 className="cart_title2">Add New Address</h2>
+
+            <form className="row g-3 form_page" style={{ maxWidth: "490px" }}>
+              {/* <!-- map  --> */}
+
+              <div className="map col-md-12">
+                <label className="form-label">Select Delivery Location</label>
+                {isLoaded ? (
+                      <>
+                        <GoogleMap
+                          mapContainerStyle={containerStyle}
+                          center={center}
+                          zoom={8}
+                          onLoad={onLoad}
+                          onUnmount={onUnmount}
+                          onClick={onMapClick}
+                        >
+                          {/* Child components, such as markers, info windows, etc. */}
+                          <>
+                          <Marker
+           
+           position={{ lat: lat, lng: lng }}
+         
+           icon={{
+             url: `/images/mapicon.png`,
+             origin: new window.google.maps.Point(0, 0),
+             anchor: new window.google.maps.Point(15, 15),
+             scaledSize: new window.google.maps.Size(30, 30),
+           }}
+         />
+                          </>
+                        </GoogleMap>
+                       
+                      </>
+                    ) : (
+                      <></>
+                    )}
+              </div>
+              <div className="col-md-12">
+                <TextInput
+                  radius="md"
+                  label="Name Address"
+                  placeholder="Enter Name Address"
+                  onChange={(e)=>{setNameAddresse(e.target.value)}}
+                />
+              </div>
+
+              <div className="col-md-12">
+                <Select
+                  label="Country"
+                  placeholder="Select Your Country"
+                  searchable
+                  clearable
+                  nothingFound="No options"
+                  transitionProps={{
+                    transition: "pop-top-left",
+                    duration: 80,
+                    timingFunction: "ease",
+                  }}
+                  onChange={setCountry}
+                  value={country}
+                  //error={errorCountry}
+                  data={countries}
+                />
+              </div>
+              <div className="col-md-12">
+                <Select
+                  label="city"
+                  placeholder="Select Your City"
+                  searchable
+                  clearable
+                  nothingFound="No options"
+                  transitionProps={{
+                    transition: "pop-top-left",
+                    duration: 80,
+                    timingFunction: "ease",
+                  }}
+                  onChange={setCity}
+                  value={city}
+                  // error={errorCity}
+                  data={cities}
+                />
+              </div>
+              <div className="col-md-12">
+                <Select
+                  label="Area"
+                  placeholder="Select Your Area"
+                  searchable
+                  clearable
+                  nothingFound="No options"
+                  transitionProps={{
+                    transition: "pop-top-left",
+                    duration: 80,
+                    timingFunction: "ease",
+                  }}
+                  onChange={setAreaID}
+                  value={areaID}
+                  // error={errorCity}
+                  data={areas}
+                />
+              </div>
+              <div className="col-md-12">
+                <TextInput
+                  radius="md"
+                  label="Address"
+                  placeholder="Type Your Address"
+                  onChange={ (e)=>{setAddresse(e.target.value)}}
+                />
+              </div>
+
+              <div className="col-md-6">
+                <TextInput
+                  radius="md"
+                  label="Building No."
+                  placeholder="Enter Building No."
+                  onChange={ (e)=>{setBuildingNo(e.target.value)}}
+                />
+              </div>
+              <div className="col-md-6">
+                <TextInput
+                  radius="md"
+                  label="Building Name"
+                  placeholder="Enter Building Name"
+                  onChange={ (e)=>{setBuildingName(e.target.value)}}
+                />
+              </div>
+
+              <div className="col-md-12">
+                <label htmlFor="inputPhone " className="form-label">
+                  Mobile Number{" "}
+                </label>
+
+                <PhoneInput
+                  defaultCountry="EG"
+                  placeholder={"Your Mobile Number"}
+                  className="form-control"
+                  
+                  value={phone}
+                  onCountryChange={(e) => setPhone_country(e)}
+                  onChange={setPhone}
+                />
+              </div>
+            </form>
+            <input
+              type="submit"
+              value="Add Address"
+              className="btn_page btn_Address"
+              onClick={(e)=>{e.preventDefault();handelNewAddresse()}}
+            />
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }
 
-export default page
+export default page;

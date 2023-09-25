@@ -1,7 +1,20 @@
+"use client";
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BtnLogOut from "@/components/btnLogOut";
+import { getUserLocation } from '@/components/useAPI/GetUser';
 function page() {
+
+const [location ,setLocation] = useState([])
+  useEffect(() => {
+    FetchDataOFUserLocation();
+  }, []);
+  const FetchDataOFUserLocation = async () => {
+    const Locations = await getUserLocation();
+    if (!Locations) console.log(Locations?.message);
+
+    setLocation(Locations)
+  };
   return (
     <>
      <div className="container breadcrumbDetails">
@@ -32,6 +45,21 @@ function page() {
           <h2 className="cart_title2">Addresses</h2>
           <form className="">
             <div className="box1 address_page">
+              {
+                location.filter((loc)=>loc.details!==null).map((loc)=>{
+                  return(
+                    <div className="myAddress" key={loc.id}>
+                <img src="/images/address.svg" alt="address" />
+                <div className="about_address">
+                  <p>
+                    {loc.details}
+                  </p>
+                  <p>{loc.phone_normalized}</p>
+                </div>
+              </div>
+                  )
+                })
+              }
               <div className="myAddress">
                 <img src="/images/address.svg" alt="address" />
                 <div className="about_address">
@@ -42,10 +70,10 @@ function page() {
                   <p>+20 154 256 1235</p>
                 </div>
               </div>
-              <a href="profile_NewAddress.html" className="addAddress">
+              <Link href="/account/addressess/new_Address" className="addAddress">
                 <h5>+</h5>
                 <h6>Add New Address</h6>
-              </a>
+              </Link>
             </div>
           </form>
         </div>

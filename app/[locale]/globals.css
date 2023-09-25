@@ -1897,6 +1897,7 @@ div#ui-datepicker-div {
 }
 .checkOut label {
   font-family: "DM Sans3";
+  padding: 0px 4px;
 }
 .checkOut .part1 form .btn_page {
   width: 274px;
@@ -1912,7 +1913,7 @@ div#ui-datepicker-div {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-  max-width: 600px;
+  max-width: 100%;
 }
 .address_page .myAddress {
   padding: 12px 8px;
@@ -2051,7 +2052,23 @@ html[dir="rtl"] .btn_Address {
 
   height: 48px;
 }
-
+.mantine-Radio-root input{
+  height: 16px;
+  width: 16px;
+}
+.mantine-Radio-root input:checked{
+  background: #383838;
+    border-color: #434343;
+}
+.mantine-Radio-root .mantine-Radio-inner{
+margin: auto;
+}
+.mantine-RadioGroup-root .mantine-Group-root {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 12px;
+}
 .form_page .form-select {
   font-size: 14px;
   line-height: 25px;

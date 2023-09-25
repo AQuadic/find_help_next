@@ -1,10 +1,18 @@
-import React from 'react'
+"use client";
+import { Group, Radio } from '@mantine/core'
+
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
+import Link from 'next/link';
+import React, { useState } from 'react'
 
 function page() {
- 
-  
+  const [date, setDate] =useState()
+  console.log(date);
   return (
    <>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
    <div className="container breadcrumbDetails">
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -23,40 +31,25 @@ function page() {
         <h2 className="headtitle">Check Out</h2>
         <form className="box">
           <div className="box1">
+      
             <h3>Service Method</h3>
-            <ul className="list-group">
-              <li className="list-group-item">
-                <input
-                  className="form-check-input me-1"
-                  type="radio"
-                  name="listGroupRadio"
-                  value=""
-                  id="firstRadio"
-                  checked
-                />
-                <label className="form-check-label" htmlFor="firstRadio">Pick Up</label>
-              </li>
-              <li className="list-group-item">
-                <input
-                  className="form-check-input me-1"
-                  type="radio"
-                  name="listGroupRadio"
-                  value=""
-                  id="secondRadio"
-                />
-                <label className="form-check-label" htmlFor="secondRadio"
-                  >Delivery
-                  </label>
-              </li>
-            </ul>
+            <Radio.Group
+      name="favoriteFramework"
+    >
+      <Group mt="xs" >
+        <Radio value="pick" label="Pick Up" />
+        <Radio value="Delivery" label="Delivery" />
+      
+      </Group>
+    </Radio.Group>
           </div>
           <div className="box1">
             <h3>Address</h3>
             <div className="add">
               <img src="/images/address.svg" alt="address" />
-              <a href="Address.html" style={{fontFamily: "DM Sans3"}}
+              <Link href="/address" style={{fontFamily: "DM Sans3"}}
                 >Add Address
-                </a>
+                </Link>
               <div className="about_add" style={{display: "none"}}>
                 <p>
                   66 Youssef Ghaly Street, Miami , Alexandria. Appointment No.
@@ -68,42 +61,26 @@ function page() {
           </div>
           <div className="box1">
             <h3>Payment Method</h3>
-            <ul className="list-group">
-              <li className="list-group-item">
-                <input
-                  className="form-check-input me-1"
-                  type="radio"
-                  name="listGroupRadio2"
-                  value=""
-                  id="firstRadio"
-                  checked
-                />
-                <label className="form-check-label" htmlFor="firstRadio">Cash</label>
-              </li>
-              <li className="list-group-item">
-                <input
-                  className="form-check-input me-1"
-                  type="radio"
-                  name="listGroupRadio2"
-                  value=""
-                  id="secondRadio"
-                />
-                <label className="form-check-label" htmlFor="secondRadio"
-                  >Credit Card
-                  </label>
-              </li>
-            </ul>
+            <Radio.Group
+      name="favoriteFramework"
+    >
+      <Group mt="xs" >
+        <Radio value="Cash" label="Cash" />
+        <Radio value="Credit" label="Credit Card" />
+      
+      </Group>
+    </Radio.Group>
+           
           </div>
           <div className="box1">
             <h3>Date</h3>
-            <input
-              className="date"
-              name="date"
-              placeholder="Select Date"
-              readonly=""
-              id="datepicker"
-              type="text"
-            />
+            <DatePicker label="Basic date picker" placeholder="Select Date"
+             defaultValue={dayjs("2022-04-17")}
+      value={date}
+      onChange={(e)=>setDate( e.$d.toLocaleDateString("en-US"))} />
+      
+
+          
           </div>
           <input type="submit" value="Place Order" className="btn_page" />
         </form>
@@ -128,6 +105,7 @@ function page() {
         </div>
       </div>
     </section>
+    </LocalizationProvider>
    </>
   )
 }

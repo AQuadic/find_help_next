@@ -109,7 +109,7 @@ function page() {
   const [errorHolidays, setErrorholidays] = useState();
   const [errorLocationLat, setErrorLocationLat] = useState("");
   const [erroLocationLng, setErroLocationLng] = useState("");
-
+console.log(holidays.includes("Monday"));
   useEffect(() => {
     FetchDataOFData();
   }, []);
@@ -195,13 +195,13 @@ function page() {
     body.append("location[lat]", lat);
     body.append("location[lng]", lng);
     body.append("work_times[holidays]", {
-      'sat':false,
-      'sun':false,
-      'mon':false,
-      'tue':false,
-      'wed':false,
-      'thu':false,
-      'fri':false,
+      'sat':holidays.includes("Saturday"),
+      'sun':holidays.includes("Sunday"),
+      'mon':holidays.includes("Monday"),
+      'tue':holidays.includes("Tuesday"),
+      'wed':holidays.includes("Wednesday"),
+      'thu':holidays.includes("Thursday"),
+      'fri':holidays.includes("Friday"),
     });
     setErrorAddress("");
     setErrorCategory("");
@@ -666,7 +666,7 @@ function page() {
                         "Monday",
                         "Tuesday",
                         "Wednesday",
-                        "Wednesday",
+                        "Thursday",
                         "Friday",
                         "Saturday",
                         "Sunday",

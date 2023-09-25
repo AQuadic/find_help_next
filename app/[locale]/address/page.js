@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 function page() {
@@ -32,10 +33,10 @@ function page() {
                 <p>+20 154 256 1235</p>
               </div>
             </div>
-            <a href="New_Address.html" className="addAddress">
+            <Link href="/newAddress" className="addAddress">
               <h5>+</h5>
               <h6>Add New Address</h6>
-            </a>
+            </Link>
           </div>
 
           <input type="submit" value="Next " className="btn_page" />
