@@ -9,18 +9,15 @@ import { getHomePage } from "@/components/useAPI/GetUser";
 import Cookies from "js-cookie";
 
 export default function Home() {
-  const [categories, setCategories] = useState();
+  const [categories, setCategories] = useState([]);
   const [services, setServices] = useState();
   const [data, setData] = useState();
 useEffect(() => {
   FetchDataOFData()
     FetchDataOFIServices();
   }, []);
-  const FetchDataOFICategories = async () => {
-    const Categories = await getCategories();
-    if (!Categories) console.log(Categories?.message);
-    setCategories(Categories);
-  };
+  
+  console.log(categories);
   const FetchDataOFIServices = async () => {
     const Services = await getServices();
     if (!Services) console.log(Services?.message);
@@ -33,6 +30,7 @@ useEffect(() => {
     const HomePage = await getHomePage();
     if (!HomePage) console.log(HomePage?.message);
     setData(HomePage);
+    setCategories(HomePage.categories);
   };
 console.log(data);
 
@@ -104,78 +102,38 @@ return(
             </div>
           </div>
         </section>
-
-        <section className= "services container m90">
-          <h2 className= "headtitle">Repairs Services</h2>
+        {
+            categories.slice(0,3).map((category)=>{
+              return(
+                <section className= "services container m90">
+          
+          <h2 className= "headtitle">{category.name.en}</h2>
 
           <div className= "allServices">
-            <ItemCourse
-              title="Alloy Wheel Repairs Derby"
+            {
+              category.children.slice(0,3).map((item)=>{
+                return(
+                  <ItemCourse
+              title={item.name.en}
               star="4.8"
               loc="sidi bisher, alex"
-              timeFrom="9:00 AM"
-              timeTo="10:00 PM"
-              oldsalary="2000"
-              newsalary="1000"
+              timeFrom=""
+              timeTo=""
+              oldsalary=""
+              newsalary={item.price}
               image="1"
             />
-            <ItemCourse
-              title="Alloy Wheel Repairs Derby"
-              star="4.8"
-              loc="sidi bisher, alex"
-              timeFrom="9:00 AM"
-              timeTo="10:00 PM"
-              newsalary="2000"
-              image="2"
-              love
-            />
-            <ItemCourse
-              title="Alloy Wheel Repairs Derby"
-              star="4.8"
-              loc="sidi bisher, alex"
-              timeFrom="9:00 AM"
-              timeTo="10:00 PM"
-              newsalary="2000"
-              image="3"
-            />
+                )
+              })
+            }
+           
+          
           </div>
         </section>
-        <section className= "services container m90">
-          <h2 className= "headtitle">Cleaning Services</h2>
-          <div className= "allServices">
-            <div className= "allServices">
-              <ItemCourse
-                title="Alloy Wheel Repairs Derby"
-                star="4.8"
-                loc="sidi bisher, alex"
-                timeFrom="9:00 AM"
-                timeTo="10:00 PM"
-                oldsalary="2000"
-                newsalary="1000"
-                image="1"
-                love
-              />
-              <ItemCourse
-                title="Alloy Wheel Repairs Derby"
-                star="4.8"
-                loc="sidi bisher, alex"
-                timeFrom="9:00 AM"
-                timeTo="10:00 PM"
-                newsalary="2000"
-                image="2"
-              />
-              <ItemCourse
-                title="Alloy Wheel Repairs Derby"
-                star="4.8"
-                loc="sidi bisher, alex"
-                timeFrom="9:00 AM"
-                timeTo="10:00 PM"
-                newsalary="2000"
-                image="3"
-              />
-            </div>
-          </div>
-        </section>
+              )
+            })
+          }
+        
 
         <section className= "need m90">
           <div className= "container">

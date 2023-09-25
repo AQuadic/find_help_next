@@ -110,7 +110,7 @@ const FetchDataOFData = async () => {
                         {
                         category.children?.map((item)=>{
                           return(
-                            <li>
+                            <li key={item.id}>
                             <Link className="dropdown-item" href={`/categoriesDetails/${item.id}`}>
                              {item.name.en}
                             </Link>
@@ -228,7 +228,7 @@ const FetchDataOFData = async () => {
             {
               categories.map((category)=>{
                 return(
-                  <li className="nav-item dropdown">
+                  <li className="nav-item dropdown" key={category.id}>
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -245,7 +245,7 @@ const FetchDataOFData = async () => {
                       {
                         category.children?.map((item)=>{
                           return(
-                            <li>
+                            <li key={item.id}>
                             <Link className="dropdown-item" href={`/categoriesDetails/${item.id}`}>
                               {item.name.en}
                             </Link>

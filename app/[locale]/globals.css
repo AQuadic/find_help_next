@@ -1854,8 +1854,7 @@ div#ui-datepicker-div {
 .ServicesProvider.services {
   overflow: hidden;
 }
-.checkOut,
-.services {
+.checkOut {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
