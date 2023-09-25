@@ -38,6 +38,7 @@ function page() {
         router.push("/verify");
       })
       .catch((res) => {
+        alert('An error occurred: ' + res.message);
         res.response.data.message
           ? setErrorPhone(res.response.data.message)
           : setErrorPhone("");

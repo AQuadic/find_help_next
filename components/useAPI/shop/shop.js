@@ -139,20 +139,58 @@ export const getMyServices = async () => {
     console.log("Error in Add New Category (service) =>", error);
   }
 };
-export const getMyOrders = async () => {
+export const getMyOrders = async (p1,p2,p3,p4) => {
   try {
-    const res = await fetch(
-      "https://findhelpapp.com/api/v1/users/orders/mine",
-      {
+    const url = new URL(
+      "https://findhelpapp.com/api/v1/users/orders/mine"
+  );
+  
+  const params = {
+    "statuses":[p1,p2,p3,p4]
+  };
+  Object.keys(params)
+      .forEach(key => url.searchParams.append(key, params[key]));
+      const headers = {
+        Authorization: `Bearer ${Cookies.get("token")} `,
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Accept-Language": "ar",
+    };
+    
+      const res = await fetch(url, {
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${Cookies.get("token")} `,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Accept-Language": "ar"
-        },
-      }
-    );
+        headers,
+    })
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log("Error in Add New Category (service) =>", error);
+  }
+};
+
+
+export const getMyServices2 = async (p1,p2,p3,p4) => {
+  try {
+    const url = new URL(
+      "https://findhelpapp.com/api/v1/users/orders"
+  );
+  
+  const params = {
+    "statuses":[p1,p2,p3,p4]
+  };
+  Object.keys(params)
+      .forEach(key => url.searchParams.append(key, params[key]));
+      const headers = {
+        Authorization: `Bearer ${Cookies.get("token")} `,
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Accept-Language": "ar",
+    };
+    
+      const res = await fetch(url, {
+        method: "GET",
+        headers,
+    })
     const data = await res.json();
     return data;
   } catch (error) {

@@ -2690,6 +2690,11 @@ html[dir="rtl"] .Profile .btn_page {
 }
 .Profile .services .allServices .service {
   min-width: 280px;
+  background: transparent;
+    border: 0;
+}
+.Profile .services .allServices .service .aboutservice{
+ width: 100%;
 }
 .Profile .services .allServices .service .aboutservice .salary_pay .salary {
   flex-wrap: wrap;
@@ -2827,6 +2832,7 @@ html[dir="rtl"] .services .allServices .service .client_details img {
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  object-fit: cover;
 }
 .Profile .infoclient .information .name_phone {
 }
@@ -3151,6 +3157,7 @@ min-width: fit-content;
   width: 100%;
   gap: 14px;
   margin: 0px auto 20px;
+  direction: ltr;
 }
 .passcode-wrapper input {
   width: 100%;
@@ -3161,10 +3168,12 @@ min-width: fit-content;
   padding: 0px;
   border: 1px solid #C1C1C1;
   border-radius: 5px;
-  width: 76px !important;
+  width: 100% !important;
     max-width: 100%;
 }
-
+.PhoneInput {
+  direction: ltr !important;
+}
 .page_log .verify .btn_page {
   width: 300px;
   max-width: 100%;

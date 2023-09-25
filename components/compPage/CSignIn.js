@@ -44,6 +44,7 @@ console.log(t('title'));
        router.push('/')
       })
       .catch((res) => {
+        alert('An error occurred: ' + res.message);
       /*  setLoading(false);
         res.response.data.email
           ? setErroremail(res.response.data.email[0])

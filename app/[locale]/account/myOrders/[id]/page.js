@@ -91,17 +91,24 @@ function page({ params }) {
                 </ul>
               </div>
               <div className="map_client">
-                <h5>Track The Provider</h5>
-       
-                <iframe
-                  src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13644.980469861162!2d${Provider.address.location_google_maps.lat}!3d${Provider.address.location_google_maps.lng}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f5c52fadf4220f%3A0x7d08dceaad4557bd!2sSan%20Stefano%20Grand%20Plaza!5e0!3m2!1sen!2seg!4v1678613910844!5m2!1sen!2seg`}
-                  width="410"
-                  height="324"
-                  style={{border: "0", borderRadius: "10px"}}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                ></iframe>
+               
+        {
+          Provider.address&&
+         <>
+          <h5>Track The Provider</h5>
+          <iframe
+          src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13644.980469861162!2d${Provider.address.location_google_maps.lat}!3d${Provider.address.location_google_maps.lng}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f5c52fadf4220f%3A0x7d08dceaad4557bd!2sSan%20Stefano%20Grand%20Plaza!5e0!3m2!1sen!2seg!4v1678613910844!5m2!1sen!2seg`}
+          width="410"
+          height="324"
+          style={{border: "0", borderRadius: "10px"}}
+          allowFullScreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+         </>
+
+        }
+              
               </div>
             </div>
           </div>

@@ -84,6 +84,7 @@ function CVerify({ params }) {
         }
       })
       .catch((res) => {
+        alert('An error occurred: ' + res.message);
         res.response.data.message
           ? setErrorCode(res.response.data.message)
           : setErrorCode("");
@@ -114,6 +115,7 @@ function CVerify({ params }) {
        Cookies.set("phone_country",Cookies.get("phone_country"));
       })
       .catch((res) => {
+        alert('An error occurred: ' + res.message);
           console.log(res);
       });
   };
@@ -180,7 +182,7 @@ function CVerify({ params }) {
               
             </form>
             <Link href={'/signIn'} className="change_num">
-              change Mobile Number
+              Change Mobile Number
             </Link>
           </div>
         </div>

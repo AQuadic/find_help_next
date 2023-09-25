@@ -255,6 +255,7 @@ function page() {
         console.log(res);
       })
       .catch((res) => {
+        alert('An error occurred: ' + res.message);
         /*  setLoading(false);*/
         console.log(res.response.data.errors["address_text.en"]);
         res.response.data.errors["address_text.en"]
@@ -504,6 +505,7 @@ function page() {
                           zoom={14}
                           onLoad={onLoad}
                           onUnmount={onUnmount}
+                          onClick={(e)=>{console.log(e);}}
                         >
                           {/* Child components, such as markers, info windows, etc. */}
                           <></>

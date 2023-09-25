@@ -83,6 +83,7 @@ console.log(user);
        
       })
       .catch((res) => {
+        alert('An error occurred: ' + res.message);
           console.log(res);
       });
   };

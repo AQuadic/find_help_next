@@ -3,17 +3,61 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import BtnLogOut from "@/components/btnLogOut";
 import { getMyOrders } from "@/components/useAPI/shop/shop";
+import axios from "axios";
+import Cookies from "js-cookie";
 function page() {
   const [MyOrder, setMyOrder] = useState([]);
+  const [status, setStatus] = useState("PENDING");
   useEffect(() => {
-    FetchDataOFMyOrder();
-  }, []);
-  const FetchDataOFMyOrder = async () => {
-    const Orders = await getMyOrders();
+    if(status==="PENDING"){
+      FetchDataOFMyOrder("PENDING","ACCEPTED","IN_PROGRESS","IN_DELIVERY");
+    }
+    if(status==="COMPLETED"){
+      FetchDataOFMyOrder("DELIVERED","COMPLETED","","");
+    }
+    if(status==="REJECTED"){
+      FetchDataOFMyOrder("REJECTED","CANCELED","","");
+    }
+    
+  }, [status]);
+  const FetchDataOFMyOrder = async (p1,p2,p3,p4) => {
+    const Orders = await getMyOrders(p1,p2,p3,p4);
     if (!Orders) console.log(Orders?.message);
     setMyOrder(Orders.data.filter(item=>item.user_service!== null));
   };
   console.log(MyOrder);
+
+
+  const handelStatus = (id) => {
+    const po = axios
+      .post(
+        "https://findhelpapp.com/api/v1/users/orders/change-status",
+        {
+          "id": id,
+          "status": "CANCELED",
+        
+
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")} `,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-Language": "ar",
+          },
+        }
+      )
+      .then((res) => {
+        alert('Message: ' + res.data.message);
+        console.log(res);
+        
+      })
+      .catch((res) => {
+        alert('An error occurred: ' + res.message);
+        console.log(res);
+      });
+  };
+
   return (
     <>
       <div className="container breadcrumbDetails">
@@ -64,9 +108,9 @@ function page() {
           <div className="Profile Profile3">
             <h2>My Orders</h2>
             <div className="type_Services">
-              <button className="active">Up Coming</button>
-              <button>Completed</button>
-              <button>Rejected</button>
+              <button onClick={()=>{setStatus("PENDING")}}   className={status==="PENDING"?"active":""}>Up Coming</button>
+              <button onClick={()=>{setStatus("COMPLETED")}}  className={status==="COMPLETED"?"active":""}  >Completed</button>
+              <button onClick={()=>{setStatus("REJECTED")}}   className={status==="REJECTED"?"active":""}>Rejected</button>
             </div>
 
             <section className="services container m90">
@@ -101,6 +145,20 @@ return(
       </div>
     </div>
     <ul>
+      {
+        status==="COMPLETED"?
+        <li
+        className="complete"
+        style={{
+          color: "#2d7700",
+          fontSize: "12px",
+          fontFamily: "DM Sans2",
+        }}
+      >
+        Completed
+      </li>
+        :null
+      }
       <li>
         <img
           src="/images/Time-Circle.svg"
@@ -127,7 +185,10 @@ return(
           {order.user_service.currency}
         </p>
       </div>
-      <button className="cancel">Cancel Order</button>
+      {
+        status==="PENDING"&& <button className="cancel" onClick={()=>handelStatus(order.id)}>Cancel Order</button>
+      }
+     
     </div>
   </div>
 </div>
@@ -172,220 +233,10 @@ return(
                     </div>
                   </div>
                 </div>
-                <div className="service">
-                  <a href="ClientDetails.html" className="client_details">
-                    <p>Provider Details</p>
-                    <img src="/images/Arrow.svg" alt="Arrow" />
-                  </a>
-                  <img
-                    src="/images/service1.webp"
-                    className="imgService"
-                    alt="service"
-                  />
-                  <div className="aboutservice">
-                    <div className="head">
-                      <h3>Alloy Wheel Repairs Derby</h3>
-                      <div className="Star">
-                        <img src="/images/star.svg" alt="star" />
-                        <p>4.8</p>
-                      </div>
-                    </div>
-                    <ul>
-                      <li>
-                        <img src="/images/Time-Circle.svg" alt="Time-Circle" />
-                        <p>9:00 AM to 10:00 PM</p>
-                      </li>
-                      <li>
-                        <img src="/images/Location.svg" alt="Location" />
-                        <p>sidi bisher, alex</p>
-                      </li>
-                    </ul>
-                    <div className="salary_pay">
-                      <div className="salary">
-                        <p>2000 EGP</p>
-                      </div>
-                      <button className="cancel">Cancel Order</button>
-                    </div>
-                  </div>
-                </div>
-                <div className="service">
-                  <a href="ClientDetails.html" className="client_details">
-                    <p>Provider Details</p>
-                    <img src="/images/Arrow.svg" alt="Arrow" />
-                  </a>
-                  <img
-                    src="/images/service1.webp"
-                    className="imgService"
-                    alt="service"
-                  />
-                  <div className="aboutservice">
-                    <div className="head">
-                      <h3>Alloy Wheel Repairs Derby</h3>
-                      <div className="Star">
-                        <img src="/images/star.svg" alt="star" />
-                        <p>4.8</p>
-                      </div>
-                    </div>
-                    <ul>
-                      <li>
-                        <img src="/images/Time-Circle.svg" alt="Time-Circle" />
-                        <p>9:00 AM to 10:00 PM</p>
-                      </li>
-                      <li>
-                        <img src="/images/Location.svg" alt="Location" />
-                        <p>sidi bisher, alex</p>
-                      </li>
-                    </ul>
-                    <div className="salary_pay">
-                      <div className="salary">
-                        <p>2000 EGP</p>
-                      </div>
-                      <button className="cancel">Cancel Order</button>
-                    </div>
-                  </div>
-                </div>
+              
               </div>
             </section>
-            <section className="services container m90">
-              <div className="allServices">
-                <div className="service">
-                  <a href="ClientDetails.html" className="client_details">
-                    <p>Provider Details</p>
-                    <img src="/images/Arrow.svg" alt="Arrow" />
-                  </a>
-                  <img
-                    src="/images/service1.webp"
-                    className="imgService"
-                    alt="service"
-                  />
-                  <div className="aboutservice">
-                    <div className="head">
-                      <h3>Alloy Wheel Repairs Derby</h3>
-                      <div className="Star">
-                        <img src="/images/star.svg" alt="star" />
-                        <p>4.8</p>
-                      </div>
-                    </div>
-                    <ul>
-                      <li
-                        className="complete"
-                        style={{
-                          color: "#2d7700",
-                          fontSize: "12px",
-                          fontFamily: "DM Sans2",
-                        }}
-                      >
-                        Completed
-                      </li>
-                      <li>
-                        <img src="/images/Time-Circle.svg" alt="Time-Circle" />
-                        <p>9:00 AM to 10:00 PM</p>
-                      </li>
-                      <li>
-                        <img src="/images/Location.svg" alt="Location" />
-                        <p>sidi bisher, alex</p>
-                      </li>
-                    </ul>
-                    <div className="salary_pay">
-                      <div className="salary">
-                        <span className="sall">2000 EGP</span>
-                        <p>1000 EGP</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="service">
-                  <a href="ClientDetails.html" className="client_details">
-                    <p>Provider Details</p>
-                    <img src="/images/Arrow.svg" alt="Arrow" />
-                  </a>
-                  <img
-                    src="/images/service1.webp"
-                    className="imgService"
-                    alt="service"
-                  />
-                  <div className="aboutservice">
-                    <div className="head">
-                      <h3>Alloy Wheel Repairs Derby</h3>
-                      <div className="Star">
-                        <img src="/images/star.svg" alt="star" />
-                        <p>4.8</p>
-                      </div>
-                    </div>
-                    <ul>
-                      <li
-                        className="complete"
-                        style={{
-                          color: "#2d7700",
-                          fontSize: "12px",
-                          fontFamily: "DM Sans2",
-                        }}
-                      >
-                        Completed
-                      </li>
-                      <li>
-                        <img src="/images/Time-Circle.svg" alt="Time-Circle" />
-                        <p>9:00 AM to 10:00 PM</p>
-                      </li>
-                      <li>
-                        <img src="/images/Location.svg" alt="Location" />
-                        <p>sidi bisher, alex</p>
-                      </li>
-                    </ul>
-                    <div className="salary_pay">
-                      <div className="salary">
-                        <p>2000 EGP</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="service">
-                  <a href="ClientDetails.html" className="client_details">
-                    <p>Provider Details</p>
-                    <img src="/images/Arrow.svg" alt="Arrow" />
-                  </a>
-                  <img
-                    src="/images/service1.webp"
-                    className="imgService"
-                    alt="service"
-                  />
-                  <div className="aboutservice">
-                    <div className="head">
-                      <h3>Alloy Wheel Repairs Derby</h3>
-                      <div className="Star">
-                        <img src="/images/star.svg" alt="star" />
-                        <p>4.8</p>
-                      </div>
-                    </div>
-                    <ul>
-                      <li
-                        className="complete"
-                        style={{
-                          color: "#2d7700",
-                          fontSize: "12px",
-                          fontFamily: "DM Sans2",
-                        }}
-                      >
-                        Completed
-                      </li>
-                      <li>
-                        <img src="/images/Time-Circle.svg" alt="Time-Circle" />
-                        <p>9:00 AM to 10:00 PM</p>
-                      </li>
-                      <li>
-                        <img src="/images/Location.svg" alt="Location" />
-                        <p>sidi bisher, alex</p>
-                      </li>
-                    </ul>
-                    <div className="salary_pay">
-                      <div className="salary">
-                        <p>2000 EGP</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+           
           </div>
         </div>
       </section>

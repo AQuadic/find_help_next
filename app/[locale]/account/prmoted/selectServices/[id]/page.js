@@ -1,15 +1,9 @@
 "use client";
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React from 'react'
 import BtnLogOut from "@/components/btnLogOut";
-function page() {
-  const [activeBtn, setActiveBtn] = useState(null);
-  const [activeId, setActiveId] = useState(0);
-
-  const handleButtonClick = (id) => {
-    setActiveBtn(`btn${id}`);
-    setActiveId(id);
-  };
+function page({}) {
+  
   return (
     <>
      <div className="container breadcrumbDetails">
