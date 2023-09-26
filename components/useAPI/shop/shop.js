@@ -217,3 +217,4 @@ export const getCategoriesHome = async () => {
     console.log("Error in Add New Category (service) =>", error);
   }
 };
+

@@ -1,11 +1,26 @@
 "use client";
+import ViewCheck from '@/components/compPage/ViewCheck';
+import { getUserLocation } from '@/components/useAPI/GetUser';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link'
-import React from 'react'
+import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
 
 function page() {
   const t = useTranslations("checkOut");
+  const [location ,setLocation] = useState([])
+  const SearchParams = useSearchParams()
+const ServiceID = SearchParams.get("id");
+  useEffect(() => {
+    FetchDataOFUserLocation();
+  }, []);
+  const FetchDataOFUserLocation = async () => {
+    const Locations = await getUserLocation();
+    if (!Locations) console.log(Locations?.message);
 
+    setLocation(Locations)
+  };
+  console.log(location);
   return (
   <>
   <div className="container breadcrumbDetails">
@@ -27,6 +42,21 @@ function page() {
         <h2 className="headtitle">{t("titleAddresses")}</h2>
         <form className="box">
           <div className="box1 address_page">
+          {
+                location.filter((loc)=>loc.details!==null).map((loc)=>{
+                  return(
+                    <div className="myAddress" key={loc.id}>
+                <img src="/images/address.svg" alt="address" />
+                <div className="about_address">
+                  <p>
+                    {loc.details}
+                  </p>
+                  <p>{loc.phone_normalized}</p>
+                </div>
+              </div>
+                  )
+                })
+              }
             <div className="myAddress">
               <img src="/images/address.svg" alt="address" />
               <div className="about_address">
@@ -37,7 +67,12 @@ function page() {
                 <p>+20 154 256 1235</p>
               </div>
             </div>
-            <Link href="/newAddress" className="addAddress">
+            <Link 
+            href={{
+              pathname: "/checkOut/address/newAddress",
+              query: { id: ServiceID},
+            }}
+            className="addAddress">
               <h5>+</h5>
               <h6>{t("addNew")}</h6>
             </Link>
@@ -46,25 +81,7 @@ function page() {
           <input type="submit" value={t("next")} className="btn_page" />
         </form>
       </div>
-      <div className="part2">
-        <h2 className="headtitle">{t("title2")}</h2>
-        <div className="box">
-          <ul>
-            <li>
-              <h3>{t("provider")}</h3>
-              <h4>Muhammed Ahmed</h4>
-            </li>
-            <li>
-              <h3>{t("serviceType")}</h3>
-              <h4>Repair car’s Wheels</h4>
-            </li>
-            <li className="amount">
-              <h3>{t("amount")}</h3>
-              <h4>2500 EGP</h4>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <ViewCheck id={ServiceID}/>
     </section>
 
   </>

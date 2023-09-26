@@ -11,6 +11,8 @@ import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
+import ViewCheck from "@/components/compPage/ViewCheck";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -20,7 +22,8 @@ function page() {
   const [lng, setLng] = useState(-38.523);
   const t = useTranslations("checkOut");
   const t2 = useTranslations("Account");
-
+  const SearchParams = useSearchParams()
+const ServiceID = SearchParams.get("id");
   const [nameAddresse, setNameAddresse] = useState("");
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState();
@@ -385,25 +388,7 @@ function page() {
             )}
           </div>
         </div>
-        <div className="part2">
-          <h2 className="headtitle">{t("title2")}</h2>
-          <div className="box">
-            <ul>
-              <li>
-                <h3>{t("provider")}</h3>
-                <h4>Muhammed Ahmed</h4>
-              </li>
-              <li>
-                <h3>{t("serviceType")}</h3>
-                <h4>Repair car’s Wheels</h4>
-              </li>
-              <li className="amount">
-                <h3>{t("amount")}</h3>
-                <h4>2500 EGP</h4>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <ViewCheck id={ServiceID}/>
       </section>
 
       <section className="carts checkout container">

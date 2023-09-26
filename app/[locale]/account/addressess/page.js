@@ -17,6 +17,7 @@ const t = useTranslations("Account");
 
     setLocation(Locations)
   };
+  console.log(location);
   return (
     <>
      <div className="container breadcrumbDetails">

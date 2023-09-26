@@ -125,7 +125,7 @@ const FetchDataOFServicesClient = async () => {
                 </div>
               )}
               <div className="bookNow_Fav">
-                <Link href="/checkOut" className="btn_page">
+                <Link href={`/checkOut?id=${services.id}`} className="btn_page">
                 {t("book")}
                 </Link>
                 <div
