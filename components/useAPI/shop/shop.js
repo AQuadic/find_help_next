@@ -197,3 +197,23 @@ export const getMyServices2 = async (p1,p2,p3,p4) => {
     console.log("Error in Add New Category (service) =>", error);
   }
 };
+
+export const getCategoriesHome = async () => {
+  try {
+    const res = await fetch(
+      `https://findhelpapp.com/api/v1/meta/service_categories`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Accept-Language": "ar"
+        },
+      }
+    );
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log("Error in Add New Category (service) =>", error);
+  }
+};

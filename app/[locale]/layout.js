@@ -42,9 +42,11 @@ export default async function RootLayout({ children , params}) {
       <NextIntlClientProvider locale={locale} messages={messages}>
         <Layout lang={locale}>
       
-
+<main>
+{children}
+</main>
         
-        {children}
+       
         
         </Layout>
         </NextIntlClientProvider>

@@ -105,7 +105,7 @@ return(
         {
             categories.slice(0,3).map((category)=>{
               return(
-                <section className= "services container m90">
+                <section className= "services container m90" key={category.id}>
           
           <h2 className= "headtitle">{category.name.en}</h2>
 
@@ -122,6 +122,8 @@ return(
               oldsalary=""
               newsalary={item.price}
               image="1"
+              id={item.id}
+  category_id={category.id}
             />
                 )
               })

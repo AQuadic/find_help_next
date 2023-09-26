@@ -23,6 +23,9 @@
   font-weight: 200;
   font-style: normal;
 }
+main {
+  min-height: 52vh;
+}
 input::placeholder {
   font-family: "DM Sans3";
 }
