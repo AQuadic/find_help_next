@@ -3,6 +3,7 @@
 import { navState } from "@/atoms";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -17,7 +18,7 @@ function CVerify({ params }) {
   const [otp, setOtp] = useState("");
   const [IsUser, setIsUser] = useRecoilState(navState);
   const [errorcode, setErrorCode] = useState("");
-
+  const t = useTranslations("Sign");
   const clearOtp = () => {
     setOtp("");
   };
@@ -130,9 +131,9 @@ function CVerify({ params }) {
       <section className="page_log">
         <div className="container">
           <div className="box_log">
-            <h3>Type The OTP</h3>
+            <h3>{t("typeOTP")}</h3>
             <p className="dec">
-              Please enter the verification code we sent to your mobile number
+            {t("verification")}
             </p>
             <form action="" className="verify">
               <div className="passcode-wrapper">
@@ -160,8 +161,8 @@ function CVerify({ params }) {
                 02:00 s
               </p>
               <h4>
-                If you don’t receive a code!
-                <input type="submit" value={"Resend"} id="resend" className="resend" disabled   onClick={(e) => {
+              {t("receive")}
+                <input type="submit" value={t("resend")} id="resend" className="resend" disabled   onClick={(e) => {
                   e.preventDefault();
                   clearOtp()
                   handelResend();
@@ -173,7 +174,7 @@ function CVerify({ params }) {
                 type="submit"
                 id="ss"
                 className="btn_page"
-                value="Verify"
+                value= {t("vrefiy")}
                 onClick={(e) => {
                   e.preventDefault();
                   handelVerify();
@@ -182,7 +183,7 @@ function CVerify({ params }) {
               
             </form>
             <Link href={'/signIn'} className="change_num">
-              Change Mobile Number
+            {t("changeMobile")}
             </Link>
           </div>
         </div>

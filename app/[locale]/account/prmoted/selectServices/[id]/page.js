@@ -2,7 +2,9 @@
 import Link from 'next/link'
 import React from 'react'
 import BtnLogOut from "@/components/btnLogOut";
+import { useTranslations } from 'next-intl';
 function page({}) {
+  const t = useTranslations("Account");
   
   return (
     <>
@@ -22,16 +24,16 @@ function page({}) {
       <div className="account_info personal_info">
         <div className="part1">
           <ul>
-            <li><Link href="/account" >My Profile</Link></li>
-            <li><Link href="/account/myServices" >My services</Link></li>
-            <li><Link href="/account/prmoted"  className="active">Promotion</Link></li>
-            <li><Link href="/account/myOrders" >My Orders</Link></li>
-            <li><Link href="/account/addressess"  >Addresses</Link></li>
+            <li><Link href="/account" >{t("account")}</Link></li>
+            <li><Link href="/account/myServices" >{t("services")}</Link></li>
+            <li><Link href="/account/prmoted"  className="active">{t("promotion")}</Link></li>
+            <li><Link href="/account/myOrders" >{t("myOrders")}</Link></li>
+            <li><Link href="/account/addressess"  >{t("addresses")}</Link></li>
            <li><BtnLogOut/></li>
           </ul>
         </div>
         <div className="Profile Profile3">
-          <h2>Select a Service</h2>
+          <h2>{t("selectService")}</h2>
           <section className="services container m90">
             <div className="allServices">
               <button className={`service  ${activeBtn === 'btn1' ? 'active' : ''}`}   onClick={() => handleButtonClick(1)}>
@@ -158,7 +160,7 @@ function page({}) {
               </button>
             </div>
           </section>
-          <button className="btn_page">Pay</button>
+          <button className="btn_page">{t("pay")}</button>
         </div>
       </div>
     </section>

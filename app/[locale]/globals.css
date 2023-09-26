@@ -4,25 +4,7 @@
   box-sizing: border-box;
   font-family: "DM Sans2";
 }
-@font-face {
-  font-family: "DM Sans";
-  src: url("./fonts/DMSans-Bold.ttf");
-  font-weight: 700;
-  font-style: normal;
-  color: var(--main-color);
-}
-@font-face {
-  font-family: "DM Sans2";
-  src: url("./fonts/DMSans-Medium.ttf");
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: "DM Sans3";
-  src: url("./fonts/DMSans-Regular.ttf");
-  font-weight: 200;
-  font-style: normal;
-}
+
 main {
   min-height: 52vh;
 }
@@ -770,6 +752,7 @@ footer .copy p a {
   width: 130px;
   height: 40px;
 }
+
 @media (max-width: 1200px) {
   .services .allServices .service {
     min-width: 265px;
@@ -2170,7 +2153,15 @@ html[dir="rtl"] .checkOut .btn_Address {
   font-family: "DM Sans";
   color: #fcbc10;
 }
-
+.addServices{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.addServices .part2 {
+  max-width: 470px;
+  flex: 1;
+}
 @media (max-width: 992px) {
   .checkOut .part2,
   .services .part2 {
@@ -3354,4 +3345,7 @@ margin:42px auto 0px;
 /*=========================== end pageAbout ======================*/
 .slick-slider .item{
   padding: 0px 8px;
+}
+.mantine-MultiSelect-searchInput {
+  border: no;
 }

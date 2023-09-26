@@ -1,7 +1,11 @@
+"use client";
+import { useTranslations } from 'next-intl';
 import Link from 'next/link'
 import React from 'react'
 
 function page() {
+  const t = useTranslations("checkOut");
+
   return (
   <>
   <div className="container breadcrumbDetails">
@@ -20,7 +24,7 @@ function page() {
 
     <section className="checkOut container m90">
       <div className="part1">
-        <h2 className="headtitle">Addresses</h2>
+        <h2 className="headtitle">{t("titleAddresses")}</h2>
         <form className="box">
           <div className="box1 address_page">
             <div className="myAddress">
@@ -35,27 +39,27 @@ function page() {
             </div>
             <Link href="/newAddress" className="addAddress">
               <h5>+</h5>
-              <h6>Add New Address</h6>
+              <h6>{t("addNew")}</h6>
             </Link>
           </div>
 
-          <input type="submit" value="Next " className="btn_page" />
+          <input type="submit" value={t("next")} className="btn_page" />
         </form>
       </div>
       <div className="part2">
-        <h2 className="headtitle">Booking Summary</h2>
+        <h2 className="headtitle">{t("title2")}</h2>
         <div className="box">
           <ul>
             <li>
-              <h3>Provider</h3>
+              <h3>{t("provider")}</h3>
               <h4>Muhammed Ahmed</h4>
             </li>
             <li>
-              <h3>Service Type</h3>
+              <h3>{t("serviceType")}</h3>
               <h4>Repair car’s Wheels</h4>
             </li>
             <li className="amount">
-              <h3>Amount</h3>
+              <h3>{t("amount")}</h3>
               <h4>2500 EGP</h4>
             </li>
           </ul>

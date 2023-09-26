@@ -19,23 +19,24 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import { useTranslations } from "next-intl";
 const containerStyle = {
   width: "100%",
   height: "400px",
 };
 
 function page() {
- 
+  const t = useTranslations("Services");
+
   const [lat, setLat] = useState(-3.745);
   const [lng, setLng] = useState(-38.523);
   const onMapClick = useCallback((e) => {
-    setLat(e.latLng.lat())
-    setLng(e.latLng.lng())
+    setLat(e.latLng.lat());
+    setLng(e.latLng.lng());
   }, []);
 
   console.log(lat);
-  
- 
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       setLat(position.coords.latitude);
@@ -109,7 +110,7 @@ function page() {
   const [errorHolidays, setErrorholidays] = useState();
   const [errorLocationLat, setErrorLocationLat] = useState("");
   const [erroLocationLng, setErroLocationLng] = useState("");
-console.log(holidays.includes("Monday"));
+  console.log(holidays.includes("Monday"));
   useEffect(() => {
     FetchDataOFData();
   }, []);
@@ -195,13 +196,13 @@ console.log(holidays.includes("Monday"));
     body.append("location[lat]", lat);
     body.append("location[lng]", lng);
     body.append("work_times[holidays]", {
-      'sat':holidays.includes("Saturday"),
-      'sun':holidays.includes("Sunday"),
-      'mon':holidays.includes("Monday"),
-      'tue':holidays.includes("Tuesday"),
-      'wed':holidays.includes("Wednesday"),
-      'thu':holidays.includes("Thursday"),
-      'fri':holidays.includes("Friday"),
+      sat: holidays.includes("Saturday"),
+      sun: holidays.includes("Sunday"),
+      mon: holidays.includes("Monday"),
+      tue: holidays.includes("Tuesday"),
+      wed: holidays.includes("Wednesday"),
+      thu: holidays.includes("Thursday"),
+      fri: holidays.includes("Friday"),
     });
     setErrorAddress("");
     setErrorCategory("");
@@ -236,7 +237,7 @@ console.log(holidays.includes("Monday"));
         console.log(res);
       })
       .catch((res) => {
-        alert('An error occurred: ' + res.message);
+        alert("An error occurred: " + res.message);
         /*  setLoading(false);*/
         console.log(res.response.data.errors["address_text.en"]);
         res.response.data.errors["address_text.en"]
@@ -316,9 +317,9 @@ console.log(holidays.includes("Monday"));
           </nav>
         </div>
 
-        <section className="services container m90">
+        <section className="services addServices container m90">
           <div className="part1">
-            <h2 className="headtitle">Add Services</h2>
+            <h2 className="headtitle">{t("addServicesBtn")}</h2>
             <div className="box">
               <form className="row g-3 form_page">
                 <div className="upload_images">
@@ -370,358 +371,339 @@ console.log(holidays.includes("Monday"));
                       <p>upload Image</p>
                     </div>
                   </div>
-
-                  <div className="col-md-12 g-3 new_row row">
-                    <label htmlFor="">What are you offering?</label>
-                    <div className="col-6">
-                      <Select
-                        label="Category"
-                        placeholder="Select category"
-                        searchable
-                        clearable
-                        nothingFound="No options"
-                        transitionProps={{
-                          transition: "pop-top-left",
-                          duration: 80,
-                          timingFunction: "ease",
-                        }}
-                        error={errorCategory}
-                        onChange={setCategory}
-                        value={category}
-                        data={categories}
-                      />
-                    </div>
-                    <div className="col-6">
-                      <Select
-                        label="Sub Category"
-                        placeholder="Select Sub category"
-                        searchable
-                        clearable
-                        nothingFound="No options"
-                        transitionProps={{
-                          transition: "pop-top-left",
-                          duration: 80,
-                          timingFunction: "ease",
-                        }}
-                        error={errorSubcategory}
-                        onChange={setSubCategory}
-                        value={Subcategory}
-                        data={Subcategories}
-                      />
-                    </div>
-                    {/* { <div className="col-6">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="inputCategory"
-                      placeholder="Enter the Category name "
+                </div>
+                <div className="col-md-12 g-3 new_row row">
+                  <label htmlFor="">{t("offering")}</label>
+                  <div className="col-6">
+                    <Select
+                      label={t("category")}
+                      placeholder={t("selectCategory")}
+                      searchable
+                      clearable
+                      nothingFound="No options"
+                      transitionProps={{
+                        transition: "pop-top-left",
+                        duration: 80,
+                        timingFunction: "ease",
+                      }}
+                      error={errorCategory}
+                      onChange={setCategory}
+                      value={category}
+                      data={categories}
                     />
                   </div>
                   <div className="col-6">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="inputCategory2"
-                      placeholder="Enter the Sub Category name "
+                    <Select
+                      label={t("subCategory")}
+                      placeholder={t("selectSub")}
+                      searchable
+                      clearable
+                      nothingFound="No options"
+                      transitionProps={{
+                        transition: "pop-top-left",
+                        duration: 80,
+                        timingFunction: "ease",
+                      }}
+                      error={errorSubcategory}
+                      onChange={setSubCategory}
+                      value={Subcategory}
+                      data={Subcategories}
                     />
-                  </div>} */}
-                    <div className="invalid-feedback">
-                      Note that is type of category are paid an amount of 25$
-                    </div>
                   </div>
+              
+                  <div className="invalid-feedback">
+                    Note that is type of category are paid an amount of 25$
+                  </div>
+                </div>
 
-                  <div className="col-md-12">
-                    <Select
-                      label="Location"
-                      placeholder="Select Your location"
-                      searchable
-                      clearable
-                      nothingFound="No options"
-                      transitionProps={{
-                        transition: "pop-top-left",
-                        duration: 80,
-                        timingFunction: "ease",
-                      }}
-                      onChange={setCountry}
-                      value={country}
-                      error={errorCountry}
-                      data={countries}
-                    />
-                  </div>
-                  <div className="col-md-12">
-                    <Select
-                      label="city"
-                      placeholder="Select Your City"
-                      searchable
-                      clearable
-                      nothingFound="No options"
-                      transitionProps={{
-                        transition: "pop-top-left",
-                        duration: 80,
-                        timingFunction: "ease",
-                      }}
-                      onChange={setCity}
-                      value={city}
-                      error={errorCity}
-                      data={cities}
-                    />
-                  </div>
-                  <div className="col-md-12">
-                    {isLoaded ? (
-                      <>
+                <div className="col-md-12">
+                  <Select
+                    label={t("location")}
+                    placeholder={t("selectLocation")}
+                    searchable
+                    clearable
+                    nothingFound="No options"
+                    transitionProps={{
+                      transition: "pop-top-left",
+                      duration: 80,
+                      timingFunction: "ease",
+                    }}
+                    onChange={setCountry}
+                    value={country}
+                    error={errorCountry}
+                    data={countries}
+                  />
+                </div>
+                <div className="col-md-12">
+                  <Select
+                    label={t("city")}
+                    placeholder={t("selectCity")}
+                    searchable
+                    clearable
+                    nothingFound="No options"
+                    transitionProps={{
+                      transition: "pop-top-left",
+                      duration: 80,
+                      timingFunction: "ease",
+                    }}
+                    onChange={setCity}
+                    value={city}
+                    error={errorCity}
+                    data={cities}
+                  />
+                </div>
+                <div className="col-md-12">
+                  {isLoaded ? (
+                    <>
                       {address_Info && (
-                          <p
-                            style={{
-                              fontSize: "12px",
-                              margin: "4px",
-                            }}
-                          >
-                            {address_Info}
-                          </p>
-                        )}
-                      
-                        <GoogleMap
-                          mapContainerStyle={containerStyle}
-                          center={center}
-                          zoom={14}
-                          onLoad={onLoad}
-                          onUnmount={onUnmount}
-                          onClick={onMapClick}
+                        <p
+                          style={{
+                            fontSize: "12px",
+                            margin: "4px",
+                          }}
                         >
-                          {/* Child components, such as markers, info windows, etc. */}
-                          <>
+                          {address_Info}
+                        </p>
+                      )}
+
+                      <GoogleMap
+                        mapContainerStyle={containerStyle}
+                        center={center}
+                        zoom={14}
+                        onLoad={onLoad}
+                        onUnmount={onUnmount}
+                        onClick={onMapClick}
+                      >
+                        {/* Child components, such as markers, info windows, etc. */}
+                        <>
                           <Marker
-           
-           position={{ lat: lat, lng: lng }}
-         
-           icon={{
-             url: `/images/mapicon.png`,
-             origin: new window.google.maps.Point(0, 0),
-             anchor: new window.google.maps.Point(15, 15),
-             scaledSize: new window.google.maps.Size(30, 30),
-           }}
-         />
-                          </>
-                        </GoogleMap>
-                        {errorLocationLat && (
-                          <p
-                            style={{
-                              color: "red",
-  
-                              fontSize: "12px",
-                              marginTop: "4px",
+                            position={{ lat: lat, lng: lng }}
+                            icon={{
+                              url: `/images/mapicon.png`,
+                              origin: new window.google.maps.Point(0, 0),
+                              anchor: new window.google.maps.Point(15, 15),
+                              scaledSize: new window.google.maps.Size(30, 30),
                             }}
-                          >
-                            {errorLocationLat}
-                          </p>
-                        )}
-                        {erroLocationLng && (
-                          <p
-                            style={{
-                              color: "red",
-  
-                              fontSize: "12px",
-                              marginTop: "4px",
-                            }}
-                          >
-                            {erroLocationLng}
-                          </p>
-                        )}
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                  <div className="col-md-12">
-                    <label htmlFor="inputMethod" className="form-label">
-                      Service Method
-                    </label>
-                    <ul
-                      className="list-group"
+                          />
+                        </>
+                      </GoogleMap>
+                      {errorLocationLat && (
+                        <p
+                          style={{
+                            color: "red",
+
+                            fontSize: "12px",
+                            marginTop: "4px",
+                          }}
+                        >
+                          {errorLocationLat}
+                        </p>
+                      )}
+                      {erroLocationLng && (
+                        <p
+                          style={{
+                            color: "red",
+
+                            fontSize: "12px",
+                            marginTop: "4px",
+                          }}
+                        >
+                          {erroLocationLng}
+                        </p>
+                      )}
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                <div className="col-md-12">
+                  <label htmlFor="inputMethod" className="form-label">
+                    Service Method
+                  </label>
+                  <ul
+                    className="list-group"
+                    style={{
+                      border: "1px solid #e2e2e2",
+                      padding: "16px 8px 0px",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <li className="list-group-item">
+                      <input
+                        className="form-check-input me-1"
+                        type="checkbox"
+                        value=""
+                        id="firstCheckbox1"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="firstCheckbox1"
+                      >
+                        Pick Up
+                      </label>
+                    </li>
+                    <li className="list-group-item">
+                      <input
+                        className="form-check-input me-1"
+                        type="checkbox"
+                        value=""
+                        id="secondCheckbox2"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="secondCheckbox2"
+                      >
+                        Delivery
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+                <div className="col-md-12">
+                  <TextInput
+                    label={t("address")}
+                    placeholder={t("enterAddress")}
+                    onChange={(e) => {
+                      setAddress(e.target.value);
+                    }}
+                    error={errorAddress}
+                  />
+                </div>
+                <div className="col-md-12">
+                  <label htmlFor="inputPhone " className="form-label">
+                  {t("number")}
+                  </label>
+
+                  <PhoneInput
+                    defaultCountry="EG"
+                    placeholder={t("enterNumber")}
+                    className="form-control"
+                    value={phone}
+                    onCountryChange={(e) => setPhone_country(e)}
+                    onChange={setPhone}
+                  />
+                  {errorPhone && (
+                    <p
                       style={{
-                        border: "1px solid #e2e2e2",
-                        padding: "16px 8px 0px",
-                        borderRadius: "10px",
+                        color: "red",
+                        fontSize: "12px",
+                        marginTop: "4px",
                       }}
                     >
-                      <li className="list-group-item">
-                        <input
-                          className="form-check-input me-1"
-                          type="checkbox"
-                          value=""
-                          id="firstCheckbox1"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="firstCheckbox1"
-                        >
-                          Pick Up
-                        </label>
-                      </li>
-                      <li className="list-group-item">
-                        <input
-                          className="form-check-input me-1"
-                          type="checkbox"
-                          value=""
-                          id="secondCheckbox2"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="secondCheckbox2"
-                        >
-                          Delivery
-                        </label>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="col-md-12">
-                    <TextInput
-                      label="Address"
-                      placeholder="Enter Your Address"
-                      onChange={(e) => {
-                        setAddress(e.target.value);
-                      }}
-                      error={errorAddress}
-                    />
-                  </div>
-                  <div className="col-md-12">
-                    <label htmlFor="inputPhone " className="form-label">
-                      Mobile Number
-                    </label>
-
-                    <PhoneInput
-                      defaultCountry="EG"
-                      placeholder={"Your Mobile Number"}
-                      className="form-control"
-                      value={phone}
-                      onCountryChange={(e) => setPhone_country(e)}
-                      onChange={setPhone}
-                    />
-                    {errorPhone && (
+                      {errorPhone}
+                    </p>
+                  )}
+                </div>
+                <div className="col-md-12 g-2 new_row row">
+                  <label>{t("serviceDetails")}</label>
+                  <label>{t("workTime")}</label>
+                  <div className="col-6">
+                    <DemoItem label={t("from")}>
+                      <MobileTimePicker
+                        defaultValue={dayjs("2022-04-17T15:30")}
+                        onChange={(e) =>
+                          setTimeFrom(e.$d.toLocaleTimeString("en-US", options))
+                        }
+                      />
+                    </DemoItem>
+                    {errorTimeFrom && (
                       <p
                         style={{
                           color: "red",
+
                           fontSize: "12px",
                           marginTop: "4px",
                         }}
                       >
-                        {errorPhone}
+                        {errorTimeFrom}
                       </p>
                     )}
                   </div>
-                  <div className="col-md-12 g-2 new_row row">
-                    <label htmlFor="">Service details</label>
-                    <div className="col-6">
-                      <DemoItem label="Mobile variant">
-                        <MobileTimePicker
-                          defaultValue={dayjs("2022-04-17T15:30")}
-                          onChange={(e) =>
-                            setTimeFrom(
-                              e.$d.toLocaleTimeString("en-US", options)
-                            )
-                          }
-                        />
-                      </DemoItem>
-                      {errorTimeFrom && (
-                        <p
-                          style={{
-                            color: "red",
+                  <div className="col-6">
+                    <DemoItem label={t("to")}>
+                      <MobileTimePicker
+                        defaultValue={dayjs("2022-04-17T15:30")}
+                        onChange={(e) =>
+                          setTimeto(e.$d.toLocaleTimeString("en-US", options))
+                        }
+                      />
+                    </DemoItem>
+                    {errorTimeto && (
+                      <p
+                        style={{
+                          color: "red",
 
-                            fontSize: "12px",
-                            marginTop: "4px",
-                          }}
-                        >
-                          {errorTimeFrom}
-                        </p>
-                      )}
-                    </div>
-                    <div className="col-6">
-                      <DemoItem label="Mobile variant">
-                        <MobileTimePicker
-                          defaultValue={dayjs("2022-04-17T15:30")}
-                          onChange={(e) =>
-                            setTimeto(e.$d.toLocaleTimeString("en-US", options))
-                          }
-                        />
-                      </DemoItem>
-                      {errorTimeto && (
-                        <p
-                          style={{
-                            color: "red",
-
-                            fontSize: "12px",
-                            marginTop: "4px",
-                          }}
-                        >
-                          {errorTimeto}
-                        </p>
-                      )}
-                    </div>
+                          fontSize: "12px",
+                          marginTop: "4px",
+                        }}
+                      >
+                        {errorTimeto}
+                      </p>
+                    )}
                   </div>
+                </div>
+                <div className="col-12">
+                  <MultiSelect
+                    label={t("selectWeekend")}
+                    placeholder={t("selectDays")}
+                    data={[
+                      "Monday",
+                      "Tuesday",
+                      "Wednesday",
+                      "Thursday",
+                      "Friday",
+                      "Saturday",
+                      "Sunday",
+                    ]}
+                    onChange={setholidays}
+                    value={holidays}
+                    error={errorHolidays}
+                  />
+                </div>
+                <div className="col-md-12 g-2 new_row row">
                   <div className="col-12">
-                    <MultiSelect
-                      label="Your favorite libraries"
-                      placeholder="Pick value"
-                      data={[
-                        "Monday",
-                        "Tuesday",
-                        "Wednesday",
-                        "Thursday",
-                        "Friday",
-                        "Saturday",
-                        "Sunday",
-                      ]}
-                      onChange={setholidays}
-                      value={holidays}
-                      error={errorHolidays}
+                    <Textarea
+                      radius="md"
+                      label={t("description")}
+                      placeholder=""
+                      onChange={(e) => setDescription(e.target.value)}
+                      error={errorDescription}
                     />
                   </div>
-                  <div className="col-md-12 g-2 new_row row">
-                    <div className="col-12">
-                      <Textarea
-                        radius="md"
-                        label="Description"
-                        placeholder=""
-                        onChange={(e) => setDescription(e.target.value)}
-                        error={errorDescription}
-                      />
-                    </div>
-                    <div className="col-8">
-                      <NumberInput
-                        label="Price"
-                        hideControls
-                        onChange={setPrice}
-                        error={errorPrice}
-                      />
-                    </div>
-                    <div className="col-4">
-                      <Select
-                        label="Currency"
-                        placeholder="Select currency"
-                        searchable
-                        clearable
-                        nothingFound="No options"
-                        transitionProps={{
-                          transition: "pop-top-left",
-                          duration: 80,
-                          timingFunction: "ease",
-                        }}
-                        onChange={setCurrency}
-                        value={currency}
-                        error={errorCurrency}
-                        data={AllCurrency}
-                      />
-                    </div>
+                  <div className="col-8">
+                    <NumberInput
+                      label={t("price")}
+                      hideControls
+                      onChange={setPrice}
+                      error={errorPrice}
+                    />
+                  </div>
+                  <div className="col-4">
+                    <Select
+                      label={t("currency")}
+                      placeholder="Select currency"
+                      searchable
+                      clearable
+                      nothingFound="No options"
+                      transitionProps={{
+                        transition: "pop-top-left",
+                        duration: 80,
+                        timingFunction: "ease",
+                      }}
+                      onChange={setCurrency}
+                      value={currency}
+                      error={errorCurrency}
+                      data={AllCurrency}
+                    />
+                  </div>
 
-                    <div className="col-12">
-                      <button className="add_more">+ Add More</button>
-                    </div>
+                  <div className="col-12">
+                    <button className="add_more">+ {t("addMore")}</button>
                   </div>
                 </div>
               </form>
               <input
                 type="submit"
-                value="Add Services"
+                value={t("addServicesBtn")}
                 className="btn_page btn_Address"
                 onClick={(e) => {
                   e.preventDefault();

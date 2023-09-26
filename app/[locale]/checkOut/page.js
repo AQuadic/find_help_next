@@ -4,11 +4,14 @@ import { Group, Radio } from '@mantine/core'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import React, { useState } from 'react'
 
 function page() {
   const [date, setDate] =useState()
+  const t = useTranslations("checkOut");
+
   console.log(date);
   return (
    <>
@@ -28,27 +31,27 @@ function page() {
 
     <section className="checkOut container m90">
       <div className="part1">
-        <h2 className="headtitle">Check Out</h2>
+        <h2 className="headtitle">{t("title")}</h2>
         <form className="box">
           <div className="box1">
       
-            <h3>Service Method</h3>
+            <h3>{t("serviceMethod")}</h3>
             <Radio.Group
       name="favoriteFramework"
     >
       <Group mt="xs" >
-        <Radio value="pick" label="Pick Up" />
-        <Radio value="Delivery" label="Delivery" />
+        <Radio value="pick" label={t("pickUp")} />
+        <Radio value="Delivery" label={t("delivery")} />
       
       </Group>
     </Radio.Group>
           </div>
           <div className="box1">
-            <h3>Address</h3>
+            <h3>{t("address")}</h3>
             <div className="add">
               <img src="/images/address.svg" alt="address" />
               <Link href="/address" style={{fontFamily: "DM Sans3"}}
-                >Add Address
+                >{t("addAddress")}
                 </Link>
               <div className="about_add" style={{display: "none"}}>
                 <p>
@@ -60,21 +63,21 @@ function page() {
             </div>
           </div>
           <div className="box1">
-            <h3>Payment Method</h3>
+            <h3>{t("paymentMethod")}</h3>
             <Radio.Group
       name="favoriteFramework"
     >
       <Group mt="xs" >
-        <Radio value="Cash" label="Cash" />
-        <Radio value="Credit" label="Credit Card" />
+        <Radio value="Cash" label={t("cash")}/>
+        <Radio value="Credit" label={t("credit")} />
       
       </Group>
     </Radio.Group>
            
           </div>
           <div className="box1">
-            <h3>Date</h3>
-            <DatePicker label="Basic date picker" placeholder="Select Date"
+            <h3>{t("date")}</h3>
+            <DatePicker label="Basic date picker" placeholder={t("selectDate")}
              defaultValue={dayjs("2022-04-17")}
       value={date}
       onChange={(e)=>setDate( e.$d.toLocaleDateString("en-US"))} />
@@ -82,23 +85,23 @@ function page() {
 
           
           </div>
-          <input type="submit" value="Place Order" className="btn_page" />
+          <input type="submit" value={t("placeOrder")} className="btn_page" />
         </form>
       </div>
       <div className="part2">
-        <h2 className="headtitle">Booking Summary</h2>
+        <h2 className="headtitle">{t("title2")}</h2>
         <div className="box">
           <ul>
             <li>
-              <h3>Provider</h3>
+              <h3>{t("provider")}</h3>
               <h4>Muhammed Ahmed</h4>
             </li>
             <li>
-              <h3>Service Type</h3>
+              <h3>{t("serviceType")}</h3>
               <h4>Repair car’s Wheels</h4>
             </li>
             <li className="amount">
-              <h3>Amount</h3>
+              <h3>{t("amount")}</h3>
               <h4>2500 EGP</h4>
             </li>
           </ul>

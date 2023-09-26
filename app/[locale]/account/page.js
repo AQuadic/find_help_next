@@ -4,6 +4,7 @@ import BtnLogOut from "@/components/btnLogOut";
 import { getUser } from "@/components/useAPI/GetUser";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -27,13 +28,8 @@ function page() {
   const [phone_normalized, setphone_normalized] = useState();
   const [phone_country, setPhone_country] = useState();
   const [user, setUser] = useState("");
-  console.log(name);
-  console.log(email);
-  console.log(IsImage);
-  console.log(phone);
-  console.log(phone_national);
-  console.log(phone_country);
-  console.log(selectedFile);
+  const t = useTranslations("Account");
+
   
   const handleHeaderInputChange = (e) => {
     setSelectedFile(e.target.files[0]);
@@ -106,16 +102,16 @@ console.log(user);
       <div className="account_info personal_info">
         <div className="part1">
           <ul>
-            <li><Link href="/account" className="active">My Profile</Link></li>
-            <li><Link href="/account/myServices">My services</Link></li>
-            <li><Link href="/account/prmoted">Promotion</Link></li>
-            <li><Link href="/account/myOrders">My Orders</Link></li>
-            <li><Link href="/account/addressess">Addresses</Link></li>
+            <li><Link href="/account" className="active">{t("account")}</Link></li>
+            <li><Link href="/account/myServices">{t("services")}</Link></li>
+            <li><Link href="/account/prmoted">{t("promotion")}</Link></li>
+            <li><Link href="/account/myOrders">{t("myOrders")}</Link></li>
+            <li><Link href="/account/addressess">{t("addresses")}</Link></li>
             <li><BtnLogOut/></li>
           </ul>
         </div>
         <div className="Profile">
-          <h2 className="cart_title2">Personal Details</h2>
+          <h2 className="cart_title2">{t("personal")}</h2>
 
           
           <div className="img_persone">
@@ -136,24 +132,24 @@ console.log(user);
 
           <form className="row g-3 form_page">
             <div className="col-md-12">
-              <label htmlFor="inputname4 " className="form-label">Full Name </label>
+              <label htmlFor="inputname4 " className="form-label">{t("full")}</label>
               <input
                 type="text"
                 className="form-control"
                 id="inputname4"
-                placeholder="Full Name"
+                placeholder={t("full")}
                 value={name}
                 onChange={(e)=>setName(e.target.value)}
               />
             </div>
             <div className="col-md-12 tel_num">
-              <label htmlFor="inputtel " className="form-label">Phone Number </label>
+              <label htmlFor="inputtel " className="form-label">{t("phone")}</label>
              
               <PhoneInput
                 defaultCountry={phone_country}
                 country={phone_country}
                 initialValueFormat="national"
-                placeholder={"Your Mobile Number"}
+                placeholder={t("enterMobile")}
                 className="form-control"
                 value={phone_normalized}
                 onCountryChange={(e)=>setPhone_country(e)}
@@ -161,17 +157,17 @@ console.log(user);
               />
             </div>
             <div className="col-md-12">
-              <label htmlFor="inputemail " className="form-label">Email Adress </label>
+              <label htmlFor="inputemail " className="form-label">{t("email")}</label>
               <input
                 type="email"
                 className="form-control"
                 id="inputemail"
-                placeholder="Email"
+                placeholder={t("email")}
                value={email}
                onChange={(e)=>setEmail(e.target.value)}
               />
             </div>
-            <button type="submit" href="" className="next btn_page" onClick={(e)=>{e.preventDefault();handelProfile()}}>Save</button>
+            <button type="submit" href="" className="next btn_page" onClick={(e)=>{e.preventDefault();handelProfile()}}>{t("save")}</button>
           </form>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 import ItemCourse from "@/components/ItemCourse";
 import { getServicesClient, getSingleServices } from "@/components/useAPI/shop/shop";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Script from "next/script";
 import React from "react";
@@ -12,6 +13,7 @@ function page({ params }) {
   const [services, setServices] = useState();
   const [servicesClient, setServicesClient] = useState();
   const [ClientID, setClientID] = useState();
+  const t = useTranslations("Categories");
 
   var settings = {
     dots: false,
@@ -59,9 +61,7 @@ const FetchDataOFServicesClient = async () => {
   }
  
 };
-console.log("====================================");
-  console.log(servicesClient);
-  console.log("====================================");
+
   return (
     <>
       {services && (
@@ -126,7 +126,7 @@ console.log("====================================");
               )}
               <div className="bookNow_Fav">
                 <Link href="/checkOut" className="btn_page">
-                  Book Now
+                {t("book")}
                 </Link>
                 <div
                   className="fav"
@@ -137,7 +137,7 @@ console.log("====================================");
           </section>
 
           <section className="provider container m90">
-            <h2 className="headtitle">Provider Details</h2>
+            <h2 className="headtitle">{t("providerDetails")}</h2>
             <div className="part1">
             
               <img src={services.user.image?services.user.image.url:'/images/person.webp'} className="person" alt="person" />
@@ -149,17 +149,17 @@ console.log("====================================");
             <div className="part2">
               <div className="rat_cus">
                 <div className="rating rat_cus_same">
-                  <h3>Provider Rating</h3>
+                  <h3>{t("providerRating")}</h3>
                   <div className="Star">
                     <p>4.8</p>
                     <img src="/images/star.svg" alt="star" />
                   </div>
                   <p>
-                    <span>79% </span> Positive Ratings
+                    <span>79% </span> {t("providerRating")}
                   </p>
                 </div>
                 <div className="customers rat_cus_same">
-                  <h3>Customers</h3>
+                  <h3>{t("customers")}</h3>
                   <h4>249K+</h4>
                   <p>During the last 90 days</p>
                 </div>
@@ -214,7 +214,7 @@ console.log("====================================");
           </section>
 
           <section className="ServicesProvider services container m90">
-            <h2 className="headtitle">All Services by this provider</h2>
+            <h2 className="headtitle">{t("searchBook")}</h2>
            <div style={{maxWidth:"100%",display:"block"}} className=" allServices">
            <Slider  {...settings}  >
             <div className="item" style={{paddingLeft:"8px",paddingRight:"8px"}}>

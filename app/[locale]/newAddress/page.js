@@ -10,6 +10,7 @@ import { getAreas, getCities, getHomePage } from "@/components/useAPI/GetUser";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { useTranslations } from "next-intl";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -17,6 +18,8 @@ const containerStyle = {
 function page() {
   const [lat, setLat] = useState(-3.745);
   const [lng, setLng] = useState(-38.523);
+  const t = useTranslations("checkOut");
+  const t2 = useTranslations("Account");
 
   const [nameAddresse, setNameAddresse] = useState("");
   const [countries, setCountries] = useState([]);
@@ -200,13 +203,13 @@ function page() {
 
       <section className="checkOut container m90">
         <div className="part1">
-          <h2 className="headtitle">Addresses</h2>
+          <h2 className="headtitle">{t("titleAddresses")}</h2>
           <div className="box">
             <form className="row g-3 form_page" style={{ maxWidth: "490px" }}>
               {/* <!-- map  --> */}
 
               <div className="map col-md-12">
-                <label className="form-label">Select Delivery Location</label>
+                <label className="form-label">{t2("selectLocation")}</label>
                 {isLoaded ? (
                   <>
                     <GoogleMap
@@ -238,8 +241,8 @@ function page() {
               <div className="col-md-12">
                 <TextInput
                   radius="md"
-                  label="Name Address"
-                  placeholder="Enter Name Address"
+                  label={t2("nameAddresse")}
+                  placeholder={t2("enterName")}
                   onChange={(e) => {
                     setNameAddresse(e.target.value);
                   }}
@@ -249,8 +252,8 @@ function page() {
 
               <div className="col-md-12">
                 <Select
-                  label="Country"
-                  placeholder="Select Your Country"
+                  label={t2("country")}
+                  placeholder={t2("enterCountry")}
                   searchable
                   clearable
                   nothingFound="No options"
@@ -267,8 +270,8 @@ function page() {
               </div>
               <div className="col-md-12">
                 <Select
-                  label="city"
-                  placeholder="Select Your City"
+                  label={t2("city")}
+                  placeholder={t2("enterCity")}
                   searchable
                   clearable
                   nothingFound="No options"
@@ -285,8 +288,8 @@ function page() {
               </div>
               <div className="col-md-12">
                 <Select
-                  label="Area"
-                  placeholder="Select Your Area"
+                  label={t2("area")}
+                  placeholder={t2("enterArea")}
                   searchable
                   clearable
                   nothingFound="No options"
@@ -304,8 +307,8 @@ function page() {
               <div className="col-md-12">
                 <TextInput
                   radius="md"
-                  label="Address"
-                  placeholder="Type Your Address"
+                  label={t2("address")}
+                  placeholder={t2("enterAddress")}
                   onChange={(e) => {
                     setAddresse(e.target.value);
                   }}
@@ -315,8 +318,8 @@ function page() {
               <div className="col-md-6">
                 <TextInput
                   radius="md"
-                  label="Building No."
-                  placeholder="Enter Building No."
+                  label={t2("building")}
+                  placeholder={t2("enterBuilding")}
                   onChange={(e) => {
                     setBuildingNo(e.target.value);
                   }}
@@ -325,8 +328,8 @@ function page() {
               <div className="col-md-6">
                 <TextInput
                   radius="md"
-                  label="Building Name"
-                  placeholder="Enter Building Name"
+                  label={t2("building2")}
+                  placeholder={t2("enterBuilding")}
                   onChange={(e) => {
                     setBuildingName(e.target.value);
                   }}
@@ -335,12 +338,12 @@ function page() {
 
               <div className="col-md-12">
                 <label htmlFor="inputPhone " className="form-label">
-                  Mobile Number{" "}
+                {t2("mobile")}
                 </label>
 
                 <PhoneInput
                   defaultCountry="EG"
-                  placeholder={"Your Mobile Number"}
+                  placeholder={t2("enterMobile")}
                   className="form-control"
                   value={phone}
                   onCountryChange={(e) => setPhone_country(e)}
@@ -361,7 +364,7 @@ function page() {
             </form>
             <input
               type="submit"
-              value="Add Address"
+              value={t2("btnAddAddress")}
               className="btn_page btn_Address"
               onClick={(e) => {
                 e.preventDefault();
@@ -383,19 +386,19 @@ function page() {
           </div>
         </div>
         <div className="part2">
-          <h2 className="headtitle">Booking Summary</h2>
+          <h2 className="headtitle">{t("title2")}</h2>
           <div className="box">
             <ul>
               <li>
-                <h3>Provider</h3>
+                <h3>{t("provider")}</h3>
                 <h4>Muhammed Ahmed</h4>
               </li>
               <li>
-                <h3>Service Type</h3>
+                <h3>{t("serviceType")}</h3>
                 <h4>Repair car’s Wheels</h4>
               </li>
               <li className="amount">
-                <h3>Amount</h3>
+                <h3>{t("amount")}</h3>
                 <h4>2500 EGP</h4>
               </li>
             </ul>

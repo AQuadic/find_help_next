@@ -6,11 +6,16 @@ import { getHomePage, getUser } from "../useAPI/GetUser";
 import { useState } from "react";
 import { navState } from "@/atoms";
 import { useRecoilState } from "recoil";
+import {usePathname, useRouter} from 'next-intl/client';
+import { useTranslations } from "next-intl";
 
-function NavBar() {
+function NavBar({lang}) {
   const [categories, setCategories] = useState([]);
   const [user, setUser] = useState("");
   const [IsUser, setIsUser] = useRecoilState(navState);
+  const t = useTranslations('Nav');
+  const router = useRouter();
+  const pathname = usePathname();
   useEffect(() => {
     FetchDataOFUser();
   }, [IsUser]);
@@ -45,27 +50,27 @@ const FetchDataOFData = async () => {
               <ul className="dropdown-menu myAcc">
                 <li>
                   <Link className="dropdown-item" href="/account">
-                    My Profile
+                   {t("myProfile")}
                   </Link>
                 </li>
                 <li>
                   <a className="dropdown-item" href="/account/myServices">
-                    My Services
+                  {t("myServices")}
                   </a>
                 </li>
                 <li>
                   <a className="dropdown-item" href="/account/prmoted">
-                    Promotion
+                   {t("promotion")}
                   </a>
                 </li>
                 <li>
                   <a className="dropdown-item" href="/account/myOrders">
-                    My Orders
+                    {t("myOrders")}
                   </a>
                 </li>
                 <li>
                   <a className="dropdown-item" href="/account/addressess">
-                    Addresses
+                    {t("addresses")}
                   </a>
                 </li>
               </ul>
@@ -97,7 +102,7 @@ const FetchDataOFData = async () => {
                   aria-expanded="false"
                 >
                   <img src="/images/categorization.svg" alt="categories" />
-                  Categories
+                  {t("categories")}
                 </a>
                 <ul className="dropdown-menu row">
                   {
@@ -157,7 +162,7 @@ const FetchDataOFData = async () => {
           </a>
           <Link href="/add_Services" className="nav_btn">
             <img src="/images/add.svg" className="add" alt="Add_Services" />
-            <p>Add Services</p>
+            <p>{t("addServices")}</p>
           </Link>
           {IsUser && (
             <div className="dropdown" style={{ position: "relative" }}>
@@ -166,33 +171,33 @@ const FetchDataOFData = async () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                {user.name},
+               {t("hi")}, {user.name}
               </h4>
 
               <ul className="dropdown-menu myAcc">
                 <li>
                   <Link className="dropdown-item" href="/account">
-                    My Profile
+                   {t("myProfile")}
                   </Link>
                 </li>
                 <li>
                   <Link className="dropdown-item" href="/account/myServices">
-                    My Services
+                   {t("myServices")}
                   </Link>
                 </li>
                 <li>
                   <Link className="dropdown-item" href="/account/prmoted">
-                    Promotion
+                   {t("promotion")}
                   </Link>
                 </li>
                 <li>
                   <Link className="dropdown-item" href="/account/myOrders">
-                    My Orders
+                    {t("myOrders")}
                   </Link>
                 </li>
                 <li>
                   <Link className="dropdown-item" href="/account/addressess">
-                    Addresses
+                    {t("addresses")}
                   </Link>
                 </li>
               </ul>
@@ -204,9 +209,9 @@ const FetchDataOFData = async () => {
               <p>Login</p>
             </Link>
           )}
-          <button className="lang">
+          <button className="lang" onClick={()=>{router.replace(`${pathname+window.location.search}`, {locale: lang==='en'?'ar':'en'});}}>
             <img src="/images/lang.webp" className="lang" alt="lang" />
-            <p>En</p>
+            <p>{lang==='en'?'Ar':'En'}</p>
           </button>
         </div>
 
@@ -217,11 +222,11 @@ const FetchDataOFData = async () => {
             </a>
             <Link href="/add_Services" className="nav_btn">
               <img src="/images/add.svg" className="add" alt="Add_Services" />
-              <p>Add Services</p>
+              <p>{t("addServices")}</p>
             </Link>
-            <button className="lang">
+            <button className="lang" onClick={()=>{router.replace(`${pathname+window.location.search}`, {locale: lang==='en'?'ar':'en'});}}>
               <img src="/images/lang.webp" className="lang" alt="lang" />
-              <p>En</p>
+              <p>{lang==='en'?'Ar':'En'}</p>
             </button>
           </div>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">

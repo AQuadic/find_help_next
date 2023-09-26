@@ -6,12 +6,14 @@ import React, { useEffect, useState } from "react";
 import BtnLogOut from "@/components/btnLogOut";
 import { getMyServices, getMyServices2 } from "@/components/useAPI/shop/shop";
 import axios from "axios";
+import { useTranslations } from "next-intl";
 
 function page() {
   const [services, setServices] = useState([]);
   const [services2, setServices2] = useState([]);
   const [status, setStatus] = useState("Services");
   const [ServicesStatus, setServicesStatus] = useState(true);
+  const t = useTranslations("Account");
   useEffect(() => {
     if (status === "Services") {
       FetchDataOFMyServices();
@@ -136,21 +138,21 @@ console.log(services);
           <div className="part1">
             <ul>
               <li>
-                <Link href="/account">My Profile</Link>
+                <Link href="/account">{t("account")}</Link>
               </li>
               <li>
                 <Link href="/account/myServices" className="active">
-                  My services
+                 {t("services")}
                 </Link>
               </li>
               <li>
-                <Link href="/account/prmoted">Promotion</Link>
+                <Link href="/account/prmoted">{t("promotion")}</Link>
               </li>
               <li>
-                <Link href="/account/myOrders">My Orders</Link>
+                <Link href="/account/myOrders">{t("myOrders")}</Link>
               </li>
               <li>
-                <Link href="/account/addressess">Addresses</Link>
+                <Link href="/account/addressess">{t("addresses")}</Link>
               </li>
               <li>
                 <BtnLogOut />
@@ -161,10 +163,9 @@ console.log(services);
             <div className="warning">
               <img src="/images/warning.webp" alt="warning" />
               <div className="about_warning">
-                <h3>Be careful!</h3>
+                <h3>{t("careful")}</h3>
                 <p>
-                  Your ratings have become low, please work to improve your
-                  service.
+                 {t("yourRatings")}
                 </p>
               </div>
             </div>
@@ -175,7 +176,7 @@ console.log(services);
                 }}
                 className={status === "Services" ? "active" : ""}
               >
-                My Services
+               {t("services")}
               </button>
               <button
                 onClick={() => {
@@ -183,7 +184,7 @@ console.log(services);
                 }}
                 className={status === "PENDING" ? "active" : ""}
               >
-                Requests
+               {t("requests")}
               </button>
               <button
                 onClick={() => {
@@ -191,7 +192,7 @@ console.log(services);
                 }}
                 className={status === "ACCEPTED" ? "active" : ""}
               >
-                Up Coming
+                 {t("upComing")}
               </button>
               <button
                 onClick={() => {
@@ -199,7 +200,7 @@ console.log(services);
                 }}
                 className={status === "COMPLETED" ? "active" : ""}
               >
-                Completed
+                {t("completed")}
               </button>
               <button
                 onClick={() => {
@@ -207,7 +208,7 @@ console.log(services);
                 }}
                 className={status === "REJECTED" ? "active" : ""}
               >
-                Rejected
+               {t("rejected")}
               </button>
             </div>
             <section className="services container m90">
@@ -299,7 +300,7 @@ console.log(services);
                           href={`/account/myOrders/${service.id}`}
                           className="client_details"
                         >
-                          <p>Provider Details</p>
+                          <p>{t("providerDetails")}</p>
                           <img src="/images/Arrow.svg" alt="Arrow" />
                         </Link>
                     
@@ -330,7 +331,7 @@ console.log(services);
                                 fontFamily: "DM Sans2",
                               }}
                             >
-                              Completed
+                              {t("completed")}
                             </li>
                           ) : null}
                           <li>
@@ -363,14 +364,14 @@ console.log(services);
                         </div>
                         {status === "PENDING" && (
                           <div className="acc_rej">
-                            <button className="accept" onClick={()=>handelStatus(service.id,"ACCEPTED")}>Accept</button>
-                            <button className="reject" onClick={()=>handelStatus(service.id,"REJECTED")}>Reject</button>
+                            <button className="accept" onClick={()=>handelStatus(service.id,"ACCEPTED")}>{t("accepted")}</button>
+                            <button className="reject" onClick={()=>handelStatus(service.id,"REJECTED")}>{t("reject")}</button>
                           </div>
                         )}
                         {status === "ACCEPTED" && (
                           <div className="acc_rej">
-                            <button className="accept" onClick={()=>handelStatus(service.id,"COMPLETED")}>Completed</button>
-                            <button className="reject" onClick={()=>handelStatus(service.id,"CANCELED")}>Cancel</button>
+                            <button className="accept" onClick={()=>handelStatus(service.id,"COMPLETED")}>{t("completed")}</button>
+                            <button className="reject" onClick={()=>handelStatus(service.id,"CANCELED")}>{t("camera")}</button>
                           </div>
                         )}
                       </div>

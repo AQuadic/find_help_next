@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import BtnLogOut from "@/components/btnLogOut";
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { useTranslations } from "next-intl";
 
 const containerStyle = {
   width: "100%",
@@ -12,7 +12,7 @@ const containerStyle = {
 function page() {
   const [lat, setLat] = useState(31.2363307);
   const [lng, setLng] = useState(29.9701217);
-
+  const t = useTranslations("Account");
   const center = {
     lat: lat,
     lng: lng,
@@ -47,21 +47,21 @@ function page() {
           <div className="part1">
             <ul>
               <li>
-                <Link href="/account">My Profile</Link>
+                <Link href="/account">{t("account")}</Link>
               </li>
               <li>
                 <Link href="/account/myServices" className="active">
-                  My services
+                {t("services")}
                 </Link>
               </li>
               <li>
-                <Link href="/account/prmoted">Promotion</Link>
+                <Link href="/account/prmoted">{t("promotion")}</Link>
               </li>
               <li>
-                <Link href="/account/myOrders">My Orders</Link>
+                <Link href="/account/myOrders">{t("myOrders")}</Link>
               </li>
               <li>
-                <Link href="/account/addressess">Addresses</Link>
+                <Link href="/account/addressess">{t("addresses")}</Link>
               </li>
               <li>
                 <BtnLogOut />

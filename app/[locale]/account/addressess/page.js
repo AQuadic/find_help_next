@@ -3,9 +3,11 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import BtnLogOut from "@/components/btnLogOut";
 import { getUserLocation } from '@/components/useAPI/GetUser';
+import { useTranslations } from 'next-intl';
 function page() {
 
 const [location ,setLocation] = useState([])
+const t = useTranslations("Account");
   useEffect(() => {
     FetchDataOFUserLocation();
   }, []);
@@ -31,18 +33,18 @@ const [location ,setLocation] = useState([])
       <div className="account_info personal_info">
         <div className="part1">
           <ul>
-            <li><Link href="/account" >My Profile</Link></li>
-            <li><Link href="/account/myServices" >My services</Link></li>
-            <li><Link href="/account/prmoted" >Promotion</Link></li>
-            <li><Link href="/account/myOrders" >My Orders</Link></li>
+            <li><Link href="/account" >{t("account")}</Link></li>
+            <li><Link href="/account/myServices" >{t("services")}</Link></li>
+            <li><Link href="/account/prmoted" >{t("promotion")}</Link></li>
+            <li><Link href="/account/myOrders" >{t("myOrders")}</Link></li>
             <li>
-              <Link href="/account/addressess"   className="active">Addresses</Link>
+              <Link href="/account/addressess"   className="active">{t("addresses")}</Link>
             </li>
            <li><BtnLogOut/></li>
           </ul>
         </div>
         <div className="Profile">
-          <h2 className="cart_title2">Addresses</h2>
+          <h2 className="cart_title2">{t("addresses")}</h2>
           <form className="">
             <div className="box1 address_page">
               {
@@ -72,7 +74,7 @@ const [location ,setLocation] = useState([])
               </div>
               <Link href="/account/addressess/new_Address" className="addAddress">
                 <h5>+</h5>
-                <h6>Add New Address</h6>
+                <h6>{t("addAddress")}</h6>
               </Link>
             </div>
           </form>

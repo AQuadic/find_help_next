@@ -7,11 +7,14 @@ import { getCategories, getServices } from "@/components/useAPI/shop/shop";
 import { useEffect } from "react";
 import { getHomePage } from "@/components/useAPI/GetUser";
 import Cookies from "js-cookie";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 export default function Home() {
   const [categories, setCategories] = useState([]);
   const [services, setServices] = useState();
   const [data, setData] = useState();
+  const t = useTranslations('Index');
 useEffect(() => {
   FetchDataOFData()
     FetchDataOFIServices();
@@ -40,17 +43,17 @@ console.log(data);
         <section className= "find">
           <img src="/images/find.webp" className= "imgFind" alt="find" />
           <div className= "aboutFind container">
-            <h1>The largest website to find and request services</h1>
-            <h2>Find your services with ease</h2>
+            <h1>{t("title")}</h1>
+            <h2>{t("title2")}</h2>
             <form action="">
-              <input type="text" placeholder="What you want to search about?" />
-              <input type="submit" value="Search" />
+              <input type="text" placeholder={t("search")} />
+              <input type="submit" value={t("btnSearch")} />
             </form>
           </div>
         </section>
 
         <section className= "categories container m90">
-          <h2 className= "headtitle">Categories</h2>
+          <h2 className= "headtitle">{t("categories")}</h2>
           <div className= "parts">
             {
               data?.service_categories?.map((item)=>{
@@ -64,16 +67,15 @@ return(
 
         <section className= "use m90">
           <div className= "container">
-            <h2>How To Use Find Help</h2>
+            <h2>{t("howTo")}</h2>
             <div className= "parts">
               <div className= "part">
                 <div className= "numStep">1</div>
                 <img src="/images/people-search.webp" alt="people-search" />
                 <div className= "aboutUse">
-                  <h3>Find The Services</h3>
+                  <h3>{t("find")}</h3>
                   <p>
-                    Find the service you need using the search box at the top or
-                    through the categories.
+                  {t("findDec")}
                   </p>
                 </div>
               </div>
@@ -81,10 +83,9 @@ return(
                 <div className= "numStep">2</div>
                 <img src="/images/click.webp" alt="click" />
                 <div className= "aboutUse">
-                  <h3>Make a Book</h3>
+                  <h3>{t("make")}</h3>
                   <p>
-                    Review service descriptions and buyer reviews, then request
-                    to open contact with the seller.
+                  {t("makDece")}
                   </p>
                 </div>
               </div>
@@ -92,10 +93,9 @@ return(
                 <div className= "numStep">3</div>
                 <img src="/images/shopping-list1.webp" alt="shopping-list" />
                 <div className= "aboutUse">
-                  <h3>Receive your service</h3>
+                  <h3> {t("receive")}</h3>
                   <p>
-                    Contact the seller directly within the find help website
-                    until receiving your complete order.
+                  {t("receiveDec")}
                   </p>
                 </div>
               </div>
@@ -141,32 +141,32 @@ return(
           <div className= "container">
             <div className= "parts">
               <div className= "part1">
-                <h3 style={{ color: "#1866ff" }}>Search - Book - Receive</h3>
+                <h3 style={{ color: "#1866ff" }}>{t("searchBook")}</h3>
                 <img
                   src="/images/hotelbooking-pana(1)1.webp"
                   alt="hotelbooking-panar"
                 />
-                <a
-                  href="#"
+                <Link
+                  href="/categoriesDetails/26"
                   className= "btn_page btn_page2"
                   style={{ backgroundColor: "#1866ff" }}
                 >
-                  Find The Services
-                </a>
+                 {t("btnFind")}
+                </Link>
               </div>
               <div className= "part2">
-                <h2>Everything you need and more in one site</h2>
+                <h2> {t("everything")}</h2>
               </div>
               <div className= "part3">
-                <h3 style={{ color: "#f3b100" }}>Add - Announce - Sale</h3>
+                <h3 style={{ color: "#f3b100" }}>{t("addAnnounce")}</h3>
                 <img src="/images/refund-pana1.webp" alt="refund-pana" />
-                <a
-                  href="#"
+                <Link
+                  href="/add_Services"
                   className= "btn_page"
                   style={{ backgroundColor: "#f3b100" }}
                 >
-                  Add Your Services
-                </a>
+                 {t("btnAdd")}
+                </Link>
               </div>
             </div>
           </div>
@@ -211,14 +211,13 @@ return(
           <img src="/images/phone.webp" className= "phone" alt="phone" />
           <div className= "aboutTry">
             <div className= "part1">
-              <h2>TRY THE FIND HELP APP</h2>
+              <h2>{t("try")}</h2>
               <p>
-                Buy, sell and find just about anything using the app on your
-                mobile.
+               {t("buy")}
               </p>
             </div>
             <div className= "part2">
-              <h3>GET YOUR APP TODAY</h3>
+              <h3>{t("getApp")}</h3>
               <ul>
                 <li>
                   <a href="">

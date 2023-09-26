@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useEffect } from "react";
@@ -11,9 +12,8 @@ function page() {
   const router = useRouter();
   const [phone, setPhone] = useState("");
   const [phone_country, setPhone_country] = useState("EG");
-
   const [Errorphone, setErrorPhone] = useState("");
-
+  const t = useTranslations("Sign");
   const handellogin = () => {
     const po = axios
       .post(
@@ -38,7 +38,7 @@ function page() {
         router.push("/verify");
       })
       .catch((res) => {
-        alert('An error occurred: ' + res.message);
+        alert("An error occurred: " + res.message);
         res.response.data.message
           ? setErrorPhone(res.response.data.message)
           : setErrorPhone("");
@@ -50,18 +50,18 @@ function page() {
       <section className="page_log">
         <div className="container">
           <div className="box_log">
-            <h2>Hello,</h2>
+            <h2>{t("hello")}</h2>
             <p className="dec">
-              Please enter your mobile number to continue the process
+            {t("please")}
             </p>
             <form className="row g-3 form_page">
               <div className="col-md-12">
                 <label htmlFor="inputPhone " className="form-label">
-                  Mobile Number{" "}
+                {t("mobile")}
                 </label>
                 <PhoneInput
                   defaultCountry="EG"
-                  placeholder={"Your Mobile Number"}
+                  placeholder={t("enterNumber")}
                   className="form-control"
                   value={phone}
                   onCountryChange={(e) => setPhone_country(e)}
@@ -85,19 +85,19 @@ function page() {
               <li className="sms">
                 <button>
                   <img src="/images/sms.svg" alt="sms" />
-                  <p>Continue Using The SMS</p>
+                  <p>{t("continueSMS")}</p>
                 </button>
               </li>
               <li className="whatsApp">
                 <button onClick={() => handellogin()}>
                   <img src="/images/whatsapp.svg" alt="WhatsApp" />
-                  <p>Continue Using WhatsApp</p>
+                  <p>{t("continueWhatsApp")}</p>
                 </button>
               </li>
             </ul>
             <div className="line">
               <span></span>
-              <p>Or continue with</p>
+              <p>{t("OrContinue")}</p>
               <span></span>
             </div>
             <div className="logApp">

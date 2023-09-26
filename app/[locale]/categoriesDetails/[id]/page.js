@@ -2,6 +2,7 @@
 import ItemCourse from "@/components/ItemCourse";
 import { getHomePage } from "@/components/useAPI/GetUser";
 import { getServices } from "@/components/useAPI/shop/shop";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React from "react";
 import { useEffect } from "react";
@@ -11,7 +12,7 @@ function page({ params }) {
   const [services, setServices] = useState();
   const [categories, setcategories] = useState();
   const [selectCurrentCategories, setSelectCurrentCategories] = useState();
-
+  const t = useTranslations("Categories");
   useEffect(() => {
     FetchDataOFIServices();
     FetchDataOFData();
@@ -57,7 +58,7 @@ function page({ params }) {
       </div>
 
       <div className="details_head container">
-        <h3>Get the support you need to run your business more smoothly</h3>
+        <h3>{t("smoothly")}</h3>
         <div className="dropdown">
           <button
             className="btn btn-secondary dropdown-toggle"
@@ -67,7 +68,7 @@ function page({ params }) {
             data-bs-target="#dropdownOne"
             aria-expanded="false"
           >
-            Recommended services
+           {t("eecommended")}
           </button>
           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <li>
@@ -91,12 +92,12 @@ function page({ params }) {
       <section className="categories container m90">
         <div className="filter">
           <div className="search">
-            <h3>Search</h3>
+            <h3>{t("search")}</h3>
             <form action="">
-              <input type="text" placeholder="What You Search about" />
+              <input type="text" placeholder={t("whatSearch")} />
             </form>
           </div>
-          <h3 className="headDrop">Categories</h3>
+          <h3 className="headDrop">{t("categories")}</h3>
           <div className="accordion" id="accordionExample">
             {categories?.map((categorie) => {
               return (
@@ -168,7 +169,7 @@ function page({ params }) {
            
            
           </div>
-          <button className="more">Show More</button>
+          <button className="more">{t("ShowMore")}</button>
         </div>
       </section>
     </>

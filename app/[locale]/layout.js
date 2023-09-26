@@ -21,9 +21,12 @@ export const metadata = {
 
 export default async function RootLayout({ children , params}) {
   const locale = useLocale();
-  console.log('====================================');
-  console.log(locale);
-  console.log('====================================');
+if(locale==='en'){
+  import('./en.css');
+} 
+if(locale==='ar'){
+  import('./ar.css');
+}
   let messages;
   try {
     messages = (await import(`../../messages/${locale}.json`)).default;

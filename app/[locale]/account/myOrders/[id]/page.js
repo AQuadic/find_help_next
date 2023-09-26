@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import BtnLogOut from "@/components/btnLogOut";
 import { getProviders } from "@/components/useAPI/GetUser";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import { useTranslations } from "next-intl";
 const containerStyle = {
   width: "410px",
   height: "324px",
@@ -14,7 +15,7 @@ function page({ params }) {
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDDbeB2JCI9I77iwI6SdzeHpcq2bx0qeQE",
   });
-
+  const t = useTranslations("Account");
   const [lat, setLat] = useState();
   const [lng, setLng] = useState();
 
@@ -62,21 +63,21 @@ function page({ params }) {
           <div className="part1">
             <ul>
               <li>
-                <Link href="/account">My Profile</Link>
+                <Link href="/account">{t("account")}</Link>
               </li>
               <li>
                 <Link href="/account/myServices" className="active">
-                  My services
+                {t("services")}
                 </Link>
               </li>
               <li>
-                <Link href="/account/prmoted">Promotion</Link>
+                <Link href="/account/prmoted">{t("promotion")}</Link>
               </li>
               <li>
-                <Link href="/account/myOrders">My Orders</Link>
+                <Link href="/account/myOrders">{t("myOrders")}</Link>
               </li>
               <li>
-                <Link href="/account/addressess">Addresses</Link>
+                <Link href="/account/addressess">{t("addresses")}</Link>
               </li>
               <li>
                 <BtnLogOut />
@@ -87,10 +88,9 @@ function page({ params }) {
             <div className="warning">
               <img src="/images/warning.webp" alt="warning" />
               <div className="about_warning">
-                <h3>Be careful!</h3>
+                <h3> {t("careful")}</h3>
                 <p>
-                  Your ratings have become low, please work to improve your
-                  service.
+                {t("yourRatings")}
                 </p>
               </div>
             </div>
@@ -116,7 +116,7 @@ function page({ params }) {
                 </div>
                 <div className="part2">
                   <div className="clientData">
-                    <h4>Booking details</h4>
+                    <h4>{t("booking")}</h4>
                     <h5>{Provider.user_service.description.en}</h5>
                     <ul>
                       <li>

@@ -4,10 +4,12 @@ import { getHomePage } from '../useAPI/GetUser';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 
 function Footer() {
   const [data, setData] = useState();
+  const t = useTranslations('Footer');
   useEffect(() => {
     FetchDataOFData()
    
@@ -26,10 +28,10 @@ function Footer() {
             <h1>
               <a href="index.html"><img src="/images/Logo.svg" alt="" /></a>
             </h1>
-            <p>Find All The Services You Need In Find Help</p>
+            <p>{t("footerTitle")}</p>
           </div>
           <div className="part">
-            <h2>About</h2>
+            <h2>{t("about")}</h2>
             <div className="links">
               {
                 data?.pages.map((item)=>{
@@ -42,7 +44,7 @@ function Footer() {
             </div>
           </div>
           <div className="part">
-            <h2>Countries</h2>
+            <h2>{t("countries")}</h2>
             <div className="links links2">
               <p>Kuwait</p>
               <p>Egypt</p>
@@ -54,7 +56,7 @@ function Footer() {
             </div>
           </div>
           <div className="part">
-            <h2 style={{padding: "0px 20px"}}>Follow Us</h2>
+            <h2 style={{padding: "0px 20px"}}>{t("followUs")}</h2>
             <div className="links_social">
             
               <a href={data?.socials.facebook} >

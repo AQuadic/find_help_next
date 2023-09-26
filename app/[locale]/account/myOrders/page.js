@@ -5,9 +5,11 @@ import BtnLogOut from "@/components/btnLogOut";
 import { getMyOrders } from "@/components/useAPI/shop/shop";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useTranslations } from "next-intl";
 function page() {
   const [MyOrder, setMyOrder] = useState([]);
   const [status, setStatus] = useState("PENDING");
+  const t = useTranslations("Account");
   useEffect(() => {
     if(status==="PENDING"){
       FetchDataOFMyOrder("PENDING","ACCEPTED","IN_PROGRESS","IN_DELIVERY");
@@ -84,21 +86,21 @@ function page() {
           <div className="part1">
             <ul>
               <li>
-                <Link href="/account">My Profile</Link>
+                <Link href="/account">{t("account")}</Link>
               </li>
               <li>
-                <Link href="/account/myServices">My services</Link>
+                <Link href="/account/myServices">{t("services")}</Link>
               </li>
               <li>
-                <Link href="/account/prmoted">Promotion</Link>
+                <Link href="/account/prmoted">{t("promotion")}</Link>
               </li>
               <li>
                 <Link href="/account/myOrders" className="active">
-                  My Orders
+                {t("myOrders")}
                 </Link>
               </li>
               <li>
-                <Link href="/account/addressess">Addresses</Link>
+                <Link href="/account/addressess">{t("addresses")}</Link>
               </li>
               <li>
                 <BtnLogOut />
@@ -106,11 +108,11 @@ function page() {
             </ul>
           </div>
           <div className="Profile Profile3">
-            <h2>My Orders</h2>
+            <h2>{t("myOrders")}</h2>
             <div className="type_Services">
-              <button onClick={()=>{setStatus("PENDING")}}   className={status==="PENDING"?"active":""}>Up Coming</button>
-              <button onClick={()=>{setStatus("COMPLETED")}}  className={status==="COMPLETED"?"active":""}  >Completed</button>
-              <button onClick={()=>{setStatus("REJECTED")}}   className={status==="REJECTED"?"active":""}>Rejected</button>
+              <button onClick={()=>{setStatus("PENDING")}}   className={status==="PENDING"?"active":""}>{t("upComing")}</button>
+              <button onClick={()=>{setStatus("COMPLETED")}}  className={status==="COMPLETED"?"active":""}  >{t("completed")}</button>
+              <button onClick={()=>{setStatus("REJECTED")}}   className={status==="REJECTED"?"active":""}>{t("rejected")}</button>
             </div>
 
             <section className="services container m90">
@@ -124,7 +126,7 @@ return(
     
     className="client_details"
   >
-    <p>Provider Details</p>
+    <p>{t("providerDetails")}</p>
     <img src="/images/Arrow.svg" alt="Arrow" />
   </Link>
   <img
@@ -155,7 +157,7 @@ return(
           fontFamily: "DM Sans2",
         }}
       >
-        Completed
+       {t("completed")}
       </li>
         :null
       }
@@ -186,7 +188,7 @@ return(
         </p>
       </div>
       {
-        status==="PENDING"&& <button className="cancel" onClick={()=>handelStatus(order.id)}>Cancel Order</button>
+        status==="PENDING"&& <button className="cancel" onClick={()=>handelStatus(order.id)}>{t("cancelOrder")}</button>
       }
      
     </div>
@@ -198,7 +200,7 @@ return(
                   })}
                 <div className="service">
                   <a href="ClientDetails.html" className="client_details">
-                    <p>Provider Details</p>
+                    <p>{t("providerDetails")}</p>
                     <img src="/images/Arrow.svg" alt="Arrow" />
                   </a>
                   <img
@@ -229,7 +231,7 @@ return(
                         <span className="sall">2000 EGP</span>
                         <p>1000 EGP</p>
                       </div>
-                      <button className="cancel">Cancel Order</button>
+                      <button className="cancel">{t("cancelOrder")}</button>
                     </div>
                   </div>
                 </div>
