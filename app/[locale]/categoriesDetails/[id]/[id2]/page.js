@@ -1,6 +1,10 @@
 "use client";
 import ItemCourse from "@/components/ItemCourse";
-import { getServicesClient, getSingleServices } from "@/components/useAPI/shop/shop";
+import { getProvider } from "@/components/useAPI/GetUser";
+import {
+  getServicesClient,
+  getSingleServices,
+} from "@/components/useAPI/shop/shop";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Script from "next/script";
@@ -12,61 +16,71 @@ import Slider from "react-slick";
 function page({ params }) {
   const [services, setServices] = useState();
   const [servicesClient, setServicesClient] = useState();
+  const [provider, setProvider] = useState([]);
   const [ClientID, setClientID] = useState();
+  const [servicesID, setServicesID] = useState();
   const t = useTranslations("Categories");
 
   var settings = {
     dots: false,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 1,
+    infinite: true,
+    speed: 500,
+    slidesToShow: provider?.services?.length<3?provider.services.length-1:3,
+    slidesToScroll: 1,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-        }
+        },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
-        }
+        },
       },
-      
-    ]
+    ],
   };
 
   useEffect(() => {
     FetchDataOFSingleServices();
-    FetchDataOFServicesClient()
+    FetchDataOFServicesClient();
+    FetchDataOFProvider();
   }, [ClientID]);
-
+  
   const FetchDataOFSingleServices = async () => {
     const Services = await getSingleServices(params.id2);
     if (!Services) console.log(Services?.message);
     setServices(Services);
-    setClientID(Services.user.id)
+    setServicesID(Services.id);
+    setClientID(Services.user.id);
   };
   console.log("====================================");
   console.log(services);
+  console.log(servicesID);
   console.log("====================================");
 
-const FetchDataOFServicesClient = async () => {
-  if(ClientID){
-    const ServicesClient = await getServicesClient(ClientID);
-    if (!ServicesClient) console.log(ServicesClient?.message);
-    setServicesClient(ServicesClient);
-  }
- 
-};
-
+  const FetchDataOFServicesClient = async () => {
+    if (ClientID) {
+      const ServicesClient = await getServicesClient(ClientID);
+      if (!ServicesClient) console.log(ServicesClient?.message);
+      setServicesClient(ServicesClient);
+    }
+  };
+  console.log(ClientID);
+  const FetchDataOFProvider = async () => {
+    if (ClientID) {
+      const Providers = await getProvider(ClientID);
+      if (!Providers) console.log(Providers?.message);
+      setProvider(Providers);
+    }
+  };
+  console.log(provider);
   return (
     <>
       {services && (
         <>
-        
           <div className="container breadcrumbDetails">
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
@@ -92,7 +106,9 @@ const FetchDataOFServicesClient = async () => {
 
           <section className="current_Service container m90">
             <img
-              src={services.images[0]?services.images[0].url : "/images/logo.svg"}
+              src={
+                services.images[0] ? services.images[0].url : "/images/logo.svg"
+              }
               className="img_current"
               alt="Service"
             />
@@ -119,14 +135,14 @@ const FetchDataOFServicesClient = async () => {
                   <p>{services.address_text.en}</p>
                 </li>
               </ul>
-              {services.price>0 && (
+              {services.price > 0 && (
                 <div className="salary_Service">
                   <p>{services.price}EGP</p>
                 </div>
               )}
               <div className="bookNow_Fav">
                 <Link href={`/checkOut?id=${services.id}`} className="btn_page">
-                {t("book")}
+                  {t("book")}
                 </Link>
                 <div
                   className="fav"
@@ -139,8 +155,15 @@ const FetchDataOFServicesClient = async () => {
           <section className="provider container m90">
             <h2 className="headtitle">{t("providerDetails")}</h2>
             <div className="part1">
-            
-              <img src={services.user.image?services.user.image.url:'/images/person.webp'} className="person" alt="person" />
+              <img
+                src={
+                  services.user.image
+                    ? services.user.image.url
+                    : "/images/person.webp"
+                }
+                className="person"
+                alt="person"
+              />
               <div className="about_Provider">
                 <h3>{services.user.name}</h3>
                 <p>{services.address_text.en}</p>
@@ -212,78 +235,49 @@ const FetchDataOFServicesClient = async () => {
               </div>
             </div>
           </section>
-
-          <section className="ServicesProvider services container m90">
+          {
+            provider?.services?.length>1&&<section className="ServicesProvider services container m90">
             <h2 className="headtitle">{t("searchBook")}</h2>
-           <div style={{maxWidth:"100%",display:"block"}} className=" allServices">
-           <Slider  {...settings}  >
-            <div className="item" style={{paddingLeft:"8px",paddingRight:"8px"}}>
-                <ItemCourse
-                  title="Alloy Wheel Repairs Derby"
-                  star="4.8"
-                  loc="sidi bisher, alex"
-                  timeFrom="9:00 AM"
-                  timeTo="10:00 PM"
-                  oldsalary="2000"
-                  newsalary="1000"
-                  image="1"
-                />
-              </div>
-              <div className="item">
-                <ItemCourse
-                  title="Alloy Wheel Repairs Derby"
-                  star="4.8"
-                  loc="sidi bisher, alex"
-                  timeFrom="9:00 AM"
-                  timeTo="10:00 PM"
-                  newsalary="2000"
-                  image="2"
-                />
-              </div>
-              <div className="item">
-                <ItemCourse
-                  title="Alloy Wheel Repairs Derby"
-                  star="4.8"
-                  loc="sidi bisher, alex"
-                  timeFrom="9:00 AM"
-                  timeTo="10:00 PM"
-                  newsalary="2000"
-                  image="3"
-                />
-              </div>
-              <div className="item">
-                <ItemCourse
-                  title="Alloy Wheel Repairs Derby"
-                  star="4.8"
-                  loc="sidi bisher, alex"
-                  timeFrom="9:00 AM"
-                  timeTo="10:00 PM"
-                  oldsalary="2000"
-                  newsalary="1000"
-                  image="1"
-                />
-              </div>
-              <div className="item">
-                <ItemCourse
-                  title="Alloy Wheel Repairs Derby"
-                  star="4.8"
-                  loc="sidi bisher, alex"
-                  timeFrom="9:00 AM"
-                  timeTo="10:00 PM"
-                  newsalary="2000"
-                  image="3"
-                />
-              </div>
-             
-            </Slider>
-           </div>
-         
+            <div
+              style={{ maxWidth: "100%", display: "block" }}
+              className=" allServices"
+            >
+              <Slider {...settings}>
+              {
+                    provider?.services?.filter((item)=>item.id!=servicesID).map((service)=>{
+                      return(
+                        <div
+                  className="item"
+                  style={{ paddingLeft: "8px", paddingRight: "8px" }}
+                  key={service.id}
+                >
+                 
+                  <ItemCourse
+                    title={service.description.en}
+                    star="4.8"
+                    loc={service.address_text.en}
+                    timeFrom={service.work_times?.time_from}
+                    timeTo={service.work_times?.time_to}
+                    img={service.images}
+                    newsalary={service.price}
+                    image="1"
+                    id={service.id}
+                    category_id={service.category_id}
+                  />
+                </div>
+                      )
+                    })
+                  }
+                  
            
-         
-           
-          
+              
+              </Slider>
+            </div>
           </section>
-       
+          }
+ 
+
+         
         </>
       )}
     </>

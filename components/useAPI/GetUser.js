@@ -124,3 +124,23 @@ let headersToken = {
         console.log('Error in Add New Category (service) =>', error);
     }
   }
+
+
+  export const getProvider = async (id) => {
+    try {
+        const res = await fetch(`https://findhelpapp.com/api/v1/users/providers/${id}`, {
+            method: 'GET',
+            headers:{
+               
+                 "Content-Type": "application/json",
+                 Accept: "application/json",
+                 "Accept-Language": "ar",
+                 
+               },
+        },);
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.log('Error in Add New Category (service) =>', error);
+    }
+  }
