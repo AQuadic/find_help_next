@@ -1,15 +1,18 @@
 "use client";
 import ViewCheck from '@/components/compPage/ViewCheck';
 import { getUserLocation } from '@/components/useAPI/GetUser';
+import Cookies from 'js-cookie';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 function page() {
   const t = useTranslations("checkOut");
   const [location ,setLocation] = useState([])
+  const [currentlocation ,setCurrentLocation] = useState(Cookies.get("AdID")?Cookies.get("AdID"):null)
   const SearchParams = useSearchParams()
+  const router = useRouter()
 const ServiceID = SearchParams.get("id");
   useEffect(() => {
     FetchDataOFUserLocation();
@@ -45,7 +48,7 @@ const ServiceID = SearchParams.get("id");
           {
                 location.filter((loc)=>loc.details!==null).map((loc)=>{
                   return(
-                    <div className="myAddress" key={loc.id}>
+                    <div className={`myAddress  ${ loc.id===+currentlocation&&"active"}`} key={loc.id} onClick={()=>{Cookies.set("AdID",loc.id);setCurrentLocation(loc.id)}}>
                 <img src="/images/address.svg" alt="address" />
                 <div className="about_address">
                   <p>
@@ -57,16 +60,7 @@ const ServiceID = SearchParams.get("id");
                   )
                 })
               }
-            <div className="myAddress">
-              <img src="/images/address.svg" alt="address" />
-              <div className="about_address">
-                <p>
-                  66 Youssef Ghaly Street, Miami , Alexandria. Appointment No.
-                  22 Floor No.4
-                </p>
-                <p>+20 154 256 1235</p>
-              </div>
-            </div>
+          
             <Link 
             href={{
               pathname: "/checkOut/address/newAddress",
@@ -78,7 +72,7 @@ const ServiceID = SearchParams.get("id");
             </Link>
           </div>
 
-          <input type="submit" value={t("next")} className="btn_page" />
+          <input type="submit" value={t("next")} onClick={(e)=>{e.preventDefault(); router.push(`/checkOut?id=${ServiceID}`)}} className="btn_page" />
         </form>
       </div>
       <ViewCheck id={ServiceID}/>

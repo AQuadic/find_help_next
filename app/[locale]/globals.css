@@ -1901,15 +1901,20 @@ div#ui-datepicker-div {
   flex-wrap: wrap;
   max-width: 100%;
 }
+.address_page .myAddress {}
 .address_page .myAddress {
   padding: 12px 8px;
-  border: 1px solid #f4c444;
+  border: 1px solid #dfdfdf;
   border-radius: 10px;
   display: flex;
   align-items: center;
   gap: 10px;
   flex: 1;
   min-width: 240px;
+}
+.address_page .myAddress.active {
+  border: 1px solid #f4c444;
+
 }
 .address_page .myAddress p {
   font-size: 14px;
