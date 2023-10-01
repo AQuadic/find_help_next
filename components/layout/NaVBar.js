@@ -231,7 +231,7 @@ const FetchDataOFData = async () => {
           </div>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             {
-              categories.map((category)=>{
+              categories?.map((category)=>{
                 return(
                   <li className="nav-item dropdown" key={category.id}>
               <a

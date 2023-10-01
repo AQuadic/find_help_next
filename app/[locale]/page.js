@@ -3,7 +3,7 @@ import ItemCourse from "@/components/ItemCourse";
 import styles from "./page.module.css";
 import React, { useState } from "react";
 import ItemCategories from "@/components/ItemCategories";
-import { getCategories, getServices } from "@/components/useAPI/shop/shop";
+import { getCategories, getHomeServices, getServices } from "@/components/useAPI/shop/shop";
 import { useEffect } from "react";
 import { getHomePage } from "@/components/useAPI/GetUser";
 import Cookies from "js-cookie";
@@ -13,11 +13,17 @@ import Link from "next/link";
 export default function Home() {
   const [categories, setCategories] = useState([]);
   const [services, setServices] = useState();
+  const [homeServices, setHomeServices] = useState([]);
+  const [homeServices2, setHomeServices2] = useState([]);
+  const [homeServices3, setHomeServices3] = useState([]);
   const [data, setData] = useState();
   const t = useTranslations('Index');
 useEffect(() => {
   FetchDataOFData()
     FetchDataOFIServices();
+    FetchDataOFHomeServices()
+    FetchDataOFHomeServices2()
+    FetchDataOFHomeServices3()
   }, []);
   
   console.log(categories);
@@ -36,6 +42,25 @@ useEffect(() => {
     setCategories(HomePage.categories);
   };
 console.log(data);
+
+const FetchDataOFHomeServices = async () => {
+  const HomeServices = await getHomeServices(23);
+  if (!HomeServices) console.log(HomeServices?.message);
+  setHomeServices(HomeServices.data);
+};
+const FetchDataOFHomeServices2 = async () => {
+  const HomeServices = await getHomeServices(66);
+  if (!HomeServices) console.log(HomeServices?.message);
+  setHomeServices2(HomeServices.data);
+};
+const FetchDataOFHomeServices3 = async () => {
+  const HomeServices = await getHomeServices(114);
+  if (!HomeServices) console.log(HomeServices?.message);
+  setHomeServices3(HomeServices.data);
+};
+console.log(homeServices);
+console.log(homeServices2);
+console.log(homeServices3);
 
   return (
     <main className={styles.main}>
@@ -102,39 +127,72 @@ return(
             </div>
           </div>
         </section>
-        {
-            categories.slice(0,3).map((category)=>{
-              return(
-                <section className= "services container m90" key={category.id}>
+{
+   <section className= "services container m90" >
           
-          <h2 className= "headtitle">{category.name.en}</h2>
+   <h2 className= "headtitle">Repairs</h2>
 
-          <div className= "allServices">
-            {
-              category.children.slice(0,3).map((item)=>{
-                return(
-                  <ItemCourse
-              title={item.name.en}
-              star="4.8"
-              loc="sidi bisher, alex"
-              timeFrom=""
-              timeTo=""
-              oldsalary=""
-              newsalary={item.price}
-              image="1"
-              id={item.id}
-  category_id={category.id}
-            />
-                )
-              })
-            }
-           
+   <div className= "allServices">
+     {
+       homeServices?.slice(0,3).map((item)=>{
+         return(
+           <ItemCourse
+       title={item.description.en}
+       star="4.8"
+       loc={item.address_text.en}
+       timeFrom={item.work_times?.time_from}
+       timeTo={item.work_times?.time_to}
+       oldsalary=""
+       newsalary={item.price}
+       img={item.images }
+       id={item.id}
+category_id={item.category_id}
+     />
+         )
+       })
+     }
+    
+   
+   </div>
+ </section>
+}
+
+
+{
+   <section className= "services container m90" >
           
-          </div>
-        </section>
-              )
-            })
-          }
+   <h2 className= "headtitle">Salon </h2>
+
+   <div className= "allServices">
+     {
+       homeServices3?.slice(0,3).map((item)=>{
+         return(
+           <ItemCourse
+       title={item.description.en}
+       star="4.8"
+       loc={item.address_text.en}
+       timeFrom={item.work_times?.time_from}
+       timeTo={item.work_times?.time_to}
+       oldsalary=""
+       newsalary={item.price}
+       img={item.images }
+       id={item.id}
+category_id={item.category_id}
+     />
+         )
+       })
+     }
+    
+   
+   </div>
+ </section>
+}
+
+
+
+
+
+ 
         
 
         <section className= "need m90">
@@ -171,42 +229,35 @@ return(
             </div>
           </div>
         </section>
-        <section className= "services container m90">
-          <h2 className= "headtitle">Cleaning Services</h2>
-          <div className= "allServices">
-            <div className= "allServices">
-              <ItemCourse
-                title="Alloy Wheel Repairs Derby"
-                star="4.8"
-                loc="sidi bisher, alex"
-                timeFrom="9:00 AM"
-                timeTo="10:00 PM"
-                oldsalary="2000"
-                newsalary="1000"
-                image="1"
-                love
-              />
-              <ItemCourse
-                title="Alloy Wheel Repairs Derby"
-                star="4.8"
-                loc="sidi bisher, alex"
-                timeFrom="9:00 AM"
-                timeTo="10:00 PM"
-                newsalary="2000"
-                image="2"
-              />
-              <ItemCourse
-                title="Alloy Wheel Repairs Derby"
-                star="4.8"
-                loc="sidi bisher, alex"
-                timeFrom="9:00 AM"
-                timeTo="10:00 PM"
-                newsalary="2000"
-                image="3"
-              />
-            </div>
-          </div>
-        </section>
+        {
+   <section className= "services container m90" >
+          
+   <h2 className= "headtitle">Cleaning Services</h2>
+
+   <div className= "allServices">
+     {
+       homeServices2?.slice(0,3).map((item)=>{
+         return(
+           <ItemCourse
+       title={item.description.en}
+       star="4.8"
+       loc={item.address_text.en}
+       timeFrom={item.work_times?.time_from}
+       timeTo={item.work_times?.time_to}
+       oldsalary=""
+       newsalary={item.price}
+       img={item.images }
+       id={item.id}
+category_id={item.category_id}
+     />
+         )
+       })
+     }
+    
+   
+   </div>
+ </section>
+}
         <section className= "try container m90">
           <img src="/images/phone.webp" className= "phone" alt="phone" />
           <div className= "aboutTry">

@@ -218,3 +218,34 @@ export const getCategoriesHome = async () => {
   }
 };
 
+export const getHomeServices = async (id) => {
+
+  try {
+    const url = new URL(
+      "https://findhelpapp.com/api/v1/users/services"
+  );
+  
+  const params = {
+      "category_id": id,
+      
+  };
+  Object.keys(params)
+      .forEach(key => url.searchParams.append(key, params[key]));
+  
+  const headers = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Accept-Language": "ar",
+  };
+  
+    const res = await fetch(url, {
+      method: "GET",
+      headers,
+  })
+ 
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log("Error in Add New Category (service) =>", error);
+  }
+};

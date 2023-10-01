@@ -9,6 +9,7 @@ import Script from 'next/script';
 import Layout from '@/components/layout/Layout';
 import {NextIntlClientProvider, useLocale} from 'next-intl';
 import {notFound} from 'next/navigation';
+import PushNotificationLayout from '@/components/PushNotificationLayout';
 
 
 
@@ -37,21 +38,25 @@ if(locale==='ar'){
   return (
     <html lang={locale} dir={locale==="en"?'ltr':'rtl'}>
 <head>
-
+<link rel="icon" href="/images/Logo.svg" sizes="any" />
 </head>
       <body className={locale==="en"?'ltr':'rtl'}>
         
 
       <NextIntlClientProvider locale={locale} messages={messages}>
+     
+
         <Layout lang={locale}>
-      
+        <PushNotificationLayout>
 <main>
 {children}
 </main>
         
        
+      </PushNotificationLayout>
         
         </Layout>
+
         </NextIntlClientProvider>
 
         <Script  src='/bootstrap.js'/>
