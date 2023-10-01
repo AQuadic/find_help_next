@@ -65,12 +65,6 @@ function page() {
           "address_id":adresse[0].id,
           "payment_method_id": paymentValue,
           "notes": nots,
-          "products[id]":ServiceID,
-          "products[quantity]":1,
-          "products[cartoon]":"yes",
-          "products[split]":"yes",
-          "products[options]":"yes",
-          
         },
         {
           headers: {

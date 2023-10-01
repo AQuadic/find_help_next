@@ -7,8 +7,10 @@ import BtnLogOut from "@/components/btnLogOut";
 import { getMyServices, getMyServices2 } from "@/components/useAPI/shop/shop";
 import axios from "axios";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 function page() {
+  const router = useRouter()
   const [services, setServices] = useState([]);
   const [services2, setServices2] = useState([]);
   const [status, setStatus] = useState("Services");
@@ -74,7 +76,8 @@ console.log(services);
         }
       )
       .then((res) => {
-        alert('Message: ' + res.data.message);
+        FetchDataOFMyServices()
+        alert('Message: ' + "Delete Services Is Done");
         console.log(res);
       })
       .catch((res) => {
@@ -228,7 +231,7 @@ console.log(services);
                             >
                               <img src="/images/delete.svg" alt="delete" />
                             </button>
-                            <button className="edit">
+                            <button className="edit" onClick={()=>{router.push(`/add_New_Services/${service.id}`)}}>
                               <img src="/images/edit.svg" alt="edit" />
                             </button>
                           </div>

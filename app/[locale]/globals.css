@@ -3353,5 +3353,5 @@ margin:42px auto 0px;
   padding: 0px 8px;
 }
 .mantine-MultiSelect-searchInput {
-  border: no;
+  border: none !important;
 }

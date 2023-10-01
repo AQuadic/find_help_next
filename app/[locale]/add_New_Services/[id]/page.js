@@ -7,8 +7,13 @@ import {
   TextInput,
   Textarea,
 } from "@mantine/core";
-import { MobileTimePicker, itIT } from "@mui/x-date-pickers";
-import { DemoItem } from "@mui/x-date-pickers/internals/demo";
+import {
+  MobileTimePicker,
+  TimePicker,
+  itIT,
+  renderTimeViewClock,
+} from "@mui/x-date-pickers";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
 import React, { useCallback } from "react";
 import { useEffect } from "react";
@@ -20,12 +25,13 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useTranslations } from "next-intl";
+import { getSingleServices } from "@/components/useAPI/shop/shop";
 const containerStyle = {
   width: "100%",
   height: "400px",
 };
 
-function page() {
+function page({ params }) {
   const t = useTranslations("Services");
 
   const [lat, setLat] = useState(-3.745);
@@ -37,12 +43,6 @@ function page() {
 
   console.log(lat);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      setLat(position.coords.latitude);
-      setLng(position.coords.longitude);
-    });
-  }, []);
   const center = {
     lat: lat,
     lng: lng,
@@ -71,7 +71,7 @@ function page() {
   const options = {
     hour: "2-digit",
     minute: "2-digit",
-    hour12: true,
+    hour12: false,
   };
 
   const formData = new FormData();
@@ -93,7 +93,9 @@ function page() {
   const [AllCurrency, setAllCurrency] = useState([]);
   const [description, setDescription] = useState("");
   const [selectedFile, setSelectedFile] = useState([]);
+  const [selectedFile2, setSelectedFile2] = useState([]);
   const [holidays, setholidays] = useState([]);
+  const [RMImagesID, setRMImagesID] = useState([]);
   const [address_Info, setaddress_Info] = useState("");
   //Error
   const [errorPhone, setErrorPhone] = useState();
@@ -110,9 +112,10 @@ function page() {
   const [errorHolidays, setErrorholidays] = useState();
   const [errorLocationLat, setErrorLocationLat] = useState("");
   const [erroLocationLng, setErroLocationLng] = useState("");
-  console.log(holidays.includes("Monday"));
+
   useEffect(() => {
     FetchDataOFData();
+    FetchDataOFSingleServices();
   }, []);
   useEffect(() => {
     if (country) {
@@ -177,7 +180,9 @@ function page() {
     });
   };
   const handellogin = () => {
-    const url = new URL("https://findhelpapp.com/api/v1/users/services");
+    const url = new URL(
+      `https://findhelpapp.com/api/v1/users/services/${params.id}`
+    );
     const body = new FormData();
     body.append("phone", phone);
     body.append("work_times[time_from]", TimeFrom);
@@ -195,7 +200,13 @@ function page() {
     body.append("phone_country", phone_country);
     body.append("location[lat]", lat);
     body.append("location[lng]", lng);
-    const HolidaysArray={
+
+    if (RMImagesID.length > 0) {
+      RMImagesID.map((item, i) => {
+        body.append(`remove_images[${i}]`, item);
+      });
+    }
+    const HolidaysArray = {
       sat: holidays.includes("Saturday"),
       sun: holidays.includes("Sunday"),
       mon: holidays.includes("Monday"),
@@ -203,9 +214,13 @@ function page() {
       wed: holidays.includes("Wednesday"),
       thu: holidays.includes("Thursday"),
       fri: holidays.includes("Friday"),
+    };
+    body.append("work_times[holidays]", JSON.stringify(HolidaysArray));
+    if (selectedFile.length > 0) {
+      selectedFile.map((item, i) => {
+        body.append(`images[${i}]`, item);
+      });
     }
-
-    body.append("work_times[holidays]",JSON.stringify(HolidaysArray));
     setErrorAddress("");
     setErrorCategory("");
     setErrorCity("");
@@ -221,18 +236,13 @@ function page() {
     setErrorTimeto("");
     setErrorCurrency("");
 
-    if (selectedFile.length > 0) {
-      selectedFile.map((item, i) => {
-        body.append(`images[${i}]`, item);
-      });
-    }
-
     const po = axios
       .post(url, body, {
         headers: {
           Authorization: `Bearer ${Cookies.get("token")}`,
           "Content-Type": "multipart/form-data",
           Accept: "application/json",
+          "Accept-Language": "ar",
         },
       })
       .then((res) => {
@@ -241,7 +251,7 @@ function page() {
       .catch((res) => {
         alert("An error occurred: " + res.message);
         /*  setLoading(false);*/
-        console.log(res.response.data.errors["address_text.en"]);
+
         res.response.data.errors["address_text.en"]
           ? setErrorAddress(res.response.data.errors["address_text.en"][0])
           : setErrorAddress("");
@@ -298,6 +308,37 @@ function page() {
       const selectedFile = files[i];
       setSelectedFile((oldArray) => [...oldArray, selectedFile]);
     }
+  };
+
+  const FetchDataOFSingleServices = async () => {
+    const Services = await getSingleServices(params.id);
+    if (!Services) console.log(Services?.message);
+
+    setCategory(Services.category_id);
+    setSubCategory(Services.sub_category_id);
+    setCountry(Services.country_id);
+    setCity(Services.city_id);
+    setAddress(Services.address_text.en);
+    setPhone(Services.phone_normalized);
+    setPhone_country(Services.phone_country);
+    setTimeFrom(Services.work_times.time_from);
+    setTimeto(Services.work_times.time_to);
+    setPrice(Services.price);
+    setCurrency(Services.currency);
+    setDescription(Services.description.en);
+    setSelectedFile2(Services.images);
+    setLat(Services.location_google_maps.lat);
+    setLng(Services.location_google_maps.lng);
+
+    setholidays([
+      JSON.parse(Services.work_times.holidays).sat ? "Saturday" : null,
+      JSON.parse(Services.work_times.holidays).sun ? "Sunday" : null,
+      JSON.parse(Services.work_times.holidays).mon ? "Monday" : null,
+      JSON.parse(Services.work_times.holidays).tue ? "Tuesday" : null,
+      JSON.parse(Services.work_times.holidays).wed ? "Wednesday" : null,
+      JSON.parse(Services.work_times.holidays).thu ? "Thursday" : null,
+      JSON.parse(Services.work_times.holidays).fri ? "Friday" : null,
+    ]);
   };
 
   return (
@@ -359,11 +400,49 @@ function page() {
                             </div>
                           );
                         })}
+                      {selectedFile2 &&
+                        selectedFile2.map((img, i) => {
+                          return (
+                            <div
+                              key={i}
+                              className="col-4 pluus"
+                              style={{ position: "relative" }}
+                            >
+                              <img
+                                src={img.url}
+                                className="img img-thumbnail m-1 imgPreview"
+                                style={{
+                                  maxHeight: "120px",
+                                  minHeight: "120px",
+                                  width: "100%",
+                                  height: "auto",
+                                }}
+                                alt="person"
+                              />
+                              <div
+                                className="RemoveImge"
+                                onClick={() => {
+                                  setRMImagesID((oldArray) => [
+                                    ...oldArray,
+                                    +img.id,
+                                  ]);
+                                  setSelectedFile2(
+                                    selectedFile2.filter(
+                                      (item) => item.id !== img.id
+                                    )
+                                  );
+                                }}
+                              >
+                                <p>X</p>
+                              </div>
+                            </div>
+                          );
+                        })}
+
                       <div className="col-4 pluus">
                         <input type="file" onChange={handleHeaderInputChange} />
                         <img
                           id="img1"
-                          onClick="onImageClick(this)"
                           className="img img-thumbnail m-1 imgPreview"
                         />
                       </div>
@@ -412,7 +491,7 @@ function page() {
                       data={Subcategories}
                     />
                   </div>
-              
+
                   <div className="invalid-feedback">
                     Note that is type of category are paid an amount of 25$
                   </div>
@@ -564,6 +643,7 @@ function page() {
                   <TextInput
                     label={t("address")}
                     placeholder={t("enterAddress")}
+                    value={address}
                     onChange={(e) => {
                       setAddress(e.target.value);
                     }}
@@ -572,11 +652,13 @@ function page() {
                 </div>
                 <div className="col-md-12">
                   <label htmlFor="inputPhone " className="form-label">
-                  {t("number")}
+                    {t("number")}
                   </label>
 
                   <PhoneInput
-                    defaultCountry="EG"
+                    defaultCountry={phone_country}
+                    country={phone_country}
+                    initialValueFormat="national"
                     placeholder={t("enterNumber")}
                     className="form-control"
                     value={phone}
@@ -602,6 +684,7 @@ function page() {
                     <DemoItem label={t("from")}>
                       <MobileTimePicker
                         defaultValue={dayjs("2022-04-17T15:30")}
+                        value={dayjs(TimeFrom, "h:mm A")}
                         onChange={(e) =>
                           setTimeFrom(e.$d.toLocaleTimeString("en-US", options))
                         }
@@ -623,7 +706,8 @@ function page() {
                   <div className="col-6">
                     <DemoItem label={t("to")}>
                       <MobileTimePicker
-                        defaultValue={dayjs("2022-04-17T15:30")}
+                        defaultValue={dayjs("2022-04-17T12:30")}
+                        value={dayjs(Timeto, "h:mm A")}
                         onChange={(e) =>
                           setTimeto(e.$d.toLocaleTimeString("en-US", options))
                         }
@@ -666,6 +750,7 @@ function page() {
                     <Textarea
                       radius="md"
                       label={t("description")}
+                      value={description}
                       placeholder=""
                       onChange={(e) => setDescription(e.target.value)}
                       error={errorDescription}
@@ -676,6 +761,7 @@ function page() {
                       label={t("price")}
                       hideControls
                       onChange={setPrice}
+                      value={price}
                       error={errorPrice}
                     />
                   </div>
@@ -770,7 +856,7 @@ function page() {
         <div
           className="modal fade"
           id="exampleModal"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
