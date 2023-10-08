@@ -20,6 +20,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -27,7 +28,7 @@ const containerStyle = {
 
 function page() {
   const t = useTranslations("Services");
-
+const router = useRouter()
   const [lat, setLat] = useState(-3.745);
   const [lng, setLng] = useState(-38.523);
   const onMapClick = useCallback((e) => {
@@ -239,7 +240,11 @@ function page() {
         console.log(res);
       })
       .catch((res) => {
+        console.log(res);
         alert("An error occurred: " + res.message);
+        if(res.response.status==401){
+          router.push('/signIn')
+        }
         /*  setLoading(false);*/
         console.log(res.response.data.errors["address_text.en"]);
         res.response.data.errors["address_text.en"]
@@ -287,7 +292,7 @@ function page() {
           ? setErrorCurrency(res.response.data.errors.currency[0])
           : setErrorCurrency("");
 
-        console.log(res);
+        
       });
   };
 
