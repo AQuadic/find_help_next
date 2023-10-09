@@ -386,37 +386,7 @@ console.log(services);
                 })
                }
 
-                <div className="service">
-                  <img
-                    src="/images/service1.webp"
-                    className="imgService"
-                    alt="service"
-                  />
-                  <div className="aboutservice">
-                    <div className="head">
-                      <h3>Alloy Wheel Repairs Derby</h3>
-                      <div className="Star">
-                        <img src="/images/star.svg" alt="star" />
-                        <p>4.8</p>
-                      </div>
-                    </div>
-                    <ul>
-                      <li>
-                        <img src="/images/Time-Circle.svg" alt="Time-Circle" />
-                        <p>9:00 AM to 10:00 PM</p>
-                      </li>
-                      <li>
-                        <img src="/images/Location.svg" alt="Location" />
-                        <p>sidi bisher, alex</p>
-                      </li>
-                    </ul>
-                    <div className="salary_pay">
-                      <div className="salary">
-                        <p>2000 EGP</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              
               </div>
             </section>
           </div>

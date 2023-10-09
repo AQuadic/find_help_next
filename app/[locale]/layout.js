@@ -21,6 +21,7 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children , params}) {
+  
   const locale = useLocale();
 if(locale==='en'){
   import('./en.css');
@@ -42,13 +43,14 @@ if(locale==='ar'){
 </head>
       <body className={locale==="en"?'ltr':'rtl'}>
         
-
+   
       <NextIntlClientProvider locale={locale} messages={messages}>
      
 
         <Layout lang={locale}>
         <PushNotificationLayout>
 <main>
+
 {children}
 </main>
         
@@ -60,6 +62,7 @@ if(locale==='ar'){
         </NextIntlClientProvider>
 
         <Script  src='/bootstrap.js'/>
+       
         
         </body>
     </html>

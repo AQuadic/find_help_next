@@ -21,6 +21,7 @@ import Cookies from "js-cookie";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { Oval, TailSpin } from "react-loader-spinner";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -29,6 +30,8 @@ const containerStyle = {
 function page() {
   const t = useTranslations("Services");
 const router = useRouter()
+const [Loading, setLoading] = useState(false);
+
   const [lat, setLat] = useState(-3.745);
   const [lng, setLng] = useState(-38.523);
   const onMapClick = useCallback((e) => {
@@ -111,6 +114,7 @@ const router = useRouter()
   const [errorHolidays, setErrorholidays] = useState();
   const [errorLocationLat, setErrorLocationLat] = useState("");
   const [erroLocationLng, setErroLocationLng] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   console.log(holidays.includes("Monday"));
   useEffect(() => {
     FetchDataOFData();
@@ -178,6 +182,7 @@ const router = useRouter()
     });
   };
   const handellogin = () => {
+    setLoading(true)
     const url = new URL("https://findhelpapp.com/api/v1/users/services");
     const body = new FormData();
     body.append("phone", phone);
@@ -221,7 +226,7 @@ const router = useRouter()
     setErrorTimeFrom("");
     setErrorTimeto("");
     setErrorCurrency("");
-
+    setErrorMessage("")
     if (selectedFile.length > 0) {
       selectedFile.map((item, i) => {
         body.append(`images[${i}]`, item);
@@ -237,16 +242,24 @@ const router = useRouter()
         },
       })
       .then((res) => {
+        setLoading(false)
         console.log(res);
+        router.push('/account/myServices')
       })
       .catch((res) => {
+        setLoading(false)
         console.log(res);
-        alert("An error occurred: " + res.message);
+        if(res.response.status===500){
+          alert("An error occurred: " + (res.response.data.message));
+
+        }
         if(res.response.status==401){
           router.push('/signIn')
         }
         /*  setLoading(false);*/
-        console.log(res.response.data.errors["address_text.en"]);
+        res.response.data.message
+        ? setErrorMessage(res.response.data.message)
+        : setErrorMessage("");
         res.response.data.errors["address_text.en"]
           ? setErrorAddress(res.response.data.errors["address_text.en"][0])
           : setErrorAddress("");
@@ -291,7 +304,8 @@ const router = useRouter()
         res.response.data.errors.currency
           ? setErrorCurrency(res.response.data.errors.currency[0])
           : setErrorCurrency("");
-
+        
+          
         
       });
   };
@@ -308,6 +322,22 @@ const router = useRouter()
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <div className="load" style={{display:Loading?"flex":"none"}}>
+        <TailSpin
+  height={120}
+  width={120}
+  color="#fff"
+  wrapperStyle={{}}
+  wrapperClass=""
+  visible={Loading}
+  ariaLabel='oval-loading'
+  secondaryColor="#fff"
+  strokeWidth={1}
+  strokeWidthSecondary={1}
+
+/>
+        </div>
+    
         <div className="container breadcrumbDetails">
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
@@ -328,8 +358,7 @@ const router = useRouter()
           <div className="part1">
             <h2 className="headtitle">{t("addServicesBtn")}</h2>
             <div className="box">
-              <form className="row g-3 form_page">
-                <div className="upload_images">
+            <div className="upload_images">
                   <div className="all_img">
                     <div className="row">
                       {selectedFile &&
@@ -337,13 +366,14 @@ const router = useRouter()
                           return (
                             <div
                               key={i}
-                              className="col-4 pluus"
+                              className="col-4 pluus doneImg"
                               style={{ position: "relative" }}
                             >
                               <img
                                 src={URL.createObjectURL(file)}
                                 className="img img-thumbnail m-1 imgPreview"
                                 style={{
+                                  background:"transparent",
                                   maxHeight: "120px",
                                   minHeight: "120px",
                                   width: "100%",
@@ -379,6 +409,8 @@ const router = useRouter()
                     </div>
                   </div>
                 </div>
+              <form className="row g-3 form_page">
+             
                 <div className="col-md-12 g-3 new_row row">
                   <label htmlFor="">{t("offering")}</label>
                   <div className="col-6">
@@ -707,6 +739,7 @@ const router = useRouter()
                     <button className="add_more">+ {t("addMore")}</button>
                   </div>
                 </div>
+                
               </form>
               <input
                 type="submit"
@@ -717,6 +750,18 @@ const router = useRouter()
                   handellogin();
                 }}
               />
+              {errorMessage && (
+                        <p
+                          style={{
+                            color: "red",
+textAlign:"end",
+                            fontSize: "12px",
+                            marginTop: "4px",
+                          }}
+                        >
+                          {errorMessage}
+                        </p>
+                      )}
             </div>
           </div>
           <div className="part2">

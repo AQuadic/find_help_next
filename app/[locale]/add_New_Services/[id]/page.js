@@ -33,6 +33,7 @@ const containerStyle = {
 
 function page({ params }) {
   const t = useTranslations("Services");
+  const [Loading, setLoading] = useState(false);
 
   const [lat, setLat] = useState(-3.745);
   const [lng, setLng] = useState(-38.523);
@@ -112,6 +113,7 @@ function page({ params }) {
   const [errorHolidays, setErrorholidays] = useState();
   const [errorLocationLat, setErrorLocationLat] = useState("");
   const [erroLocationLng, setErroLocationLng] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     FetchDataOFData();
@@ -180,6 +182,8 @@ function page({ params }) {
     });
   };
   const handellogin = () => {
+    setLoading(true)
+
     const url = new URL(
       `https://findhelpapp.com/api/v1/users/services/${params.id}`
     );
@@ -235,6 +239,7 @@ function page({ params }) {
     setErrorTimeFrom("");
     setErrorTimeto("");
     setErrorCurrency("");
+    setErrorMessage("")
 
     const po = axios
       .post(url, body, {
@@ -247,11 +252,20 @@ function page({ params }) {
       })
       .then((res) => {
         console.log(res);
+        setLoading(false)
       })
       .catch((res) => {
-        alert("An error occurred: " + res.message);
-        /*  setLoading(false);*/
+        setLoading(false)
+        if(res.response.status===500){
+          alert("An error occurred: " + (res.response.data.message));
 
+        }
+        if(res.response.status==401){
+          router.push('/signIn')
+        }
+        res.response.data.message
+        ? setErrorMessage(res.response.data.message)
+        : setErrorMessage("");
         res.response.data.errors["address_text.en"]
           ? setErrorAddress(res.response.data.errors["address_text.en"][0])
           : setErrorAddress("");
@@ -798,6 +812,18 @@ function page({ params }) {
                   handellogin();
                 }}
               />
+               {errorMessage && (
+                        <p
+                          style={{
+                            color: "red",
+textAlign:"end",
+                            fontSize: "12px",
+                            marginTop: "4px",
+                          }}
+                        >
+                          {errorMessage}
+                        </p>
+                      )}
             </div>
           </div>
           <div className="part2">

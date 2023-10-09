@@ -63,16 +63,7 @@ const t = useTranslations("Account");
                   )
                 })
               }
-              <div className="myAddress">
-                <img src="/images/address.svg" alt="address" />
-                <div className="about_address">
-                  <p>
-                    66 Youssef Ghaly Street, Miami , Alexandria. Appointment No.
-                    22 Floor No.4
-                  </p>
-                  <p>+20 154 256 1235</p>
-                </div>
-              </div>
+             
               <Link href="/account/addressess/new_Address" className="addAddress">
                 <h5>+</h5>
                 <h6>{t("addAddress")}</h6>
