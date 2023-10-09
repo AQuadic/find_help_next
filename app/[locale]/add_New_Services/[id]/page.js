@@ -114,7 +114,30 @@ function page({ params }) {
   const [errorLocationLat, setErrorLocationLat] = useState("");
   const [erroLocationLng, setErroLocationLng] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
+  useEffect(()=>{
+    country&&setErrorCountry("")
+    phone&&setErrorPhone("")
+    city&&setErrorCity("")
+    category&&setErrorCategory("")
+    Subcategory&&setErrorSubCategory("")
+    address&&setErrorAddress("")
+    TimeFrom&&setErrorTimeFrom("")
+    Timeto&&setErrorTimeto("")
+    price&&setErrorPrice("")
+    currency&&setErrorCurrency("")
+    description&&setErrorDescription("")
+    holidays&&setErrorholidays("")
+  },[country,phone
+    ,city
+    ,category
+    ,Subcategory
+    ,address
+    ,TimeFrom
+    ,Timeto
+    ,price
+    ,currency
+    ,description
+    ,holidays])
   useEffect(() => {
     FetchDataOFData();
     FetchDataOFSingleServices();
@@ -182,7 +205,7 @@ function page({ params }) {
     });
   };
   const handellogin = () => {
-    setLoading(true)
+    setLoading(true);
 
     const url = new URL(
       `https://findhelpapp.com/api/v1/users/services/${params.id}`
@@ -239,7 +262,7 @@ function page({ params }) {
     setErrorTimeFrom("");
     setErrorTimeto("");
     setErrorCurrency("");
-    setErrorMessage("")
+    setErrorMessage("");
 
     const po = axios
       .post(url, body, {
@@ -252,20 +275,19 @@ function page({ params }) {
       })
       .then((res) => {
         console.log(res);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((res) => {
-        setLoading(false)
-        if(res.response.status===500){
-          alert("An error occurred: " + (res.response.data.message));
-
+        setLoading(false);
+        if (res.response.status === 500) {
+          alert("An error occurred: " + res.response.data.message);
         }
-        if(res.response.status==401){
-          router.push('/signIn')
+        if (res.response.status == 401) {
+          router.push("/signIn");
         }
         res.response.data.message
-        ? setErrorMessage(res.response.data.message)
-        : setErrorMessage("");
+          ? setErrorMessage(res.response.data.message)
+          : setErrorMessage("");
         res.response.data.errors["address_text.en"]
           ? setErrorAddress(res.response.data.errors["address_text.en"][0])
           : setErrorAddress("");
@@ -611,48 +633,7 @@ function page({ params }) {
                     <></>
                   )}
                 </div>
-                <div className="col-md-12">
-                  <label htmlFor="inputMethod" className="form-label">
-                    Service Method
-                  </label>
-                  <ul
-                    className="list-group"
-                    style={{
-                      border: "1px solid #e2e2e2",
-                      padding: "16px 8px 0px",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    <li className="list-group-item">
-                      <input
-                        className="form-check-input me-1"
-                        type="checkbox"
-                        value=""
-                        id="firstCheckbox1"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="firstCheckbox1"
-                      >
-                        Pick Up
-                      </label>
-                    </li>
-                    <li className="list-group-item">
-                      <input
-                        className="form-check-input me-1"
-                        type="checkbox"
-                        value=""
-                        id="secondCheckbox2"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="secondCheckbox2"
-                      >
-                        Delivery
-                      </label>
-                    </li>
-                  </ul>
-                </div>
+                
                 <div className="col-md-12">
                   <TextInput
                     label={t("address")}
@@ -812,18 +793,18 @@ function page({ params }) {
                   handellogin();
                 }}
               />
-               {errorMessage && (
-                        <p
-                          style={{
-                            color: "red",
-textAlign:"end",
-                            fontSize: "12px",
-                            marginTop: "4px",
-                          }}
-                        >
-                          {errorMessage}
-                        </p>
-                      )}
+              {errorMessage && (
+                <p
+                  style={{
+                    color: "red",
+                    textAlign: "end",
+                    fontSize: "12px",
+                    marginTop: "4px",
+                  }}
+                >
+                  {errorMessage}
+                </p>
+              )}
             </div>
           </div>
           <div className="part2">

@@ -29,8 +29,8 @@ const containerStyle = {
 
 function page() {
   const t = useTranslations("Services");
-const router = useRouter()
-const [Loading, setLoading] = useState(false);
+  const router = useRouter();
+  const [Loading, setLoading] = useState(false);
 
   const [lat, setLat] = useState(-3.745);
   const [lng, setLng] = useState(-38.523);
@@ -116,6 +116,30 @@ const [Loading, setLoading] = useState(false);
   const [erroLocationLng, setErroLocationLng] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   console.log(holidays.includes("Monday"));
+  useEffect(()=>{
+    country&&setErrorCountry("")
+    phone&&setErrorPhone("")
+    city&&setErrorCity("")
+    category&&setErrorCategory("")
+    Subcategory&&setErrorSubCategory("")
+    address&&setErrorAddress("")
+    TimeFrom&&setErrorTimeFrom("")
+    Timeto&&setErrorTimeto("")
+    price&&setErrorPrice("")
+    currency&&setErrorCurrency("")
+    description&&setErrorDescription("")
+    holidays&&setErrorholidays("")
+  },[country,phone
+    ,city
+    ,category
+    ,Subcategory
+    ,address
+    ,TimeFrom
+    ,Timeto
+    ,price
+    ,currency
+    ,description
+    ,holidays])
   useEffect(() => {
     FetchDataOFData();
   }, []);
@@ -182,7 +206,7 @@ const [Loading, setLoading] = useState(false);
     });
   };
   const handellogin = () => {
-    setLoading(true)
+    setLoading(true);
     const url = new URL("https://findhelpapp.com/api/v1/users/services");
     const body = new FormData();
     body.append("phone", phone);
@@ -201,7 +225,7 @@ const [Loading, setLoading] = useState(false);
     body.append("phone_country", phone_country);
     body.append("location[lat]", lat);
     body.append("location[lng]", lng);
-    const HolidaysArray={
+    const HolidaysArray = {
       sat: holidays.includes("Saturday"),
       sun: holidays.includes("Sunday"),
       mon: holidays.includes("Monday"),
@@ -209,9 +233,9 @@ const [Loading, setLoading] = useState(false);
       wed: holidays.includes("Wednesday"),
       thu: holidays.includes("Thursday"),
       fri: holidays.includes("Friday"),
-    }
+    };
 
-    body.append("work_times[holidays]",JSON.stringify(HolidaysArray));
+    body.append("work_times[holidays]", JSON.stringify(HolidaysArray));
     setErrorAddress("");
     setErrorCategory("");
     setErrorCity("");
@@ -226,7 +250,7 @@ const [Loading, setLoading] = useState(false);
     setErrorTimeFrom("");
     setErrorTimeto("");
     setErrorCurrency("");
-    setErrorMessage("")
+    setErrorMessage("");
     if (selectedFile.length > 0) {
       selectedFile.map((item, i) => {
         body.append(`images[${i}]`, item);
@@ -242,24 +266,23 @@ const [Loading, setLoading] = useState(false);
         },
       })
       .then((res) => {
-        setLoading(false)
+        setLoading(false);
         console.log(res);
-        router.push('/account/myServices')
+        router.push("/account/myServices");
       })
       .catch((res) => {
-        setLoading(false)
+        setLoading(false);
         console.log(res);
-        if(res.response.status===500){
-          alert("An error occurred: " + (res.response.data.message));
-
+        if (res.response.status === 500) {
+          alert("An error occurred: " + res.response.data.message);
         }
-        if(res.response.status==401){
-          router.push('/signIn')
+        if (res.response.status == 401) {
+          router.push("/signIn");
         }
         /*  setLoading(false);*/
         res.response.data.message
-        ? setErrorMessage(res.response.data.message)
-        : setErrorMessage("");
+          ? setErrorMessage(res.response.data.message)
+          : setErrorMessage("");
         res.response.data.errors["address_text.en"]
           ? setErrorAddress(res.response.data.errors["address_text.en"][0])
           : setErrorAddress("");
@@ -304,9 +327,6 @@ const [Loading, setLoading] = useState(false);
         res.response.data.errors.currency
           ? setErrorCurrency(res.response.data.errors.currency[0])
           : setErrorCurrency("");
-        
-          
-        
       });
   };
 
@@ -322,22 +342,21 @@ const [Loading, setLoading] = useState(false);
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <div className="load" style={{display:Loading?"flex":"none"}}>
-        <TailSpin
-  height={120}
-  width={120}
-  color="#fff"
-  wrapperStyle={{}}
-  wrapperClass=""
-  visible={Loading}
-  ariaLabel='oval-loading'
-  secondaryColor="#fff"
-  strokeWidth={1}
-  strokeWidthSecondary={1}
-
-/>
+        <div className="load" style={{ display: Loading ? "flex" : "none" }}>
+          <TailSpin
+            height={120}
+            width={120}
+            color="#fff"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={Loading}
+            ariaLabel="oval-loading"
+            secondaryColor="#fff"
+            strokeWidth={1}
+            strokeWidthSecondary={1}
+          />
         </div>
-    
+
         <div className="container breadcrumbDetails">
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
@@ -358,59 +377,58 @@ const [Loading, setLoading] = useState(false);
           <div className="part1">
             <h2 className="headtitle">{t("addServicesBtn")}</h2>
             <div className="box">
-            <div className="upload_images">
-                  <div className="all_img">
-                    <div className="row">
-                      {selectedFile &&
-                        selectedFile.map((file, i) => {
-                          return (
+              <div className="upload_images">
+                <div className="all_img">
+                  <div className="row">
+                    {selectedFile &&
+                      selectedFile.map((file, i) => {
+                        return (
+                          <div
+                            key={i}
+                            className="col-4 pluus doneImg"
+                            style={{ position: "relative" }}
+                          >
+                            <img
+                              src={URL.createObjectURL(file)}
+                              className="img img-thumbnail m-1 imgPreview"
+                              style={{
+                                background: "transparent",
+                                maxHeight: "120px",
+                                minHeight: "120px",
+                                width: "100%",
+                                height: "auto",
+                              }}
+                              alt="person"
+                            />
                             <div
-                              key={i}
-                              className="col-4 pluus doneImg"
-                              style={{ position: "relative" }}
+                              className="RemoveImge"
+                              onClick={() => {
+                                setSelectedFile(
+                                  selectedFile.filter((item) => item !== file)
+                                );
+                              }}
                             >
-                              <img
-                                src={URL.createObjectURL(file)}
-                                className="img img-thumbnail m-1 imgPreview"
-                                style={{
-                                  background:"transparent",
-                                  maxHeight: "120px",
-                                  minHeight: "120px",
-                                  width: "100%",
-                                  height: "auto",
-                                }}
-                                alt="person"
-                              />
-                              <div
-                                className="RemoveImge"
-                                onClick={() => {
-                                  setSelectedFile(
-                                    selectedFile.filter((item) => item !== file)
-                                  );
-                                }}
-                              >
-                                <p>X</p>
-                              </div>
+                              <p>X</p>
                             </div>
-                          );
-                        })}
-                      <div className="col-4 pluus">
-                        <input type="file" onChange={handleHeaderInputChange} />
-                        <img
-                          id="img1"
-                          onClick="onImageClick(this)"
-                          className="img img-thumbnail m-1 imgPreview"
-                        />
-                      </div>
-                    </div>
-                    <div className="upload">
+                          </div>
+                        );
+                      })}
+                    <div className="col-4 pluus">
                       <input type="file" onChange={handleHeaderInputChange} />
-                      <p>upload Image</p>
+                      <img
+                        id="img1"
+                        onClick="onImageClick(this)"
+                        className="img img-thumbnail m-1 imgPreview"
+                      />
                     </div>
                   </div>
+                  <div className="upload">
+                    <input type="file" onChange={handleHeaderInputChange} />
+                    <p>upload Image</p>
+                  </div>
                 </div>
+              </div>
               <form className="row g-3 form_page">
-             
                 <div className="col-md-12 g-3 new_row row">
                   <label htmlFor="">{t("offering")}</label>
                   <div className="col-6">
@@ -449,7 +467,7 @@ const [Loading, setLoading] = useState(false);
                       data={Subcategories}
                     />
                   </div>
-              
+
                   <div className="invalid-feedback">
                     Note that is type of category are paid an amount of 25$
                   </div>
@@ -555,48 +573,7 @@ const [Loading, setLoading] = useState(false);
                     <></>
                   )}
                 </div>
-                <div className="col-md-12">
-                  <label htmlFor="inputMethod" className="form-label">
-                    Service Method
-                  </label>
-                  <ul
-                    className="list-group"
-                    style={{
-                      border: "1px solid #e2e2e2",
-                      padding: "16px 8px 0px",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    <li className="list-group-item">
-                      <input
-                        className="form-check-input me-1"
-                        type="checkbox"
-                        value=""
-                        id="firstCheckbox1"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="firstCheckbox1"
-                      >
-                        Pick Up
-                      </label>
-                    </li>
-                    <li className="list-group-item">
-                      <input
-                        className="form-check-input me-1"
-                        type="checkbox"
-                        value=""
-                        id="secondCheckbox2"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="secondCheckbox2"
-                      >
-                        Delivery
-                      </label>
-                    </li>
-                  </ul>
-                </div>
+             
                 <div className="col-md-12">
                   <TextInput
                     label={t("address")}
@@ -609,7 +586,7 @@ const [Loading, setLoading] = useState(false);
                 </div>
                 <div className="col-md-12">
                   <label htmlFor="inputPhone " className="form-label">
-                  {t("number")}
+                    {t("number")}
                   </label>
 
                   <PhoneInput
@@ -739,7 +716,6 @@ const [Loading, setLoading] = useState(false);
                     <button className="add_more">+ {t("addMore")}</button>
                   </div>
                 </div>
-                
               </form>
               <input
                 type="submit"
@@ -751,17 +727,17 @@ const [Loading, setLoading] = useState(false);
                 }}
               />
               {errorMessage && (
-                        <p
-                          style={{
-                            color: "red",
-textAlign:"end",
-                            fontSize: "12px",
-                            marginTop: "4px",
-                          }}
-                        >
-                          {errorMessage}
-                        </p>
-                      )}
+                <p
+                  style={{
+                    color: "red",
+                    textAlign: "end",
+                    fontSize: "12px",
+                    marginTop: "4px",
+                  }}
+                >
+                  {errorMessage}
+                </p>
+              )}
             </div>
           </div>
           <div className="part2">
