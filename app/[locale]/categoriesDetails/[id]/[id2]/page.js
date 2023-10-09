@@ -1,11 +1,12 @@
 "use client";
 import ItemCourse from "@/components/ItemCourse";
+import { getLocal } from "@/components/useAPI/Auth";
 import { getProvider } from "@/components/useAPI/GetUser";
 import {
   getServicesClient,
   getSingleServices,
 } from "@/components/useAPI/shop/shop";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import Script from "next/script";
 import React from "react";
@@ -20,6 +21,7 @@ function page({ params }) {
   const [ClientID, setClientID] = useState();
   const [servicesID, setServicesID] = useState();
   const t = useTranslations("Categories");
+  const locale = useLocale()
 
   var settings = {
     dots: false,
@@ -114,7 +116,7 @@ function page({ params }) {
             />
             <div className="about_current_Service">
               <div className="head">
-                <h3>{services.description.en}</h3>
+                <h3>{getLocal(locale,services.description)}</h3>
                 <div className="Star">
                   <img src="/images/star.svg" alt="star" />
                   <p>4.8</p>
@@ -132,7 +134,7 @@ function page({ params }) {
                 )}
                 <li>
                   <img src="/images/Location.svg" alt="Location" />
-                  <p>{services.address_text.en}</p>
+                  <p>{getLocal(locale,services.address_text)}</p>
                 </li>
               </ul>
               {services.price > 0 && (
@@ -166,7 +168,7 @@ function page({ params }) {
               />
               <div className="about_Provider">
                 <h3>{services.user.name}</h3>
-                <p>{services.address_text.en}</p>
+                <p>{getLocal(locale,services.address_text)}</p>
               </div>
             </div>
             <div className="part2">
@@ -253,9 +255,9 @@ function page({ params }) {
                 >
                  
                   <ItemCourse
-                    title={service.description.en}
+                    title={getLocal(locale,service.description)}
                     star="4.8"
-                    loc={service.address_text.en}
+                    loc={getLocal(locale,service.address_text)}
                     timeFrom={service.work_times?.time_from}
                     timeTo={service.work_times?.time_to}
                     img={service.images}

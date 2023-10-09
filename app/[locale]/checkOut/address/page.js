@@ -2,13 +2,14 @@
 import ViewCheck from '@/components/compPage/ViewCheck';
 import { getUserLocation } from '@/components/useAPI/GetUser';
 import Cookies from 'js-cookie';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 function page() {
   const t = useTranslations("checkOut");
+  const locale = useLocale()
   const [location ,setLocation] = useState([])
   const [currentlocation ,setCurrentLocation] = useState(Cookies.get("AdID")?Cookies.get("AdID"):null)
   const SearchParams = useSearchParams()

@@ -5,11 +5,13 @@ import BtnLogOut from "@/components/btnLogOut";
 import { getMyOrders } from "@/components/useAPI/shop/shop";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { getLocal } from "@/components/useAPI/Auth";
 function page() {
   const [MyOrder, setMyOrder] = useState([]);
   const [status, setStatus] = useState("PENDING");
   const t = useTranslations("Account");
+  const locale = useLocale()
   useEffect(() => {
     if(status==="PENDING"){
       FetchDataOFMyOrder("PENDING","ACCEPTED","IN_PROGRESS","IN_DELIVERY");
@@ -140,7 +142,7 @@ return(
   />
   <div className="aboutservice">
     <div className="head">
-      <h3>{order.user_service.description.en}</h3>
+      <h3>{getLocal(locale,order.user_service.description) }</h3>
       <div className="Star">
         <img src="/images/star.svg" alt="star" />
         <p>4.8</p>
@@ -176,7 +178,7 @@ return(
           src="/images/Location.svg"
           alt="Location"
         />
-        <p>{order.user_service.address_text.en}</p>
+        <p>{getLocal(locale,order.user_service.address_text)}</p>
       </li>
     </ul>
     <div className="salary_pay">

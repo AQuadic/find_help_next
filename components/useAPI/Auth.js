@@ -55,3 +55,10 @@ let headersToken = {
         console.log('Error in Add New Category (service) =>', error);
     }
   }
+  export function getLocal (locale,path) {
+    if (path == null || path == undefined) return "";
+  
+    if (path.hasOwnProperty(locale) && path[locale]) return path[locale];
+  
+    return path[Object.keys(path)[0]];
+  }

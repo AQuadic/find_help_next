@@ -19,9 +19,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Oval, TailSpin } from "react-loader-spinner";
+import { getLocal } from "@/components/useAPI/Auth";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -29,6 +30,7 @@ const containerStyle = {
 
 function page() {
   const t = useTranslations("Services");
+  const locale= useLocale()
   const router = useRouter();
   const [Loading, setLoading] = useState(false);
 
@@ -115,7 +117,6 @@ function page() {
   const [errorLocationLat, setErrorLocationLat] = useState("");
   const [erroLocationLng, setErroLocationLng] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  console.log(holidays.includes("Monday"));
   useEffect(()=>{
     country&&setErrorCountry("")
     phone&&setErrorPhone("")
@@ -158,13 +159,13 @@ function page() {
     const HomePage = await getHomePage();
     if (!HomePage) console.log(HomePage?.message);
     HomePage.countries.map((itemCountries) => {
-      const item = { value: itemCountries.id, label: itemCountries.name.en };
+      const item = { value: itemCountries.id, label:getLocal(locale,itemCountries.name)};
       setCountries((current) => [...current, item]);
     });
     HomePage.service_categories.map((itemservice_categories) => {
       const item = {
         value: itemservice_categories.id,
-        label: itemservice_categories.name.en,
+        label:getLocal(locale,itemservice_categories.name) ,
       };
       setCategories((current) => [...current, item]);
     });
@@ -172,7 +173,7 @@ function page() {
     HomePage.countries.map((county) => {
       const item = {
         value: county.currency.en,
-        label: county.currency.en,
+        label:getLocal(locale,county.currency) ,
       };
       items.push(item);
     });
@@ -190,7 +191,7 @@ function page() {
       .children.map((itemservice_categories) => {
         const item = {
           value: itemservice_categories.id,
-          label: itemservice_categories.name.en,
+          label:getLocal(locale,itemservice_categories.name),
         };
         setSubCategories((current) => [...current, item]);
       });
@@ -201,7 +202,7 @@ function page() {
     if (!HomePage) console.log(HomePage?.message);
     setCities([]);
     HomePage.map((itemCountries) => {
-      const item = { value: itemCountries.id, label: itemCountries.name.en };
+      const item = { value: itemCountries.id, label:getLocal(locale,itemCountries.name)};
       setCities((current) => [...current, item]);
     });
   };
@@ -342,20 +343,7 @@ function page() {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <div className="load" style={{ display: Loading ? "flex" : "none" }}>
-          <TailSpin
-            height={120}
-            width={120}
-            color="#fff"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={Loading}
-            ariaLabel="oval-loading"
-            secondaryColor="#fff"
-            strokeWidth={1}
-            strokeWidthSecondary={1}
-          />
-        </div>
+        
 
         <div className="container breadcrumbDetails">
           <nav aria-label="breadcrumb">
@@ -424,7 +412,7 @@ function page() {
                   </div>
                   <div className="upload">
                     <input type="file" onChange={handleHeaderInputChange} />
-                    <p>upload Image</p>
+                    <p>{t("upload")}</p>
                   </div>
                 </div>
               </div>

@@ -3380,3 +3380,11 @@ margin:42px auto 0px;
   background-color: rgba(0,0,0,0.4);
   z-index: 9999;
 }
+.loadItems {
+  display: flex;
+  gap: 68px;
+  justify-content: space-between;
+}
+.loadItems .item {
+  width: 30%;
+}

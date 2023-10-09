@@ -6,8 +6,9 @@ import React, { useEffect, useState } from "react";
 import BtnLogOut from "@/components/btnLogOut";
 import { getMyServices, getMyServices2 } from "@/components/useAPI/shop/shop";
 import axios from "axios";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { getLocal } from "@/components/useAPI/Auth";
 
 function page() {
   const router = useRouter()
@@ -16,6 +17,7 @@ function page() {
   const [status, setStatus] = useState("Services");
   const [ServicesStatus, setServicesStatus] = useState(true);
   const t = useTranslations("Account");
+  const locale = useLocale()
   useEffect(() => {
     if (status === "Services") {
       FetchDataOFMyServices();
@@ -246,7 +248,7 @@ console.log(services);
                         />
                         <div className="aboutservice">
                           <div className="head">
-                            <h3>{service.description.en}</h3>
+                            <h3>{getLocal(locale,service.description)}</h3>
                             <div className="Star">
                               <img src="/images/star.svg" alt="star" />
                               <p>4.8</p>
@@ -265,7 +267,7 @@ console.log(services);
                             </li>
                             <li>
                               <img src="/images/Location.svg" alt="Location" />
-                              <p>{service.address_text.en}</p>
+                              <p>{getLocal(locale,service.address_text)}</p>
                             </li>
                           </ul>
                           <div className="salary_pay">
@@ -318,7 +320,7 @@ console.log(services);
                       />
                       <div className="aboutservice">
                         <div className="head">
-                          <h3>{service.user_service.description.en}</h3>
+                          <h3>{getLocal(locale,service.user_service.description) }</h3>
                           <div className="Star">
                             <img src="/images/star.svg" alt="star" />
                             <p>4.8</p>
@@ -349,7 +351,7 @@ console.log(services);
                           </li>
                           <li>
                             <img src="/images/Location.svg" alt="Location" />
-                            <p>{service.user_service.address_text.en}</p>
+                            <p>{getLocal(locale,service.user_service.address_text)}</p>
                           </li>
                         </ul>
                         <div className="salary_pay">

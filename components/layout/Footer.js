@@ -4,12 +4,14 @@ import { getHomePage } from '../useAPI/GetUser';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { getLocal } from '../useAPI/Auth';
 
 
 function Footer() {
   const [data, setData] = useState();
   const t = useTranslations('Footer');
+  const locale = useLocale()
   useEffect(() => {
     FetchDataOFData()
    
@@ -36,7 +38,7 @@ function Footer() {
               {
                 data?.pages.map((item)=>{
                   return(
-                    <Link href={`/about/${(item.title.en).replace(/\s/g, "")}`} key={item.id}>{item.title.en}</Link>
+                    <Link href={`/about/${(getLocal(locale,item.title)).replace(/\s/g, "")}`} key={item.id}>{getLocal(locale,item.title)}</Link>
                   )
                 })
               }

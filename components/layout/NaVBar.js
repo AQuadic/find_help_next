@@ -7,13 +7,15 @@ import { useState } from "react";
 import { navState } from "@/atoms";
 import { useRecoilState } from "recoil";
 import {usePathname, useRouter} from 'next-intl/client';
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { getLocal } from "../useAPI/Auth";
 
 function NavBar({lang}) {
   const [categories, setCategories] = useState([]);
   const [user, setUser] = useState("");
   const [IsUser, setIsUser] = useRecoilState(navState);
   const t = useTranslations('Nav');
+  const locale = useLocale()
   const router = useRouter();
   const pathname = usePathname();
   useEffect(() => {
@@ -79,7 +81,7 @@ const FetchDataOFData = async () => {
           {!IsUser && (
             <Link href="/signIn" className="nav_btn">
               <img src="/images/login.svg" className="img_login" alt="login" />
-              <p>Login</p>
+              <p>{t("logIn")}</p>
             </Link>
           )}
           <button className="search btnsearch">
@@ -109,7 +111,7 @@ const FetchDataOFData = async () => {
                     categories?.map((category)=>{
                       return(
                         <li className="col-md-4 col-sm-6 col-12" key={category.id}>
-                    <h5>{category.name.en}</h5>
+                    <h5>{getLocal(locale,category.name)}</h5>
                     <div className="ul_all">
                       <ul>
                         {
@@ -117,7 +119,7 @@ const FetchDataOFData = async () => {
                           return(
                             <li key={item.id}>
                             <Link className="dropdown-item" href={`/categoriesDetails/${item.id}`}>
-                             {item.name.en}
+                             {getLocal(locale,item.name)}
                             </Link>
                           </li>
                           )
@@ -206,7 +208,7 @@ const FetchDataOFData = async () => {
           {!IsUser && (
             <Link href="/signIn" className="nav_btn login_btn">
               <img src="/images/login.svg" className="img_login" alt="login" />
-              <p>Login</p>
+              <p>{t("logIn")}</p>
             </Link>
           )}
           <button className="lang" onClick={()=>{router.replace(`${pathname+window.location.search}`, {locale: lang==='en'?'ar':'en'});}}>
@@ -241,7 +243,7 @@ const FetchDataOFData = async () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-               {category.name.en}
+               {getLocal(locale,category.name)}
               </a>
               <ul className="dropdown-menu">
                 <li>
@@ -252,7 +254,7 @@ const FetchDataOFData = async () => {
                           return(
                             <li key={item.id}>
                             <Link className="dropdown-item" href={`/categoriesDetails/${item.id}`}>
-                              {item.name.en}
+                              {getLocal(locale,item.name)}
                             </Link>
                           </li>
                           )

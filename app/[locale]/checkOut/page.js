@@ -1,5 +1,6 @@
 "use client";
 import ViewCheck from "@/components/compPage/ViewCheck";
+import { getLocal } from "@/components/useAPI/Auth";
 import { getHomePage, getUserLocation } from "@/components/useAPI/GetUser";
 import { getSingleServices } from "@/components/useAPI/shop/shop";
 import { Group, Radio, TextInput, Textarea } from "@mantine/core";
@@ -9,12 +10,13 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import axios from "axios";
 import dayjs from "dayjs";
 import Cookies from "js-cookie";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 function page() {
+  const locale = useLocale()
   const [date, setDate] = useState();
   const [paymentValue, setPayment] = useState("1");
   const [serviceMethod, setServiceMethod] = useState("1");
@@ -183,7 +185,7 @@ function page() {
                           <Radio
                             key={payment.id}
                             value={payment.id.toString()}
-                            label={payment.name.en}
+                            label={getLocal(locale,payment.name)}
                           />
                         );
                       })}

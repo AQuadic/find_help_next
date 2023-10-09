@@ -10,14 +10,16 @@ import { getAreas, getCities, getHomePage } from "@/components/useAPI/GetUser";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import Cookies from "js-cookie";
 import axios from "axios";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import ViewCheck from "@/components/compPage/ViewCheck";
+import { getLocal } from "@/components/useAPI/Auth";
 const containerStyle = {
   width: "100%",
   height: "400px",
 };
 function page() {
+  const locale = useLocale()
   const [lat, setLat] = useState(-3.745);
   const [lng, setLng] = useState(-38.523);
   const t = useTranslations("checkOut");
@@ -94,7 +96,7 @@ const ServiceID = SearchParams.get("id");
     const HomePage = await getHomePage();
     if (!HomePage) console.log(HomePage?.message);
     HomePage.countries.map((itemCountries) => {
-      const item = { value: itemCountries.id, label: itemCountries.name.en };
+      const item = { value: itemCountries.id, label:getLocal(locale,itemCountries.name)};
       setCountries((current) => [...current, item]);
     });
   };
@@ -103,7 +105,7 @@ const ServiceID = SearchParams.get("id");
     if (!HomePage) console.log(HomePage?.message);
     setCities([]);
     HomePage.map((itemCountries) => {
-      const item = { value: itemCountries.id, label: itemCountries.name.en };
+      const item = { value: itemCountries.id, label:getLocal(locale,itemCountries.name)};
       setCities((current) => [...current, item]);
     });
   };
@@ -113,7 +115,7 @@ const ServiceID = SearchParams.get("id");
     if (!HomePage) console.log(HomePage?.message);
     setAreas([]);
     HomePage.map((itemCountries) => {
-      const item = { value: itemCountries.id, label: itemCountries.name.en };
+      const item = { value: itemCountries.id, label:getLocal(locale,itemCountries.name)};
       setAreas((current) => [...current, item]);
     });
   };

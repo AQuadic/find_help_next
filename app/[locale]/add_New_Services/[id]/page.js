@@ -9,11 +9,8 @@ import {
 } from "@mantine/core";
 import {
   MobileTimePicker,
-  TimePicker,
-  itIT,
-  renderTimeViewClock,
 } from "@mui/x-date-pickers";
-import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
 import React, { useCallback } from "react";
 import { useEffect } from "react";
@@ -24,8 +21,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getSingleServices } from "@/components/useAPI/shop/shop";
+import { TailSpin } from "react-loader-spinner";
+import { getLocal } from "@/components/useAPI/Auth";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -33,6 +32,8 @@ const containerStyle = {
 
 function page({ params }) {
   const t = useTranslations("Services");
+  const locale= useLocale()
+
   const [Loading, setLoading] = useState(false);
 
   const [lat, setLat] = useState(-3.745);
@@ -157,13 +158,13 @@ function page({ params }) {
     const HomePage = await getHomePage();
     if (!HomePage) console.log(HomePage?.message);
     HomePage.countries.map((itemCountries) => {
-      const item = { value: itemCountries.id, label: itemCountries.name.en };
+      const item = { value: itemCountries.id, label: getLocal(locale,itemCountries.name) };
       setCountries((current) => [...current, item]);
     });
     HomePage.service_categories.map((itemservice_categories) => {
       const item = {
         value: itemservice_categories.id,
-        label: itemservice_categories.name.en,
+        label: getLocal(locale,itemservice_categories.name),
       };
       setCategories((current) => [...current, item]);
     });
@@ -171,7 +172,7 @@ function page({ params }) {
     HomePage.countries.map((county) => {
       const item = {
         value: county.currency.en,
-        label: county.currency.en,
+        label: getLocal(locale,county.currency),
       };
       items.push(item);
     });
@@ -189,7 +190,7 @@ function page({ params }) {
       .children.map((itemservice_categories) => {
         const item = {
           value: itemservice_categories.id,
-          label: itemservice_categories.name.en,
+          label: getLocal(locale,itemservice_categories.name),
         };
         setSubCategories((current) => [...current, item]);
       });
@@ -200,7 +201,7 @@ function page({ params }) {
     if (!HomePage) console.log(HomePage?.message);
     setCities([]);
     HomePage.map((itemCountries) => {
-      const item = { value: itemCountries.id, label: itemCountries.name.en };
+      const item = { value: itemCountries.id, label: getLocal(locale,itemCountries.name) };
       setCities((current) => [...current, item]);
     });
   };
@@ -354,14 +355,14 @@ function page({ params }) {
     setSubCategory(Services.sub_category_id);
     setCountry(Services.country_id);
     setCity(Services.city_id);
-    setAddress(Services.address_text.en);
+    setAddress(getLocal(locale,Services.address_text));
     setPhone(Services.phone_normalized);
     setPhone_country(Services.phone_country);
     setTimeFrom(Services.work_times.time_from);
     setTimeto(Services.work_times.time_to);
     setPrice(Services.price);
     setCurrency(Services.currency);
-    setDescription(Services.description.en);
+    setDescription(getLocal(locale,Services.description));
     setSelectedFile2(Services.images);
     setLat(Services.location_google_maps.lat);
     setLng(Services.location_google_maps.lng);
@@ -380,6 +381,20 @@ function page({ params }) {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <div className="load" style={{ display: Loading ? "flex" : "none" }}>
+          <TailSpin
+            height={120}
+            width={120}
+            color="#fff"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={Loading}
+            ariaLabel="oval-loading"
+            secondaryColor="#fff"
+            strokeWidth={1}
+            strokeWidthSecondary={1}
+          />
+        </div>
         <div className="container breadcrumbDetails">
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">

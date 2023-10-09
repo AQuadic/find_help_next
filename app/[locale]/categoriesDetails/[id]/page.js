@@ -1,14 +1,16 @@
 "use client";
 import ItemCourse from "@/components/ItemCourse";
+import { getLocal } from "@/components/useAPI/Auth";
 import { getHomePage } from "@/components/useAPI/GetUser";
 import { getServices } from "@/components/useAPI/shop/shop";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 
 function page({ params }) {
+  const locale = useLocale()
   const [services, setServices] = useState();
   const [categories, setcategories] = useState();
   const [selectCurrentCategories, setSelectCurrentCategories] = useState();
@@ -111,7 +113,7 @@ function page({ params }) {
                       aria-expanded="false"
                       aria-controls={`collapse${categorie.id}`}
                     >
-                      {categorie.name.en}
+                      {getLocal(locale,categorie.name)}
                     </button>
                   </h2>
                   <div
@@ -124,7 +126,7 @@ function page({ params }) {
                         {categorie.children.map((child) => {
                           return (
                             <li key={child.id}>
-                              <Link href={`/categoriesDetails/${child.id}`} className={`${child.id=== +params.id?"active":""}`}>{child.name.en}</Link>
+                              <Link href={`/categoriesDetails/${child.id}`} className={`${child.id=== +params.id?"active":""}`}>{getLocal(locale,child.name)}</Link>
                             </li>
                           );
                         })}
@@ -144,9 +146,9 @@ function page({ params }) {
             {services?.data?.map((service) => {
               return (
                 <ItemCourse
-                  title={service.description.en}
+                  title={getLocal(locale,service.description)}
                   star="4.8"
-                  loc={service.address_text.en}
+                  loc={getLocal(locale,service.address_text)}
                   timeFrom={service.work_times?.time_from}
                   timeTo={service.work_times?.time_to}
                   newsalary={service.price}
@@ -156,16 +158,7 @@ function page({ params }) {
                 />
               );
             })}
-            <ItemCourse
-              title="Alloy Wheel Repairs Derby"
-              star="4.8"
-              loc="sidi bisher, alex"
-              timeFrom="9:00 AM"
-              timeTo="10:00 PM"
-              oldsalary="2000"
-              newsalary="1000"
-              image="1"
-            />
+         
            
            
           </div>

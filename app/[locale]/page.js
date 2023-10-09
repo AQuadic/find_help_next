@@ -7,10 +7,13 @@ import { getCategories, getHomeServices, getServices } from "@/components/useAPI
 import { useEffect } from "react";
 import { getHomePage } from "@/components/useAPI/GetUser";
 import Cookies from "js-cookie";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
+import { getLocal } from "@/components/useAPI/Auth";
+import { Skeleton } from "@mantine/core";
 
 export default function Home() {
+  const locale = useLocale()
   const [categories, setCategories] = useState([]);
   const [services, setServices] = useState();
   const [homeServices, setHomeServices] = useState([]);
@@ -83,7 +86,7 @@ console.log(homeServices3);
             {
               data?.service_categories?.map((item)=>{
 return(
-  <ItemCategories  key={item.id}  id={item.id} title={item.name.en} image={item.image.url} />
+  <ItemCategories  key={item.id}  id={item.id} title={getLocal(locale,item.name)} image={item.image.url} />
 )
               })
             }
@@ -137,9 +140,9 @@ return(
        homeServices?.slice(0,3).map((item)=>{
          return(
            <ItemCourse
-       title={item.description.en}
+       title={ getLocal(locale,item.description)}
        star="4.8"
-       loc={item.address_text.en}
+       loc={getLocal(locale,item.address_text) }
        timeFrom={item.work_times?.time_from}
        timeTo={item.work_times?.time_to}
        oldsalary=""
@@ -168,9 +171,9 @@ category_id={item.category_id}
        homeServices3?.slice(0,3).map((item)=>{
          return(
            <ItemCourse
-       title={item.description.en}
+         title={ getLocal(locale,item.description)}
        star="4.8"
-       loc={item.address_text.en}
+      loc={getLocal(locale,item.address_text) }
        timeFrom={item.work_times?.time_from}
        timeTo={item.work_times?.time_to}
        oldsalary=""
@@ -233,15 +236,34 @@ category_id={item.category_id}
    <section className= "services container m90" >
           
    <h2 className= "headtitle">Cleaning Services</h2>
+   {
+    !homeServices2.length>0&&<div className="loadItems" >
+    <div className="item">
+    <Skeleton height={80}  mb="xl" />
+            <Skeleton height={20} radius="xl" />
+            <Skeleton height={20} mt={6} radius="xl" />
+    </div>
+    <div className="item">
+    <Skeleton height={80}  mb="xl" />
+            <Skeleton height={20} radius="xl" />
+            <Skeleton height={20} mt={6} radius="xl" />
+    </div>
+    <div className="item">
+    <Skeleton height={80}  mb="xl" />
+            <Skeleton height={20} radius="xl" />
+            <Skeleton height={20} mt={6} radius="xl" />
+    </div>
+    </div>
+   }
 
    <div className= "allServices">
      {
        homeServices2?.slice(0,3).map((item)=>{
          return(
            <ItemCourse
-       title={item.description.en}
+       title={ getLocal(locale,item.description)}
        star="4.8"
-       loc={item.address_text.en}
+        loc={getLocal(locale,item.address_text) }
        timeFrom={item.work_times?.time_from}
        timeTo={item.work_times?.time_to}
        oldsalary=""

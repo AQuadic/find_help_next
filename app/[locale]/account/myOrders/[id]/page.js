@@ -4,13 +4,15 @@ import React, { useEffect, useState } from "react";
 import BtnLogOut from "@/components/btnLogOut";
 import { getProviders } from "@/components/useAPI/GetUser";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { getLocal } from "@/components/useAPI/Auth";
 const containerStyle = {
   width: "410px",
   height: "324px",
 };
 
 function page({ params }) {
+  const locale = useLocale()
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDDbeB2JCI9I77iwI6SdzeHpcq2bx0qeQE",
@@ -117,7 +119,7 @@ function page({ params }) {
                 <div className="part2">
                   <div className="clientData">
                     <h4>{t("booking")}</h4>
-                    <h5>{Provider.user_service.description.en}</h5>
+                    <h5>{getLocal(locale, Provider.user_service.description)}</h5>
                     <ul>
                       <li>
                         <img src="/images/Time-Circle2.svg" alt="Time-Circle" />
@@ -129,7 +131,7 @@ function page({ params }) {
                       </li>
                       <li>
                         <img src="/images/Location2.svg" alt="Location" />
-                        <p>{Provider.user_service.address_text.en}</p>
+                        <p>{getLocal(locale,Provider.user_service.address_text)}</p>
                       </li>
                       <li>
                         <img src="/images/Location2.svg" alt="Location" />
