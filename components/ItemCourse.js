@@ -25,7 +25,7 @@ function ItemCourse({
       >
         <img src="/images/love.svg" alt="love" />
       </div>
-      <img src={img?.length?img[0]?.url:`/images/logo.svg`}  className= "imgService" alt="service" />
+      <img src={img?.length?img[0]?.url:`/images/Logo.svg`}  className= "imgService" alt="service" />
       <div className= "aboutservice">
         <div className= "head">
           <h3>{title}</h3>

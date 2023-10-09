@@ -239,7 +239,7 @@ console.log(services);
                           src={
                             service.images?.length > 0
                               ? service.images[0].url
-                              : `/images/logo.svg`
+                              : `/images/Logo.svg`
                           }
                           className="imgService"
                           alt="service"
@@ -311,7 +311,7 @@ console.log(services);
                         src={
                           service.user_service.images?.length > 0
                             ? service.user_service.images[0].url
-                            : `/images/logo.svg`
+                            : `/images/Logo.svg`
                         }
                         className="imgService"
                         alt="service"

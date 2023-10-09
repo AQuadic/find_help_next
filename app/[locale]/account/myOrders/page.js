@@ -133,7 +133,7 @@ return(
     src={
       order.user_service.images?.length > 0
         ? order.user_service.images[0].url
-        : `/images/logo.svg`
+        : `/images/Logo.svg`
     }
     className="imgService"
     alt="service"

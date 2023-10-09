@@ -107,7 +107,7 @@ function page({ params }) {
           <section className="current_Service container m90">
             <img
               src={
-                services.images[0] ? services.images[0].url : "/images/logo.svg"
+                services.images[0] ? services.images[0].url : "/images/Logo.svg"
               }
               className="img_current"
               alt="Service"

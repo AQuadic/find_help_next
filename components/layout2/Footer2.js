@@ -7,7 +7,7 @@ function Footer2() {
       <div className="container">
         <div className="fotter_content">
           <div className="head">
-              <a href="index.html"><img src="/images/logo.svg" alt="" /></a>
+              <a href="index.html"><img src="/images/Logo.svg" alt="" /></a>
           </div>
           
 
