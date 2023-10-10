@@ -20,6 +20,10 @@ function page({ params }) {
   const [provider, setProvider] = useState([]);
   const [ClientID, setClientID] = useState();
   const [servicesID, setServicesID] = useState();
+  const [selectCurrentCategories, setSelectCurrentCategories] = useState();
+  const [selectCurrentCategoriesName, setSelectCurrentCategoriesName] = useState("");
+  const [selectCurrentSubCategories, setSelectCurrentSubCategories] = useState();
+  const [selectCurrentSubCategoriesName, setSelectCurrentSubCategoriesName] = useState("");
   const t = useTranslations("Categories");
   const locale = useLocale()
 
@@ -57,6 +61,11 @@ function page({ params }) {
     setServices(Services);
     setServicesID(Services.id);
     setClientID(Services.user.id);
+    setSelectCurrentCategories(Services.category_id)
+    setSelectCurrentCategoriesName(getLocal(locale,Services.category.name))
+    setSelectCurrentSubCategories(Services.sub_category.id)
+setSelectCurrentSubCategoriesName(getLocal(locale,Services.sub_category.name) )
+
   };
   console.log("====================================");
   console.log(services);
@@ -68,6 +77,7 @@ function page({ params }) {
       const ServicesClient = await getServicesClient(ClientID);
       if (!ServicesClient) console.log(ServicesClient?.message);
       setServicesClient(ServicesClient);
+
     }
   };
   console.log(ClientID);
@@ -87,20 +97,24 @@ function page({ params }) {
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item" aria-current="page">
-                  Home
-                </li>
-
-                <li className="breadcrumb-item" aria-current="page">
-                  Categories
+                <Link href='/'>
+              Home
+              </Link>
                 </li>
                 <li className="breadcrumb-item" aria-current="page">
-                  Repairs
-                </li>
-                <li className="breadcrumb-item" aria-current="page">
-                  Sub category
-                </li>
-                <li className="breadcrumb-item" aria-current="page">
-                  Services
+              <Link href={`/categoriesDetails/${selectCurrentCategories}`}>
+             {selectCurrentCategoriesName}
+              </Link>
+            
+            </li>
+            <li className="breadcrumb-item" aria-current="page">
+              <Link href={`/categoriesDetails/${selectCurrentSubCategories}`}>
+             {selectCurrentSubCategoriesName}
+              </Link>
+            
+            </li>
+                <li className="breadcrumb-item active" >
+                {getLocal(locale,services.description)}
                 </li>
               </ol>
             </nav>

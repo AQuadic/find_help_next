@@ -17,6 +17,9 @@ function page({ params }) {
   const [services, setServices] = useState();
   const [categories, setcategories] = useState();
   const [selectCurrentCategories, setSelectCurrentCategories] = useState();
+  const [selectCurrentCategoriesName, setSelectCurrentCategoriesName] = useState("");
+  const [selectCurrentSubCategories, setSelectCurrentSubCategories] = useState();
+  const [selectCurrentSubCategoriesName, setSelectCurrentSubCategoriesName] = useState("");
   const [stateSearch, setStateSearch] = useRecoilState(StateSearch);
   const [Search, setSearch] = useState(stateSearch);
 
@@ -33,6 +36,10 @@ const searchparams = useSearchParams()
     if (!Services) console.log(Services?.message);
     setServices(Services);
     setSelectCurrentCategories(Services.data[0].category_id)
+    setSelectCurrentCategoriesName(getLocal(locale,Services.data[0].category.name))
+    console.log(Services.data[0].sub_category.id);
+    setSelectCurrentSubCategories(Services.data[0].sub_category.id)
+setSelectCurrentSubCategoriesName(getLocal(locale,Services.data[0].sub_category.name))
   };
   
   const FetchDataOFData = async () => {
@@ -40,23 +47,29 @@ const searchparams = useSearchParams()
     if (!HomePage) console.log(HomePage?.message);
     setcategories(HomePage.categories);
   };
+  console.log(categories);
+  console.log(categories);
   return (
     <>
       <div className="container breadcrumbDetails">
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item" aria-current="page">
+            <Link href='/'>
               Home
-            </li>
-
-            <li className="breadcrumb-item" aria-current="page">
-              Categories
+              </Link>
             </li>
             <li className="breadcrumb-item" aria-current="page">
-              Repairs
+              <Link href={`/categoriesDetails/${selectCurrentCategories}`}>
+             {selectCurrentCategoriesName}
+              </Link>
+            
             </li>
             <li className="breadcrumb-item" aria-current="page">
-              Sub category
+             
+             {selectCurrentSubCategoriesName}
+              
+            
             </li>
           </ol>
         </nav>

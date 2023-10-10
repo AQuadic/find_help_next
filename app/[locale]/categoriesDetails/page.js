@@ -31,6 +31,7 @@ console.log(searchparams.get('search'));
     if (!Services) console.log(Services?.message);
     setServices(Services);
     setSelectCurrentCategories(Services.data[0].category_id)
+
   };
   console.log("====================================");
   console.log(services);
@@ -48,18 +49,18 @@ console.log(searchparams.get('search'));
       <div className="container breadcrumbDetails">
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
-            <li className="breadcrumb-item" aria-current="page">
+            <li className="breadcrumb-item" >
+              <Link href='/'>
               Home
+              </Link>
+             
             </li>
-
-            <li className="breadcrumb-item" aria-current="page">
-              Categories
-            </li>
-            <li className="breadcrumb-item" aria-current="page">
-              Repairs
-            </li>
-            <li className="breadcrumb-item" aria-current="page">
-              Sub category
+          
+            <li className="breadcrumb-item active" >
+             
+             {stateSearch}
+              
+            
             </li>
           </ol>
         </nav>
