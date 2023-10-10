@@ -4,6 +4,7 @@ import ItemCourse from "@/components/ItemCourse";
 import { getLocal } from "@/components/useAPI/Auth";
 import { getHomePage } from "@/components/useAPI/GetUser";
 import { getServices } from "@/components/useAPI/shop/shop";
+import { Skeleton } from "@mantine/core";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -109,6 +110,7 @@ console.log(searchparams.get('search'));
           </div>
           <h3 className="headDrop">{t("categories")}</h3>
           <div className="accordion" id="accordionExample">
+         
             {categories?.map((categorie) => {
               return (
                 <div className="accordion-item" key={categorie.id}>
@@ -150,7 +152,48 @@ console.log(searchparams.get('search'));
           </div>
         </div>
         <div className="services">
+        {!services?.data?.length > 0 && (
+              <div className="loadItems loadItems3">
+                <div className="item">
+                  <Skeleton height={110}  mb="xl" />
+                  <Skeleton height={20} radius="xl" />
+                  <Skeleton height={20} mt={6} radius="xl" />
+                  <Skeleton height={30} width={100} mt={6} radius="xl" />
+                </div>
+                <div className="item">
+                  <Skeleton height={110} mb="xl" />
+                  <Skeleton height={20} radius="xl" />
+                  <Skeleton height={20} mt={6} radius="xl" />
+                  <Skeleton height={30} width={100} mt={6} radius="xl" />
+                </div>
+                <div className="item">
+                  <Skeleton height={110} mb="xl" />
+                  <Skeleton height={20} radius="xl" />
+                  <Skeleton height={20} mt={6} radius="xl" />
+                  <Skeleton height={30} width={100} mt={6} radius="xl" />
+                </div>
+                <div className="item">
+                  <Skeleton height={110} mb="xl" />
+                  <Skeleton height={20} radius="xl" />
+                  <Skeleton height={20} mt={6} radius="xl" />
+                  <Skeleton height={30} width={100} mt={6} radius="xl" />
+                </div>
+                <div className="item">
+                  <Skeleton height={110} mb="xl" />
+                  <Skeleton height={20} radius="xl" />
+                  <Skeleton height={20} mt={6} radius="xl" />
+                  <Skeleton height={30} width={100} mt={6} radius="xl" />
+                </div>
+                <div className="item">
+                  <Skeleton height={110} mb="xl" />
+                  <Skeleton height={20} radius="xl" />
+                  <Skeleton height={20} mt={6} radius="xl" />
+                  <Skeleton height={30} width={100} mt={6} radius="xl" />
+                </div>
+              </div>
+            )}
           <div className="allServices">
+         
             {services?.data?.map((service) => {
               return (
                 <ItemCourse

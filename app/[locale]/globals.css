@@ -184,12 +184,12 @@ html::-webkit-scrollbar-track {
 .categories .parts {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+ 
   gap: 40px 44px;
   flex-wrap: wrap;
 }
 .categories .parts .part {
-  flex: 1;
+
 }
 .categories .parts .part img {
   width: 94px;
@@ -208,6 +208,15 @@ html::-webkit-scrollbar-track {
   margin-top: 16px;
   min-width: max-content;
 }
+@media (max-width:768px) {
+  .categories .parts {
+    
+    justify-content: center;
+    gap: 30px 18px;
+ 
+  }
+}
+
 @media (max-width: 500px) {
   .categories .parts .part h3 {
     font-size: 12px;
@@ -3383,7 +3392,7 @@ html[dir="rtl"] .services .allServices .service .client_details img {
   gap: 68px;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+ 
 }
 .loadItems .item {
   width: 27%;
@@ -3394,15 +3403,51 @@ html[dir="rtl"] .services .allServices .service .client_details img {
 .loadItems .item.item2 {
 align-items: center;
 max-width: 100px;
-}
 
+}
+.loadItems2 {
+  flex-direction: row;
+  flex-wrap: wrap;
+ }
+ .loadItems3 {
+  gap: 16px;
+flex-wrap: wrap;
+ }
+ .loadItems3 .item{
+  width: 100%;
+  max-width: 300px;
+ }
+ .loadItems4{
+  align-items: flex-start;
+ 
+ }
+ .loadItems4 .item{
+  flex: 1;
+  max-width: 50%;
+  align-items: center;
+  width: 50%;
+ }
 @media (max-width: 992px) {
   .loadItems {
     gap: 26px;
   
   }
 }
-@media (max-width: 430px) {
+@media (max-width: 768px) {
+  .loadItems3 {
+    flex-direction: column;
+  
+  }
+  .loadItems4{
+    flex-direction: column;
+    align-items: center;
+   }
+   .loadItems4 .item{
+   max-width: 95%;
+    width: 100%;
+   }
+}
+@media (max-width: 460px) {
   .loadItems {
 
     flex-direction: column;

@@ -6,6 +6,7 @@ import {
   getServicesClient,
   getSingleServices,
 } from "@/components/useAPI/shop/shop";
+import { Skeleton } from "@mantine/core";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import Script from "next/script";
@@ -119,8 +120,24 @@ setSelectCurrentSubCategoriesName(getLocal(locale,Services.sub_category.name) )
               </ol>
             </nav>
           </div>
-
+          {!services.id && (
+              <div className="loadItems loadItems4 container">
+              <div className="item">
+                <Skeleton height={400}  radius="xl" mb="xl" />
+                
+              </div>
+              <div className="item" style={{alignItems:"flex-start"}}>
+                <Skeleton height={60}  radius="md" mb="xl" />
+                <Skeleton height={40}  radius="md" mb="xl" />
+                <Skeleton height={30}   />
+                <Skeleton height={20}  mt={6} radius="xl" />
+               
+              </div>
+              
+            </div>
+            )}
           <section className="current_Service container m90">
+         
             <img
               src={
                 services.images[0] ? services.images[0].url : "/images/Logo.svg"
