@@ -1,5 +1,8 @@
 "use client";
+
+
 import axios from "axios";
+import { RecaptchaVerifier, getAuth, signInWithPhoneNumber } from "firebase/auth";
 import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -7,6 +10,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import PhoneInput from "react-phone-number-input";
+import { auth } from "../firebase.config";
 
 function page() {
   const router = useRouter();
@@ -47,19 +51,64 @@ function page() {
         console.log(res);
       });
   };
+
+console.log(auth);
+/*function onCaptchVerify() {
+ 
+  let recaptchaVerifier = new RecaptchaVerifier(auth, 'sign-in-button', {
+     'size': 'invisible',
+     'callback': (response) => {
+       // reCAPTCHA solved, allow signInWithPhoneNumber.
+       onSignup();
+     }
+   });
+ 
+}
+*/
+  function onCaptchVerify() {
+    console.log("dsd");
+    if (!window.recaptchaVerifier) {
+      window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+        'size': 'normal',
+        'callback': (response) => {
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+          // ...
+          onSignup();
+          console.log(response);
+
+        },
+        'expired-callback': () => {
+          // Response expired. Ask user to solve reCAPTCHA again.
+          // ...
+          console.log("2");
+          
+        }
+        
+      });
+    }
+  }
+console.log(phone);
+const onSignup= async()=> {
+  let recaptchaVerifier = await new RecaptchaVerifier(auth,"recaptcha",{})
+let confirmation = await signInWithPhoneNumber(auth,'+201276790349',recaptchaVerifier)
+console.log(confirmation);
+ 
+}
+const onOtp = ()=>{
+  
+}
+
   return (
     <>
       <section className="page_log">
         <div className="container">
           <div className="box_log">
             <h2>{t("hello")}</h2>
-            <p className="dec">
-            {t("please")}
-            </p>
+            <p className="dec">{t("please")}</p>
             <form className="row g-3 form_page">
               <div className="col-md-12">
                 <label htmlFor="inputPhone " className="form-label">
-                {t("mobile")}
+                  {t("mobile")}
                 </label>
                 <PhoneInput
                   defaultCountry="EG"
@@ -85,11 +134,12 @@ function page() {
             </form>
             <ul className="send_sms">
               <li className="sms">
-                <button>
+                <button onClick={()=>{onSignup()}}>
                   <img src="/images/sms.svg" alt="sms" />
                   <p>{t("continueSMS")}</p>
                 </button>
               </li>
+              
               <li className="whatsApp">
                 <button onClick={() => handellogin()}>
                   <img src="/images/whatsapp.svg" alt="WhatsApp" />
@@ -97,6 +147,9 @@ function page() {
                 </button>
               </li>
             </ul>
+            <div id="recaptcha">
+
+            </div>
             <div className="line">
               <span></span>
               <p>{t("OrContinue")}</p>

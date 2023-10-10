@@ -25,8 +25,12 @@ function ItemCourse({
       >
         <img src="/images/love.svg" alt="love" />
       </div>
+      <Link href={`/categoriesDetails/${category_id}/${id}`}>
       <img src={img?.length?img[0]?.url:`/images/Logo.svg`}  className= "imgService" alt="service" />
+
+      </Link>
       <div className= "aboutservice">
+        <Link href={`/categoriesDetails/${category_id}/${id}`}>
         <div className= "head">
           <h3>{title}</h3>
           <div className= "Star">
@@ -49,6 +53,8 @@ function ItemCourse({
             <p>{loc}</p>
           </li>
         </ul>
+        </Link>
+        
         <div className= "salary_pay">
          {
           newsalary===0?<></>:
@@ -63,7 +69,7 @@ function ItemCourse({
            )}
          </div>
          }
-          <Link href={`/categoriesDetails/${category_id}/${id}`} className= "btn_page">
+          <Link href={`/checkOut?id=${id}`} className= "btn_page">
             Book Now
           </Link>
         </div>

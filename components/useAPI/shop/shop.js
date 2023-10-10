@@ -32,17 +32,22 @@ export const getCategories = async () => {
   }
 };
 
-export const getServices = async (id) => {
+export const getServices = async (id,search) => {
 
   try {
     const url = new URL(
       "https://findhelpapp.com/api/v1/users/services"
   );
   
-  const params = {
-      "category_id": id,
+  const params = id===0? {
+      'search':search,
       "pinned": "1",
-      "per_page":"3"
+      "per_page":"3",
+  }:{
+    "category_id": id,
+    'search':search,
+    "pinned": "1",
+    "per_page":"3",
   };
   Object.keys(params)
       .forEach(key => url.searchParams.append(key, params[key]));

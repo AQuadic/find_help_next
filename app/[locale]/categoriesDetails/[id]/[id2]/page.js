@@ -27,7 +27,7 @@ function page({ params }) {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: provider?.services?.length<3?provider.services.length-1:3,
+    slidesToShow: provider?.services?.length>3?3:provider?.services?.length-1,
     slidesToScroll: 1,
     responsive: [
       {

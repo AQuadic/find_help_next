@@ -20,3 +20,9 @@ export const MessagingFir = atom({
   key: "MessagingFir",
   default: "",
 });
+let params = new URLSearchParams(window.location.search);
+let search = params.get("search");
+export const StateSearch = atom({
+    key: "StateSearch",
+    default: search,
+});

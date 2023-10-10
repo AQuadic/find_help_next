@@ -1,42 +1,45 @@
 "use client";
+import { StateSearch } from "@/atoms";
 import ItemCourse from "@/components/ItemCourse";
 import { getLocal } from "@/components/useAPI/Auth";
 import { getHomePage } from "@/components/useAPI/GetUser";
 import { getServices } from "@/components/useAPI/shop/shop";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
 
 function page({ params }) {
   const locale = useLocale()
   const [services, setServices] = useState();
   const [categories, setcategories] = useState();
   const [selectCurrentCategories, setSelectCurrentCategories] = useState();
+  const [stateSearch, setStateSearch] = useRecoilState(StateSearch);
+  const [Search, setSearch] = useState(stateSearch);
+
+const router = useRouter()
   const t = useTranslations("Categories");
   useEffect(() => {
     FetchDataOFIServices();
     FetchDataOFData();
   }, []);
+const searchparams = useSearchParams()
 
   const FetchDataOFIServices = async () => {
-    const Services = await getServices(params.id);
+    const Services = await getServices(params.id,stateSearch||searchparams.get('search')||"");
     if (!Services) console.log(Services?.message);
     setServices(Services);
     setSelectCurrentCategories(Services.data[0].category_id)
   };
-  console.log("====================================");
-  console.log(services);
-  console.log(selectCurrentCategories);
-  console.log("====================================");
-
+  
   const FetchDataOFData = async () => {
     const HomePage = await getHomePage();
     if (!HomePage) console.log(HomePage?.message);
     setcategories(HomePage.categories);
   };
-  console.log(categories);
   return (
     <>
       <div className="container breadcrumbDetails">
@@ -95,8 +98,8 @@ function page({ params }) {
         <div className="filter">
           <div className="search">
             <h3>{t("search")}</h3>
-            <form action="">
-              <input type="text" placeholder={t("whatSearch")} />
+            <form onSubmit={(e)=>{e.preventDefault(); FetchDataOFIServices();router.push(`/categoriesDetails/${params.id}?search=${Search}`)}}>
+              <input type="text" value={stateSearch} onChange={(e)=>{setStateSearch(e.target.value);setSearch(e.target.value)}} onClick={(e)=>{e.preventDefault(); FetchDataOFIServices();}} placeholder={t("whatSearch")} />
             </form>
           </div>
           <h3 className="headDrop">{t("categories")}</h3>
@@ -126,7 +129,7 @@ function page({ params }) {
                         {categorie.children.map((child) => {
                           return (
                             <li key={child.id}>
-                              <Link href={`/categoriesDetails/${child.id}`} className={`${child.id=== +params.id?"active":""}`}>{getLocal(locale,child.name)}</Link>
+                              <Link href={Search?`/categoriesDetails/${child.id}?search=${Search}`:`/categoriesDetails/${child.id}`} className={`${child.id=== +params.id?"active":""}`}>{getLocal(locale,child.name)}</Link>
                             </li>
                           );
                         })}
@@ -146,6 +149,7 @@ function page({ params }) {
             {services?.data?.map((service) => {
               return (
                 <ItemCourse
+                key={service.id}
                   title={getLocal(locale,service.description)}
                   star="4.8"
                   loc={getLocal(locale,service.address_text)}
