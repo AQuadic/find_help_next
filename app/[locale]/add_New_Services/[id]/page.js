@@ -395,21 +395,7 @@ function page({ params }) {
             strokeWidthSecondary={1}
           />
         </div>
-        <div className="container breadcrumbDetails">
-          <nav aria-label="breadcrumb">
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item" aria-current="page">
-                Home
-              </li>
-              <li className="breadcrumb-item" aria-current="page">
-                Add Services
-              </li>
-              <li className="breadcrumb-item" aria-current="page">
-                Add
-              </li>
-            </ol>
-          </nav>
-        </div>
+       
 
         <section className="services addServices container m90">
           <div className="part1">

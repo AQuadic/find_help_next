@@ -177,35 +177,7 @@ const ServiceID = SearchParams.get("id");
   console.log(nameAddresse);
   return (
     <>
-      <div className="container breadcrumbDetails">
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item" aria-current="page">
-              Home
-            </li>
-
-            <li className="breadcrumb-item" aria-current="page">
-              Categories
-            </li>
-            <li className="breadcrumb-item" aria-current="page">
-              Repairs
-            </li>
-            <li className="breadcrumb-item" aria-current="page">
-              Sub category
-            </li>
-            <li className="breadcrumb-item" aria-current="page">
-              Check Out
-            </li>
-            <li className="breadcrumb-item" aria-current="page">
-              Addresses
-            </li>
-            <li className="breadcrumb-item" aria-current="page">
-              Add New Address
-            </li>
-          </ol>
-        </nav>
-      </div>
-
+    
       <section className="checkOut container m90">
         <div className="part1">
           <h2 className="headtitle">{t("titleAddresses")}</h2>

@@ -173,24 +173,7 @@ function page() {
   console.log(nameAddresse);
   return (
     <>
-      <div className="container breadcrumbDetails">
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item" aria-current="page">
-              Home
-            </li>
-            <li className="breadcrumb-item" aria-current="page">
-              Account
-            </li>
-            <li className="breadcrumb-item" aria-current="page">
-              Addressess
-            </li>
-            <li className="breadcrumb-item" aria-current="page">
-              Add New Address
-            </li>
-          </ol>
-        </nav>
-      </div>
+     
 
       <section className="account container">
         <div className="account_info personal_info">

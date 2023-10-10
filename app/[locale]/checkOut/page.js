@@ -91,28 +91,7 @@ function page() {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <div className="container breadcrumbDetails">
-          <nav aria-label="breadcrumb">
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item" aria-current="page">
-                Home
-              </li>
-
-              <li className="breadcrumb-item" aria-current="page">
-                Categories
-              </li>
-              <li className="breadcrumb-item" aria-current="page">
-                Repairs
-              </li>
-              <li className="breadcrumb-item" aria-current="page">
-                Sub category
-              </li>
-              <li className="breadcrumb-item" aria-current="page">
-                Check Out
-              </li>
-            </ol>
-          </nav>
-        </div>
+       
         {services.id && (
           <section className="checkOut container m90">
             <div className="part1">

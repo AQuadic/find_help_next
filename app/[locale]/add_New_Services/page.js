@@ -343,23 +343,22 @@ function page() {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        
-
-        <div className="container breadcrumbDetails">
-          <nav aria-label="breadcrumb">
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item" aria-current="page">
-                Home
-              </li>
-              <li className="breadcrumb-item" aria-current="page">
-                Add Services
-              </li>
-              <li className="breadcrumb-item" aria-current="page">
-                Add
-              </li>
-            </ol>
-          </nav>
+      <div className="load" style={{ display: Loading ? "flex" : "none" }}>
+          <TailSpin
+            height={120}
+            width={120}
+            color="#fff"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={Loading}
+            ariaLabel="oval-loading"
+            secondaryColor="#fff"
+            strokeWidth={1}
+            strokeWidthSecondary={1}
+          />
         </div>
+
+       
 
         <section className="services addServices container m90">
           <div className="part1">
