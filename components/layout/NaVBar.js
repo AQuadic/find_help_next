@@ -61,6 +61,11 @@ const FetchDataOFData = async () => {
                   </a>
                 </li>
                 <li>
+                  <a className="dropdown-item" href="/account/myFavourite">
+                  {t("favourites")}
+                  </a>
+                </li>
+                <li>
                   <a className="dropdown-item" href="/account/prmoted">
                    {t("promotion")}
                   </a>
@@ -186,6 +191,11 @@ const FetchDataOFData = async () => {
                   <Link className="dropdown-item" href="/account/myServices">
                    {t("myServices")}
                   </Link>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="/account/myFavourite">
+                  {t("favourites")}
+                  </a>
                 </li>
                 <li>
                   <Link className="dropdown-item" href="/account/prmoted">

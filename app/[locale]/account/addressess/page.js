@@ -1,13 +1,12 @@
 "use client";
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 import BtnLogOut from "@/components/btnLogOut";
-import { getUserLocation } from '@/components/useAPI/GetUser';
-import { useTranslations } from 'next-intl';
+import { getUserLocation } from "@/components/useAPI/GetUser";
+import { useTranslations } from "next-intl";
 function page() {
-
-const [location ,setLocation] = useState([])
-const t = useTranslations("Account");
+  const [location, setLocation] = useState([]);
+  const t = useTranslations("Account");
   useEffect(() => {
     FetchDataOFUserLocation();
   }, []);
@@ -15,58 +14,74 @@ const t = useTranslations("Account");
     const Locations = await getUserLocation();
     if (!Locations) console.log(Locations?.message);
 
-    setLocation(Locations)
+    setLocation(Locations);
   };
   console.log(location);
   return (
     <>
-     
+      <section className="account container">
+        <div className="account_info personal_info">
+          <div className="part1">
+            <ul>
+              <li>
+                <Link href="/account">{t("account")}</Link>
+              </li>
+              <li>
+                <Link href="/account/myServices">{t("services")}</Link>
+              </li>{" "}
+              <li>
+                <Link href="/account/myFavourite" >
+                  {t("favourites")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/account/prmoted">{t("promotion")}</Link>
+              </li>
+              <li>
+                <Link href="/account/myOrders">{t("myOrders")}</Link>
+              </li>
+              <li>
+                <Link href="/account/addressess" className="active">
+                  {t("addresses")}
+                </Link>
+              </li>
+              <li>
+                <BtnLogOut />
+              </li>
+            </ul>
+          </div>
+          <div className="Profile">
+            <h2 className="cart_title2">{t("addresses")}</h2>
+            <form className="">
+              <div className="box1 address_page">
+                {location
+                  .filter((loc) => loc.details !== null)
+                  .map((loc) => {
+                    return (
+                      <div className="myAddress" key={loc.id}>
+                        <img src="/images/address.svg" alt="address" />
+                        <div className="about_address">
+                          <p>{loc.details}</p>
+                          <p>{loc.phone_normalized}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
 
-    <section className="account container">
-      <div className="account_info personal_info">
-        <div className="part1">
-          <ul>
-            <li><Link href="/account" >{t("account")}</Link></li>
-            <li><Link href="/account/myServices" >{t("services")}</Link></li>
-            <li><Link href="/account/prmoted" >{t("promotion")}</Link></li>
-            <li><Link href="/account/myOrders" >{t("myOrders")}</Link></li>
-            <li>
-              <Link href="/account/addressess"   className="active">{t("addresses")}</Link>
-            </li>
-           <li><BtnLogOut/></li>
-          </ul>
-        </div>
-        <div className="Profile">
-          <h2 className="cart_title2">{t("addresses")}</h2>
-          <form className="">
-            <div className="box1 address_page">
-              {
-                location.filter((loc)=>loc.details!==null).map((loc)=>{
-                  return(
-                    <div className="myAddress" key={loc.id}>
-                <img src="/images/address.svg" alt="address" />
-                <div className="about_address">
-                  <p>
-                    {loc.details}
-                  </p>
-                  <p>{loc.phone_normalized}</p>
-                </div>
+                <Link
+                  href="/account/addressess/new_Address"
+                  className="addAddress"
+                >
+                  <h5>+</h5>
+                  <h6>{t("addAddress")}</h6>
+                </Link>
               </div>
-                  )
-                })
-              }
-             
-              <Link href="/account/addressess/new_Address" className="addAddress">
-                <h5>+</h5>
-                <h6>{t("addAddress")}</h6>
-              </Link>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
     </>
-  )
+  );
 }
 
-export default page
+export default page;

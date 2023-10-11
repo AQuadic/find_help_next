@@ -37,7 +37,8 @@
     "myServices": "My Services",
     "promotion": "Promotion",
     "myOrders": "My Orders",
-    "addresses": "Addresses"
+    "addresses": "Addresses",
+    "favourites":"My Favourites"
   },
   "Sign": {
     "hello": "Hello,",
@@ -112,7 +113,9 @@
     "building2":"Building Name",
     "mobile":"Mobile Number ",
     "enterMobile":"Your Mobile Number",
-    "btnAddAddress":"Add Address"
+    "btnAddAddress":"Add Address",
+    "favourites":"My Favourites"
+
   },
  "Categories":{
   "smoothly":"Get the support you need to run your business more smoothly",

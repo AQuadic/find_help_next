@@ -36,7 +36,12 @@ let headersToken = {
     try {
         const res = await fetch("https://findhelpapp.com/api/v1/meta/data", {
             method: 'GET',
-            headers:{
+            headers:Cookies.get("token")?{
+              Authorization: `Bearer ${Cookies.get("token")} `,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "Accept-Language": "ar"
+            }:{
               
                  "Content-Type": "application/json",
                  Accept: "application/json",
@@ -130,7 +135,12 @@ let headersToken = {
     try {
         const res = await fetch(`https://findhelpapp.com/api/v1/users/providers/${id}`, {
             method: 'GET',
-            headers:{
+            headers:Cookies.get("token")?{
+              Authorization: `Bearer ${Cookies.get("token")} `,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "Accept-Language": "ar"
+            }:{
                
                  "Content-Type": "application/json",
                  Accept: "application/json",

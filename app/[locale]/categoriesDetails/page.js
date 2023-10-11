@@ -206,6 +206,7 @@ console.log(searchparams.get('search'));
                   img={service.images}
                   id={service.id}
                   category_id={service.category_id}
+                  fav={service.is_favourite}
                 />
               );
             })}

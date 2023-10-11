@@ -37,7 +37,8 @@
     "myServices": "خدماتي",
     "promotion": "الترويج",
     "myOrders": "طلباتي",
-    "addresses": "العناوين"
+    "addresses": "العناوين",
+    "favourites":"المفضلة"
   },
   "Sign": {
     "hello": "مرحبا,",
@@ -112,7 +113,9 @@
     "building2":"اسم المبنى",
     "mobile":"رقم الجوال",
     "enterMobile":"رقم هاتفك المحمول",
-    "btnAddAddress":"إضافة عنوان"
+    "btnAddAddress":"إضافة عنوان",
+    "favourites":"المفضلة"
+
   },
  "Categories":{
   "smoothly":"احصل على الدعم الذي تحتاجه لإدارة عملك بسلاسة أكب",

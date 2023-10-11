@@ -7,6 +7,8 @@ import {
   getSingleServices,
 } from "@/components/useAPI/shop/shop";
 import { Skeleton } from "@mantine/core";
+import axios from "axios";
+import Cookies from "js-cookie";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import Script from "next/script";
@@ -90,6 +92,37 @@ setSelectCurrentSubCategoriesName(getLocal(locale,Services.sub_category.name) )
     }
   };
   console.log(provider);
+  const handelFav = (id) => {
+   
+    const po = axios
+      .post(
+        "https://findhelpapp.com/api/v1/users/favourites",
+        {
+          "model_type": "UserService",
+          "model_id": id
+        },
+        {
+          headers: Cookies.get("token")?{
+            Authorization: `Bearer ${Cookies.get("token")} `,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-Language": "ar",
+          }:{
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-Language": "ar",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((res) => {
+    setLoading(false)
+
+        console.log(res);
+      });
+  };
   return (
     <>
       {services && (
@@ -177,10 +210,11 @@ setSelectCurrentSubCategoriesName(getLocal(locale,Services.sub_category.name) )
                 <Link href={`/checkOut?id=${services.id}`} className="btn_page">
                   {t("book")}
                 </Link>
-                <div
+                <button
+                onClick={()=>{handelFav(params.id2)}}
                   className="fav"
-                  style={{ backgroundImage: "url(/images/love.svg)" }}
-                ></div>
+                  style={{ backgroundImage:services.is_favourite?"url(/images/loved.svg)":"url(/images/love.svg)" }}
+                ></button>
               </div>
             </div>
           </section>
@@ -296,6 +330,8 @@ setSelectCurrentSubCategoriesName(getLocal(locale,Services.sub_category.name) )
                     image="1"
                     id={service.id}
                     category_id={service.category_id}
+                    fav={service.is_favourite}
+
                   />
                 </div>
                       )

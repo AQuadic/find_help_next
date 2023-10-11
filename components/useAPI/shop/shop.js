@@ -52,7 +52,12 @@ export const getServices = async (id,search) => {
   Object.keys(params)
       .forEach(key => url.searchParams.append(key, params[key]));
   
-  const headers = {
+  const headers = Cookies.get("token")?{
+    Authorization: `Bearer ${Cookies.get("token")} `,
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    "Accept-Language": "ar"
+  }:{
       "Content-Type": "application/json",
       "Accept": "application/json",
       "Accept-Language": "ar",
@@ -78,7 +83,12 @@ export const getSingleServices = async (id) => {
       `https://findhelpapp.com/api/v1/users/services/${id}`
   );
   
-  const headers = {
+  const headers = Cookies.get("token")?{
+    Authorization: `Bearer ${Cookies.get("token")} `,
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    "Accept-Language": "ar"
+  }:{
       "Content-Type": "application/json",
       "Accept": "application/json",
       "Accept-Language": "ar",
@@ -105,7 +115,12 @@ export const getServicesClient = async (id) => {
   );
   
   
-  const headers = {
+  const headers = Cookies.get("token")?{
+    Authorization: `Bearer ${Cookies.get("token")} `,
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    "Accept-Language": "ar"
+  }:{
       "Content-Type": "application/json",
       "Accept": "application/json",
       "Accept-Language": "ar",
@@ -124,7 +139,7 @@ export const getServicesClient = async (id) => {
 };
 
 
-export const getMyServices = async () => {
+export const getMyServices = async () => { 
   try {
     const res = await fetch(
       "https://findhelpapp.com/api/v1/users/services/mine",
@@ -209,7 +224,12 @@ export const getCategoriesHome = async () => {
       `https://findhelpapp.com/api/v1/meta/service_categories`,
       {
         method: "GET",
-        headers: {
+        headers: Cookies.get("token")?{
+          Authorization: `Bearer ${Cookies.get("token")} `,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Accept-Language": "ar"
+        }:{
           "Content-Type": "application/json",
           Accept: "application/json",
           "Accept-Language": "ar"
@@ -237,7 +257,12 @@ export const getHomeServices = async (id) => {
   Object.keys(params)
       .forEach(key => url.searchParams.append(key, params[key]));
   
-  const headers = {
+  const headers = Cookies.get("token")?{
+    Authorization: `Bearer ${Cookies.get("token")} `,
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    "Accept-Language": "ar"
+  }:{
       "Content-Type": "application/json",
       "Accept": "application/json",
       "Accept-Language": "ar",
@@ -248,6 +273,27 @@ export const getHomeServices = async (id) => {
       headers,
   })
  
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log("Error in Add New Category (service) =>", error);
+  }
+};
+
+export const getMyFav = async () => {
+  try {
+    const res = await fetch(
+      "https://findhelpapp.com/api/v1/users/favourites",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")} `,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Accept-Language": "ar"
+        },
+      }
+    );
     const data = await res.json();
     return data;
   } catch (error) {

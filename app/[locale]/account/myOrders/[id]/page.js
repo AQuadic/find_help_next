@@ -55,6 +55,9 @@ function page({ params }) {
                 </Link>
               </li>
               <li>
+                <Link href="/account/myFavourite" >{t("favourites")}</Link>
+              </li>
+              <li>
                 <Link href="/account/prmoted">{t("promotion")}</Link>
               </li>
               <li>

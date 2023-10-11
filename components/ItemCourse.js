@@ -1,3 +1,6 @@
+"use client";
+import axios from "axios";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import React from "react";
 
@@ -14,17 +17,53 @@ function ItemCourse({
   img,
   love,
   id,
-  category_id
+  category_id,
+  fav
 }) {
- 
+  const handelFav = (id) => {
+   
+    const po = axios
+      .post(
+        "https://findhelpapp.com/api/v1/users/favourites",
+        {
+          "model_type": "UserService",
+          "model_id": id
+        },
+        {
+          headers: Cookies.get("token")?{
+            Authorization: `Bearer ${Cookies.get("token")} `,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-Language": "ar",
+          }:{
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-Language": "ar",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((res) => {
+    setLoading(false)
+
+        console.log(res);
+      });
+  };
+
   return (
     <div className= "service" key={id}>
-      <div
+      <button
+      onClick={()=>{handelFav(id)}}
         className= "stateLove"
-        style={love&&{ backgroundImage: "url(/images/loved.svg)" }}
+       
       >
-        <img src="/images/love.svg" alt="love" />
-      </div>
+        {
+          fav?<img src="/images/loved.svg" alt="love" />:<img src="/images/love.svg" alt="love" />
+        }
+       
+      </button>
       <Link href={`/categoriesDetails/${category_id}/${id}`}>
       <img src={img?.length?img[0]?.url:`/images/Logo.svg`}  className= "imgService" alt="service" />
 

@@ -238,6 +238,8 @@ setSelectCurrentSubCategoriesName(getLocal(locale,Services.data[0].sub_category.
                   img={service.images}
                   id={service.id}
                   category_id={service.category_id}
+                  fav={service.is_favourite}
+                  
                 />
               );
             })}

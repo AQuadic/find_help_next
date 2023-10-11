@@ -222,6 +222,7 @@ export default function Home() {
                     img={item.images}
                     id={item.id}
                     category_id={item.category_id}
+                    fav={item.is_favourite}
                   />
                 );
               })}
@@ -269,6 +270,7 @@ export default function Home() {
                     img={item.images}
                     id={item.id}
                     category_id={item.category_id}
+                    fav={item.is_favourite}
                   />
                 );
               })}
@@ -351,6 +353,7 @@ export default function Home() {
                     img={item.images}
                     id={item.id}
                     category_id={item.category_id}
+                    fav={item.is_favourite}
                   />
                 );
               })}
