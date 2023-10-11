@@ -2498,6 +2498,9 @@ img:hover ~ .imgDelete {
 /*========================== end services======================*/
 
 /*=========================== start account ======================*/
+.account{
+  margin-top: 20px;
+} 
 .account_info {
   display: flex;
   gap: 34px;

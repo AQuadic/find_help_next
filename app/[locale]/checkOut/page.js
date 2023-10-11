@@ -14,6 +14,7 @@ import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { TailSpin } from "react-loader-spinner";
 
 function page() {
   const locale = useLocale()
@@ -22,7 +23,9 @@ function page() {
   const [serviceMethod, setServiceMethod] = useState("1");
   const [nots, setNots] = useState("");
   const [adresse, setAdresse] = useState([]);
-
+  const [ErrorAdresse, setErrorAdresse] = useState("");
+  const [Loading, setLoading] = useState(false);
+const router = useRouter()
   const [payment_methods, setPayment_methods] = useState([]);
   const [services, setServices] = useState([]);
   const t = useTranslations("checkOut");
@@ -57,41 +60,66 @@ function page() {
     setAdresse(Locations.filter((item) => item.id === +Cookies.get("AdID")));
   };
   const handelCheckOut = () => {
-    const po = axios
-      .post(
-        "https://findhelpapp.com/api/v1/users/orders",
-        {
-          "type": "quotation",
-          "user_service_id": ServiceID,
-          "delivery": serviceMethod,
-          "address_id":adresse[0].id,
-          "payment_method_id": paymentValue,
-          "notes": nots,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${Cookies.get("token")} `,
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "Accept-Language": "ar",
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-      
-      })
-      .catch((res) => {
-       
-       
-        console.log(res);
-      });
+    setLoading(true);
+if(!Cookies.get("AdID")){
+  setErrorAdresse("you should select address")
+  setLoading(false)
+}else{
+  const po = axios
+  .post(
+    "https://findhelpapp.com/api/v1/users/orders",
+    {
+      "type": "quotation",
+      "user_service_id": ServiceID,
+      "delivery": serviceMethod,
+      "address_id":adresse[0].id,
+      "payment_method_id": paymentValue,
+      "notes": nots,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")} `,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Accept-Language": "ar",
+      },
+    }
+  )
+  .then((res) => {
+    console.log(res);
+    if(res.status==200){
+      router.push('/account/myOrders')
+    }
+setLoading(false);
+  
+  })
+  .catch((res) => {
+setLoading(false);
+   
+   
+    console.log(res);
+  });
+}
+
   };
 
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-       
+      <div className="load" style={{ display: Loading ? "flex" : "none" }}>
+          <TailSpin
+            height={120}
+            width={120}
+            color="#fff"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={Loading}
+            ariaLabel="oval-loading"
+            secondaryColor="#fff"
+            strokeWidth={1}
+            strokeWidthSecondary={1}
+          />
+        </div>
         {services.id && (
           <section className="checkOut container m90">
             <div className="part1">
@@ -149,6 +177,17 @@ function page() {
                       </>
                      
                     )}
+                    {ErrorAdresse && (
+                    <p
+                      style={{
+                        color: "red",
+                        fontSize: "12px",
+                        marginTop: "4px",
+                      }}
+                    >
+                      {ErrorAdresse}
+                    </p>
+                  )}
                   </div>
                 </div>
                 <div className="box1">

@@ -26,3 +26,8 @@ export const StateSearch = atom({
     key: "StateSearch",
     default: search,
 });
+
+export const SMS = atom({
+  key: "SMS",
+  default: "",
+});

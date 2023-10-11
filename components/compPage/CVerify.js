@@ -1,23 +1,30 @@
 "use client";
 
-import { navState } from "@/atoms";
+import { SMS, navState } from "@/atoms";
+import { authenti } from "@/utils/firebase";
 import axios from "axios";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { TailSpin } from "react-loader-spinner";
 import OTPInput from "react-otp-input";
 import { useRecoilState } from "recoil";
 
 function CVerify({ params }) {
-  const router = useRouter();
 
+  const router = useRouter();
+  const [SMS1, setSMS] = useRecoilState(SMS);
+console.log(SMS1.verificationId);
   const [phone, setPhone] = useState(Cookies.get('phone'));
   const [phone_country, setPhone_country] = useState(Cookies.get('phone_country'));
   const [otp, setOtp] = useState("");
   const [IsUser, setIsUser] = useRecoilState(navState);
   const [errorcode, setErrorCode] = useState("");
+  const [Loading, setLoading] = useState(false);
+
   const t = useTranslations("Sign");
   const clearOtp = () => {
     setOtp("");
@@ -55,6 +62,7 @@ function CVerify({ params }) {
   }, []);
 
   const handelVerify = () => {
+    setLoading(true)
     setErrorCode("");
     const po = axios
       .post(
@@ -74,6 +82,8 @@ function CVerify({ params }) {
         }
       )
       .then((res) => {
+    setLoading(false)
+
         console.log(res);
         if (res.status === 200) {
           setIsUser(true);
@@ -85,6 +95,8 @@ function CVerify({ params }) {
         }
       })
       .catch((res) => {
+    setLoading(false)
+
         alert('An error occurred: ' + res.message);
         res.response.data.message
           ? setErrorCode(res.response.data.message)
@@ -93,6 +105,7 @@ function CVerify({ params }) {
       });
   };
   const handelResend = () => {
+    setLoading(true)
     
     const po = axios
       .post(
@@ -111,23 +124,117 @@ function CVerify({ params }) {
         }
       )
       .then((res) => {
+    setLoading(false)
+
        console.log(res);
        Cookies.set("phone",Cookies.get('phone'));
        Cookies.set("phone_country",Cookies.get("phone_country"));
       })
       .catch((res) => {
+    setLoading(false)
+
         alert('An error occurred: ' + res.message);
           console.log(res);
       });
   };
+  const generateRe = () => {
+    window.recaptchaVerifier = new RecaptchaVerifier(authenti, 'recaptcha-container', {
+      'size': 'invisible',
+      'callback': (response) => {
+        // reCAPTCHA solved, allow signInWithPhoneNumber.
+      }
+    });
+  };
+  const handelSMS = (e) => {
+    e.preventDefault();
+    generateRe();
+    let appVerifier = window.recaptchaVerifier;
+    signInWithPhoneNumber(authenti, Cookies.get('phone'), appVerifier)
+    .then((confirmationResult) => {
+      // SMS sent. Prompt user to type the code from the message, then sign the
+      // user in with confirmationResult.confirm(code).
+      Cookies.set("phone", phone);
+      window.confirmationResult = confirmationResult;
+      console.log(confirmationResult);
+      setSMS(confirmationResult)
+      router.push("/verify");
+      // ...
+    }).catch((error) => {
+      // Error; SMS not sent
+      // ...
+      console.log(error);
+    });
+  };
+
   useEffect(() => {
     if(otp.split("").length===6){
-      handelVerify()
+      SMS1.verificationId?handelVerifySMS():handelVerify()
+      
     }
   }, [otp]);
+  const handelVerify2 = (token) => {
+    setLoading(true)
+    setErrorCode("");
+    const po = axios
+      .post(
+        "https://findhelpapp.com/api/v1/users/auth/firebase",
+        {
+          "provider": "FIREBASE",
+           "access_token": token
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-Language": "ar",
+          },
+        }
+      )
+      .then((res) => {
+    setLoading(false)
 
+        console.log(res);
+        if (res.status === 200) {
+          setIsUser(true);
+          Cookies.set("token", res.data.token);
+          if (res.data.user.name === "go he to our") {
+            router.push("/created");
+          } else {
+            router.push("/");
+          }
+        }
+       
+      })
+      .catch((res) => {
+    setLoading(false)
+
+        console.log(res);
+      });
+  };
+  const handelVerifySMS =()=>{
+    SMS1.confirm(otp).then((result)=>{
+      console.log(result);
+      handelVerify2(result.user.accessToken)
+    }).catch((err)=>{
+      console.log(err);
+    })
+      }
   return (
     <>
+    <div className="load" style={{ display: Loading ? "flex" : "none" }}>
+          <TailSpin
+            height={120}
+            width={120}
+            color="#fff"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={Loading}
+            ariaLabel="oval-loading"
+            secondaryColor="#fff"
+            strokeWidth={1}
+            strokeWidthSecondary={1}
+          />
+        </div>
       <section className="page_log">
         <div className="container">
           <div className="box_log">
@@ -165,7 +272,8 @@ function CVerify({ params }) {
                 <input type="submit" value={t("resend")} id="resend" className="resend" disabled   onClick={(e) => {
                   e.preventDefault();
                   clearOtp()
-                  handelResend();
+                  SMS1.verificationId?handelSMS():handelResend();
+                  
                 }}/>
                   
               
@@ -177,7 +285,8 @@ function CVerify({ params }) {
                 value= {t("vrefiy")}
                 onClick={(e) => {
                   e.preventDefault();
-                  handelVerify();
+                  SMS1.verificationId?handelVerifySMS():handelVerify()
+                 
                 }}
               />
               

@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { useLocale, useTranslations } from "next-intl";
 import { getLocal } from "@/components/useAPI/Auth";
+import { TailSpin } from "react-loader-spinner";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -39,7 +40,16 @@ function page() {
   const [errorName, setErrorName] = useState("");
   const [errorPhone, setErrorPhone] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [Loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    areas && setErrorArea("");
+    city && setErrorCity("");
+    country && setErrorCountry("");
+    nameAddresse && setErrorName("");
+    phone && setErrorPhone("");
+    setErrorMessage("");
+  }, [areas, city, country, nameAddresse, phone]);
   const onMapClick = useCallback((e) => {
     setLat(e.latLng.lat());
     setLng(e.latLng.lng());
@@ -116,6 +126,7 @@ function page() {
     });
   };
   const handelNewAddresse = () => {
+    setLoading(true);
     setErrorArea("");
     setErrorCity("");
     setErrorCountry("");
@@ -146,9 +157,15 @@ function page() {
         }
       )
       .then((res) => {
+        setLoading(false);
         console.log(res);
+        if(res.status==200){
+          router.push(`/account/addressess`)
+        }
       })
       .catch((res) => {
+        setLoading(false);
+
         res.response.data.errors.area_id
           ? setErrorArea(res.response.data.errors.area_id)
           : setErrorArea("");
@@ -173,7 +190,20 @@ function page() {
   console.log(nameAddresse);
   return (
     <>
-     
+      <div className="load" style={{ display: Loading ? "flex" : "none" }}>
+        <TailSpin
+          height={120}
+          width={120}
+          color="#fff"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={Loading}
+          ariaLabel="oval-loading"
+          secondaryColor="#fff"
+          strokeWidth={1}
+          strokeWidthSecondary={1}
+        />
+      </div>
 
       <section className="account container">
         <div className="account_info personal_info">

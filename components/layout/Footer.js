@@ -38,7 +38,7 @@ function Footer() {
               {
                 data?.pages.map((item)=>{
                   return(
-                    <Link href={`/about/${(getLocal(locale,item.title)).replace(/\s/g, "")}`} key={item.id}>{getLocal(locale,item.title)}</Link>
+                    <Link href={`/about/${(getLocal('en',item.title)).replace(/\s/g, "")}`} key={item.id}>{getLocal(locale,item.title)}</Link>
                   )
                 })
               }

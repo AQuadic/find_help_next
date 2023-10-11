@@ -5,12 +5,15 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useState } from "react";
+import { TailSpin } from "react-loader-spinner";
 
 function page() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [Loading, setLoading] = useState(false);
+
   const t = useTranslations("Sign");
   console.log(name);
   console.log(email);
@@ -21,6 +24,7 @@ function page() {
   };
 
   const handelProfile = () => {
+    setLoading(true)
     const body = new FormData();
     body.append("name", name);
     body.append("email", email);
@@ -36,16 +40,32 @@ function page() {
         },
       })
       .then((res) => {
+        setLoading(false)
         console.log(res);
         router.push("/");
       })
       .catch((res) => {
+        setLoading(false)
         console.log(res);
       });
   };
 
   return (
     <>
+     <div className="load" style={{ display: Loading ? "flex" : "none" }}>
+          <TailSpin
+            height={120}
+            width={120}
+            color="#fff"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={Loading}
+            ariaLabel="oval-loading"
+            secondaryColor="#fff"
+            strokeWidth={1}
+            strokeWidthSecondary={1}
+          />
+        </div>
       <section className="page_log">
         <div className="container">
           <div className="box_log">

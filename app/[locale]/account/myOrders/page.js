@@ -7,12 +7,16 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useLocale, useTranslations } from "next-intl";
 import { getLocal } from "@/components/useAPI/Auth";
+import { Skeleton } from "@mantine/core";
 function page() {
   const [MyOrder, setMyOrder] = useState([]);
   const [status, setStatus] = useState("PENDING");
+  const [Loading, setLoading] = useState(true);
+
   const t = useTranslations("Account");
   const locale = useLocale()
   useEffect(() => {
+    setLoading(true)
     if(status==="PENDING"){
       FetchDataOFMyOrder("PENDING","ACCEPTED","IN_PROGRESS","IN_DELIVERY");
     }
@@ -28,6 +32,7 @@ function page() {
     const Orders = await getMyOrders(p1,p2,p3,p4);
     if (!Orders) console.log(Orders?.message);
     setMyOrder(Orders.data.filter(item=>item.user_service!== null));
+    setLoading(false)
   };
   console.log(MyOrder);
 
@@ -54,6 +59,9 @@ function page() {
       .then((res) => {
         alert('Message: ' + res.data.message);
         console.log(res);
+        if(res.status==200){
+          FetchDataOFMyOrder("PENDING","ACCEPTED","IN_PROGRESS","IN_DELIVERY")
+        }
         
       })
       .catch((res) => {
@@ -183,7 +191,28 @@ return(
                        
                      
                   })}
-               
+               {Loading && (
+              <div className="loadItems" style={{width:"100%"}}>
+                <div className="item">
+                  <Skeleton height={110}  mb="xl" />
+                  <Skeleton height={20} radius="xl" />
+                  <Skeleton height={20} mt={6} radius="xl" />
+                  <Skeleton height={30} width={100} mt={6} radius="xl" />
+                </div>
+                <div className="item">
+                  <Skeleton height={110} mb="xl" />
+                  <Skeleton height={20} radius="xl" />
+                  <Skeleton height={20} mt={6} radius="xl" />
+                  <Skeleton height={30} width={100} mt={6} radius="xl" />
+                </div>
+                <div className="item">
+                  <Skeleton height={110} mb="xl" />
+                  <Skeleton height={20} radius="xl" />
+                  <Skeleton height={20} mt={6} radius="xl" />
+                  <Skeleton height={30} width={100} mt={6} radius="xl" />
+                </div>
+              </div>
+            )}
               
               </div>
             </section>

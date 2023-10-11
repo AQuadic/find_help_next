@@ -9,6 +9,7 @@ import axios from "axios";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { getLocal } from "@/components/useAPI/Auth";
+import { Skeleton } from "@mantine/core";
 
 function page() {
   const router = useRouter()
@@ -16,9 +17,11 @@ function page() {
   const [services2, setServices2] = useState([]);
   const [status, setStatus] = useState("Services");
   const [ServicesStatus, setServicesStatus] = useState(true);
+  const [Loading, setLoading] = useState(true);
   const t = useTranslations("Account");
   const locale = useLocale()
   useEffect(() => {
+    setLoading(true)
     if (status === "Services") {
       FetchDataOFMyServices();
       setServicesStatus(true)
@@ -56,11 +59,13 @@ console.log(services);
     const Services = await getMyServices();
     if (!Services) console.log(Services?.message);
     setServices(Services.data.filter(item=>item.user_service!== null));
+    setLoading(false)
   };
   const FetchDataOFMyServices2 = async (p1, p2, p3, p4) => {
     const Services = await getMyServices2(p1, p2, p3, p4);
     if (!Services) console.log(Services?.message);
     setServices2(Services.data.filter(item=>item.user_service!== null));
+    setLoading(false)
   };
 
   const handelDelete = (id) => { 
@@ -200,7 +205,7 @@ console.log(services);
             </div>
             <section className="services container m90">
               <div className="allServices">
-
+             
                 {
                    ServicesStatus&& services?.map((service) => {
                     return (
@@ -369,7 +374,28 @@ console.log(services);
                 
                 })
                }
-
+ {Loading && (
+              <div className="loadItems" style={{width:"100%"}}>
+                <div className="item">
+                  <Skeleton height={110}  mb="xl" />
+                  <Skeleton height={20} radius="xl" />
+                  <Skeleton height={20} mt={6} radius="xl" />
+                  <Skeleton height={30} width={100} mt={6} radius="xl" />
+                </div>
+                <div className="item">
+                  <Skeleton height={110} mb="xl" />
+                  <Skeleton height={20} radius="xl" />
+                  <Skeleton height={20} mt={6} radius="xl" />
+                  <Skeleton height={30} width={100} mt={6} radius="xl" />
+                </div>
+                <div className="item">
+                  <Skeleton height={110} mb="xl" />
+                  <Skeleton height={20} radius="xl" />
+                  <Skeleton height={20} mt={6} radius="xl" />
+                  <Skeleton height={30} width={100} mt={6} radius="xl" />
+                </div>
+              </div>
+            )}
               
               </div>
             </section>

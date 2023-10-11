@@ -13,14 +13,14 @@ function btnLogOut() {
     const t = useTranslations("Account");
     
     const HandelLogOut = async () => {
-      const UserLogOut = await LogOut();
-      if (UserLogOut.message === "Logged out Successfully") {
+     LogOut();
+
         console.log("done");
         setIsUser(false);
         Cookies.remove('token')
         Cookies.remove('phone')
         router.push('/signIn')
-      }
+      
     };
 
   

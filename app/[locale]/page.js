@@ -211,6 +211,7 @@ export default function Home() {
               {homeServices?.slice(0, 3).map((item) => {
                 return (
                   <ItemCourse
+                  key={item.id}
                     title={getLocal(locale, item.description)}
                     star="4.8"
                     loc={getLocal(locale, item.address_text)}
@@ -257,6 +258,7 @@ export default function Home() {
               {homeServices3?.slice(0, 3).map((item) => {
                 return (
                   <ItemCourse
+                  key={item.id}
                     title={getLocal(locale, item.description)}
                     star="4.8"
                     loc={getLocal(locale, item.address_text)}
@@ -338,6 +340,7 @@ export default function Home() {
               {homeServices2?.slice(0, 3).map((item) => {
                 return (
                   <ItemCourse
+                  key={item.id}
                     title={getLocal(locale, item.description)}
                     star="4.8"
                     loc={getLocal(locale, item.address_text)}

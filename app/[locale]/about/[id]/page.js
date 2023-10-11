@@ -14,7 +14,7 @@ function page({params}) {
       const FetchDataOFData = async () => {
         const HomePage = await getHomePage();
         if (!HomePage) console.log(HomePage?.message);
-        setAbout(HomePage.pages.filter((item)=> ((getLocal(locale,item.title) ).replace(/\s/g, "")) === params.id)[0]);
+        setAbout(HomePage.pages.filter((item)=> ((getLocal('en',item.title) ).replace(/\s/g, "")) === params.id)[0]);
       };
     console.log(about);
     console.log('====================================');

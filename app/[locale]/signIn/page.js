@@ -2,15 +2,21 @@
 
 
 import axios from "axios";
-import { RecaptchaVerifier, getAuth, signInWithPhoneNumber } from "firebase/auth";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { useEffect } from "react";
 import { useState } from "react";
 import PhoneInput from "react-phone-number-input";
-import { auth } from "../firebase.config";
+
+import { TailSpin } from "react-loader-spinner";
+
+import CVerify from "@/components/compPage/CVerify";
+import OTPInput from "react-otp-input";
+import { useRecoilState } from "recoil";
+import { SMS } from "@/atoms";
+import { authenti } from "@/utils/firebase";
 
 function page() {
   const router = useRouter();
@@ -18,7 +24,12 @@ function page() {
   const [phone_country, setPhone_country] = useState("EG");
   const [Errorphone, setErrorPhone] = useState("");
   const t = useTranslations("Sign");
+  const [Loading, setLoading] = useState(false);
+  const [SMS1, setSMS] = useRecoilState(SMS);
+console.log(SMS1);
+
   const handellogin = () => {
+    setLoading(true)
     const po = axios
       .post(
         "https://findhelpapp.com/api/v1/users/auth/login",
@@ -36,12 +47,17 @@ function page() {
       )
       .then((res) => {
         console.log(res);
+        setSMS("")
         Cookies.set("token", res.data.token);
         Cookies.set("phone", phone);
         Cookies.set("phone_country", phone_country);
         router.push("/verify");
+    setLoading(false)
+
       })
       .catch((res) => {
+    setLoading(false)
+
         if (res.response.status === 500) {
           alert("An error occurred: " + res.response.data.message);
         }
@@ -52,54 +68,57 @@ function page() {
       });
   };
 
-console.log(auth);
-/*function onCaptchVerify() {
- 
-  let recaptchaVerifier = new RecaptchaVerifier(auth, 'sign-in-button', {
-     'size': 'invisible',
-     'callback': (response) => {
-       // reCAPTCHA solved, allow signInWithPhoneNumber.
-       onSignup();
-     }
-   });
- 
-}
-*/
-  function onCaptchVerify() {
-    console.log("dsd");
-    if (!window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-        'size': 'normal',
-        'callback': (response) => {
-          // reCAPTCHA solved, allow signInWithPhoneNumber.
-          // ...
-          onSignup();
-          console.log(response);
 
-        },
-        'expired-callback': () => {
-          // Response expired. Ask user to solve reCAPTCHA again.
-          // ...
-          console.log("2");
-          
-        }
-        
-      });
+
+const generateRe = () => {
+  window.recaptchaVerifier = new RecaptchaVerifier(authenti, 'recaptcha-container', {
+    'size': 'invisible',
+    'callback': (response) => {
+      // reCAPTCHA solved, allow signInWithPhoneNumber.
     }
-  }
-console.log(phone);
-const onSignup= async()=> {
-  let recaptchaVerifier = await new RecaptchaVerifier(auth,"recaptcha",{})
-let confirmation = await signInWithPhoneNumber(auth,'+201276790349',recaptchaVerifier)
-console.log(confirmation);
- 
-}
-const onOtp = ()=>{
-  
-}
+  });
+};
+const handelSMS = (e) => {
+  e.preventDefault();
+  generateRe();
+  let appVerifier = window.recaptchaVerifier;
+  signInWithPhoneNumber(authenti, phone, appVerifier)
+  .then((confirmationResult) => {
+    // SMS sent. Prompt user to type the code from the message, then sign the
+    // user in with confirmationResult.confirm(code).
+    setUser(confirmationResult)
+    Cookies.set("phone", phone);
+    window.confirmationResult = confirmationResult;
+    console.log(confirmationResult);
+    setSMS(confirmationResult)
+    router.push("/verify");
+    // ...
+  }).catch((error) => {
+    // Error; SMS not sent
+    // ...
+    console.log(error);
+  });
+};
+
 
   return (
     <>
+    
+<div className="load" style={{ display: Loading ? "flex" : "none" }}>
+          <TailSpin
+            height={120}
+            width={120}
+            color="#fff"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={Loading}
+            ariaLabel="oval-loading"
+            secondaryColor="#fff"
+            strokeWidth={1}
+            strokeWidthSecondary={1}
+          />
+        </div>
+
       <section className="page_log">
         <div className="container">
           <div className="box_log">
@@ -134,7 +153,7 @@ const onOtp = ()=>{
             </form>
             <ul className="send_sms">
               <li className="sms">
-                <button onClick={()=>{onSignup()}}>
+                <button onClick={handelSMS}>
                   <img src="/images/sms.svg" alt="sms" />
                   <p>{t("continueSMS")}</p>
                 </button>
@@ -176,6 +195,7 @@ const onOtp = ()=>{
             </div>
           </div>
         </div>
+        <div id="recaptcha-container"></div>
       </section>
 
       <section className="endPage_login">

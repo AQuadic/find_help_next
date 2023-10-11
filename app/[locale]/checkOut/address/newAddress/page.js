@@ -11,21 +11,22 @@ import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { useLocale, useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import ViewCheck from "@/components/compPage/ViewCheck";
 import { getLocal } from "@/components/useAPI/Auth";
+import { TailSpin } from "react-loader-spinner";
 const containerStyle = {
   width: "100%",
   height: "400px",
 };
 function page() {
-  const locale = useLocale()
+  const locale = useLocale();
   const [lat, setLat] = useState(-3.745);
   const [lng, setLng] = useState(-38.523);
   const t = useTranslations("checkOut");
   const t2 = useTranslations("Account");
-  const SearchParams = useSearchParams()
-const ServiceID = SearchParams.get("id");
+  const SearchParams = useSearchParams();
+  const ServiceID = SearchParams.get("id");
   const [nameAddresse, setNameAddresse] = useState("");
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState();
@@ -44,6 +45,17 @@ const ServiceID = SearchParams.get("id");
   const [errorName, setErrorName] = useState("");
   const [errorPhone, setErrorPhone] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [Loading, setLoading] = useState(false);
+const router = useRouter()
+  useEffect(() => {
+    areas && setErrorArea("");
+    city && setErrorCity("");
+    country && setErrorCountry("");
+    nameAddresse && setErrorName("");
+    phone && setErrorPhone("");
+    setErrorMessage("");
+  }, [areas, city, country, nameAddresse, phone]);
+
   const onMapClick = useCallback((e) => {
     setLat(e.latLng.lat());
     setLng(e.latLng.lng());
@@ -96,7 +108,10 @@ const ServiceID = SearchParams.get("id");
     const HomePage = await getHomePage();
     if (!HomePage) console.log(HomePage?.message);
     HomePage.countries.map((itemCountries) => {
-      const item = { value: itemCountries.id, label:getLocal(locale,itemCountries.name)};
+      const item = {
+        value: itemCountries.id,
+        label: getLocal(locale, itemCountries.name),
+      };
       setCountries((current) => [...current, item]);
     });
   };
@@ -105,7 +120,10 @@ const ServiceID = SearchParams.get("id");
     if (!HomePage) console.log(HomePage?.message);
     setCities([]);
     HomePage.map((itemCountries) => {
-      const item = { value: itemCountries.id, label:getLocal(locale,itemCountries.name)};
+      const item = {
+        value: itemCountries.id,
+        label: getLocal(locale, itemCountries.name),
+      };
       setCities((current) => [...current, item]);
     });
   };
@@ -115,11 +133,15 @@ const ServiceID = SearchParams.get("id");
     if (!HomePage) console.log(HomePage?.message);
     setAreas([]);
     HomePage.map((itemCountries) => {
-      const item = { value: itemCountries.id, label:getLocal(locale,itemCountries.name)};
+      const item = {
+        value: itemCountries.id,
+        label: getLocal(locale, itemCountries.name),
+      };
       setAreas((current) => [...current, item]);
     });
   };
   const handelNewAddresse = () => {
+    setLoading(true);
     setErrorArea("");
     setErrorCity("");
     setErrorCountry("");
@@ -150,9 +172,16 @@ const ServiceID = SearchParams.get("id");
         }
       )
       .then((res) => {
+        setLoading(false);
+
         console.log(res);
+        if(res.status==200){
+          router.push(`/checkOut/address?id=${ServiceID}`)
+        }
       })
       .catch((res) => {
+        setLoading(false);
+
         res.response.data.errors.area_id
           ? setErrorArea(res.response.data.errors.area_id)
           : setErrorArea("");
@@ -177,7 +206,20 @@ const ServiceID = SearchParams.get("id");
   console.log(nameAddresse);
   return (
     <>
-    
+      <div className="load" style={{ display: Loading ? "flex" : "none" }}>
+        <TailSpin
+          height={120}
+          width={120}
+          color="#fff"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={Loading}
+          ariaLabel="oval-loading"
+          secondaryColor="#fff"
+          strokeWidth={1}
+          strokeWidthSecondary={1}
+        />
+      </div>
       <section className="checkOut container m90">
         <div className="part1">
           <h2 className="headtitle">{t("titleAddresses")}</h2>
@@ -315,7 +357,7 @@ const ServiceID = SearchParams.get("id");
 
               <div className="col-md-12">
                 <label htmlFor="inputPhone " className="form-label">
-                {t2("mobile")}
+                  {t2("mobile")}
                 </label>
 
                 <PhoneInput
@@ -362,7 +404,7 @@ const ServiceID = SearchParams.get("id");
             )}
           </div>
         </div>
-        <ViewCheck id={ServiceID}/>
+        <ViewCheck id={ServiceID} />
       </section>
 
       <section className="carts checkout container">
