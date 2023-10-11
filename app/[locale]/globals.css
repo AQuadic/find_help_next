@@ -1406,12 +1406,36 @@ html[dir="rtl"] .accordion-button::after {
   gap: 4px 30px;
   flex-wrap: wrap;
 }
-.current_Service .img_current {
+.current_Service .boxImages {
   flex: 1;
   width: 50%;
   height: auto;
   object-fit: fill;
   min-width: 352px;
+  display: flex;
+  flex-direction: column;
+}
+.current_Service .boxImages .groupImages{
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.current_Service .boxImages .groupImages img{
+  max-width: 70px;
+  border-radius: 8px;
+  max-height: 100px;
+    object-fit: cover;
+}
+.current_Service .boxImages .CurrentImage img{
+  max-width: 100%;
+  border-radius: 8px;
+  width: 100%;
+  max-height: 336px;
+    margin: auto;
+    display: block;
+    object-fit: cover;
 }
 .current_Service .about_current_Service {
   flex: 1;
@@ -1643,7 +1667,7 @@ html[dir="rtl"] .provider .part1 .about_Provider #myPhoneNumber {
   .current_Service {
     flex-direction: column;
   }
-  .current_Service .img_current {
+  .current_Service .boxImages {
     width: 100%;
 
     min-width: 100%;

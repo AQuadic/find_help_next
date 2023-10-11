@@ -19,6 +19,7 @@ import Slider from "react-slick";
 
 function page({ params }) {
   const [services, setServices] = useState();
+  const [ImageNum, setImageNum] = useState(0);
   const [servicesClient, setServicesClient] = useState();
   const [provider, setProvider] = useState([]);
   const [ClientID, setClientID] = useState();
@@ -170,14 +171,39 @@ setSelectCurrentSubCategoriesName(getLocal(locale,Services.sub_category.name) )
             </div>
             )}
           <section className="current_Service container m90">
-         
-            <img
+         <div className="boxImages">
+          <div className="CurrentImage">
+          <img
               src={
-                services.images[0] ? services.images[0].url : "/images/Logo.svg"
+                services.images[ImageNum] ? services.images[ImageNum].url : "/images/Logo.svg"
               }
               className="img_current"
               alt="Service"
             />
+          </div>
+          {
+            services.images.length>1&&   <div className="groupImages">
+              {
+                services.images.map((img,i)=>{
+                  return(
+                    <img
+                    onClick={()=>{setImageNum(i)}}
+                  src={
+                    img.url
+                  }
+                  className="img_current"
+                  alt="Service"
+                />
+                  )
+                })
+              }
+           
+                 
+            </div>
+          }
+     
+         </div>
+           
             <div className="about_current_Service">
               <div className="head">
                 <h3>{getLocal(locale,services.description)}</h3>
