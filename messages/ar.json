@@ -44,7 +44,8 @@
     "promotion": "الترويج",
     "myOrders": "طلباتي",
     "addresses": "العناوين",
-    "favourites":"المفضلة"
+    "favourites":"المفضلة",
+    "search": "ما الذي تريد البحث عنه؟"
   },
   "Sign": {
     "hello": "مرحبا,",

@@ -299,7 +299,7 @@ const FetchDataOFData = async () => {
         <input  type="text" onChange={(e) => {
                   setSearch(e.target.value);
                   ;
-                }} placeholder="Search For ......." />
+                }} placeholder={t("search")} />
       </form>
     </nav>
   );
