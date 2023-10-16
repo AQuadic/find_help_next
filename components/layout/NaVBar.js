@@ -6,9 +6,10 @@ import { getHomePage, getUser } from "../useAPI/GetUser";
 import { useState } from "react";
 import { navState } from "@/atoms";
 import { useRecoilState } from "recoil";
-import {usePathname, useRouter} from 'next-intl/client';
+
 import { useLocale, useTranslations } from "next-intl";
 import { getLocal } from "../useAPI/Auth";
+import { usePathname, useRouter } from "next-intl/client";
 
 function NavBar({lang}) {
   const [categories, setCategories] = useState([]);
