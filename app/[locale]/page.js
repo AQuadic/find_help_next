@@ -184,7 +184,7 @@ export default function Home() {
         </section>
         {
           <section className="services container m90">
-            <h2 className="headtitle">Repairs</h2>
+            <h2 className="headtitle">{t('repairs')}</h2>
             {!homeServices.length > 0 && (
               <div className="loadItems">
                 <div className="item">
@@ -232,7 +232,7 @@ export default function Home() {
 
         {
           <section className="services container m90">
-            <h2 className="headtitle">Salon </h2>
+            <h2 className="headtitle">{t('salon')} </h2>
             {!homeServices3.length > 0 && (
               <div className="loadItems">
                 <div className="item">
@@ -314,7 +314,7 @@ export default function Home() {
         </section>
         {
           <section className="services container m90">
-            <h2 className="headtitle">Cleaning Services</h2>
+            <h2 className="headtitle">{t('cleaning')}</h2>
             {!homeServices2.length > 0 && (
               <div className="loadItems">
                 <div className="item">

@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React from "react";
 
@@ -51,6 +52,7 @@ function ItemCourse({
         console.log(res);
       });
   };
+  const t = useTranslations('Categories');
 
   return (
     <div className= "service" key={id}>
@@ -109,7 +111,7 @@ function ItemCourse({
          </div>
          }
           <Link href={`/checkOut?id=${id}`} className= "btn_page">
-            Book Now
+            {t('book')}
           </Link>
         </div>
       </div>

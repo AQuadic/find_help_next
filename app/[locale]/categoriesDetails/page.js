@@ -16,6 +16,7 @@ import { useRecoilState } from "recoil";
 function page({ params }) {
   const locale = useLocale()
   const [services, setServices] = useState();
+  const [Load, setLoad] = useState(false);
   const [categories, setcategories] = useState();
   const [selectCurrentCategories, setSelectCurrentCategories] = useState();
   const [stateSearch, setStateSearch] = useRecoilState(StateSearch);
@@ -24,12 +25,14 @@ const router = useRouter()
   useEffect(() => {
     FetchDataOFIServices();
     FetchDataOFData();
-  }, []);
+  }, [stateSearch]);
 const searchparams = useSearchParams()
 console.log(searchparams.get('search'));
   const FetchDataOFIServices = async () => {
+    setLoad(true)
     const Services = await getServices(params.id?params.id:0,stateSearch||searchparams.get('search'));
     if (!Services) console.log(Services?.message);
+    setLoad(false)
     setServices(Services);
     setSelectCurrentCategories(Services.data[0].category_id)
 
@@ -152,7 +155,7 @@ console.log(searchparams.get('search'));
           </div>
         </div>
         <div className="services">
-        {!services?.data?.length > 0 && (
+        {Load && (
               <div className="loadItems loadItems3">
                 <div className="item">
                   <Skeleton height={110}  mb="xl" />
@@ -192,7 +195,7 @@ console.log(searchparams.get('search'));
                 </div>
               </div>
             )}
-          <div className="allServices">
+          <div className="allServices" style={{minHeight:"300px"}}>
          
             {services?.data?.map((service) => {
               return (

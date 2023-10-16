@@ -1095,7 +1095,7 @@ nav .dropdown-menu a {
 }
 .input_srearch.active {
   opacity: 1;
-  top: 100%;
+  top: 102%;
   z-index: 2;
 }
 .input_srearch input {
@@ -1111,6 +1111,8 @@ nav .dropdown-menu a {
   font-size: 16px;
   font-family: "DM Sans3";
   color: #797979;
+  border:  1px solid #6d6c6c;
+  border-radius: 6px;
 }
 
 .col-dec {

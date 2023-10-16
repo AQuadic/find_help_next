@@ -19,13 +19,19 @@
     "btnAdd": "Add Your Services",
     "try": "TRY THE FIND HELP APP",
     "buy": "Buy, sell and find just about anything using the app on your mobile.",
-    "getApp": "GET YOUR APP TODAY"
+    "getApp": "GET YOUR APP TODAY",
+    "repairs":"Repairs",
+    "salon":"Salon",
+    "cleaning":"Cleaning Services"
   },
   "Footer": {
     "footerTitle": "Find All The Services You Need In Find Help",
     "about": "About",
     "countries": "Countries",
-    "followUs": "Follow Us"
+    "followUs": "Follow Us",
+    "rights":"All rights reserved.",
+    "made":"Made by",
+    "aquadic":"AQuadic"
   },
   "Nav": {
     "categories": "Categories",

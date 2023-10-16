@@ -4,7 +4,7 @@ import React from "react";
 import { useEffect } from "react";
 import { getHomePage, getUser } from "../useAPI/GetUser";
 import { useState } from "react";
-import { navState } from "@/atoms";
+import { StateSearch, navState } from "@/atoms";
 import { useRecoilState } from "recoil";
 
 import { useLocale, useTranslations } from "next-intl";
@@ -14,8 +14,11 @@ import { usePathname, useRouter } from "next-intl/client";
 function NavBar({lang}) {
   const [categories, setCategories] = useState([]);
   const [user, setUser] = useState("");
+  const [NavSearchShow, setNavSearchShow] = useState(false);
   const [IsUser, setIsUser] = useRecoilState(navState);
   const t = useTranslations('Nav');
+  const [Search, setSearch] = useState("");
+  const [stateSearch, setStateSearch] = useRecoilState(StateSearch);
   const locale = useLocale()
   const router = useRouter();
   const pathname = usePathname();
@@ -90,7 +93,7 @@ const FetchDataOFData = async () => {
               <p>{t("logIn")}</p>
             </Link>
           )}
-          <button className="search btnsearch">
+          <button className="search btnsearch" onClick={()=>{setNavSearchShow(!NavSearchShow)}}>
             <img src="/images/search.svg" alt="search" />
           </button>
         </div>
@@ -161,13 +164,13 @@ const FetchDataOFData = async () => {
         </button>
 
         <div className="right_nav ac_nav" id="">
-          <button id="search" className="btnsearch">
+          <button id="search" className="btnsearch" onClick={()=>{setNavSearchShow(!NavSearchShow)}}>
             <img src="/images/search.svg" className="search" alt="search" />
           </button>
-          <a href="#">
+          <Link href="/account/myFavourite">
             {" "}
             <img src="/images/fav.svg" className="fav" alt="fav" />
-          </a>
+          </Link>
           <Link href="/add_Services" className="nav_btn">
             <img src="/images/add.svg" className="add" alt="Add_Services" />
             <p>{t("addServices")}</p>
@@ -230,9 +233,9 @@ const FetchDataOFData = async () => {
 
         <div className="collapse col-phone" id="navbarSupportedContent">
           <div className="right_nav ac_nav" id="">
-            <a href="#">
+            <Link href="/account/myFavourite">
               <img src="/images/fav.svg" className="fav" alt="fav" />
-            </a>
+            </Link>
             <Link href="/add_Services" className="nav_btn">
               <img src="/images/add.svg" className="add" alt="Add_Services" />
               <p>{t("addServices")}</p>
@@ -292,8 +295,11 @@ const FetchDataOFData = async () => {
           </ul>
         </div>
       </div>
-      <form action="" id="form_nav" className="input_srearch">
-        <input type="search" placeholder="Search For ......." />
+      <form action=""  className={`input_srearch ${NavSearchShow&&'active'}`} onSubmit={(e)=>{e.preventDefault();setStateSearch(Search); router.push(`/categoriesDetails?search=${Search}`)}}>
+        <input  type="text" onChange={(e) => {
+                  setSearch(e.target.value);
+                  ;
+                }} placeholder="Search For ......." />
       </form>
     </nav>
   );

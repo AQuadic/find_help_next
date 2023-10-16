@@ -124,7 +124,7 @@ const handelSMS = (e) => {
           <div className="box_log">
             <h2>{t("hello")}</h2>
             <p className="dec">{t("please")}</p>
-            <form className="row g-3 form_page">
+            <form className="row g-3 form_page" onSubmit={(e)=>{e.preventDefault(),handellogin()}}>
               <div className="col-md-12">
                 <label htmlFor="inputPhone " className="form-label">
                   {t("mobile")}
@@ -160,7 +160,7 @@ const handelSMS = (e) => {
               </li>
               
               <li className="whatsApp">
-                <button onClick={() => handellogin()}>
+                <button type='submit' onClick={() => handellogin()}>
                   <img src="/images/whatsapp.svg" alt="WhatsApp" />
                   <p>{t("continueWhatsApp")}</p>
                 </button>

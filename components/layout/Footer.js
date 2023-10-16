@@ -45,7 +45,11 @@ function Footer() {
               
             </div>
           </div>
-          <div className="part">
+        
+          {/* 
+          //TODO
+          {
+            <div className="part">
             <h2>{t("countries")}</h2>
             <div className="links links2">
               <p>Kuwait</p>
@@ -57,6 +61,8 @@ function Footer() {
               <p>Bahrain</p>
             </div>
           </div>
+          } */}
+          
           <div className="part">
             <h2 style={{padding: "0px 20px"}}>{t("followUs")}</h2>
             <div className="links_social">
@@ -86,10 +92,10 @@ function Footer() {
         </div>
         <div className="copy">
           <p>
-            © Find Help, 2019-2022 Made by
-            <a href="#">AQuadic Solution Company</a>
+            © Find Help, 2019-2022 {t('made')}
+            <a href="https://aquadic.com/" target='_blank'> {t('aquadic')}</a>
           </p>
-          <p>All rights reserved.</p>
+          <p>{t('rights')}</p>
         </div>
       </div>
     </footer>

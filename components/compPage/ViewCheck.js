@@ -1,11 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { getSingleServices } from "../useAPI/shop/shop";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { getLocal } from "../useAPI/Auth";
 
 function ViewCheck({ id }) {
   const [services, setServices] = useState([]);
   const t = useTranslations("checkOut");  
+  const locale = useLocale()
   console.log(id);
   useEffect(() => {
     FetchDataOFSingleServices();
@@ -30,7 +32,7 @@ function ViewCheck({ id }) {
               </li>
               <li>
                 <h3>{t("serviceType")}</h3>
-                <h4>{services?.sub_category.name.en}</h4>
+                <h4>{getLocal(locale, services?.sub_category.name)}</h4>
               </li>
               <li className="amount">
                 <h3>{t("amount")}</h3>
