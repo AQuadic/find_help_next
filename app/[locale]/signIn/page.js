@@ -72,7 +72,7 @@ console.log(SMS1);
 
 const generateRe = () => {
   window.recaptchaVerifier = new RecaptchaVerifier(authenti, 'recaptcha-container', {
-    'size': 'invisible',
+    'size': 'normal',
     'callback': (response) => {
       // reCAPTCHA solved, allow signInWithPhoneNumber.
     }
@@ -86,7 +86,7 @@ const handelSMS = (e) => {
   .then((confirmationResult) => {
     // SMS sent. Prompt user to type the code from the message, then sign the
     // user in with confirmationResult.confirm(code).
-    setUser(confirmationResult)
+
     Cookies.set("phone", phone);
     window.confirmationResult = confirmationResult;
     console.log(confirmationResult);
