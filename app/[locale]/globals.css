@@ -3494,3 +3494,34 @@ flex-wrap: wrap;
     max-width: 90px;
     }
 }
+.Country{
+  margin-top: 40px;
+}
+.Country h2{
+  font-size: 24px;
+  line-height: 31px;
+  margin-bottom: 28px;
+  font-family: "DM Sans2";
+}
+.allCountry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.boxCountry {
+  background-color: #f5f5f5;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #dddddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-direction: row-reverse;
+}
+.boxCountry.active{
+  background-color: #2870cf;
+  color: white;
+}
