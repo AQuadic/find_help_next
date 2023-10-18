@@ -55,7 +55,7 @@ function Footer() {
          
             <div className="part" style={{gap:"6px"}}>
             <h2>{t("countries")}</h2>
-            <h3>{UserCountry2}</h3>
+            <h3>{UserCountry2||Cookies.get('country')}</h3>
             <Link href='/country' className='countryLink'>Change Country</Link>
           </div>
       

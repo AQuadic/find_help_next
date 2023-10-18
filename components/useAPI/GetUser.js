@@ -24,8 +24,6 @@ let headersToken = {
                  "Content-Type": "application/json",
                  Accept: "application/json",
                  "Accept-Language": "ar",
-                 country_id:Cookies.get('countryID')
-                 
                },
         },);
         const data = await res.json();
@@ -44,13 +42,13 @@ let headersToken = {
               "Content-Type": "application/json",
               Accept: "application/json",
               "Accept-Language": "ar",
-                country_id:Cookies.get('countryID')
+                
             }:{
               
                  "Content-Type": "application/json",
                  Accept: "application/json",
                  "Accept-Language": "ar",
-                country_id:Cookies.get('countryID')
+                
 
                },
         },);

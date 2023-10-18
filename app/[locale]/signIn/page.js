@@ -236,7 +236,7 @@ function page() {
                   </button>
                 </li>
                 <li>
-                  <button>
+                  <button onClick={()=>{signIn('twitter')}}>
                     <img src="/images/twitter3.webp" alt="twitter" />
                   </button>
                 </li>
