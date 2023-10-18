@@ -3224,15 +3224,16 @@ html[dir="rtl"] .services .allServices .service .client_details img {
 }
 .page_log .logApp ul li {
 }
-.page_log .logApp ul li a {
+.page_log .logApp ul li button {
   width: 54px;
   height: 54px;
   border: 1px solid #e6e6e6;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: transparent;
 }
-.page_log .logApp ul li a img {
+.page_log .logApp ul li button img {
   width: 34px;
   height: 34px;
 }

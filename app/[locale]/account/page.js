@@ -148,7 +148,7 @@ function page() {
                 </label>
 
                 <PhoneInput
-                  defaultCountry={phone_country}
+                  defaultCountry={phone_country||'EG'}
                   country={phone_country}
                   initialValueFormat="national"
                   placeholder={t("enterMobile")}

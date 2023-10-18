@@ -6,6 +6,8 @@ import { navState } from '@/atoms';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { signOut } from 'next-auth/react';
+
 
 function btnLogOut() {
     const router = useRouter()
@@ -14,7 +16,7 @@ function btnLogOut() {
     
     const HandelLogOut = async () => {
      LogOut();
-
+        signOut()
         console.log("done");
         setIsUser(false);
         Cookies.remove('token')
