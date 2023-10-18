@@ -21,6 +21,8 @@ import { StateSearch } from "@/atoms";
 export default function Home() {
   const locale = useLocale();
   const [categories, setCategories] = useState([]);
+  const [selectedElements, setselectedElements] = useState([]);
+  const [selectedElementsName, setselectedElementsName] = useState([]);
   const [Search, setSearch] = useState("");
   const [services, setServices] = useState();
   const [homeServices, setHomeServices] = useState([]);
@@ -33,11 +35,13 @@ export default function Home() {
   useEffect(() => {
     FetchDataOFData();
     FetchDataOFIServices();
-    FetchDataOFHomeServices();
-    FetchDataOFHomeServices2();
-    FetchDataOFHomeServices3();
+    
+     
+    
   }, []);
-
+useEffect(()=>{
+  getThreeService()
+},[data])
   const FetchDataOFIServices = async () => {
     const Services = await getServices();
     if (!Services) console.log(Services?.message);
@@ -47,25 +51,52 @@ export default function Home() {
   const FetchDataOFData = async () => {
     const HomePage = await getHomePage();
     if (!HomePage) console.log(HomePage?.message);
+    console.log(HomePage);
     setData(HomePage);
     setCategories(HomePage.categories);
   };
 
-  const FetchDataOFHomeServices = async () => {
-    const HomeServices = await getHomeServices(23);
+  const FetchDataOFHomeServices = async (e) => {
+    const HomeServices = await getHomeServices(e);
     if (!HomeServices) console.log(HomeServices?.message);
     setHomeServices(HomeServices.data);
   };
-  const FetchDataOFHomeServices2 = async () => {
-    const HomeServices = await getHomeServices(66);
+  const FetchDataOFHomeServices2 = async (e) => {
+    const HomeServices = await getHomeServices(e);
     if (!HomeServices) console.log(HomeServices?.message);
     setHomeServices2(HomeServices.data);
   };
-  const FetchDataOFHomeServices3 = async () => {
-    const HomeServices = await getHomeServices(114);
+  const FetchDataOFHomeServices3 = async (e) => {
+    const HomeServices = await getHomeServices(e);
     if (!HomeServices) console.log(HomeServices?.message);
     setHomeServices3(HomeServices.data);
   };
+  const getThreeService = ()=>{
+    if(data){
+     
+      const indices = [];
+      while (indices.length < 3) {
+        const randomIndex = Math.floor(Math.random() * data?.categories.length);
+        if (!indices.includes(randomIndex)) {
+          indices.push(randomIndex);
+        }
+      }
+      const selectedElements = indices.map((index) => data?.categories[index]);
+      console.log(selectedElements);
+      if(selectedElements.length>0){
+        console.log(selectedElements[0].id);
+        console.log(selectedElements[1].id);
+        console.log(selectedElements[2].id);
+        setselectedElementsName([getLocal(locale,selectedElements[0].name),getLocal(locale,selectedElements[1].name),getLocal(locale,selectedElements[2].name)])
+        FetchDataOFHomeServices(selectedElements[0].id);
+        FetchDataOFHomeServices2(selectedElements[1].id);
+        FetchDataOFHomeServices3(selectedElements[2].id);
+      }
+      
+    }
+  }
+  
+ 
 
   return (
     <main className={styles.main}>
@@ -177,7 +208,7 @@ export default function Home() {
         </section>
         {
           <section className="services container m90">
-            <h2 className="headtitle">{t("repairs")}</h2>
+            <h2 className="headtitle">{selectedElementsName[0]}</h2>
             {!homeServices.length > 0 && (
               <div className="loadItems">
                 <div className="item">
@@ -225,7 +256,7 @@ export default function Home() {
 
         {
           <section className="services container m90">
-            <h2 className="headtitle">{t("salon")} </h2>
+            <h2 className="headtitle">{selectedElementsName[1]} </h2>
             {!homeServices3.length > 0 && (
               <div className="loadItems">
                 <div className="item">
@@ -307,7 +338,7 @@ export default function Home() {
         </section>
         {
           <section className="services container m90">
-            <h2 className="headtitle">{t("cleaning")}</h2>
+            <h2 className="headtitle">{selectedElementsName[2]}</h2>
             {!homeServices2.length > 0 && (
               <div className="loadItems">
                 <div className="item">

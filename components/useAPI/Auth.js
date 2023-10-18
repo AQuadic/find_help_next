@@ -48,7 +48,7 @@ let headersToken = {
                "Content-Type": "application/json",
                Accept: "application/json",
                "Accept-Language": "ar",
-               country_id:Cookies.get('countryID')
+               country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
              },
             body,
         },);

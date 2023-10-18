@@ -40,9 +40,7 @@ export default async function RootLayout({ children, params }) {
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Layout lang={locale}>
             <PushNotificationLayout>
-              <Provider>
-                <main>{children}</main>
-              </Provider>
+              <Provider>{children}</Provider>
             </PushNotificationLayout>
           </Layout>
         </NextIntlClientProvider>

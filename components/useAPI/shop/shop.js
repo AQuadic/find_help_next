@@ -22,7 +22,7 @@ export const getCategories = async () => {
           "Content-Type": "application/json",
           Accept: "application/json",
           "Accept-Language": "ar",
-          country_id:Cookies.get('countryID')
+          country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
         },
       }
     );
@@ -58,12 +58,12 @@ export const getServices = async (id,search) => {
     "Content-Type": "application/json",
     Accept: "application/json",
     "Accept-Language": "ar",
-    country_id:Cookies.get('countryID')
+    country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
   }:{
       "Content-Type": "application/json",
       "Accept": "application/json",
       "Accept-Language": "ar",
-      country_id:Cookies.get('countryID')
+      country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
   };
   
     const res = await fetch(url, {
@@ -91,12 +91,12 @@ export const getSingleServices = async (id) => {
     "Content-Type": "application/json",
     Accept: "application/json",
     "Accept-Language": "ar",
-    country_id:Cookies.get('countryID')
+    country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
   }:{
       "Content-Type": "application/json",
       "Accept": "application/json",
       "Accept-Language": "ar",
-      country_id:Cookies.get('countryID')
+      country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
   };
   
     const res = await fetch(url, {
@@ -125,12 +125,12 @@ export const getServicesClient = async (id) => {
     "Content-Type": "application/json",
     Accept: "application/json",
     "Accept-Language": "ar",
-    country_id:Cookies.get('countryID')
+    country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
   }:{
       "Content-Type": "application/json",
       "Accept": "application/json",
       "Accept-Language": "ar",
-      country_id:Cookies.get('countryID')
+      country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
   };
   
     const res = await fetch(url, {
@@ -157,7 +157,7 @@ export const getMyServices = async () => {
           "Content-Type": "application/json",
           Accept: "application/json",
           "Accept-Language": "ar",
-          country_id:Cookies.get('countryID')
+          country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
         },
       }
     );
@@ -183,7 +183,7 @@ export const getMyOrders = async (p1,p2,p3,p4) => {
         "Content-Type": "application/json",
         "Accept": "application/json",
         "Accept-Language": "ar",
-        country_id:Cookies.get('countryID')
+        country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
     };
     
       const res = await fetch(url, {
@@ -214,7 +214,7 @@ export const getMyServices2 = async (p1,p2,p3,p4) => {
         "Content-Type": "application/json",
         "Accept": "application/json",
         "Accept-Language": "ar",
-        country_id:Cookies.get('countryID')
+        country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
     };
     
       const res = await fetch(url, {
@@ -239,12 +239,12 @@ export const getCategoriesHome = async () => {
           "Content-Type": "application/json",
           Accept: "application/json",
           "Accept-Language": "ar",
-          country_id:Cookies.get('countryID')
+          country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
         }:{
           "Content-Type": "application/json",
           Accept: "application/json",
           "Accept-Language": "ar",
-          country_id:Cookies.get('countryID')
+          country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
         },
       }
     );
@@ -274,12 +274,12 @@ export const getHomeServices = async (id) => {
     "Content-Type": "application/json",
     Accept: "application/json",
     "Accept-Language": "ar",
-    country_id:Cookies.get('countryID')
+    country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
   }:{
       "Content-Type": "application/json",
       "Accept": "application/json",
       "Accept-Language": "ar",
-      country_id:Cookies.get('countryID')
+      country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
   };
   
     const res = await fetch(url, {
@@ -305,7 +305,7 @@ export const getMyFav = async () => {
           "Content-Type": "application/json",
           Accept: "application/json",
           "Accept-Language": "ar",
-          country_id:Cookies.get('countryID')
+          country_id:Cookies.get('countryID')?Cookies.get('countryID'):null
         },
       }
     );
@@ -315,3 +315,4 @@ export const getMyFav = async () => {
     console.log("Error in Add New Category (service) =>", error);
   }
 };
+
