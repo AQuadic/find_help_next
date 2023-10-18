@@ -1,4 +1,6 @@
+import axios from "axios";
 import Cookies from "js-cookie";
+
 
 let headersToken = {
     Authorization: `Bearer ${Cookies.get('token')} `,
@@ -22,6 +24,7 @@ let headersToken = {
                  "Content-Type": "application/json",
                  Accept: "application/json",
                  "Accept-Language": "ar",
+                 country_id:Cookies.get('countryID')
                  
                },
         },);
@@ -40,12 +43,15 @@ let headersToken = {
               Authorization: `Bearer ${Cookies.get("token")} `,
               "Content-Type": "application/json",
               Accept: "application/json",
-              "Accept-Language": "ar"
+              "Accept-Language": "ar",
+                country_id:Cookies.get('countryID')
             }:{
               
                  "Content-Type": "application/json",
                  Accept: "application/json",
                  "Accept-Language": "ar",
+                country_id:Cookies.get('countryID')
+
                },
         },);
         const data = await res.json();
@@ -64,6 +70,8 @@ let headersToken = {
                  "Content-Type": "application/json",
                  Accept: "application/json",
                  "Accept-Language": "ar",
+                country_id:Cookies.get('countryID')
+
                },
         },);
         const data = await res.json();
@@ -83,6 +91,8 @@ let headersToken = {
                  "Content-Type": "application/json",
                  Accept: "application/json",
                  "Accept-Language": "ar",
+                country_id:Cookies.get('countryID')
+
                  
                },
         },);
@@ -102,6 +112,8 @@ let headersToken = {
                  "Content-Type": "application/json",
                  Accept: "application/json",
                  "Accept-Language": "ar",
+                country_id:Cookies.get('countryID')
+
                  
                },
         },);
@@ -121,6 +133,8 @@ let headersToken = {
                  "Content-Type": "application/json",
                  Accept: "application/json",
                  "Accept-Language": "ar",
+                country_id:Cookies.get('countryID')
+
                },
         },);
         const data = await res.json();
@@ -139,12 +153,16 @@ let headersToken = {
               Authorization: `Bearer ${Cookies.get("token")} `,
               "Content-Type": "application/json",
               Accept: "application/json",
-              "Accept-Language": "ar"
+              "Accept-Language": "ar",
+              country_id:Cookies.get('countryID')
+
             }:{
                
                  "Content-Type": "application/json",
                  Accept: "application/json",
                  "Accept-Language": "ar",
+                country_id:Cookies.get('countryID')
+
                  
                },
         },);
@@ -154,3 +172,15 @@ let headersToken = {
         console.log('Error in Add New Category (service) =>', error);
     }
   }
+
+  export const getCountryUser = async () => {
+    const result = axios
+      .get("http://ip-api.com/json")
+      .then((res) => {
+        return res.data;
+      })
+      .catch((error) => {
+        return "";
+      });
+    return result;
+  };

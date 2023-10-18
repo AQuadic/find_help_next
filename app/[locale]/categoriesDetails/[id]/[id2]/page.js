@@ -1,4 +1,5 @@
 "use client";
+import api from "@/app/[locale]/api";
 import ItemCourse from "@/components/ItemCourse";
 import { getLocal } from "@/components/useAPI/Auth";
 import { getProvider } from "@/components/useAPI/GetUser";
@@ -95,9 +96,9 @@ setSelectCurrentSubCategoriesName(getLocal(locale,Services.sub_category.name) )
   console.log(provider);
   const handelFav = (id) => {
    
-    const po = axios
+    const po = api
       .post(
-        "https://findhelpapp.com/api/v1/users/favourites",
+        "api/v1/users/favourites",
         {
           "model_type": "UserService",
           "model_id": id

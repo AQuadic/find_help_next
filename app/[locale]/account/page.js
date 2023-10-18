@@ -11,6 +11,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import PhoneInput from "react-phone-number-input";
+import api from "../api";
 
 function page() {
   const router = useRouter();
@@ -46,7 +47,7 @@ function page() {
     setphone_normalized(User.phone_normalized);
     setPhone_country(User.phone_country);
   };
-  console.log(user);
+
 
   const handelProfile = () => {
     const body = new FormData();
@@ -55,8 +56,8 @@ function page() {
     changeImage && body.append("image", selectedFile);
     body.append("phone", phone);
     body.append("phone_country", phone_country);
-    const po = axios
-      .post("https://findhelpapp.com/api/v1/users/auth/update", body, {
+    const po = api
+      .post("api/v1/users/auth/update", body, {
         headers: {
           Authorization: `Bearer ${Cookies.get("token")}`,
           "Content-Type": "multipart/form-data",

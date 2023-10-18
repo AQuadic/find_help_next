@@ -21,7 +21,8 @@ export const getCategories = async () => {
           Authorization: `Bearer ${Cookies.get("token")} `,
           "Content-Type": "application/json",
           Accept: "application/json",
-          "Accept-Language": "ar"
+          "Accept-Language": "ar",
+          country_id:Cookies.get('countryID')
         },
       }
     );
@@ -56,11 +57,13 @@ export const getServices = async (id,search) => {
     Authorization: `Bearer ${Cookies.get("token")} `,
     "Content-Type": "application/json",
     Accept: "application/json",
-    "Accept-Language": "ar"
+    "Accept-Language": "ar",
+    country_id:Cookies.get('countryID')
   }:{
       "Content-Type": "application/json",
       "Accept": "application/json",
       "Accept-Language": "ar",
+      country_id:Cookies.get('countryID')
   };
   
     const res = await fetch(url, {
@@ -87,11 +90,13 @@ export const getSingleServices = async (id) => {
     Authorization: `Bearer ${Cookies.get("token")} `,
     "Content-Type": "application/json",
     Accept: "application/json",
-    "Accept-Language": "ar"
+    "Accept-Language": "ar",
+    country_id:Cookies.get('countryID')
   }:{
       "Content-Type": "application/json",
       "Accept": "application/json",
       "Accept-Language": "ar",
+      country_id:Cookies.get('countryID')
   };
   
     const res = await fetch(url, {
@@ -119,11 +124,13 @@ export const getServicesClient = async (id) => {
     Authorization: `Bearer ${Cookies.get("token")} `,
     "Content-Type": "application/json",
     Accept: "application/json",
-    "Accept-Language": "ar"
+    "Accept-Language": "ar",
+    country_id:Cookies.get('countryID')
   }:{
       "Content-Type": "application/json",
       "Accept": "application/json",
       "Accept-Language": "ar",
+      country_id:Cookies.get('countryID')
   };
   
     const res = await fetch(url, {
@@ -149,7 +156,8 @@ export const getMyServices = async () => {
           Authorization: `Bearer ${Cookies.get("token")} `,
           "Content-Type": "application/json",
           Accept: "application/json",
-          "Accept-Language": "ar"
+          "Accept-Language": "ar",
+          country_id:Cookies.get('countryID')
         },
       }
     );
@@ -175,6 +183,7 @@ export const getMyOrders = async (p1,p2,p3,p4) => {
         "Content-Type": "application/json",
         "Accept": "application/json",
         "Accept-Language": "ar",
+        country_id:Cookies.get('countryID')
     };
     
       const res = await fetch(url, {
@@ -205,6 +214,7 @@ export const getMyServices2 = async (p1,p2,p3,p4) => {
         "Content-Type": "application/json",
         "Accept": "application/json",
         "Accept-Language": "ar",
+        country_id:Cookies.get('countryID')
     };
     
       const res = await fetch(url, {
@@ -228,11 +238,13 @@ export const getCategoriesHome = async () => {
           Authorization: `Bearer ${Cookies.get("token")} `,
           "Content-Type": "application/json",
           Accept: "application/json",
-          "Accept-Language": "ar"
+          "Accept-Language": "ar",
+          country_id:Cookies.get('countryID')
         }:{
           "Content-Type": "application/json",
           Accept: "application/json",
-          "Accept-Language": "ar"
+          "Accept-Language": "ar",
+          country_id:Cookies.get('countryID')
         },
       }
     );
@@ -261,11 +273,13 @@ export const getHomeServices = async (id) => {
     Authorization: `Bearer ${Cookies.get("token")} `,
     "Content-Type": "application/json",
     Accept: "application/json",
-    "Accept-Language": "ar"
+    "Accept-Language": "ar",
+    country_id:Cookies.get('countryID')
   }:{
       "Content-Type": "application/json",
       "Accept": "application/json",
       "Accept-Language": "ar",
+      country_id:Cookies.get('countryID')
   };
   
     const res = await fetch(url, {
@@ -290,7 +304,8 @@ export const getMyFav = async () => {
           Authorization: `Bearer ${Cookies.get("token")} `,
           "Content-Type": "application/json",
           Accept: "application/json",
-          "Accept-Language": "ar"
+          "Accept-Language": "ar",
+          country_id:Cookies.get('countryID')
         },
       }
     );

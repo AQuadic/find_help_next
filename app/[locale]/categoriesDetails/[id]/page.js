@@ -23,6 +23,7 @@ function page({ params }) {
   const [selectCurrentSubCategoriesName, setSelectCurrentSubCategoriesName] = useState("");
   const [stateSearch, setStateSearch] = useRecoilState(StateSearch);
   const [Search, setSearch] = useState(stateSearch);
+  const [Load, setLoad] = useState(false);
 
 const router = useRouter()
   const t = useTranslations("Categories");
@@ -33,14 +34,21 @@ const router = useRouter()
 const searchparams = useSearchParams()
 
   const FetchDataOFIServices = async () => {
+    setLoad(true)
+
     const Services = await getServices(params.id,stateSearch||searchparams.get('search')||"");
     if (!Services) console.log(Services?.message);
+    console.log('====================================');
+    console.log(Services);
+    console.log('====================================');
     setServices(Services);
+    setLoad(false)
     setSelectCurrentCategories(Services.data[0].category_id)
     setSelectCurrentCategoriesName(getLocal(locale,Services.data[0].category.name))
     console.log(Services.data[0].sub_category.id);
     setSelectCurrentSubCategories(Services.data[0].sub_category.id)
 setSelectCurrentSubCategoriesName(getLocal(locale,Services.data[0].sub_category.name))
+
   };
   
   const FetchDataOFData = async () => {
@@ -184,7 +192,7 @@ setSelectCurrentSubCategoriesName(getLocal(locale,Services.data[0].sub_category.
           </div>
         </div>
         <div className="services">
-        {!services?.data?.length > 0 && (
+        {!services?.data?.length > 0&&Load&& (
               <div className="loadItems loadItems3">
                 <div className="item">
                   <Skeleton height={110}  mb="xl" />
@@ -224,6 +232,14 @@ setSelectCurrentSubCategoriesName(getLocal(locale,Services.data[0].sub_category.
                 </div>
               </div>
             )}
+            {!services?.data?.length > 0&&!Load&&
+              <div className="boxEmpty">
+              <h2>{t('exist')}</h2>
+              <h3>{t('frist')}</h3>
+              <Link className="btn_page" href='/add_Services'>{t('addService')}</Link>
+              
+              </div>
+            }
           <div className="allServices">
             {services?.data?.map((service) => {
               return (
@@ -247,7 +263,7 @@ setSelectCurrentSubCategoriesName(getLocal(locale,Services.data[0].sub_category.
            
            
           </div>
-          <button className="more">{t("ShowMore")}</button>
+          {services?.data?.length > 0&&<button className="more">{t("ShowMore")}</button>} 
         </div>
       </section>
     </>

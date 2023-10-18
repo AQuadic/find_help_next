@@ -135,7 +135,10 @@
   "providerDetails":"Provider Details",
   "providerRating":"Provider Rating",
   "customers":"Customers",
-  "searchBook":"All Services by this provider"
+  "searchBook":"All Services by this provider",
+  "exist":"No Services Exist",
+  "frist":"Be First Provider",
+  "addService":"Add Service"
  },
  "checkOut":{
   "title":"Check Out",

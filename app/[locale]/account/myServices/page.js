@@ -10,6 +10,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { getLocal } from "@/components/useAPI/Auth";
 import { Skeleton } from "@mantine/core";
+import api from "../../api";
 
 function page() {
   const router = useRouter()
@@ -69,9 +70,9 @@ console.log(services);
   };
 
   const handelDelete = (id) => { 
-    const po = axios
+    const po = api
       .delete(
-        `https://findhelpapp.com/api/v1/users/services/${id}`,
+        `api/v1/users/services/${id}`,
 
         {
           headers: {
@@ -79,6 +80,7 @@ console.log(services);
             "Content-Type": "application/json",
             Accept: "application/json",
             "Accept-Language": "ar",
+            country_id:Cookies.get('countryID')
           },
         }
       )
@@ -94,9 +96,9 @@ console.log(services);
   };
 
   const handelStatus = (id,status) => {
-    const po = axios
+    const po = api
       .post(
-        "https://findhelpapp.com/api/v1/users/orders/change-status",
+        "api/v1/users/orders/change-status",
         {
           "id": id,
           "status": status,

@@ -540,6 +540,25 @@ footer h1 a:hover {
 footer .part h2 {
   font-size: 14px;
   line-height: 18px;
+  margin-bottom: 4px;
+}
+footer .part h3 {
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 110px;
+  background: #6b685f;
+  color: white;
+  padding: 8px;
+  border-radius: 7px;
+  border: 1px solid #b7a15f;
+  margin: 0;
+  text-align: center;
+} 
+footer .part .countryLink {
+  color: #b7a15f;
+  font-size: 14px;
 }
 footer .head p {
   font-size: 20px;
@@ -1053,6 +1072,9 @@ nav .nav-link {
 .col-dec .dropdown-item {
   padding: 0.25rem 0rem;
   text-align: start;
+}
+.dropdown-item.active, .dropdown-item:active{
+  background-color: transparent;
 }
 .col-dec .dropdown-menu {
   padding: 20px 28px;
@@ -3507,7 +3529,7 @@ flex-wrap: wrap;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
 }
 .boxCountry {
@@ -3517,11 +3539,71 @@ flex-wrap: wrap;
   border: 1px solid #dddddd;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
+  justify-content: flex-end;
+  gap: 4px;
   flex-direction: row-reverse;
+  transition: 0.1s;
+  width: 170px;
+}
+.boxCountry span{
+  font-size: 14px;
+}
+.boxCountry:hover {
+    box-shadow: 0px 0px 5px #adadad;
+    transform: scale(1.01);
 }
 .boxCountry.active{
   background-color: #2870cf;
   color: white;
+}
+.boxCountry img{
+  border-radius: 5px;
+}
+@media (max-width: 768px) {
+  .allCountry {
+    
+    gap: 8px;
+  }
+  .boxCountry {
+
+    padding: 8px 6px;
+    width: 105px;
+  }
+  .boxCountry span{
+    font-size: 12px;
+  }
+  .boxCountry img{
+      width: 26px !important;
+      height: 21px !important;
+  }
+}
+.boxEmpty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  width: fit-content;
+  margin: auto;
+  padding: 20px;
+  gap: 10px;
+  height: 100%;
+}
+.boxEmpty h2{
+  font-size: 24px;
+  line-height: 31px;
+  margin-bottom: 4px;
+  font-family: "DM Sans";
+}
+.boxEmpty h3{
+  font-size: 20px;
+  font-family: "DM Sans2";
+  margin-bottom: 8px;
+}
+.boxEmpty a{
+  font-size: 14px;
+    line-height: 18px;
+    border-radius: 5px;
+    width: 130px;
+    height: 40px;
 }

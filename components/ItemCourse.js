@@ -1,4 +1,5 @@
 "use client";
+import api from "@/app/[locale]/api";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
@@ -23,9 +24,9 @@ function ItemCourse({
 }) {
   const handelFav = (id) => {
    
-    const po = axios
+    const po = api
       .post(
-        "https://findhelpapp.com/api/v1/users/favourites",
+        "api/v1/users/favourites",
         {
           "model_type": "UserService",
           "model_id": id

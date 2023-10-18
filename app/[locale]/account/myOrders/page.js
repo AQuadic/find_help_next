@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { useLocale, useTranslations } from "next-intl";
 import { getLocal } from "@/components/useAPI/Auth";
 import { Skeleton } from "@mantine/core";
+import api from "../../api";
 function page() {
   const [MyOrder, setMyOrder] = useState([]);
   const [status, setStatus] = useState("PENDING");
@@ -38,9 +39,9 @@ function page() {
 
 
   const handelStatus = (id) => {
-    const po = axios
+    const po = api
       .post(
-        "https://findhelpapp.com/api/v1/users/orders/change-status",
+        "api/v1/users/orders/change-status",
         {
           "id": id,
           "status": "CANCELED",
@@ -53,6 +54,7 @@ function page() {
             "Content-Type": "application/json",
             Accept: "application/json",
             "Accept-Language": "ar",
+            country_id:Cookies.get('countryID')
           },
         }
       )

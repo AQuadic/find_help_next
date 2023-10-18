@@ -135,7 +135,10 @@
   "providerDetails":"تفاصيل الموفر",
   "providerRating":"تقييم الموفر",
   "customers":"العملاء",
-  "searchBook":"جميع الخدمات من قبل هذا المزود"
+  "searchBook":"جميع الخدمات من قبل هذا المزود",
+  "exist":"لا توجد خدمات",
+  "frist":"كن المزود الأول",
+  "addService":"إضافة خدمة"
  },
  "checkOut":{
   "title":"الدفع",

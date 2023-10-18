@@ -4,6 +4,7 @@ import PhoneInput from "react-phone-number-input";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import axios from "axios";
+import api from "@/app/[locale]/api";
 
 
 
@@ -26,9 +27,9 @@ console.log(value);
 
   const handelSignUP = () => {
     
-    const po = axios
+    const po = api
       .post(
-        "https://education.aquadic.com/api/v1/users/auth/signup",
+        "api/v1/users/auth/signup",
         {
           "name": name,
            email: email,

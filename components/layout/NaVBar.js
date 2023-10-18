@@ -33,7 +33,6 @@ function NavBar({lang}) {
     if (!User) console.log(User?.message);
     setUser(User);
   };
-console.log(user);
 const FetchDataOFData = async () => {
   const HomePage = await getHomePage();
   if (!HomePage) console.log(HomePage?.message);

@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { useRecoilState } from "recoil";
 import { navState } from "@/atoms";
 import { useTranslations } from "next-intl";
+import api from "@/app/[locale]/api";
 
 
 
@@ -23,9 +24,9 @@ console.log(t('title'));
   console.log(props);
   const handellogin = () => {
     
-    const po = axios
+    const po = api
       .post(
-        "https://education.aquadic.com/api/v1/users/auth/login",
+        "api/v1/users/auth/login",
         {
           email: email,
           password: password,

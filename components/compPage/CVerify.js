@@ -1,5 +1,6 @@
 "use client";
 
+import api from "@/app/[locale]/api";
 import { SMS, navState } from "@/atoms";
 import { authenti } from "@/utils/firebase";
 import axios from "axios";
@@ -64,9 +65,9 @@ console.log(SMS1.verificationId);
   const handelVerify = () => {
     setLoading(true)
     setErrorCode("");
-    const po = axios
+    const po = api
       .post(
-        "https://findhelpapp.com/api/v1/users/auth/verify",
+        "api/v1/users/auth/verify",
         {
           phone: phone,
           phone_country: phone_country,
@@ -107,9 +108,9 @@ console.log(SMS1.verificationId);
   const handelResend = () => {
     setLoading(true)
     
-    const po = axios
+    const po = api
       .post(
-        "https://findhelpapp.com/api/v1/users/auth/resend",
+        "api/v1/users/auth/resend",
         {
           "phone": phone,
           "phone_country":phone_country,
@@ -175,9 +176,9 @@ console.log(SMS1.verificationId);
   const handelVerify2 = (token) => {
     setLoading(true)
     setErrorCode("");
-    const po = axios
+    const po = api
       .post(
-        "https://findhelpapp.com/api/v1/users/auth/firebase",
+        "api/v1/users/auth/firebase",
         {
           "provider": "FIREBASE",
            "access_token": token

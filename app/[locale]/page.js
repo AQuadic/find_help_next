@@ -38,22 +38,18 @@ export default function Home() {
     FetchDataOFHomeServices3();
   }, []);
 
-  console.log(categories);
   const FetchDataOFIServices = async () => {
     const Services = await getServices();
     if (!Services) console.log(Services?.message);
     setServices(Services);
   };
-  console.log("====================================");
-  console.log(services);
-  console.log("====================================");
+
   const FetchDataOFData = async () => {
     const HomePage = await getHomePage();
     if (!HomePage) console.log(HomePage?.message);
     setData(HomePage);
     setCategories(HomePage.categories);
   };
-  console.log(data);
 
   const FetchDataOFHomeServices = async () => {
     const HomeServices = await getHomeServices(23);
@@ -70,9 +66,6 @@ export default function Home() {
     if (!HomeServices) console.log(HomeServices?.message);
     setHomeServices3(HomeServices.data);
   };
-  console.log(homeServices);
-  console.log(homeServices2);
-  console.log(homeServices3);
 
   return (
     <main className={styles.main}>
@@ -101,41 +94,41 @@ export default function Home() {
         <section className="categories container m90">
           <h2 className="headtitle">{t("categories")}</h2>
           {!data?.service_categories.length > 0 && (
-              <div className="loadItems loadItems2">
-                <div className="item item2 ">
-                  <Skeleton height={70} width={70} circle  mb="xl" />
-                  <Skeleton height={20} width={100} radius="xl" />
-                </div>
-                <div className="item item2 ">
-                  <Skeleton height={70} width={70} circle  mb="xl" />
-                  <Skeleton height={20} width={100} radius="xl" />
-                </div>
-                <div className="item item2 ">
-                  <Skeleton height={70} width={70} circle  mb="xl" />
-                  <Skeleton height={20} width={100} radius="xl" />
-                </div>
-                <div className="item item2 ">
-                  <Skeleton height={70} width={70} circle  mb="xl" />
-                  <Skeleton height={20} width={100} radius="xl" />
-                </div>
-                <div className="item item2 ">
-                  <Skeleton height={70} width={70} circle  mb="xl" />
-                  <Skeleton height={20} width={100} radius="xl" />
-                </div>
-                <div className="item item2 ">
-                  <Skeleton height={70} width={70} circle  mb="xl" />
-                  <Skeleton height={20} width={100} radius="xl" />
-                </div>
-                <div className="item item2 ">
-                  <Skeleton height={70} width={70} circle  mb="xl" />
-                  <Skeleton height={20} width={100} radius="xl" />
-                </div>
-                <div className="item item2 ">
-                  <Skeleton height={70} width={70} circle  mb="xl" />
-                  <Skeleton height={20} width={100} radius="xl" />
-                </div>
+            <div className="loadItems loadItems2">
+              <div className="item item2 ">
+                <Skeleton height={70} width={70} circle mb="xl" />
+                <Skeleton height={20} width={100} radius="xl" />
               </div>
-            )}
+              <div className="item item2 ">
+                <Skeleton height={70} width={70} circle mb="xl" />
+                <Skeleton height={20} width={100} radius="xl" />
+              </div>
+              <div className="item item2 ">
+                <Skeleton height={70} width={70} circle mb="xl" />
+                <Skeleton height={20} width={100} radius="xl" />
+              </div>
+              <div className="item item2 ">
+                <Skeleton height={70} width={70} circle mb="xl" />
+                <Skeleton height={20} width={100} radius="xl" />
+              </div>
+              <div className="item item2 ">
+                <Skeleton height={70} width={70} circle mb="xl" />
+                <Skeleton height={20} width={100} radius="xl" />
+              </div>
+              <div className="item item2 ">
+                <Skeleton height={70} width={70} circle mb="xl" />
+                <Skeleton height={20} width={100} radius="xl" />
+              </div>
+              <div className="item item2 ">
+                <Skeleton height={70} width={70} circle mb="xl" />
+                <Skeleton height={20} width={100} radius="xl" />
+              </div>
+              <div className="item item2 ">
+                <Skeleton height={70} width={70} circle mb="xl" />
+                <Skeleton height={20} width={100} radius="xl" />
+              </div>
+            </div>
+          )}
 
           <div className="parts">
             {data?.service_categories?.map((item) => {
@@ -184,11 +177,11 @@ export default function Home() {
         </section>
         {
           <section className="services container m90">
-            <h2 className="headtitle">{t('repairs')}</h2>
+            <h2 className="headtitle">{t("repairs")}</h2>
             {!homeServices.length > 0 && (
               <div className="loadItems">
                 <div className="item">
-                  <Skeleton height={110}  mb="xl" />
+                  <Skeleton height={110} mb="xl" />
                   <Skeleton height={20} radius="xl" />
                   <Skeleton height={20} mt={6} radius="xl" />
                   <Skeleton height={30} width={100} mt={6} radius="xl" />
@@ -211,7 +204,7 @@ export default function Home() {
               {homeServices?.slice(0, 3).map((item) => {
                 return (
                   <ItemCourse
-                  key={item.id}
+                    key={item.id}
                     title={getLocal(locale, item.description)}
                     star="4.8"
                     loc={getLocal(locale, item.address_text)}
@@ -232,11 +225,11 @@ export default function Home() {
 
         {
           <section className="services container m90">
-            <h2 className="headtitle">{t('salon')} </h2>
+            <h2 className="headtitle">{t("salon")} </h2>
             {!homeServices3.length > 0 && (
               <div className="loadItems">
                 <div className="item">
-                  <Skeleton height={110}  mb="xl" />
+                  <Skeleton height={110} mb="xl" />
                   <Skeleton height={20} radius="xl" />
                   <Skeleton height={20} mt={6} radius="xl" />
                   <Skeleton height={30} width={100} mt={6} radius="xl" />
@@ -259,7 +252,7 @@ export default function Home() {
               {homeServices3?.slice(0, 3).map((item) => {
                 return (
                   <ItemCourse
-                  key={item.id}
+                    key={item.id}
                     title={getLocal(locale, item.description)}
                     star="4.8"
                     loc={getLocal(locale, item.address_text)}
@@ -314,11 +307,11 @@ export default function Home() {
         </section>
         {
           <section className="services container m90">
-            <h2 className="headtitle">{t('cleaning')}</h2>
+            <h2 className="headtitle">{t("cleaning")}</h2>
             {!homeServices2.length > 0 && (
               <div className="loadItems">
                 <div className="item">
-                  <Skeleton height={110}  mb="xl" />
+                  <Skeleton height={110} mb="xl" />
                   <Skeleton height={20} radius="xl" />
                   <Skeleton height={20} mt={6} radius="xl" />
                   <Skeleton height={30} width={100} mt={6} radius="xl" />
@@ -342,7 +335,7 @@ export default function Home() {
               {homeServices2?.slice(0, 3).map((item) => {
                 return (
                   <ItemCourse
-                  key={item.id}
+                    key={item.id}
                     title={getLocal(locale, item.description)}
                     star="4.8"
                     loc={getLocal(locale, item.address_text)}

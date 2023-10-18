@@ -15,6 +15,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
+import api from "../api";
 
 function page() {
   const locale = useLocale()
@@ -65,9 +66,9 @@ if(!Cookies.get("AdID")){
   setErrorAdresse("you should select address")
   setLoading(false)
 }else{
-  const po = axios
+  const po = api
   .post(
-    "https://findhelpapp.com/api/v1/users/orders",
+    "api/v1/users/orders",
     {
       "type": "quotation",
       "user_service_id": ServiceID,

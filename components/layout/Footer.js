@@ -6,11 +6,17 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { getLocal } from '../useAPI/Auth';
+import Cookies from 'js-cookie';
+import { useRecoilState } from 'recoil';
+import {UserCountry } from '@/atoms';
 
 
 function Footer() {
   const [data, setData] = useState();
   const t = useTranslations('Footer');
+  const [UserCountry2, setUserCountry2] = useRecoilState(UserCountry);
+
+
   const locale = useLocale()
   useEffect(() => {
     FetchDataOFData()
@@ -21,7 +27,7 @@ function Footer() {
       if (!HomePage) console.log(HomePage?.message);
       setData(HomePage);
     };
-  console.log(data);
+
   return (
     <footer>
       <div className="container">
@@ -46,22 +52,13 @@ function Footer() {
             </div>
           </div>
         
-          {/* 
-          //TODO
-          {
-            <div className="part">
+         
+            <div className="part" style={{gap:"6px"}}>
             <h2>{t("countries")}</h2>
-            <div className="links links2">
-              <p>Kuwait</p>
-              <p>Egypt</p>
-              <p>Bahrain</p>
-              <p>Bahrain</p>
-              <p>Bahrain</p>
-              <p>Bahrain</p>
-              <p>Bahrain</p>
-            </div>
+            <h3>{UserCountry2}</h3>
+            <Link href='/country' className='countryLink'>Change Country</Link>
           </div>
-          } */}
+      
           
           <div className="part">
             <h2 style={{padding: "0px 20px"}}>{t("followUs")}</h2>

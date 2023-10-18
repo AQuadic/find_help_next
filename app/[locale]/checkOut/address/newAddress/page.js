@@ -15,6 +15,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import ViewCheck from "@/components/compPage/ViewCheck";
 import { getLocal } from "@/components/useAPI/Auth";
 import { TailSpin } from "react-loader-spinner";
+import api from "@/app/[locale]/api";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -148,9 +149,9 @@ const router = useRouter()
     setErrorName("");
     setErrorPhone("");
     setErrorMessage("");
-    const po = axios
+    const po = api
       .post(
-        "https://findhelpapp.com/api/v1/users/addresses",
+        "api/v1/users/addresses",
         {
           name: nameAddresse,
           phone: phone,

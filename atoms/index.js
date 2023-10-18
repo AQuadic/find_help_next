@@ -31,3 +31,7 @@ export const SMS = atom({
   key: "SMS",
   default: "",
 });
+export const UserCountry = atom({
+  key: "Country",
+  default:  Cookies.get('country')||"",
+});

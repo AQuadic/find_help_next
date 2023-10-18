@@ -17,6 +17,7 @@ import OTPInput from "react-otp-input";
 import { useRecoilState } from "recoil";
 import { SMS } from "@/atoms";
 import { authenti } from "@/utils/firebase";
+import api from "../api";
 
 function page() {
   const router = useRouter();
@@ -30,9 +31,9 @@ console.log(SMS1);
 
   const handellogin = () => {
     setLoading(true)
-    const po = axios
+    const po = api
       .post(
-        "https://findhelpapp.com/api/v1/users/auth/login",
+        "api/v1/users/auth/login",
         {
           phone: phone,
           phone_country: phone_country,

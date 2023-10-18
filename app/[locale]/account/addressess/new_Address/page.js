@@ -12,6 +12,7 @@ import axios from "axios";
 import { useLocale, useTranslations } from "next-intl";
 import { getLocal } from "@/components/useAPI/Auth";
 import { TailSpin } from "react-loader-spinner";
+import api from "@/app/[locale]/api";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -133,9 +134,9 @@ function page() {
     setErrorName("");
     setErrorPhone("");
     setErrorMessage("");
-    const po = axios
+    const po = api
       .post(
-        "https://findhelpapp.com/api/v1/users/addresses",
+        "api/v1/users/addresses",
         {
           name: nameAddresse,
           phone: phone,

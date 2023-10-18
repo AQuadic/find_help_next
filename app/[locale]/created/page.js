@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { useState } from "react";
 import { TailSpin } from "react-loader-spinner";
+import api from "../api";
 
 function page() {
   const router = useRouter();
@@ -30,8 +31,8 @@ function page() {
     body.append("email", email);
     body.append("image", selectedFile);
 
-    const po = axios
-      .post("https://findhelpapp.com/api/v1/users/auth/update", body, {
+    const po = api
+      .post("api/v1/users/auth/update", body, {
         headers: {
           Authorization: `Bearer ${Cookies.get("token")}`,
           "Content-Type": "multipart/form-data",

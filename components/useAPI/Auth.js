@@ -1,4 +1,6 @@
+import { UserCountry } from "@/atoms";
 import Cookies from "js-cookie";
+
 
 let headersToken = {
     Authorization: `Bearer ${Cookies.get('token')} `,
@@ -24,7 +26,7 @@ let headersToken = {
               Authorization: `Bearer ${Cookies.get("token")} `,
                "Content-Type": "application/json",
                Accept: "application/json",
-               
+             
              },
             body,
         },);
@@ -46,6 +48,7 @@ let headersToken = {
                "Content-Type": "application/json",
                Accept: "application/json",
                "Accept-Language": "ar",
+               country_id:Cookies.get('countryID')
              },
             body,
         },);

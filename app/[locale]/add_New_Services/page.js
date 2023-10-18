@@ -23,6 +23,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Oval, TailSpin } from "react-loader-spinner";
 import { getLocal } from "@/components/useAPI/Auth";
+import api from "../api";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -208,7 +209,7 @@ function page() {
   };
   const handellogin = () => {
     setLoading(true);
-    const url = new URL("https://findhelpapp.com/api/v1/users/services");
+    const url = new URL("api/v1/users/services");
     const body = new FormData();
     body.append("phone", phone);
     body.append("work_times[time_from]", TimeFrom);
@@ -258,7 +259,7 @@ function page() {
       });
     }
 
-    const po = axios
+    const po = api
       .post(url, body, {
         headers: {
           Authorization: `Bearer ${Cookies.get("token")}`,

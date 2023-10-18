@@ -25,6 +25,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { getSingleServices } from "@/components/useAPI/shop/shop";
 import { TailSpin } from "react-loader-spinner";
 import { getLocal } from "@/components/useAPI/Auth";
+import api from "../../api";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -209,7 +210,7 @@ function page({ params }) {
     setLoading(true);
 
     const url = new URL(
-      `https://findhelpapp.com/api/v1/users/services/${params.id}`
+      `api/v1/users/services/${params.id}`
     );
     const body = new FormData();
     body.append("phone", phone);
@@ -265,7 +266,7 @@ function page({ params }) {
     setErrorCurrency("");
     setErrorMessage("");
 
-    const po = axios
+    const po = api
       .post(url, body, {
         headers: {
           Authorization: `Bearer ${Cookies.get("token")}`,

@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import { authenti } from '@/utils/firebase';
+import api from '../api';
 
 
 
@@ -21,9 +22,9 @@ export default function Home() {
 
   const handellogin = () => {
     
-    const po = axios
+    const po = api
       .post(
-        "https://findhelpapp.com/api/v1/users/auth/login",
+        "api/v1/users/auth/login",
         {
           phone: "phone",
           phone_country: "phone_country",
