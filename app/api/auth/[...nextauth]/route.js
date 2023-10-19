@@ -26,9 +26,15 @@ export const authOptions = {
   },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
+      console.log('====================================');
+      console.log('user',{ user, account, profile, email, credentials });
+      console.log('====================================');
       return true;
     },
     async jwt({ token, account }) {
+      console.log('====================================');
+      console.log('jwt',{ token, account });
+      console.log('====================================');
       // Persist the OAuth access_token to the token right after signin
       if (account) {
         token.accessToken = account.access_token;

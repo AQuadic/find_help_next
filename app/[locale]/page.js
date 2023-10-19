@@ -24,6 +24,9 @@ export default function Home() {
   const [selectedElements, setselectedElements] = useState([]);
   const [selectedElementsName, setselectedElementsName] = useState([]);
   const [Search, setSearch] = useState("");
+  const [Load1, setLoad1] = useState(true);
+  const [Load2, setLoad2] = useState(true);
+  const [Load3, setLoad3] = useState(true);
   const [services, setServices] = useState();
   const [homeServices, setHomeServices] = useState([]);
   const [homeServices2, setHomeServices2] = useState([]);
@@ -60,18 +63,24 @@ useEffect(()=>{
     const HomeServices = await getHomeServices(e);
     if (!HomeServices) console.log(HomeServices?.message);
     setHomeServices(HomeServices.data);
+    setLoad1(false)
   };
   const FetchDataOFHomeServices2 = async (e) => {
     const HomeServices = await getHomeServices(e);
     if (!HomeServices) console.log(HomeServices?.message);
     setHomeServices2(HomeServices.data);
+    setLoad2(false)
   };
   const FetchDataOFHomeServices3 = async (e) => {
     const HomeServices = await getHomeServices(e);
     if (!HomeServices) console.log(HomeServices?.message);
     setHomeServices3(HomeServices.data);
+    setLoad3(false)
   };
   const getThreeService = ()=>{
+    setLoad1(true)
+    setLoad2(true)
+    setLoad3(true)
     if(data){
      
       const indices = [];
@@ -206,10 +215,13 @@ useEffect(()=>{
             </div>
           </div>
         </section>
-        {
+        { 
           <section className="services container m90">
-            <h2 className="headtitle">{selectedElementsName[0]}</h2>
-            {!homeServices.length > 0 && (
+            {
+              Load1?homeServices.length>0?<h2 className="headtitle">{selectedElementsName[0]}</h2>:<></>:homeServices.length<=0?null:<h2 className="headtitle">{selectedElementsName[0]}</h2>
+            }
+            
+            {Load1 && (
               <div className="loadItems">
                 <div className="item">
                   <Skeleton height={110} mb="xl" />
@@ -256,8 +268,11 @@ useEffect(()=>{
 
         {
           <section className="services container m90">
-            <h2 className="headtitle">{selectedElementsName[1]} </h2>
-            {!homeServices3.length > 0 && (
+             {
+              Load3?homeServices3.length>0?<h2 className="headtitle">{selectedElementsName[2]}</h2>:<></>:homeServices3.length<=0?null:<h2 className="headtitle">{selectedElementsName[2]}</h2>
+            }
+           
+            {Load3 && (
               <div className="loadItems">
                 <div className="item">
                   <Skeleton height={110} mb="xl" />
@@ -338,8 +353,11 @@ useEffect(()=>{
         </section>
         {
           <section className="services container m90">
-            <h2 className="headtitle">{selectedElementsName[2]}</h2>
-            {!homeServices2.length > 0 && (
+             {
+              Load2?homeServices2.length>0?<h2 className="headtitle">{selectedElementsName[1]}</h2>:<></>:homeServices2.length<=0?null:<h2 className="headtitle">{selectedElementsName[1]}</h2>
+            }
+          
+            {Load2&& (
               <div className="loadItems">
                 <div className="item">
                   <Skeleton height={110} mb="xl" />

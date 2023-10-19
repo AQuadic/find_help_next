@@ -102,7 +102,8 @@ function page() {
       });
   };
   const { data } = useSession();
-  const handelloginGoogleFacebook = (token) => {
+  console.log(data);
+  const handelloginGoogleFacebookTwitter = (token) => {
     const po = api
       .post(
         "api/v1/users/auth/social",
@@ -133,7 +134,7 @@ function page() {
   };
   if (data?.accessToken) {
     console.log("hhhhhhhhhhhhhhh");
-    handelloginGoogleFacebook(data.accessToken);
+    handelloginGoogleFacebookTwitter(data.accessToken);
   }
   const handleLogin = async () => {
     Cookies.set("typeLogin", "google");
@@ -148,7 +149,13 @@ function page() {
     if (response.ok) router.push("/");
     else console.log("ssssssssssssssssssssssssss");
   };
+  const handleLoginTwitter = async () => {
+    Cookies.set("typeLogin", "twitter");
 
+    const response = await signIn("twitter", { redirect: false });
+    if (response.ok) router.push("/");
+    else console.log("ssssssssssssssssssssssssss");
+  };
   return (
     <>
       <div className="load" style={{ display: Loading ? "flex" : "none" }}>
@@ -236,7 +243,7 @@ function page() {
                   </button>
                 </li>
                 <li>
-                  <button onClick={()=>{signIn('twitter')}}>
+                  <button onClick={()=>{handleLoginTwitter()}}>
                     <img src="/images/twitter3.webp" alt="twitter" />
                   </button>
                 </li>

@@ -31,7 +31,7 @@ const containerStyle = {
 
 function page() {
   const t = useTranslations("Services");
-  const locale= useLocale()
+  const locale = useLocale();
   const router = useRouter();
   const [Loading, setLoading] = useState(false);
 
@@ -118,30 +118,33 @@ function page() {
   const [errorLocationLat, setErrorLocationLat] = useState("");
   const [erroLocationLng, setErroLocationLng] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  useEffect(()=>{
-    country&&setErrorCountry("")
-    phone&&setErrorPhone("")
-    city&&setErrorCity("")
-    category&&setErrorCategory("")
-    Subcategory&&setErrorSubCategory("")
-    address&&setErrorAddress("")
-    TimeFrom&&setErrorTimeFrom("")
-    Timeto&&setErrorTimeto("")
-    price&&setErrorPrice("")
-    currency&&setErrorCurrency("")
-    description&&setErrorDescription("")
-    holidays&&setErrorholidays("")
-  },[country,phone
-    ,city
-    ,category
-    ,Subcategory
-    ,address
-    ,TimeFrom
-    ,Timeto
-    ,price
-    ,currency
-    ,description
-    ,holidays])
+  useEffect(() => {
+    country && setErrorCountry("");
+    phone && setErrorPhone("");
+    city && setErrorCity("");
+    category && setErrorCategory("");
+    Subcategory && setErrorSubCategory("");
+    address && setErrorAddress("");
+    TimeFrom && setErrorTimeFrom("");
+    Timeto && setErrorTimeto("");
+    price && setErrorPrice("");
+    currency && setErrorCurrency("");
+    description && setErrorDescription("");
+    holidays && setErrorholidays("");
+  }, [
+    country,
+    phone,
+    city,
+    category,
+    Subcategory,
+    address,
+    TimeFrom,
+    Timeto,
+    price,
+    currency,
+    description,
+    holidays,
+  ]);
   useEffect(() => {
     FetchDataOFData();
   }, []);
@@ -160,13 +163,16 @@ function page() {
     const HomePage = await getHomePage();
     if (!HomePage) console.log(HomePage?.message);
     HomePage.countries.map((itemCountries) => {
-      const item = { value: itemCountries.id, label:getLocal(locale,itemCountries.name)};
+      const item = {
+        value: itemCountries.id,
+        label: getLocal(locale, itemCountries.name),
+      };
       setCountries((current) => [...current, item]);
     });
     HomePage.service_categories.map((itemservice_categories) => {
       const item = {
         value: itemservice_categories.id,
-        label:getLocal(locale,itemservice_categories.name) ,
+        label: getLocal(locale, itemservice_categories.name),
       };
       setCategories((current) => [...current, item]);
     });
@@ -174,7 +180,7 @@ function page() {
     HomePage.countries.map((county) => {
       const item = {
         value: county.currency.en,
-        label:getLocal(locale,county.currency) ,
+        label: county.currency.en,
       };
       items.push(item);
     });
@@ -192,7 +198,7 @@ function page() {
       .children.map((itemservice_categories) => {
         const item = {
           value: itemservice_categories.id,
-          label:getLocal(locale,itemservice_categories.name),
+          label: getLocal(locale, itemservice_categories.name),
         };
         setSubCategories((current) => [...current, item]);
       });
@@ -203,13 +209,16 @@ function page() {
     if (!HomePage) console.log(HomePage?.message);
     setCities([]);
     HomePage.map((itemCountries) => {
-      const item = { value: itemCountries.id, label:getLocal(locale,itemCountries.name)};
+      const item = {
+        value: itemCountries.id,
+        label: getLocal(locale, itemCountries.name),
+      };
       setCities((current) => [...current, item]);
     });
   };
   const handellogin = () => {
     setLoading(true);
-    const url = new URL("api/v1/users/services");
+    const url = new URL("https://findhelpapp.com/api/v1/users/services");
     const body = new FormData();
     body.append("phone", phone);
     body.append("work_times[time_from]", TimeFrom);
@@ -259,12 +268,15 @@ function page() {
       });
     }
 
-    const po = api
+    const po = axios
       .post(url, body, {
         headers: {
           Authorization: `Bearer ${Cookies.get("token")}`,
           "Content-Type": "multipart/form-data",
           Accept: "application/json",
+          country_id: Cookies.get("countryID")
+            ? Cookies.get("countryID")
+            : null,
         },
       })
       .then((res) => {
@@ -344,7 +356,7 @@ function page() {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div className="load" style={{ display: Loading ? "flex" : "none" }}>
+        <div className="load" style={{ display: Loading ? "flex" : "none" }}>
           <TailSpin
             height={120}
             width={120}
@@ -358,8 +370,6 @@ function page() {
             strokeWidthSecondary={1}
           />
         </div>
-
-       
 
         <section className="services addServices container m90">
           <div className="part1">
@@ -561,7 +571,7 @@ function page() {
                     <></>
                   )}
                 </div>
-             
+
                 <div className="col-md-12">
                   <TextInput
                     label={t("address")}

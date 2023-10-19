@@ -138,7 +138,9 @@
   "searchBook":"All Services by this provider",
   "exist":"No Services Exist",
   "frist":"Be First Provider",
-  "addService":"Add Service"
+  "addService":"Add Service",
+  "please":"Please sign in first",
+  "success":"success"
  },
  "checkOut":{
   "title":"Check Out",

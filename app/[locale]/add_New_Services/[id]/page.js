@@ -7,9 +7,7 @@ import {
   TextInput,
   Textarea,
 } from "@mantine/core";
-import {
-  MobileTimePicker,
-} from "@mui/x-date-pickers";
+import { MobileTimePicker } from "@mui/x-date-pickers";
 import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
 import React, { useCallback } from "react";
@@ -26,6 +24,7 @@ import { getSingleServices } from "@/components/useAPI/shop/shop";
 import { TailSpin } from "react-loader-spinner";
 import { getLocal } from "@/components/useAPI/Auth";
 import api from "../../api";
+import { useRouter } from "next/navigation";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -33,8 +32,8 @@ const containerStyle = {
 
 function page({ params }) {
   const t = useTranslations("Services");
-  const locale= useLocale()
-
+  const locale = useLocale();
+const router = useRouter()
   const [Loading, setLoading] = useState(false);
 
   const [lat, setLat] = useState(-3.745);
@@ -116,30 +115,33 @@ function page({ params }) {
   const [errorLocationLat, setErrorLocationLat] = useState("");
   const [erroLocationLng, setErroLocationLng] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  useEffect(()=>{
-    country&&setErrorCountry("")
-    phone&&setErrorPhone("")
-    city&&setErrorCity("")
-    category&&setErrorCategory("")
-    Subcategory&&setErrorSubCategory("")
-    address&&setErrorAddress("")
-    TimeFrom&&setErrorTimeFrom("")
-    Timeto&&setErrorTimeto("")
-    price&&setErrorPrice("")
-    currency&&setErrorCurrency("")
-    description&&setErrorDescription("")
-    holidays&&setErrorholidays("")
-  },[country,phone
-    ,city
-    ,category
-    ,Subcategory
-    ,address
-    ,TimeFrom
-    ,Timeto
-    ,price
-    ,currency
-    ,description
-    ,holidays])
+  useEffect(() => {
+    country && setErrorCountry("");
+    phone && setErrorPhone("");
+    city && setErrorCity("");
+    category && setErrorCategory("");
+    Subcategory && setErrorSubCategory("");
+    address && setErrorAddress("");
+    TimeFrom && setErrorTimeFrom("");
+    Timeto && setErrorTimeto("");
+    price && setErrorPrice("");
+    currency && setErrorCurrency("");
+    description && setErrorDescription("");
+    holidays && setErrorholidays("");
+  }, [
+    country,
+    phone,
+    city,
+    category,
+    Subcategory,
+    address,
+    TimeFrom,
+    Timeto,
+    price,
+    currency,
+    description,
+    holidays,
+  ]);
   useEffect(() => {
     FetchDataOFData();
     FetchDataOFSingleServices();
@@ -159,13 +161,16 @@ function page({ params }) {
     const HomePage = await getHomePage();
     if (!HomePage) console.log(HomePage?.message);
     HomePage.countries.map((itemCountries) => {
-      const item = { value: itemCountries.id, label: getLocal(locale,itemCountries.name) };
+      const item = {
+        value: itemCountries.id,
+        label: getLocal(locale, itemCountries.name),
+      };
       setCountries((current) => [...current, item]);
     });
     HomePage.service_categories.map((itemservice_categories) => {
       const item = {
         value: itemservice_categories.id,
-        label: getLocal(locale,itemservice_categories.name),
+        label: getLocal(locale, itemservice_categories.name),
       };
       setCategories((current) => [...current, item]);
     });
@@ -173,7 +178,7 @@ function page({ params }) {
     HomePage.countries.map((county) => {
       const item = {
         value: county.currency.en,
-        label: getLocal(locale,county.currency),
+        label: getLocal(locale, county.currency),
       };
       items.push(item);
     });
@@ -191,7 +196,7 @@ function page({ params }) {
       .children.map((itemservice_categories) => {
         const item = {
           value: itemservice_categories.id,
-          label: getLocal(locale,itemservice_categories.name),
+          label: getLocal(locale, itemservice_categories.name),
         };
         setSubCategories((current) => [...current, item]);
       });
@@ -202,7 +207,10 @@ function page({ params }) {
     if (!HomePage) console.log(HomePage?.message);
     setCities([]);
     HomePage.map((itemCountries) => {
-      const item = { value: itemCountries.id, label: getLocal(locale,itemCountries.name) };
+      const item = {
+        value: itemCountries.id,
+        label: getLocal(locale, itemCountries.name),
+      };
       setCities((current) => [...current, item]);
     });
   };
@@ -210,7 +218,7 @@ function page({ params }) {
     setLoading(true);
 
     const url = new URL(
-      `api/v1/users/services/${params.id}`
+      `https://findhelpapp.com/api/v1/users/services/${params.id}`
     );
     const body = new FormData();
     body.append("phone", phone);
@@ -266,20 +274,25 @@ function page({ params }) {
     setErrorCurrency("");
     setErrorMessage("");
 
-    const po = api
+    const po = axios
       .post(url, body, {
         headers: {
           Authorization: `Bearer ${Cookies.get("token")}`,
           "Content-Type": "multipart/form-data",
           Accept: "application/json",
           "Accept-Language": "ar",
+          country_id: Cookies.get("countryID")
+            ? Cookies.get("countryID")
+            : null,
         },
       })
       .then((res) => {
         console.log(res);
         setLoading(false);
+        router.push("/account/myServices");
       })
       .catch((res) => {
+        console.log(res);
         setLoading(false);
         if (res.response.status === 500) {
           alert("An error occurred: " + res.response.data.message);
@@ -356,14 +369,14 @@ function page({ params }) {
     setSubCategory(Services.sub_category_id);
     setCountry(Services.country_id);
     setCity(Services.city_id);
-    setAddress(getLocal(locale,Services.address_text));
+    setAddress(getLocal(locale, Services.address_text));
     setPhone(Services.phone_normalized);
     setPhone_country(Services.phone_country);
     setTimeFrom(Services.work_times.time_from);
     setTimeto(Services.work_times.time_to);
     setPrice(Services.price);
     setCurrency(Services.currency);
-    setDescription(getLocal(locale,Services.description));
+    setDescription(getLocal(locale, Services.description));
     setSelectedFile2(Services.images);
     setLat(Services.location_google_maps.lat);
     setLng(Services.location_google_maps.lng);
@@ -382,7 +395,7 @@ function page({ params }) {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div className="load" style={{ display: Loading ? "flex" : "none" }}>
+        <div className="load" style={{ display: Loading ? "flex" : "none" }}>
           <TailSpin
             height={120}
             width={120}
@@ -396,7 +409,6 @@ function page({ params }) {
             strokeWidthSecondary={1}
           />
         </div>
-       
 
         <section className="services addServices container m90">
           <div className="part1">
@@ -635,7 +647,7 @@ function page({ params }) {
                     <></>
                   )}
                 </div>
-                
+
                 <div className="col-md-12">
                   <TextInput
                     label={t("address")}

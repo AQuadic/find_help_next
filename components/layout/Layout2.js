@@ -31,10 +31,14 @@ function Layout2({ children, lang }) {
 
   return (
     <>
-      <NavBar lang={lang} />
-      <main>{children}</main>
+      {Cookies.get("countryID") ? (
+        <>
+          <NavBar lang={lang} />
+          <main>{children}</main>
 
-      <Footer lang={lang} />
+          <Footer lang={lang} />
+        </>
+      ) : null}
     </>
   );
 }

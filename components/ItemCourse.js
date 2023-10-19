@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 
 function ItemCourse({
@@ -22,6 +23,9 @@ function ItemCourse({
   category_id,
   fav
 }) {
+  const t = useTranslations('Categories');
+  const notify = () => toast.success(t('success'));
+  const notifyError = () => toast.error(t('please'),{theme: "dark",});
   const handelFav = (id) => {
    
     const po = api
@@ -46,15 +50,16 @@ function ItemCourse({
       )
       .then((res) => {
         console.log(res);
+        notify()
       })
       .catch((res) => {
-    setLoading(false)
+        notifyError()
 
         console.log(res);
       });
   };
-  const t = useTranslations('Categories');
 
+  
   return (
     <div className= "service" key={id}>
       <button
@@ -67,6 +72,7 @@ function ItemCourse({
         }
        
       </button>
+     
       <Link href={`/categoriesDetails/${category_id}/${id}`}>
       <img src={img?.length?img[0]?.url:`/images/Logo.svg`}  className= "imgService" alt="service" />
 
