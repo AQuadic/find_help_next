@@ -1564,9 +1564,20 @@ html[dir="rtl"] .provider .part1 .about_Provider #myPhoneNumber {
   align-items: flex-start;
   flex-wrap: wrap;
 }
-.provider .part2 .rat_cus {
+.provider .part2 .rat_cus .btnChateMe{
+margin-top: 44px;
+
 }
-.provider .part2 .rat_cus {
+.provider .part2 .rat_cus .btnChateMe a{
+  height: 50px;
+  gap: 24px;
+  }
+  .provider .part2 .rat_cus .btnChateMe a:hover{
+    background-color: #f3b100 !important;
+    color: white;
+    box-shadow: 0px 0px 5px #737373e8;
+  }
+.provider .part2 .rat_cus .twoRate{
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
@@ -1680,7 +1691,7 @@ html[dir="rtl"] .provider .part1 .about_Provider #myPhoneNumber {
   }
 }
 @media (max-width: 560px) {
-  .provider .part2 .rat_cus {
+  .provider .part2 .rat_cus .twoRate{
     flex: 1;
   }
 }
@@ -3620,4 +3631,100 @@ flex-wrap: wrap;
 .Toastify__toast-theme--dark{
   background: #4b4a4a;
   color: white;
+}
+.chat{
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  
+}
+.chat .part1{
+  width: 320px;
+  min-width: 320px;
+
+}
+.chat .part2{
+  flex: 1;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.20);
+  background: #FFF;
+  width: 840px;
+  max-width: 100%;
+  padding: 8px 40px 26px;
+}
+.chat .part2 .headChat{
+  display: flex;
+  gap: 34px;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 40px;
+}
+.chat .part2 .headChat img{
+  width: 75px;
+height: 75px;
+border-radius: 50%;
+}
+.chat .part2 .headChat p{
+  color: #1E1E1E;
+  font-size: 24px;
+}
+.chat .part2 .boxChat{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.chat .part2 .boxChat p{
+  color: #1B1B1B;
+font-size: 16px;
+background-color: #FFF1CC;
+min-height: 50px;
+border-radius: 10px;
+padding: 12px 24px ;
+position: relative;
+width: max-content;
+max-width: 100%;
+}
+.chat .part2 .boxChat p::after{
+position: absolute;
+content: "";
+background-image: url('/images/backChat.svg');
+bottom: 0;
+    background-size: 44px;
+    width: 44px;
+    height: 18px;
+    background-repeat: no-repeat;
+    left: -11px;
+    z-index: 0;
+}
+.chat .part2 .boxChat p.user::after {
+  background-image: url('/images/backChat2.svg');
+  right: -11px;
+  left: auto;
+}
+.chat .part2 .boxChat p.user{
+  background: #FFC731;
+  align-self: self-end;
+}
+.chat .part2 .inputChat {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+}
+.chat .part2 .inputChat .boxInput{
+  flex: 1;
+}
+.chat .part2 .inputChat .boxInput .textInput{
+
+}
+.chat .part2 .btnSend {
+  border-radius: 10px;
+  background: #FFC731;
+  border: none;
+  width: 56px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

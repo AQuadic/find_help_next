@@ -265,6 +265,7 @@ setSelectCurrentSubCategoriesName(getLocal(locale,Services.sub_category.name) )
             </div>
             <div className="part2">
               <div className="rat_cus">
+                <div className="twoRate">
                 <div className="rating rat_cus_same">
                   <h3>{t("providerRating")}</h3>
                   <div className="Star">
@@ -279,6 +280,15 @@ setSelectCurrentSubCategoriesName(getLocal(locale,Services.sub_category.name) )
                   <h3>{t("customers")}</h3>
                   <h4>249K+</h4>
                   <p>During the last 90 days</p>
+                </div>
+                </div>
+                
+                <div className="btnChateMe">
+                 
+                <Link href={`/chat`} className="btn_page">
+                <img src="/images/chat.svg" alt="chat"/>
+                Chat with me
+                </Link>
                 </div>
               </div>
               <div className="all_Rating">
