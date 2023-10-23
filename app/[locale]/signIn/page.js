@@ -122,6 +122,8 @@ function page() {
         if (res.status === 200) {
            setIsUser(true);
            Cookies.set("token", res.data.token);
+           Cookies.set("UserID", res.data.user.id);
+
             router.push("/");
             
         }

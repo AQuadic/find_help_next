@@ -88,6 +88,7 @@ console.log(SMS1.verificationId);
         console.log(res);
         if (res.status === 200) {
           setIsUser(true);
+          Cookies.set("UserID", res.data.user.id);
           if (res.data.user.name === "FindHelp User") {
             router.push("/created");
           } else {

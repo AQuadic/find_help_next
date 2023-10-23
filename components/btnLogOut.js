@@ -21,6 +21,7 @@ function btnLogOut() {
         setIsUser(false);
         Cookies.remove('token')
         Cookies.remove('phone')
+        Cookies.remove('UserID')
         router.push('/signIn')
       
     };

@@ -1,7 +1,9 @@
 import {initializeApp} from "firebase/app";
 import localforage from "localforage";
 import {getMessaging, getToken} from "firebase/messaging";
+import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 const firebaseConfig = {
     apiKey: "AIzaSyCF155mNBMIZOhyAerxcg4aouXHupmqTpU",
 authDomain: "findhelp-9f012.firebaseapp.com",
@@ -14,6 +16,9 @@ measurementId: "G-QK2Q19BWZN"
 };
 const app = initializeApp(firebaseConfig);
 export const authenti = getAuth(app);
+export const db = getFirestore(app)
+export const storage  = getStorage(app)
+
 const firebaseCloudMessaging = {
     init: async () => {
         // Initialize the Firebase app with the credentials

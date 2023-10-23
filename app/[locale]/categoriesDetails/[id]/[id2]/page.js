@@ -285,7 +285,7 @@ setSelectCurrentSubCategoriesName(getLocal(locale,Services.sub_category.name) )
                 
                 <div className="btnChateMe">
                  
-                <Link href={`/chat`} className="btn_page">
+                <Link href={`/chat/${provider.id}`} className="btn_page">
                 <img src="/images/chat.svg" alt="chat"/>
                 Chat with me
                 </Link>

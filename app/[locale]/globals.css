@@ -1564,26 +1564,26 @@ html[dir="rtl"] .provider .part1 .about_Provider #myPhoneNumber {
   align-items: flex-start;
   flex-wrap: wrap;
 }
-.provider .part2 .rat_cus .btnChateMe{
+.provider  .rat_cus .btnChateMe{
 margin-top: 44px;
 
 }
-.provider .part2 .rat_cus .btnChateMe a{
+.provider  .rat_cus .btnChateMe a{
   height: 50px;
   gap: 24px;
   }
-  .provider .part2 .rat_cus .btnChateMe a:hover{
+  .provider  .rat_cus .btnChateMe a:hover{
     background-color: #f3b100 !important;
     color: white;
     box-shadow: 0px 0px 5px #737373e8;
   }
-.provider .part2 .rat_cus .twoRate{
+.provider  .rat_cus .twoRate{
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
   flex: 0.5;
 }
-.provider .part2 .rat_cus .rat_cus_same {
+.provider  .rat_cus .rat_cus_same {
   background: #ffffff;
   border: 1px solid #dfdfdf;
   border-radius: 10px;
@@ -1591,41 +1591,41 @@ margin-top: 44px;
   flex: 1;
   min-width: 160px;
 }
-.provider .part2 .rat_cus .rat_cus_same h3 {
+.provider  .rat_cus .rat_cus_same h3 {
   font-size: 16px;
   line-height: 21px;
   margin-bottom: 18px;
 }
-.provider .part2 .rat_cus .rat_cus_same p {
+.provider  .rat_cus .rat_cus_same p {
   font-size: 14px;
   line-height: 20px;
   color: #757575;
 }
-.provider .part2 .rat_cus .rat_cus_same p span {
+.provider  .rat_cus .rat_cus_same p span {
   color: #00a54f;
   font-family: "DM Sans3";
 }
-.provider .part2 .rat_cus .rating .Star {
+.provider  .rat_cus .rating .Star {
   margin-bottom: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
-.provider .part2 .rat_cus .rating .Star p {
+.provider  .rat_cus .rating .Star p {
   font-size: 32px;
   line-height: 42px;
   font-family: "DM Sans";
   color: black;
 }
-.provider .part2 .rat_cus .rating .Star img {
+.provider  .rat_cus .rating .Star img {
   height: 24px;
   width: auto;
 }
 
-.provider .part2 .rat_cus .customers {
+.provider  .rat_cus .customers {
 }
-.provider .part2 .rat_cus .customers h4 {
+.provider  .rat_cus .customers h4 {
   font-size: 32px;
   line-height: 42px;
   font-family: "DM Sans";
@@ -1691,7 +1691,7 @@ margin-top: 44px;
   }
 }
 @media (max-width: 560px) {
-  .provider .part2 .rat_cus .twoRate{
+  .provider  .rat_cus .twoRate{
     flex: 1;
   }
 }
@@ -2388,12 +2388,13 @@ html[dir="rtl"] .new_row div {
   cursor: pointer;
   width: 20px;
   height: 20px;
-  border: 1px solid red;
+  border: 1px solid #fac611;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgb(255, 60, 0);
+  color: rgb(255 255 255);
+  background: #fac611;
 }
 .upload_images .RemoveImge img {
   width: 100%;
@@ -3637,7 +3638,7 @@ flex-wrap: wrap;
   gap: 40px;
   justify-content: space-between;
   flex-wrap: wrap;
-  
+  padding-top: 60px;
 }
 .chat .part1{
   width: 320px;
@@ -3651,7 +3652,10 @@ flex-wrap: wrap;
   background: #FFF;
   width: 840px;
   max-width: 100%;
-  padding: 8px 40px 26px;
+  padding: 8px 0px 26px;
+  min-width: 400px;
+  height: min-content;
+
 }
 .chat .part2 .headChat{
   display: flex;
@@ -3668,24 +3672,29 @@ border-radius: 50%;
 .chat .part2 .headChat p{
   color: #1E1E1E;
   font-size: 24px;
+  font-family: "DM Sans";
 }
 .chat .part2 .boxChat{
   display: flex;
   flex-direction: column;
   gap: 30px;
+  padding: 6px 50px;
+max-height: 80vh;
+  overflow: auto;
 }
-.chat .part2 .boxChat p{
+.chat .part2 .boxChat  .text{
   color: #1B1B1B;
 font-size: 16px;
 background-color: #FFF1CC;
-min-height: 50px;
 border-radius: 10px;
 padding: 12px 24px ;
 position: relative;
 width: max-content;
 max-width: 100%;
+font-family: "DM Sans2";
+min-height: auto;
 }
-.chat .part2 .boxChat p::after{
+.chat .part2 .boxChat  .text::after{
 position: absolute;
 content: "";
 background-image: url('/images/backChat.svg');
@@ -3697,26 +3706,54 @@ bottom: 0;
     left: -11px;
     z-index: 0;
 }
-.chat .part2 .boxChat p.user::after {
+.chat .part2 .boxChat  .text.user::after {
   background-image: url('/images/backChat2.svg');
   right: -11px;
   left: auto;
 }
-.chat .part2 .boxChat p.user{
+.chat .part2 .boxChat  .text.user{
   background: #FFC731;
   align-self: self-end;
+}
+.chat .textImg {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.chat .textImg img {
+  max-height: 140px;
+  width: auto;
 }
 .chat .part2 .inputChat {
   display: flex;
   justify-content: space-between;
   gap: 24px;
   align-items: center;
+  padding-top: 60px;
+  padding: 50px 40px 0px;
 }
 .chat .part2 .inputChat .boxInput{
   flex: 1;
+  position: relative;
+  border-radius: 10px;
+  background: #EFEFEF;
 }
-.chat .part2 .inputChat .boxInput .textInput{
-
+.chat .part2 .inputChat .boxInput .boxImages{
+  padding: 12px;
+  display: flex;
+  gap: 10px;
+  border-bottom: 2px #cccccc dotted;
+  flex-wrap: wrap;
+}
+.chat .part2 .inputChat .boxInput .textInput textarea{
+  border-radius: 10px;
+  background: #EFEFEF;
+  border: none;
+  height: 34px;
+  width: 100%;
+  outline: none;
+  padding: 12px 40px 12px 12px;
 }
 .chat .part2 .btnSend {
   border-radius: 10px;
@@ -3727,4 +3764,74 @@ bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.chat .provider{
+  max-width: 320px;
+}
+@media (max-width: 992px) {
+  .chat .provider{
+    max-width: 100%;
+    width: 100%;
+  }
+  .chat .part2{
+    min-width: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .chat .part2 {
+    border-radius: 12px;
+    padding: 8px 16px 11px;
+}
+.chat .part2 .headChat {
+  gap: 10px;
+  padding-bottom: 22px;
+}
+.chat .part2 .headChat img {
+  width: 56px;
+  height: 56px;
+}
+.chat .part2 .headChat p {
+  font-size: 20px;
+}
+.chat .part2 .boxChat .text {
+  font-size: 14px;
+  min-height: 36px;
+  border-radius: 8px;
+  padding: 8px 20px;
+}
+.chat .part2 .boxChat {
+ 
+  gap: 20px;
+}
+.chat .part2 .inputChat .boxInput .textInput textarea {
+ 
+  font-size: 14px;
+}
+.chat .part2 .inputChat {
+ 
+  gap: 16px;
+ 
+  padding-top: 30px;
+}
+}
+#image-container {
+  width: 24px;
+  height: auto;
+  cursor: pointer;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+/* CSS to hide the file input */
+#file-input {
+  /* display: none; */
+  position: absolute;
+  top: 0;
+  /* left: 0; */
+  right: 0;
+  /* opacity: 0; */
+  cursor: pointer;
+  /* max-width: 100%; */
 }
