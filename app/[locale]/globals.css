@@ -3833,5 +3833,20 @@ bottom: 0;
   right: 0;
   /* opacity: 0; */
   cursor: pointer;
-  /* max-width: 100%; */
+  direction: ltr;
+}
+.loadChat{
+  min-width: 100%;
+
+}
+.loadChat .item{
+  gap: 20px;
+  align-items: flex-start;
+  width: 100%;
+}
+.loadChat .item div{
+  align-self: flex-start;
+}
+.loadChat .item .two {
+  align-self:flex-end;
 }

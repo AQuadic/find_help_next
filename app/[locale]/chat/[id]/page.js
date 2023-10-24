@@ -12,7 +12,7 @@ import {
 } from "firebase/firestore";
 import { db, storage } from "@/utils/firebase";
 import Cookies from "js-cookie";
-import { Textarea } from "@mantine/core";
+import { Skeleton, Textarea } from "@mantine/core";
 import {
   deleteObject,
   getDownloadURL,
@@ -132,7 +132,20 @@ function page({ params }) {
       ) : null}
 
       <div className="part2" >
+
         <div className="boxChat"  >
+        {!AllMessage.length> 0 && (
+            <div className="loadItems loadChat">
+              <div className="item ">
+                <Skeleton className="two"  height={30} width={"80%"}  />
+                <Skeleton className="two"  height={40} width={"60%"}  />
+                <Skeleton height={30} width={"80%"}  />
+                <Skeleton height={30} width={"60%"}  />
+               
+              </div>
+              
+            </div>
+          )}
           {AllMessage.map((mes, i) => {
             return (
                  <div
@@ -164,6 +177,7 @@ function page({ params }) {
         </div>
         <div className="inputChat">
           <div className="boxInput">
+         
             {selectedFile.length > 0 ? (
               <div className="boxImages upload_images">
                 {selectedFile.map((file, i) => {
