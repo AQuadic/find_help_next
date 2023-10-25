@@ -20,14 +20,15 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import { useStickyScroll } from "use-chat-scroll";
+import { MessageList } from "react-chat-elements";
 
 function page({ params }) {
   const [Message, setMessage] = useState("");
+  const [load, setload] = useState(false);
   const [Imgs, setImgs] = useState([]);
   const [provider, setProvider] = useState([]);
   const [AllMessage, setAllMessage] = useState([]);
   const [selectedFile, setSelectedFile] = useState([]);
-
 
   const handleHeaderInputChange = (e) => {
     const files = e.target.files; // Get the selected files
@@ -45,10 +46,8 @@ function page({ params }) {
     }
   };
 
-
-
-
   useEffect(() => {
+    setload(true);
     FetchDataOFProvider();
   }, []);
 
@@ -69,14 +68,16 @@ function page({ params }) {
       snapshot.forEach((doc) => {
         allMessage.push({ ...doc.data() });
       });
+      console.log(allMessage);
       setAllMessage(allMessage);
+      setload(false);
     });
     return () => {
       unsnap();
     };
   }, []);
   const handelSendMessage = async () => {
-    if (Message ===""&&Imgs.length==0) return;
+    if (Message === "" && Imgs.length == 0) return;
     await addDoc(MessageRef, {
       created_at: serverTimestamp(),
       chat_id: `${Cookies.get("UserID") + "-" + params.id}`,
@@ -86,14 +87,12 @@ function page({ params }) {
       message_read: null,
       images: Imgs,
     });
-
     setMessage("");
-    setImgs([])
-    setAllMessage([])
+    setSelectedFile([])
+    setImgs([]);
   };
 
-
-
+  const messageListReferance = useRef();
   return (
     <div className="container chat m90">
       {provider.id > 0 ? (
@@ -131,21 +130,19 @@ function page({ params }) {
         </div>
       ) : null}
 
-      <div className="part2" >
-
-        <div className="boxChat"  >
-        {!AllMessage.length> 0 && (
+      <div className="part2">
+        <div className="boxChat">
+          {load && (
             <div className="loadItems loadChat">
               <div className="item ">
-                <Skeleton className="two"  height={30} width={"80%"}  />
-                <Skeleton className="two"  height={40} width={"60%"}  />
-                <Skeleton height={30} width={"80%"}  />
-                <Skeleton height={30} width={"60%"}  />
-               
+                <Skeleton className="two" height={30} width={"80%"} />
+                <Skeleton className="two" height={40} width={"60%"} />
+                <Skeleton height={30} width={"80%"} />
+                <Skeleton height={30} width={"60%"} />
               </div>
-              
             </div>
           )}
+          <div className="chatShow">
           {AllMessage.map((mes, i) => {
             return (
                  <div
@@ -174,10 +171,12 @@ function page({ params }) {
              
             );
           })}
+          </div>
+      
+          
         </div>
         <div className="inputChat">
           <div className="boxInput">
-         
             {selectedFile.length > 0 ? (
               <div className="boxImages upload_images">
                 {selectedFile.map((file, i) => {
@@ -210,7 +209,9 @@ function page({ params }) {
                               console.log("noooooooooooo delet form fir");
                               console.log(error);
                             });
-setImgs(Imgs.filter(item=>!item.includes(file.name)))
+                          setImgs(
+                            Imgs.filter((item) => !item.includes(file.name))
+                          );
                           setSelectedFile(
                             selectedFile.filter((item) => item !== file)
                           );
@@ -253,7 +254,6 @@ setImgs(Imgs.filter(item=>!item.includes(file.name)))
             <img src="/images/send.svg" alt="send" />
           </button>
         </div>
-      
       </div>
     </div>
   );

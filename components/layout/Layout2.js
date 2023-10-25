@@ -7,6 +7,9 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { UserCountry } from "@/atoms";
 import { useRecoilState } from "recoil";
+import IPinfoWrapper from "node-ipinfo";
+
+
 function Layout2({ children, lang }) {
   const [CountryID, setCountryID] = useState("");
   const [UserCountry2, setUserCountry2] = useRecoilState(UserCountry);
@@ -22,13 +25,13 @@ function Layout2({ children, lang }) {
     setCountryID(CountryUser2.country);
     Cookies.set("country", CountryUser2.country);
     HomePage.countries.map((item) =>
-      item.name.en == CountryUser2.country
+      item.code == CountryUser2.country
         ? Cookies.set("countryID", item.id)
         : null
     );
     router.refresh();
   };
-
+    
   return (
     <>
       {Cookies.get("countryID") ? (

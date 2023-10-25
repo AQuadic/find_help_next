@@ -173,7 +173,7 @@ let headersToken = {
 
   export const getCountryUser = async () => {
     const result = axios
-      .get("https://ip-api.com/json")
+      .get("https://api.country.is/")
       .then((res) => {
         return res.data;
       })
