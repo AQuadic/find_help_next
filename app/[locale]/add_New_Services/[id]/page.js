@@ -252,7 +252,13 @@ const router = useRouter()
       thu: holidays.includes("Thursday"),
       fri: holidays.includes("Friday"),
     };
-    body.append("work_times[holidays]", JSON.stringify(HolidaysArray));
+    body.append("work_times[holidays][sat]", HolidaysArray.sat);
+    body.append("work_times[holidays][sun]", HolidaysArray.sun);
+    body.append("work_times[holidays][mon]", HolidaysArray.mon);
+    body.append("work_times[holidays][tue]", HolidaysArray.tue);
+    body.append("work_times[holidays][wed]", HolidaysArray.wed);
+    body.append("work_times[holidays][thu]", HolidaysArray.thu);
+    body.append("work_times[holidays][fri]", HolidaysArray.fri);
     if (selectedFile.length > 0) {
       selectedFile.map((item, i) => {
         body.append(`images[${i}]`, item);

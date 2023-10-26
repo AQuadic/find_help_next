@@ -236,17 +236,23 @@ function page() {
     body.append("phone_country", phone_country);
     body.append("location[lat]", lat);
     body.append("location[lng]", lng);
-    const HolidaysArray = {
-      sat: holidays.includes("Saturday"),
-      sun: holidays.includes("Sunday"),
-      mon: holidays.includes("Monday"),
-      tue: holidays.includes("Tuesday"),
-      wed: holidays.includes("Wednesday"),
-      thu: holidays.includes("Thursday"),
-      fri: holidays.includes("Friday"),
-    };
-
-    body.append("work_times[holidays]", JSON.stringify(HolidaysArray));
+    const HolidaysArray = 
+       {sat: holidays.includes("Saturday") ,
+       sun: holidays.includes("Sunday") ,
+       mon: holidays.includes("Monday") ,
+       tue: holidays.includes("Tuesday") ,
+       wed: holidays.includes("Wednesday") ,
+       thu: holidays.includes("Thursday") ,
+       fri: holidays.includes("Friday") ,}
+    ;
+console.log(HolidaysArray);
+    body.append("work_times[holidays][sat]", HolidaysArray.sat);
+    body.append("work_times[holidays][sun]", HolidaysArray.sun);
+    body.append("work_times[holidays][mon]", HolidaysArray.mon);
+    body.append("work_times[holidays][tue]", HolidaysArray.tue);
+    body.append("work_times[holidays][wed]", HolidaysArray.wed);
+    body.append("work_times[holidays][thu]", HolidaysArray.thu);
+    body.append("work_times[holidays][fri]", HolidaysArray.fri);
     setErrorAddress("");
     setErrorCategory("");
     setErrorCity("");
@@ -415,7 +421,6 @@ function page() {
                       <input type="file" onChange={handleHeaderInputChange} />
                       <img
                         id="img1"
-                        onClick="onImageClick(this)"
                         className="img img-thumbnail m-1 imgPreview"
                       />
                     </div>
@@ -794,7 +799,6 @@ function page() {
         <div
           className="modal fade"
           id="exampleModal"
-          tabindex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >

@@ -3,7 +3,6 @@
 import api from "@/app/[locale]/api";
 import { SMS, navState } from "@/atoms";
 import { authenti } from "@/utils/firebase";
-import axios from "axios";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
@@ -13,7 +12,8 @@ import React, { useEffect, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import OTPInput from "react-otp-input";
 import { useRecoilState } from "recoil";
-
+import { DeviceUUID } from "device-uuid";
+import platform from "platform";
 function CVerify({ params }) {
 
   const router = useRouter();
@@ -25,7 +25,7 @@ console.log(SMS1.verificationId);
   const [IsUser, setIsUser] = useRecoilState(navState);
   const [errorcode, setErrorCode] = useState("");
   const [Loading, setLoading] = useState(false);
-
+  var uuid = new DeviceUUID().get();
   const t = useTranslations("Sign");
   const clearOtp = () => {
     setOtp("");
@@ -88,6 +88,7 @@ console.log(SMS1.verificationId);
         console.log(res);
         if (res.status === 200) {
           setIsUser(true);
+          handelAddDevices()
           Cookies.set("UserID", res.data.user.id);
           if (res.data.user.name === "FindHelp User") {
             router.push("/created");
@@ -221,6 +222,41 @@ console.log(SMS1.verificationId);
       console.log(err);
     })
       }
+
+
+
+
+      const handelAddDevices = () => {
+        const po = api
+          .post(
+            "/api/v1/users/devices",
+            {
+              device_type: "web",
+              device_token: uuid,
+              device_name: platform.name,
+              notifiable_method: "firebase",
+              notifiable_token: Cookies.get('tokenFir'),
+              enabled: true,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${Cookies.get("token")}`,
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((res) => {
+            console.log(res);
+          });
+      };
+
+
+
+
   return (
     <>
     <div className="load" style={{ display: Loading ? "flex" : "none" }}>

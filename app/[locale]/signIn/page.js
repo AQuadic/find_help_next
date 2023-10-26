@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
@@ -9,8 +8,6 @@ import React from "react";
 import { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import { TailSpin } from "react-loader-spinner";
-import CVerify from "@/components/compPage/CVerify";
-import OTPInput from "react-otp-input";
 import { useRecoilState } from "recoil";
 import { SMS, navState } from "@/atoms";
 import { authenti } from "@/utils/firebase";
