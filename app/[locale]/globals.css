@@ -94,6 +94,8 @@ html::-webkit-scrollbar-track {
 .find {
   position: relative;
   margin-bottom: 40px;
+   height: 404px;
+  width: 100%;
 }
 .find .imgFind {
   height: 404px;
@@ -3725,6 +3727,7 @@ html[dir="rtl"] .services .allServices .service .client_details img {
   max-height: 80vh;
   overflow: auto;
   transform: rotateX(180deg);
+  min-height: 400px;
 }
 .chat .part2 .boxChat .text {
   color: #1b1b1b;
