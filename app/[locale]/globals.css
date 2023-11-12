@@ -194,7 +194,7 @@ html::-webkit-scrollbar-track {
   width: 94px;
   height: 94px;
   border-radius: 50%;
-  object-fit: fill;
+  object-fit: cover;
   display: block;
   margin: auto;
 }

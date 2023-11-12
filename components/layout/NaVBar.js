@@ -101,7 +101,7 @@ const FetchDataOFData = async () => {
           <Link className="navbar-brand" href="/">
             <img src="/images/Logo.svg" alt="" />
           </Link>
-          <div className="collapse  col-dec" id="navbarSupportedContent">
+          <div className="collapse  col-dec" >
             <div className="navbar-nav me-auto mb-2 mb-lg-0">
               <div className="nav-item dropdown">
                 <a
@@ -111,7 +111,7 @@ const FetchDataOFData = async () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <img src="/images/categorization.svg" alt="categories" />
+                  <img src="/images/categorization.svg" alt="ccategorization" />
                   {t("categories")}
                 </a>
                 <ul className="dropdown-menu row">

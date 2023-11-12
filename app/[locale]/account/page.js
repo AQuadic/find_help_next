@@ -48,7 +48,6 @@ function page() {
     setPhone_country(User.phone_country);
   };
 
-
   const handelProfile = () => {
     const body = new FormData();
     body.append("name", name);
@@ -89,9 +88,7 @@ function page() {
                 <Link href="/account/myServices">{t("services")}</Link>
               </li>
               <li>
-                <Link href="/account/myFavourite">
-                  {t("favourites")}
-                </Link>
+                <Link href="/account/myFavourite">{t("favourites")}</Link>
               </li>
               <li>
                 <Link href="/account/prmoted">{t("promotion")}</Link>
@@ -148,7 +145,7 @@ function page() {
                 </label>
 
                 <PhoneInput
-                  defaultCountry={phone_country||'EG'}
+                  defaultCountry={phone_country || "EG"}
                   country={phone_country}
                   initialValueFormat="national"
                   placeholder={t("enterMobile")}
@@ -173,7 +170,6 @@ function page() {
               </div>
               <button
                 type="submit"
-                href=""
                 className="next btn_page"
                 onClick={(e) => {
                   e.preventDefault();
