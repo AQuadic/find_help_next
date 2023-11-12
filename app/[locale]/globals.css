@@ -416,6 +416,8 @@ html[dir="rtl"] .try {
 .try .phone {
   max-width: 100%;
   align-self: flex-end;
+  width: 270px;
+  height: 100%;
 }
 .try .aboutTry {
   display: flex;
@@ -468,9 +470,8 @@ html[dir="rtl"] .try {
 .try .aboutTry .part2 ul li a {
 }
 .try .aboutTry .part2 ul li a img {
-  width: 100%;
-    height: auto;
-    max-width: 148px;
+  width: 148px;
+  height: 44px;
 }
 
 @media (max-width: 1200px) {
@@ -482,6 +483,7 @@ html[dir="rtl"] .try {
     border-top: 1px solid #818181;
     height: auto;
     padding: 20px 0px;
+    border-right: none !important;
   }
   .try .phone {
     width: 230px;
@@ -514,6 +516,12 @@ html[dir="rtl"] .try {
     margin-bottom: 10px;
   }
 }
+@media (max-width: 400px) {
+  .try .aboutTry .part2 ul li a img {
+    width: 98px;
+    height: 30px;
+}
+}
 /*end try*/
 
 /*============================footer==========================*/
@@ -528,7 +536,7 @@ footer {
   gap: 10px 130px;
   flex-wrap: wrap;
 }
-fotter_content .head h1 img{
+.fotter_content .head h1 img{
   width: 94px;
     height: 68px;
 }
