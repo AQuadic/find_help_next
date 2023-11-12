@@ -23,7 +23,9 @@ function NavBar({lang}) {
   const router = useRouter();
   const pathname = usePathname();
   useEffect(() => {
-    FetchDataOFUser();
+    if(IsUser){
+      FetchDataOFUser();
+    }
   }, [IsUser]);
   useEffect(() => {
     FetchDataOFData();
@@ -111,7 +113,7 @@ const FetchDataOFData = async () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <img src="/images/categorization.svg" alt="categories" />
+                  <img src="/images/categorization.svg" alt="Categorization" />
                   {t("categories")}
                 </a>
                 <ul className="dropdown-menu row">

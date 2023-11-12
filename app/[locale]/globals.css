@@ -93,8 +93,7 @@ html::-webkit-scrollbar-track {
   margin-bottom: 40px;
 }
 .find .imgFind {
-  min-height: 34vh;
-  height: 100%;
+  height: 404px;
   width: 100%;
 }
 .find .aboutFind {
@@ -159,7 +158,12 @@ html::-webkit-scrollbar-track {
   align-items: center;
   justify-content: center;
 }
-
+@media (max-width: 768px) {
+  .find .imgFind {
+    height: 300px;
+    width: 100%;
+  }
+}
 @media (max-width: 600px) {
   .find .aboutFind form input[type="text"]::placeholder {
     font-size: 12px;
@@ -364,6 +368,7 @@ html[dir="rtl"] .use .parts .part .numStep {
   max-width: 100%;
   margin: auto;
   display: block;
+  width: auto;
 }
 @media (max-width: 1200px) {
   .need .parts {
@@ -625,7 +630,7 @@ footer .store a {
   max-width: 82px;
 }
 footer .store img {
-  width: 100%;
+  width: 82px;
   height: 25px;
 }
 footer .copy {
@@ -864,7 +869,10 @@ footer .copy p a {
 .middle-bar {
   margin: 5px auto;
 }
-
+.btnsearch img{
+  width: 20px;
+  height: 20px;
+}
 /* State when navbar is opened (START) */
 .navbar-toggler .top-bar {
   transform: rotate(45deg);
