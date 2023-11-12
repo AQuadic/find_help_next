@@ -4,7 +4,9 @@
   box-sizing: border-box;
   font-family: "DM Sans2";
 }
-
+body{
+  overflow-x: hidden;
+}
 main {
   min-height: 52vh;
   position: relative;
@@ -194,7 +196,7 @@ html::-webkit-scrollbar-track {
   width: 94px;
   height: 94px;
   border-radius: 50%;
-  object-fit: fill;
+  object-fit: cover;
   display: block;
   margin: auto;
 }
@@ -360,7 +362,6 @@ html[dir="rtl"] .use .parts .part .numStep {
 .need .parts img {
   height: 225px;
   max-width: 100%;
-  width: auto;
   margin: auto;
   display: block;
 }
@@ -441,6 +442,10 @@ html[dir="rtl"] .try {
   justify-content: center;
   padding: 0px 30px;
 }
+.rtl .try .aboutTry .part2{
+  border-right: 1px solid #818181;
+  border-left: none;
+}
 .try .aboutTry .part2 h3 {
   font-size: 16px;
   line-height: 21px;
@@ -458,9 +463,9 @@ html[dir="rtl"] .try {
 .try .aboutTry .part2 ul li a {
 }
 .try .aboutTry .part2 ul li a img {
-  width: 148px;
-  height: auto;
-  max-width: 100%;
+  width: 100%;
+    height: auto;
+    max-width: 148px;
 }
 
 @media (max-width: 1200px) {
@@ -517,6 +522,10 @@ footer {
 
   gap: 10px 130px;
   flex-wrap: wrap;
+}
+fotter_content .head h1 img{
+  width: 94px;
+    height: 68px;
 }
 footer .part {
   display: flex;
@@ -601,7 +610,10 @@ footer .links_social {
   align-items: center;
   gap: 20px;
 }
-
+footer .links_social img{
+  width: 20px;
+  height: 20px;
+}
 footer .store {
   display: flex;
   align-items: center;
@@ -614,6 +626,7 @@ footer .store a {
 }
 footer .store img {
   width: 100%;
+  height: 25px;
 }
 footer .copy {
   display: flex;
@@ -676,7 +689,7 @@ footer .copy p a {
 }
 .services .allServices .service .stateLove img {
   width: calc(100% - 22px);
-  height: auto;
+  height: 18px;
   margin: auto;
   display: block;
 }
@@ -719,7 +732,7 @@ footer .copy p a {
 .services .allServices .service .aboutservice .head .Star img,
 .current_Service .about_current_Service .head .Star img {
   height: 16px;
-  width: auto;
+  width: 16px;
 }
 .services .allServices .service .aboutservice .head .Star p,
 .current_Service .about_current_Service .head .Star p {
@@ -741,7 +754,7 @@ footer .copy p a {
 }
 .services .allServices .service .aboutservice ul li img {
   width: 12px;
-  height: auto;
+  height: 16px;
 }
 .services .allServices .service .aboutservice ul li p {
   font-size: 12px;
@@ -1004,6 +1017,14 @@ footer .copy p a {
   line-height: 18px;
   color: #ffffff;
 }
+.ac_nav .nav_btn .add{
+  width: 16px;
+  height: 14px;
+}
+.ac_nav .nav_btn .img_login{
+width: 20px;
+height: 18px;
+}
 .ac_nav a p {
   font-size: 14px;
   line-height: 18px;
@@ -1021,6 +1042,8 @@ footer .copy p a {
   font-family: "DM Sans";
 }
 .ac_nav .lang img {
+  height: 20px;
+    width: 25px;
 }
 .navbar .logo .dropdown-toggle::after {
   display: none;
@@ -1044,6 +1067,10 @@ nav .nav-link {
 .nav-link:hover,
 .nav-link:focus {
   color: #ffffff;
+}
+.dropdown .nav-link  img{
+  width: 24px;
+  height: 24px;
 }
 .col-phone {
   display: none;
@@ -1137,6 +1164,10 @@ nav .dropdown-menu a {
 
 .col-dec {
   display: block !important;
+}
+.navbar  img.fav {
+  height: 19px;
+  width: 21px;
 }
 @media (min-width: 992px) {
   .navbar-expand-lg {

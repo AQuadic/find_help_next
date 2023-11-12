@@ -34,7 +34,7 @@ function Footer() {
         <div className="fotter_content">
           <div className="head">
             <h1>
-              <a href="index.html"><img src="/images/Logo.svg" alt="" /></a>
+              <a href="index.html"><img src="/images/Logo.svg" alt="logo" /></a>
             </h1>
             <p>{t("footerTitle")}</p>
           </div>
@@ -80,8 +80,8 @@ function Footer() {
               </a>
             </div>
             <div className="store">
-              <a href=""><img src="/images/app.webp" alt="app store" /></a>
-              <a href=""
+              <a href="/"><img src="/images/app.webp" alt="app store" /></a>
+              <a href="/"
                 ><img src="/images/google.webp" alt="google play"
               /></a>
             </div>

@@ -87,7 +87,7 @@ const FetchDataOFData = async () => {
             </div>
           )}
           {!IsUser && (
-            <Link href="/signIn" className="nav_btn">
+            <Link href="/signIn" className="nav_btn " aria-label="login">
               <img src="/images/login.svg" className="img_login" alt="login" />
               <p>{t("logIn")}</p>
             </Link>
@@ -98,10 +98,10 @@ const FetchDataOFData = async () => {
         </div>
 
         <div className="logo">
-          <Link className="navbar-brand" href="/">
-            <img src="/images/Logo.svg" alt="" />
+          <Link className="navbar-brand" href="/" aria-label="logo">
+            <img src="/images/Logo.svg" alt="logo" />
           </Link>
-          <div className="collapse  col-dec" id="navbarSupportedContent">
+          <div className="collapse  col-dec">
             <div className="navbar-nav me-auto mb-2 mb-lg-0">
               <div className="nav-item dropdown">
                 <a
@@ -230,7 +230,7 @@ const FetchDataOFData = async () => {
           </button>
         </div>
 
-        <div className="collapse col-phone" id="navbarSupportedContent">
+        <div className="collapse col-phone" >
           <div className="right_nav ac_nav" id="">
             <Link href="/account/myFavourite">
               <img src="/images/fav.svg" className="fav" alt="fav" />

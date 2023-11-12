@@ -413,12 +413,12 @@ useEffect(()=>{
               <h3>{t("getApp")}</h3>
               <ul>
                 <li>
-                  <a href="">
+                  <a href="/">
                     <img src="/images/app.webp" alt="app store" />
                   </a>
                 </li>
                 <li>
-                  <a href="">
+                  <a href="/">
                     <img src="/images/google.webp" alt="google play" />
                   </a>
                 </li>
