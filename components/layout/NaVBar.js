@@ -98,7 +98,7 @@ const FetchDataOFData = async () => {
         </div>
 
         <div className="logo">
-          <Link className="navbar-brand" href="/">
+          <Link className="navbar-brand" href="/" aria-label="logo">
             <img src="/images/Logo.svg" alt="" />
           </Link>
           <div className="collapse  col-dec" >
