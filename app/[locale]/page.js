@@ -85,12 +85,12 @@ useEffect(()=>{
      
       const indices = [];
       while (indices.length < 3) {
-        const randomIndex = Math.floor(Math.random() * data?.categories.length);
+        const randomIndex = Math.floor(Math.random() * data?.service_categories.length);
         if (!indices.includes(randomIndex)) {
           indices.push(randomIndex);
         }
       }
-      const selectedElements = indices.map((index) => data?.categories[index]);
+      const selectedElements = indices.map((index) => data?.service_categories[index]);
       console.log(selectedElements);
       if(selectedElements.length>0){
         console.log(selectedElements[0].id);
@@ -104,8 +104,6 @@ useEffect(()=>{
       
     }
   }
-  
- 
 
   return (
     <main className={styles.main}>

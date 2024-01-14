@@ -13,24 +13,29 @@ import { SMS, navState } from "@/atoms";
 import { authenti } from "@/utils/firebase";
 import api from "../api";
 import { useSession, signIn } from "next-auth/react";
-
+import { DeviceUUID } from "device-uuid";
+import platform from "platform";
+import {  Modal } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 function page() {
   const router = useRouter();
   const [phone, setPhone] = useState("");
+  const [LinkSend, setLinkSend] = useState("");
   const [phone_country, setPhone_country] = useState("EG");
   const [Errorphone, setErrorPhone] = useState("");
   const t = useTranslations("Sign");
   const [Loading, setLoading] = useState(false);
   const [SMS1, setSMS] = useRecoilState(SMS);
   const [IsUser, setIsUser] = useRecoilState(navState);
-
-
+  var uuid = new DeviceUUID().get();
+  const [opened, { open, close }] = useDisclosure(false);
   const handellogin = () => {
     setLoading(true);
     const po = api
       .post(
         "api/v1/users/auth/login",
         {
+          verify_type: "whatsapp_receive",
           phone: phone,
           phone_country: phone_country,
         },
@@ -54,6 +59,157 @@ function page() {
       .catch((res) => {
         setLoading(false);
 
+        if (res.response.status === 500) {
+          alert("An error occurred: " + res.response.data.message);
+        }
+        res.response.data.message
+          ? setErrorPhone(res.response.data.message)
+          : setErrorPhone("");
+        console.log(res);
+      });
+  };
+  const handelloginSMS = () => {
+    setLoading(true);
+    const po = api
+      .post(
+        "api/v1/users/auth/login",
+        {
+          verify_type: "sms",
+          phone: phone,
+          phone_country: phone_country,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-Language": "ar",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        Cookies.set("token", res.data.token);
+        Cookies.set("phone", phone);
+        Cookies.set("phone_country", phone_country);
+        setSMS("");
+        setLoading(false);
+      })
+      .catch((res) => {
+        setLoading(false);
+
+        if (res.response.status === 500) {
+          alert("An error occurred: " + res.response.data.message);
+        }
+        res.response.data.message
+          ? setErrorPhone(res.response.data.message)
+          : setErrorPhone("");
+        console.log(res);
+      });
+  };
+  const handelAddDevices = (token) => {
+    const po = api
+      .post(
+        "/api/v1/users/devices",
+        {
+          device_type: "web",
+          device_token: uuid,
+          device_name: platform.name,
+          notifiable_method: "firebase",
+          notifiable_token: Cookies.get("tokenFir"),
+          enabled: true,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((res) => {
+        console.log(res);
+      });
+  };
+  const startInterval = (ref) => {
+    console.log("====================================");
+    console.log(ref);
+    console.log("====================================");
+    // Start the interval when the button is clicked
+    const id = setInterval(() => {
+      const po = api
+        .post(
+          "api/v1/users/auth/otp/check",
+          {
+            reference: ref,
+            phone: "+201276790349",
+            phone_country: "EG",
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "Accept-Language": "ar",
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          clearInterval(id);
+          setIsUser(true);
+          Cookies.set("token", res.data.token);
+          Cookies.set("phone", phone);
+          Cookies.set("phone_country", phone_country);
+          handelAddDevices(res.data.token);
+          Cookies.set("UserID", res.data.user.id);
+          if (res.data.user.name === "FindHelp User") {
+            router.push("/created");
+          } else {
+            router.push("/");
+          }
+        })
+        .catch((res) => {
+          console.log(res);
+        });
+    }, 2000);
+    // Stop the interval after 50 minutes (600000 milliseconds)
+    setTimeout(() => {
+      clearInterval(id);
+      close();
+      IsUser ? null : alert("Try Again");
+      console.log("Interval stopped after 10 minutes.");
+    }, 600000);
+  };
+  const handelloginSend = () => {
+    setLoading(true);
+    const po = api
+      .post(
+        "api/v1/users/auth/login",
+        {
+          verify_type: "whatsapp_send",
+          phone: phone,
+          phone_country: phone_country,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-Language": "ar",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setLinkSend(res.data.otp_callback.url);
+        open();
+        startInterval(res.data.otp_callback.reference);
+
+        setLoading(false);
+      })
+      .catch((res) => {
+        setLoading(false);
         if (res.response.status === 500) {
           alert("An error occurred: " + res.response.data.message);
         }
@@ -117,14 +273,13 @@ function page() {
       )
       .then((res) => {
         if (res.status === 200) {
-           setIsUser(true);
-           Cookies.set("token", res.data.token);
-           Cookies.set("UserID", res.data.user.id);
+          setIsUser(true);
+          Cookies.set("token", res.data.token);
+          Cookies.set("UserID", res.data.user.id);
 
-            router.push("/");
-            
+          router.push("/");
         }
-        
+
         console.log(res);
       })
       .catch((res) => {
@@ -171,6 +326,13 @@ function page() {
           strokeWidthSecondary={1}
         />
       </div>
+      <Modal opened={opened} centered onClose={close} title="">
+        <div className="modalOtp">
+          <a href={LinkSend} target="_blank" className="btn_page">
+            Send OTP
+          </a>
+        </div>
+      </Modal>
 
       <section className="page_log">
         <div className="container">
@@ -211,16 +373,21 @@ function page() {
             </form>
             <ul className="send_sms">
               <li className="sms">
-                <button onClick={handelSMS}>
+                <button onClick={handelloginSMS}>
                   <img src="/images/sms.svg" alt="sms" />
                   <p>{t("continueSMS")}</p>
                 </button>
               </li>
-
               <li className="whatsApp">
                 <button type="submit" onClick={() => handellogin()}>
                   <img src="/images/whatsapp.svg" alt="WhatsApp" />
                   <p>{t("continueWhatsApp")}</p>
+                </button>
+              </li>
+              <li className="whatsApp">
+                <button type="submit" onClick={() => handelloginSend()}>
+                  <img src="/images/whatsapp.svg" alt="WhatsApp" />
+                  <p>{t("continueWhatsApp")} OTP</p>
                 </button>
               </li>
             </ul>
@@ -242,7 +409,11 @@ function page() {
                   </button>
                 </li>
                 <li>
-                  <button onClick={()=>{handleLoginTwitter()}}>
+                  <button
+                    onClick={() => {
+                      handleLoginTwitter();
+                    }}
+                  >
                     <img src="/images/twitter3.webp" alt="twitter" />
                   </button>
                 </li>
