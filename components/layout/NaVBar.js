@@ -9,7 +9,8 @@ import { useRecoilState } from "recoil";
 
 import { useLocale, useTranslations } from "next-intl";
 import { getLocal } from "../useAPI/Auth";
-import { usePathname, useRouter } from "next-intl/client";
+
+import { usePathname, useRouter } from "next/navigation";
 
 function NavBar({lang}) {
   const [categories, setCategories] = useState([]);

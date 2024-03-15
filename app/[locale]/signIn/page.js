@@ -23,6 +23,7 @@ function page() {
   const [Loading, setLoading] = useState(false);
   const [SMS1, setSMS] = useRecoilState(SMS);
   const [IsUser, setIsUser] = useRecoilState(navState);
+  const [otpCode, setOtpCode] = useState("");
 
 
   const handellogin = () => {
@@ -31,6 +32,7 @@ function page() {
       .post(
         "api/v1/users/auth/login",
         {
+          verify_type :'whatsapp_receive',
           phone: phone,
           phone_country: phone_country,
         },
@@ -63,7 +65,139 @@ function page() {
         console.log(res);
       });
   };
+  const handelloginSMS = () => {
+    setLoading(true);
+    const po = api
+      .post(
+        "api/v1/users/auth/login",
+        {
+          verify_type :'sms',
+          phone: phone,
+          phone_country: phone_country,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-Language": "ar",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setSMS("");
+        Cookies.set("token", res.data.token);
+        Cookies.set("phone", phone);
+        Cookies.set("phone_country", phone_country);
+        router.push("/verify");
+        setLoading(false);
+      })
+      .catch((res) => {
+        setLoading(false);
 
+        if (res.response.status === 500) {
+          alert("An error occurred: " + res.response.data.message);
+        }
+        res.response.data.message
+          ? setErrorPhone(res.response.data.message)
+          : setErrorPhone("");
+        console.log(res);
+      });
+  };
+  const handelloginSend = () => {
+    setLoading(true);
+    const po = api
+      .post(
+        "api/v1/users/auth/login",
+        {
+          verify_type :'whatsapp_send',
+          phone: phone,
+          phone_country: phone_country,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-Language": "ar",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        console.log(res.data.otp_callback.message);
+        setOtpCode(res.data.otp_callback.message)
+        setSMS("");
+        startInterval()
+        setLoading(false);
+
+      })
+      .catch((res) => {
+        setLoading(false);
+
+        if (res.response.status === 500) {
+          alert("An error occurred: " + res.response.data.message);
+        }
+        res.response.data.message
+          ? setErrorPhone(res.response.data.message)
+          : setErrorPhone("");
+        console.log(res);
+      });
+  };
+  function requestData() {
+    // Your API request logic goes here
+    console.log('Making API request...');
+    setLoading(true);
+    const po = api
+      .post(
+        "api/v1/users/auth/otp/check",
+        {
+          verify_type :'reference',
+          phone: phone,
+          phone_country: phone_country,
+          reference:otpCode
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Accept-Language": "ar",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setSMS("");
+        startInterval(res.data.otp_callback.message)
+        setLoading(false);
+
+      })
+      .catch((res) => {
+        setLoading(false);
+
+        if (res.response.status === 500) {
+          alert("An error occurred: " + res.response.data.message);
+        }
+        res.response.data.message
+          ? setErrorPhone(res.response.data.message)
+          : setErrorPhone("");
+        console.log(res);
+      });
+  }
+  
+ 
+    const [intervalId, setIntervalId] = useState(null);
+  
+    const startInterval = () => {
+      // Start the interval when the button is clicked
+      const id = setInterval(requestData, 2000);
+  
+      // Stop the interval after 50 minutes (3000000 milliseconds)
+      setTimeout(() => {
+        clearInterval(id);
+        console.log('Interval stopped after 50 minutes.');
+      }, 3000000);
+    };
+  
   const generateRe = () => {
     window.recaptchaVerifier = new RecaptchaVerifier(
       authenti,
@@ -211,7 +345,7 @@ function page() {
             </form>
             <ul className="send_sms">
               <li className="sms">
-                <button onClick={handelSMS}>
+                <button onClick={handelloginSMS}>
                   <img src="/images/sms.svg" alt="sms" />
                   <p>{t("continueSMS")}</p>
                 </button>
@@ -221,6 +355,12 @@ function page() {
                 <button type="submit" onClick={() => handellogin()}>
                   <img src="/images/whatsapp.svg" alt="WhatsApp" />
                   <p>{t("continueWhatsApp")}</p>
+                </button>
+              </li>
+              <li className="whatsApp">
+                <button type="submit" onClick={() => handelloginSend()}>
+                  <img src="/images/whatsapp.svg" alt="WhatsApp" />
+                  <p>{t("continueWhatsApp")} send</p>
                 </button>
               </li>
             </ul>
