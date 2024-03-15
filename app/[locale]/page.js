@@ -104,8 +104,6 @@ useEffect(()=>{
       
     }
   }
-  
- 
 
   return (
     <main className={styles.main}>

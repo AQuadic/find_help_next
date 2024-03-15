@@ -3967,3 +3967,14 @@ html[dir="rtl"] .services .allServices .service .client_details img {
     padding: 10px 12px;
   }
 }
+.modalOtp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  width: 100%;
+}
+.modalOtp a {
+  height: 40px;
+  width: 126px;
+}
